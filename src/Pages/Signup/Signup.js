@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Text, Input, colors } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { styling } from './styling';

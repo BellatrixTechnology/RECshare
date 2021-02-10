@@ -1,0 +1,64 @@
+import React, { useState } from 'react';
+import { View, StyleSheet, StatusBar, TouchableOpacity, ScrollView, SafeAreaView, TextInput } from 'react-native';
+import { Text, Input, colors } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import Icons from 'react-native-vector-icons/AntDesign';
+import IconMap from 'react-native-vector-icons/MaterialIcons'
+import { styling } from './styling';
+const MapBrowse = () => {
+    const [check, setcheck] = useState(false)
+    return (
+        <SafeAreaView style={styling.safeContainer} >
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
+            <View style={styling.headView}>
+                <Icons.Button name="left" style={styling.headIcon} color='black' size={28}>
+
+                </Icons.Button>
+
+                <Icon name='filter' style={styling.headIcon} color='black' size={20} />
+            </View>
+            <View style={styling.mainContainer}>
+
+
+                <View style={styling.locationView}>
+                    <Icon name='map-marker-alt' size={50} color='#FF2D55' />
+                </View>
+                <ScrollView horizontal={true}>
+                    <View style={styling.floatingView}>
+
+                        <View style={styling.floatingInnerView}>
+
+                        </View>
+                        <View style={styling.txtView} >
+                            <Text style={styling.cardheadTXT}>
+                                Mindspace Solution
+                        </Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Icon name='map-marker-alt' color='#666666' size={16} />
+                                <Text style={styling.cardheadLabel}> 0.48 mi away </Text>
+                            </View>
+                        </View>
+                    </View>
+                    <View style={styling.floatingView}>
+
+                        <View style={styling.floatingInnerView}>
+
+                        </View>
+                        <View style={styling.txtView} >
+                            <Text style={styling.cardheadTXT}>
+                                Mindspace Solution
+                        </Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Icon name='map-marker-alt' color='#666666' size={16} />
+                                <Text style={styling.cardheadLabel}>   0.48 mi away </Text>
+                            </View>
+                        </View>
+                    </View>
+                </ScrollView>
+
+            </View>
+        </SafeAreaView >
+    )
+}
+
+export default MapBrowse;

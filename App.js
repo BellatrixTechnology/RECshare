@@ -7,40 +7,62 @@ import VerfiyCode from './src/Pages/VerifyCode/VerifyCode';
 import set_location from './src/Pages/setLocations/set-location';
 import Signup from './src/Pages/Signup/Signup';
 import ChooseLocation from './src/Pages/ChooseLocation/ChooseLocation';
-// import BottomTab from './src/Navigator/BottomTab';
+import BottomTab from './src/Navigator/BottomTab';
 import Browse from './src/Pages/Browse/Browse';
 import Browse2 from './src/Pages/Browse2/Browse2';
 import Browse3 from './src/Pages/Browse3/Browse3';
 import Categories from './src/Pages/Categories/Categories';
+import Search from './src/Pages/Search/Search';
+import Search2 from './src/Pages/Search2/Search2';
+import ChooseLanguage from './src/Pages/ChooseLanguage/ChooseLanguage';
+import MapBrowse from './src/Pages/Map/MapBrowse';
+import Success from './src/Pages/Success/Success';
+import Favourites from './src/Pages/Favourites/Favourites';
+import Notification from './src/Pages/Notification/Notification';
+import Booking from './src/Pages/Booking/Booking';
+import Setting from './src/Pages/Setting/Setting';
+import Schedule from './src/Pages/Schedule/Schedule';
+import ReviewBooking from './src/Pages/ReviewBooking/ReviewBooking';
+import BookingDetails from './src/Pages/BookingDetails/BookingDetails';
 const { Navigator, Screen } = createStackNavigator();
 
 const AuthStack = () => (
   <Navigator headerMode='none'>
-    <Screen name='VerfiyCode' component={VerfiyCode} />
+    <Screen name='Search' component={Search} />
 
-    <Screen name='Categories' component={Categories} />
+    <Screen name='Search2' component={Search2} />
 
-    <Screen name='Browse3' component={Browse3} />
+    <Screen name='Map' component={MapBrowse} />
 
-    {/* <Screen name='BottomTab' component={BottomTab} /> */}
-    <Screen name='ForgetPassword' component={ForgetPassword} />
+    <Screen name='Success' component={Success} />
 
-    <Screen name="LoginScreen" component={LoginScreen} />
+    <Screen name='Favourites' component={Favourites} />
 
+    <Screen name='Notification' component={Notification} />
 
-    <Screen name='setlocation' component={set_location} />
+    <Screen name='Booking' component={Booking} />
 
-    <Screen name='Signup' component={Signup} />
+    <Screen name='Setting' component={Setting} />
 
-    <Screen name='ChooseLocation' component={ChooseLocation} />
+    <Screen name='ChooseLanguage' component={ChooseLanguage} />
 
-    <Screen name='Browse' component={Browse} />
+    <Screen name='ReviewBooking' component={ReviewBooking} />
+
+    <Screen name='BookingDetails' component={BookingDetails} />
+
     <Screen name='Browse2' component={Browse2} />
 
+    <Screen name='Scheduele' component={Schedule} />
 
-
-
-
+    <Screen name='Categories' component={Categories} />
+    <Screen name='VerfiyCode' component={VerfiyCode} />
+    <Screen name='Browse3' component={Browse3} />
+    <Screen name='ForgetPassword' component={ForgetPassword} />
+    <Screen name="LoginScreen" component={LoginScreen} />
+    <Screen name='setlocation' component={set_location} />
+    <Screen name='Signup' component={Signup} />
+    <Screen name='ChooseLocation' component={ChooseLocation} />
+    <Screen name='Browse' component={Browse} />
 
   </Navigator>
 );

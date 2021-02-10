@@ -19,44 +19,46 @@ const Categories = () => {
 
             </View>
             <View style={styling.mainContainer}>
-                <View style={styling.innerView}>
-                    <Text style={styling.categoryTXT}>Categories</Text>
-
-                </View>
-                <View style={styling.cardContainer}>
-                    <View style={styling.cardView}>
-                        <Text style={styling.headTXT}>Private</Text>
-                        <Text style={styling.labelTXT}>400 WorkSpaces</Text>
-                    </View>
-                    <View style={styling.cardView}>
-                        <Text style={styling.headTXT}>Meeting</Text>
-                        <Text style={styling.labelTXT} >460 WorkSpaces</Text>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                    <View style={styling.innerView}>
+                        <Text style={styling.categoryTXT}>Categories</Text>
 
                     </View>
-                </View>
-                <View style={styling.cardContainer}>
-                    <View style={styling.cardView}>
-                        <Text style={styling.headTXT}>Seminar</Text>
-                        <Text style={styling.labelTXT}>490 WorkSpaces</Text>
+                    <View style={styling.cardContainer}>
+                        <View style={styling.cardView}>
+                            <Text style={styling.headTXT}>Private</Text>
+                            <Text style={styling.labelTXT}>400 WorkSpaces</Text>
+                        </View>
+                        <View style={styling.cardView}>
+                            <Text style={styling.headTXT}>Meeting</Text>
+                            <Text style={styling.labelTXT} >460 WorkSpaces</Text>
 
+                        </View>
                     </View>
-                    <View style={styling.cardView}>
-                        <Text style={styling.headTXT}>Offices</Text>
-                        <Text style={styling.labelTXT}>490 WorkSpaces</Text>
-                    </View>
-                </View>
-                <View style={styling.cardContainer}>
-                    <View style={styling.cardView}>
-                        <Text style={styling.headTXT}>Event</Text>
-                        <Text style={styling.labelTXT}>60 WorkSpaces</Text>
+                    <View style={styling.cardContainer}>
+                        <View style={styling.cardView}>
+                            <Text style={styling.headTXT}>Seminar</Text>
+                            <Text style={styling.labelTXT}>490 WorkSpaces</Text>
 
+                        </View>
+                        <View style={styling.cardView}>
+                            <Text style={styling.headTXT}>Offices</Text>
+                            <Text style={styling.labelTXT}>490 WorkSpaces</Text>
+                        </View>
                     </View>
-                    <View style={styling.cardView}>
-                        <Text style={styling.headTXT}>Hot Text</Text>
-                        <Text style={styling.labelTXT}>400 WorkSpaces</Text>
+                    <View style={styling.cardContainer}>
+                        <View style={styling.cardView}>
+                            <Text style={styling.headTXT}>Event</Text>
+                            <Text style={styling.labelTXT}>60 WorkSpaces</Text>
 
+                        </View>
+                        <View style={styling.cardView}>
+                            <Text style={styling.headTXT}>Hot Text</Text>
+                            <Text style={styling.labelTXT}>400 WorkSpaces</Text>
+
+                        </View>
                     </View>
-                </View>
+                </ScrollView>
             </View>
 
         </SafeAreaView >

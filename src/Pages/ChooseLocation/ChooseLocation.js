@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, TextInput } from 'react-native';
-import { Text, Input, colors } from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/AntDesign';
 import IconMap from 'react-native-vector-icons/MaterialIcons'
