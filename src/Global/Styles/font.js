@@ -94,6 +94,30 @@ const fontSize = {
         labels: wp(5),
         line: wp(4),
         txt: wp(3.5),
+    },
+    Account: {
+        heading: wp(7),
+        tag: wp(6),
+        labels: wp(5),
+        line: wp(4),
+        txt: wp(3.5),
+    },
+    Chat: {
+        heading: wp(7),
+        tag: wp(6),
+        labels: wp(5),
+        line: wp(4),
+        txt: wp(3.5),
+        status: wp(3)
+
+    },
+    Space: {
+        heading: wp(7),
+        tag: wp(5.5),
+        labels: wp(4.5),
+        line: wp(4),
+        txt: wp(3.5),
+        status: wp(3)
     }
 
 
@@ -102,8 +126,8 @@ const fontFamily = {
 
     SFUITextHeavy: 'SFUIText-Heavy',
     SFUIText: 'SFUIText-Regular',
-    SFUITextBold: 'SFUIText-Bold'
-
+    SFUITextBold: 'SFUIText-Bold',
+    SFUITextSemiBold: 'SFUIText-Semibold'
 }
 
 export { fontFamily, fontSize }

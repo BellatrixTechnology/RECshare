@@ -24,10 +24,18 @@ import Setting from './src/Pages/Setting/Setting';
 import Schedule from './src/Pages/Schedule/Schedule';
 import ReviewBooking from './src/Pages/ReviewBooking/ReviewBooking';
 import BookingDetails from './src/Pages/BookingDetails/BookingDetails';
+import Account from './src/Pages/Account/Account';
+import Chat from './src/Pages/Chat/Chat';
+import Filter from './src/Pages/Filter/Filter';
+import SpaceDetail from './src/Pages/SpaceDetail/SpaceDetail';
 const { Navigator, Screen } = createStackNavigator();
 
 const AuthStack = () => (
   <Navigator headerMode='none'>
+    <Screen name='SpaceDetail' component={SpaceDetail} />
+    <Screen name='Filter' component={Filter} />
+    <Screen name='Chat' component={Chat} />
+    <Screen name='Account' component={Account} />
     <Screen name='Search' component={Search} />
 
     <Screen name='Search2' component={Search2} />
