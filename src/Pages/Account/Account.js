@@ -9,14 +9,17 @@ import { fontFamily, fontSize } from '../../Global/Styles/font';
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { wp } from '../../Global/Styles/Scalling';
 
-const Account = () => {
+const Account = ({ props }) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#F9F9F9" translucent={false} />
             <View style={styling.mainHeaderView}>
 
                 <View style={styling.headerView}>
-                    <Icons.Button name='setting' backgroundColor='#F9F9F9' color='black' size={25} />
+                    <Icons.Button name='setting' backgroundColor='#F9F9F9' color='black' size={25}
+                        onPress={() => {
+                            props.navigation.navigate('Setting')
+                        }} />
 
 
                     <Iconss.Button name='dots-three-horizontal' size={25} backgroundColor='#F9F9F9' color='black' ></Iconss.Button>

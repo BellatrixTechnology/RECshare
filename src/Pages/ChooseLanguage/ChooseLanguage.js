@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { styling } from './styling';
 
-const ChooseLanguage = () => {
+const ChooseLanguage = (props) => {
     const [checked, setcheck] = useState(false)
     return (
         <SafeAreaView style={styling.safeContainer} >
@@ -111,7 +111,9 @@ const ChooseLanguage = () => {
                 </View>
 
                 <View style={styling.signupView}>
-                    <TouchableOpacity style={styling.signupOpacity}>
+                    <TouchableOpacity style={styling.signupOpacity} onPress={() => {
+                        props.navigation.navigate('SpaceDetail')
+                    }} >
                         <Text style={styling.signupText}>Select</Text>
                     </TouchableOpacity>
                 </View>

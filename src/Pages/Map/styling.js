@@ -29,7 +29,7 @@ export const styling = StyleSheet.create({
     },
     locationView: {
         width: wp('90%'),
-        height: hp('65%'),
+        height: hp('60%'),
         alignItems: 'center',
         justifyContent: 'center',
         // backgroundColor: 'red',

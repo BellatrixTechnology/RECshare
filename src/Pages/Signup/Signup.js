@@ -4,7 +4,7 @@ import { Text, Input, colors } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { styling } from './styling';
-const Signup = () => {
+const Signup = (props) => {
     const [check, setcheck] = useState(false)
     return (
         <SafeAreaView style={styling.safeContainer} >
@@ -71,13 +71,13 @@ const Signup = () => {
                     </TouchableOpacity>
                 </View>
                 <View style={styling.signupView}>
-                    <TouchableOpacity style={styling.signupOpacity}>
+                    <TouchableOpacity style={styling.signupOpacity} onPress={() => props.navigation.navigate('VerfiyCode')}>
                         <Text style={styling.signupText}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styling.signinView}>
                     <Text style={styling.signinTXT}>Have an account? </Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => { props.navigation.navigate('LoginScreen') }}>
                         <Text style={styling.opacitysigninTXT}>Sign in</Text>
                     </TouchableOpacity>
                 </View>

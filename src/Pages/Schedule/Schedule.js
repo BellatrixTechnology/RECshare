@@ -8,7 +8,7 @@ import IconFont from 'react-native-vector-icons/FontAwesome5';
 import CalendarPicker from 'react-native-calendar-picker';
 
 
-const Schedule = () => {
+const Schedule = (props) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
@@ -58,7 +58,11 @@ const Schedule = () => {
                     </View>
                 </View>
                 <View style={styling.signupView}>
-                    <TouchableOpacity style={styling.signupOpacity}>
+                    <TouchableOpacity style={styling.signupOpacity}
+                        onPress={() => {
+                            props.navigation.navigate('Success')
+                        }}
+                    >
                         <Text style={styling.signupText}>Next</Text>
                     </TouchableOpacity>
                 </View>

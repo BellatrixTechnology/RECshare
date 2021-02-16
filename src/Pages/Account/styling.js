@@ -8,7 +8,7 @@ export const styling = StyleSheet.create({
         backgroundColor: 'white'
     },
     mainContainer: {
-        height: hp(73),
+        height: hp(70),
         width: wp(100),
         paddingLeft: 20,
         paddingRight: 20,

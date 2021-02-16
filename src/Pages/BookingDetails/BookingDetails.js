@@ -8,7 +8,7 @@ import Iconss from 'react-native-vector-icons/Entypo';
 
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 
-const BookingDetails = () => {
+const BookingDetails = (props) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
@@ -110,7 +110,7 @@ const BookingDetails = () => {
                 </View>
 
                 <View style={styling.signupView}>
-                    <TouchableOpacity style={styling.signupOpacity}>
+                    <TouchableOpacity style={styling.signupOpacity} onPress={() => { props.navigation.navigate('Filter') }}>
                         <Text style={styling.signupText}>Cancel</Text>
                     </TouchableOpacity>
                 </View>

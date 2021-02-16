@@ -5,7 +5,7 @@ import Icons from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { styling } from './styling';
-const Success = () => {
+const Success = (props) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="#F2F2F2" translucent={false} />
@@ -58,7 +58,7 @@ const Success = () => {
 
                 </View>
                 <View style={styling.signupView}>
-                    <TouchableOpacity style={styling.signupOpacity}>
+                    <TouchableOpacity style={styling.signupOpacity} onPress={() => { props.navigation.navigate('BookingDetails') }}>
                         <Text style={styling.signupText}>Check Details</Text>
                     </TouchableOpacity>
                 </View>

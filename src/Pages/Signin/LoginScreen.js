@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
-const LoginScreen = () => {
+const LoginScreen = (props) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
@@ -26,12 +26,12 @@ const LoginScreen = () => {
                         label='Password'
                     />
                     <View style={styling.forgetView}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => props.navigation.navigate('ForgetPassword')}>
                             <Text style={styling.opacityForgetTXT}>Forget Password?</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styling.signinView}>
-                        <TouchableOpacity style={styling.signinOpacity}>
+                        <TouchableOpacity style={styling.signinOpacity} onPress={() => { props.navigation.navigate('tabs') }}>
                             <Text style={styling.signinText}>Sign In</Text>
                         </TouchableOpacity>
                     </View>
@@ -39,7 +39,7 @@ const LoginScreen = () => {
 
                 <View style={styling.signupView}>
                     <Text style={styling.signupTXT}>Don't have an Account? </Text>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => { props.navigation.navigate('Signup') }}>
                         <Text style={styling.opacitysignupTXT}>Sign Up</Text>
                     </TouchableOpacity>
                 </View>

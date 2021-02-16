@@ -7,7 +7,6 @@ import VerfiyCode from './src/Pages/VerifyCode/VerifyCode';
 import set_location from './src/Pages/setLocations/set-location';
 import Signup from './src/Pages/Signup/Signup';
 import ChooseLocation from './src/Pages/ChooseLocation/ChooseLocation';
-import BottomTab from './src/Navigator/BottomTab';
 import Browse from './src/Pages/Browse/Browse';
 import Browse2 from './src/Pages/Browse2/Browse2';
 import Browse3 from './src/Pages/Browse3/Browse3';
@@ -28,10 +27,18 @@ import Account from './src/Pages/Account/Account';
 import Chat from './src/Pages/Chat/Chat';
 import Filter from './src/Pages/Filter/Filter';
 import SpaceDetail from './src/Pages/SpaceDetail/SpaceDetail';
+import tabs from './src/Navigator/BottomTab';
+import Payment from './src/Pages/Payment/Payment';
 const { Navigator, Screen } = createStackNavigator();
 
 const AuthStack = () => (
   <Navigator headerMode='none'>
+    <Screen name="LoginScreen" component={LoginScreen} />
+
+    <Screen name='Payment' component={Payment} />
+
+    <Screen name='Signup' component={Signup} />
+
     <Screen name='SpaceDetail' component={SpaceDetail} />
     <Screen name='Filter' component={Filter} />
     <Screen name='Chat' component={Chat} />
@@ -66,11 +73,10 @@ const AuthStack = () => (
     <Screen name='VerfiyCode' component={VerfiyCode} />
     <Screen name='Browse3' component={Browse3} />
     <Screen name='ForgetPassword' component={ForgetPassword} />
-    <Screen name="LoginScreen" component={LoginScreen} />
     <Screen name='setlocation' component={set_location} />
-    <Screen name='Signup' component={Signup} />
     <Screen name='ChooseLocation' component={ChooseLocation} />
     <Screen name='Browse' component={Browse} />
+    <Screen name='tabs' component={tabs} />
 
   </Navigator>
 );

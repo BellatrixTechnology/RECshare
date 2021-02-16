@@ -7,9 +7,10 @@ export const styling = StyleSheet.create({
         flex: 1,
     },
     mainContainer: {
-        height: hp('88%'),
+        height: hp('80%'),
         width: wp('100%'),
         padding: 20,
+        backgroundColor: 'white'
 
     },
     headerView: {

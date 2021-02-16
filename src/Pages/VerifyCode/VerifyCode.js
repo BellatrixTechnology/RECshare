@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
-const VerifyCode = () => {
+const VerifyCode = (props) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor='white' translucent={false} />
@@ -23,7 +23,7 @@ const VerifyCode = () => {
                 </View>
 
                 <View style={styling.verifyView}>
-                    <TouchableOpacity style={styling.verifyOpacity}>
+                    <TouchableOpacity style={styling.verifyOpacity} onPress={() => { props.navigation.navigate('ChooseLanguage') }}>
                         <Text style={styling.verifyText}>Verify</Text>
                     </TouchableOpacity>
                 </View>

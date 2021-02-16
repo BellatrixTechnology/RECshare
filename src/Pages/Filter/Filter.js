@@ -7,7 +7,7 @@ import IconMap from 'react-native-vector-icons/MaterialIcons'
 import { Checkbox } from 'react-native-paper';
 
 import { styling } from './styling';
-const Filter = () => {
+const Filter = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const [checked, setcheck] = useState(false)
 
@@ -164,7 +164,7 @@ const Filter = () => {
                     </View>
 
                     <View style={styling.opacityView}>
-                        <TouchableOpacity style={styling.OpacityLog}>
+                        <TouchableOpacity style={styling.OpacityLog} onPress={() => { props.navigation.navigate('Payment') }}>
                             <Text style={styling.Opacitytxt}>Filter</Text>
                         </TouchableOpacity>
                     </View>

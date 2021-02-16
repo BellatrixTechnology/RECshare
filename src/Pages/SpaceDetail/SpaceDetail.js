@@ -7,7 +7,7 @@ import IconMap from 'react-native-vector-icons/MaterialIcons'
 import { Checkbox } from 'react-native-paper';
 
 import { styling } from './styling';
-const SpaceDetail = () => {
+const SpaceDetail = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const [checked, setcheck] = useState(false)
 
@@ -158,7 +158,9 @@ Raffles Place, Boat Band M83</Text>
                     </View>
                     <Text style={styling.hourTXT}>Mindspace Solution is the latest piece of the sharing economy, eliminating extra office space by giving it to freelancers looking for a more steady place to work.</Text>
                     <View style={styling.opacityView}>
-                        <TouchableOpacity style={styling.OpacityLog}>
+                        <TouchableOpacity style={styling.OpacityLog} onPress={() => {
+                            props.navigation.navigate('ReviewBooking')
+                        }}>
                             <Text style={styling.Opacitytxt}>Book Now</Text>
                         </TouchableOpacity>
                     </View>

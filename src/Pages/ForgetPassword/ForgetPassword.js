@@ -4,12 +4,12 @@ import { Text, Input } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/AntDesign';
 import { styling } from './styling';
 // import   {}
-const ForgetPassword = () => {
+const ForgetPassword = (props) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor='white' translucent={true} />
             <View style={styling.headView}>
-                <Icons.Button name="left" style={styling.headIcon} color='black' size={30}>
+                <Icons.Button name="left" style={styling.headIcon} color='black' size={30} onPress={() => props.navigation.navigate('LoginScreen')}>
 
                 </Icons.Button>
 

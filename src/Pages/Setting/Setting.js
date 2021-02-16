@@ -5,7 +5,7 @@ import Icons from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Iconss from 'react-native-vector-icons/Feather';
 import { styling } from './styling';
-const Setting = () => {
+const Setting = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
 
     return (

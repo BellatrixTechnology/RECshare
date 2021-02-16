@@ -8,7 +8,7 @@ import IconFont from 'react-native-vector-icons/FontAwesome5';
 import { hp, wp } from '../../Global/Styles/Scalling';
 
 
-const ReviewBooking = () => {
+const ReviewBooking = (props) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
@@ -92,8 +92,8 @@ const ReviewBooking = () => {
                         </View>
                     </View>
                     <View style={styling.signupView}>
-                        <TouchableOpacity style={styling.signupOpacity}>
-                            <Text style={styling.signupText}>Sign Up</Text>
+                        <TouchableOpacity style={styling.signupOpacity} onPress={() => props.navigation.navigate('Scheduele')}>
+                            <Text style={styling.signupText}>Confirm</Text>
                         </TouchableOpacity>
                     </View>
 
