@@ -28,7 +28,7 @@ const VerifyCode = (props) => {
                     </TouchableOpacity>
                 </View>
                 <View style={styling.resendView}>
-                    <TouchableOpacity>
+                    <TouchableOpacity >
                         <Text style={styling.resentTxt} >Resend Code</Text>
                     </TouchableOpacity>
 

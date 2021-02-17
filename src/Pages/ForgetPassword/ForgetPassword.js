@@ -7,7 +7,7 @@ import { styling } from './styling';
 const ForgetPassword = (props) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor='white' translucent={true} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor='white' translucent={false} />
             <View style={styling.headView}>
                 <Icons.Button name="left" style={styling.headIcon} color='black' size={30} onPress={() => props.navigation.navigate('LoginScreen')}>
 

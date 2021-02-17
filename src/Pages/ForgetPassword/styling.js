@@ -8,7 +8,7 @@ export const styling = StyleSheet.create({
     },
 
     headView: {
-        height: hp('12%'),
+        height: hp('8%'),
         width: wp('100%'),
         alignItems: 'center',
         flexDirection: 'row',

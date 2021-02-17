@@ -3,8 +3,7 @@ import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, Switch, Sc
 import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/AntDesign';
-import IconMap from 'react-native-vector-icons/MaterialIcons'
-import { Checkbox } from 'react-native-paper';
+
 
 import { styling } from './styling';
 const SpaceDetail = (props) => {
@@ -14,7 +13,7 @@ const SpaceDetail = (props) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <View style={styling.headView}>
-                <Icons.Button name="left" style={styling.headIcon} color='black' size={28}>
+                <Icons.Button name="left" style={styling.headIcon} color='black' size={28} onPress={() => { props.navigation.navigate('ChooseLanguage') }}>
 
                 </Icons.Button>
                 <Text style={styling.headTXT}>Space Details</Text>

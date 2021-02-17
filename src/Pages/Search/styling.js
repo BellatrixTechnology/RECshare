@@ -17,7 +17,7 @@ export const styling = StyleSheet.create({
     },
     headerView: {
         height: hp('7%'),
-        width: wp('100%'),
+        width: wp('20%'),
         justifyContent: 'flex-end',
         padding: 5,
     },

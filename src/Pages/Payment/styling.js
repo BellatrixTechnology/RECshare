@@ -16,7 +16,7 @@ export const styling = StyleSheet.create({
     },
     headerView: {
         height: hp('7%'),
-        width: wp('100%'),
+        width: wp('20%'),
         justifyContent: 'flex-end',
         padding: 5,
     },
@@ -88,6 +88,8 @@ export const styling = StyleSheet.create({
         width: wp('90%'),
         height: hp('20%'),
         justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'center'
     },
     signupOpacity: {
         width: wp('85%'),

@@ -9,9 +9,9 @@ import Search from '../Pages/Search/Search';
 import Categories from '../Pages/Categories/Categories';
 import Account from '../Pages/Account/Account';
 import MapBrowse from '../Pages/Map/MapBrowse';
-
-
-
+import Icon from 'react-native-vector-icons/AntDesign';
+import Icons from 'react-native-vector-icons/Feather';
+import Iconss from 'react-native-vector-icons/Fontisto';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +41,7 @@ export default function App(props) {
     }
     function Notification() {
         return (
-            <MapBrowse />
+            <MapBrowse props={props} />
         );
     }
     return (
@@ -52,11 +52,43 @@ export default function App(props) {
                     activeTintColor: 'rgb(17,129,176)',
                 }}
             >
-                <Tab.Screen name="Browse" component={Browse} />
-                <Tab.Screen name="Booking" component={Booking} />
-                <Tab.Screen name="Discover" component={Connect} />
-                <Tab.Screen name="Map" component={Notification} />
-                <Tab.Screen name="Account" component={cate} />
+                <Tab.Screen name="Browse" component={Browse}
+                    options={{
+                        // tabBarColor: '#6bfaf3',
+                        tabBarIcon: () => (
+                            <Icon name="search1" color="black" size={22} />
+                        ),
+                    }}
+                />
+                <Tab.Screen name="Booking" component={Booking}
+                    options={{
+                        // tabBarColor: '#6bfaf3',
+                        tabBarIcon: () => (
+                            <Icons name="bookmark" color="black" size={22} />
+                        ),
+                    }}
+                />
+                <Tab.Screen name="Discover" component={Connect}
+                    options={{
+                        // tabBarColor: '#6bfaf3',
+                        tabBarIcon: () => (
+                            <Iconss name="discover" color="black" size={22} />
+                        ),
+                    }} />
+                <Tab.Screen name="Map" component={Notification}
+                    options={{
+                        // tabBarColor: '#6bfaf3',
+                        tabBarIcon: () => (
+                            <Icons name="map-pin" color="black" size={22} />
+                        ),
+                    }}
+                />
+                <Tab.Screen name="Account" component={cate} options={{
+                    // tabBarColor: '#6bfaf3',
+                    tabBarIcon: () => (
+                        <Icons name="user" color="black" size={22} />
+                    ),
+                }} />
 
 
             </Tab.Navigator>

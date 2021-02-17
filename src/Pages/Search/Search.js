@@ -20,16 +20,16 @@ function Searchbar() {
 function Recentbar() {
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Settings!</Text>
+            <Text>Recent!</Text>
         </View>
     );
 }
-const Search = () => {
+const Search = ({ props }) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
             <View style={styling.headerView}>
-                <Icon name='left' size={30} />
+                <Icon.Button name='left' size={30} color='black' backgroundColor={'white'} onPress={() => { props.navigation.navigate('LoginScreen') }}></Icon.Button>
             </View>
             <View style={styling.headTXTView}>
                 <Text style={styling.headTXT}> Discover</Text>

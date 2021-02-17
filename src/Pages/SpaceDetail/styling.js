@@ -120,12 +120,14 @@ export const styling = StyleSheet.create({
         backgroundColor: '#F9F9F9',
         borderRadius: 10,
         flexDirection: 'row',
-        borderRadius: 10
+        borderRadius: 10,
+        width: wp(90),
+        justifyContent: 'center',
     },
     innerDayView: {
         paddingLeft: 5,
         borderWidth: 0.5,
-        width: wp(45),
+        width: wp(42),
         backgroundColor: '#F9F9F9',
         flexDirection: 'row',
         alignItems: 'center',

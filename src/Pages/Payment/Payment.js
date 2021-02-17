@@ -13,7 +13,7 @@ const Payment = (props) => {
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
             <View style={styling.headerView}>
-                <Icon name='left' size={30} />
+                <Icon.Button name='left' size={30} backgroundColor='white' color='black' onPress={() => { props.navigation.navigate('Filter') }} ></Icon.Button>
             </View>
             <View style={styling.headTXTView}>
                 <Text style={styling.headTXT}>Payment</Text>

@@ -13,7 +13,7 @@ const BookingDetails = (props) => {
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
             <View style={styling.headerView}>
-                <Icons.Button name='left' backgroundColor='white' color='black' size={30} />
+                <Icons.Button name='left' backgroundColor='white' color='black' size={30} onPress={() => { props.navigation.navigate('Success') }} />
 
 
                 <Iconss.Button name='dots-three-horizontal' size={30} backgroundColor='white' color='black' />

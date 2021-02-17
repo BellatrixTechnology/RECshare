@@ -14,7 +14,7 @@ const Filter = (props) => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <View style={styling.headView}>
-                <Icons.Button name="left" style={styling.headIcon} color='black' size={30}>
+                <Icons.Button name="left" style={styling.headIcon} color='black' size={30} onPress={() => { props.navigation.navigate('BookingDetails') }}>
 
                 </Icons.Button>
 

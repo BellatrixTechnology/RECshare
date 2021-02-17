@@ -6,13 +6,13 @@ import Icons from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Iconss from 'react-native-vector-icons/Ionicons';
 
-const Chat = () => {
+const Chat = (props) => {
 
     return (
         <SafeAreaView style={styling.flexContainer}>
             <ScrollView>
                 <View style={styling.headerView}>
-                    <Icons name='left' size={24} />
+                    <Icons.Button name='left' size={26} backgroundColor='white' color='black' onPress={props.navigation.navigate('Payment')}></Icons.Button>
                     <View style={styling.userView}>
                         <Icon name='user-circle' size={40} color='#C8C7CC' />
 
@@ -44,7 +44,7 @@ const Chat = () => {
 
                 </View>
             </ScrollView>
-        </SafeAreaView>
+        </SafeAreaView >
     )
 }
 export default Chat;

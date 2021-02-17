@@ -43,14 +43,16 @@ export const styling = StyleSheet.create({
         // justifyContent: 'center',
     },
     verifyView: {
-        width: wp('90%'),
+        width: wp('80%'),
         height: hp('15%'),
         justifyContent: 'flex-end',
+        alignItems: 'center',
+        alignSelf: 'center'
 
     },
     verifyOpacity: {
 
-        width: wp('84%'),
+        width: wp('80%'),
         height: hp('8%'),
         borderRadius: 8,
         backgroundColor: '#FF2D55',
