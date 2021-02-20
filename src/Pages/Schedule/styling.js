@@ -105,8 +105,8 @@ export const styling = StyleSheet.create({
         justifyContent: 'center',
     },
     signupOpacity: {
-        width: wp('90%'),
-        height: hp('7%'),
+        width: wp('85%'),
+        height: hp('8%'),
         borderRadius: 8,
         backgroundColor: '#FF2D55',
         alignItems: 'center',

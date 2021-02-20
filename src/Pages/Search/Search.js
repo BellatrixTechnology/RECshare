@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
@@ -26,37 +26,43 @@ function Recentbar() {
 }
 const Search = ({ props }) => {
     return (
-        <SafeAreaView style={styling.safeContainer} >
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
-            <View style={styling.headerView}>
-                <Icon.Button name='left' size={30} color='black' backgroundColor={'white'} onPress={() => { props.navigation.navigate('LoginScreen') }}></Icon.Button>
-            </View>
-            <View style={styling.headTXTView}>
-                <Text style={styling.headTXT}> Discover</Text>
-            </View>
-            <View style={styling.mainContainer}>
-                <NavigationContainer
-                    independent={true}
-                >
-                    <Tab.Navigator
-                        tabBarOptions={{
-                            labelStyle: { fontSize: 15, fontFamily: 'SFUIText-Bold' },
-                            style: {
-                                width: wp('100%')
-                            },
-                            indicatorStyle: {
-                                borderBottomColor: '#FF2D55',
-                                borderBottomWidth: 2,
-                            },
-                        }}
-                    >
-                        <Tab.Screen name="Search" component={Searchbar} />
-                        <Tab.Screen name="Recent" component={Recentbar} />
-                    </Tab.Navigator>
-                </NavigationContainer>
-            </View>
+        <Fragment>
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
 
-        </SafeAreaView >
+            <SafeAreaView style={{ backgroundColor: 'white' }} />
+            <SafeAreaView style={styling.safeContainer} >
+                <View style={styling.headerView}>
+                    <Icon.Button name='left' size={30} color='black' backgroundColor={'white'} onPress={() => { props.navigation.navigate('LoginScreen') }}></Icon.Button>
+                </View>
+                <View style={styling.headTXTView}>
+                    <Text style={styling.headTXT}> Discover</Text>
+                </View>
+                <View style={styling.mainContainer}>
+                    <NavigationContainer
+                        independent={true}
+                    >
+                        <Tab.Navigator
+                            tabBarOptions={{
+                                labelStyle: { fontSize: 15, fontFamily: 'SFUIText-Bold' },
+                                style: {
+                                    width: wp('100%')
+                                },
+                                indicatorStyle: {
+                                    borderBottomColor: '#FF2D55',
+                                    borderBottomWidth: 2,
+                                },
+                            }}
+                        >
+                            <Tab.Screen name="Search" component={Searchbar} />
+                            <Tab.Screen name="Recent" component={Recentbar} />
+                        </Tab.Navigator>
+                    </NavigationContainer>
+                </View>
+
+            </SafeAreaView >
+            <SafeAreaView style={{ backgroundColor: 'white' }} />
+
+        </Fragment>
     )
 }
 

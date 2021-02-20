@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, ScrollView, SafeAreaView, TextInput } from 'react-native';
 import { Text, Input, colors } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -8,56 +8,64 @@ import { styling } from './styling';
 const MapBrowse = ({ props }) => {
     const [check, setcheck] = useState(false)
     return (
-        <SafeAreaView style={styling.safeContainer} >
+        <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
-            <View style={styling.headView}>
-                <Icons.Button name="left" style={styling.headIcon} color='black' size={28} onPress={() => { props.navigation.navigate('LoginScreen') }}>
 
-                </Icons.Button>
+            <SafeAreaView style={{ backgroundColor: 'white' }} />
 
-                <Icon name='filter' style={styling.headIcon} color='black' size={20} />
-            </View>
-            <View style={styling.mainContainer}>
+            <SafeAreaView style={styling.safeContainer} >
 
+                <View style={styling.headView}>
+                    <Icons.Button name="left" style={styling.headIcon} color='black' size={28} onPress={() => { props.navigation.navigate('LoginScreen') }}>
 
-                <View style={styling.locationView}>
-                    <Icon name='map-marker-alt' size={50} color='#FF2D55' />
+                    </Icons.Button>
+
+                    <Icon name='filter' style={styling.headIcon} color='black' size={20} />
                 </View>
-                <ScrollView horizontal={true}>
-                    <View style={styling.floatingView}>
+                <View style={styling.mainContainer}>
 
-                        <View style={styling.floatingInnerView}>
 
-                        </View>
-                        <View style={styling.txtView} >
-                            <Text style={styling.cardheadTXT}>
-                                Mindspace Solution
+                    <View style={styling.locationView}>
+                        <Icon name='map-marker-alt' size={50} color='#FF2D55' />
+                    </View>
+                    <ScrollView horizontal={true}>
+                        <View style={styling.floatingView}>
+
+                            <View style={styling.floatingInnerView}>
+
+                            </View>
+                            <View style={styling.txtView} >
+                                <Text style={styling.cardheadTXT}>
+                                    Mindspace Solution
                         </Text>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Icon name='map-marker-alt' color='#666666' size={16} />
-                                <Text style={styling.cardheadLabel}> 0.48 mi away </Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Icon name='map-marker-alt' color='#666666' size={16} />
+                                    <Text style={styling.cardheadLabel}> 0.48 mi away </Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
-                    <View style={styling.floatingView}>
+                        <View style={styling.floatingView}>
 
-                        <View style={styling.floatingInnerView}>
+                            <View style={styling.floatingInnerView}>
 
-                        </View>
-                        <View style={styling.txtView} >
-                            <Text style={styling.cardheadTXT}>
-                                Mindspace Solution
+                            </View>
+                            <View style={styling.txtView} >
+                                <Text style={styling.cardheadTXT}>
+                                    Mindspace Solution
                         </Text>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Icon name='map-marker-alt' color='#666666' size={16} />
-                                <Text style={styling.cardheadLabel}>   0.48 mi away </Text>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <Icon name='map-marker-alt' color='#666666' size={16} />
+                                    <Text style={styling.cardheadLabel}>   0.48 mi away </Text>
+                                </View>
                             </View>
                         </View>
-                    </View>
-                </ScrollView>
+                    </ScrollView>
 
-            </View>
-        </SafeAreaView >
+                </View>
+            </SafeAreaView>
+            <SafeAreaView style={{ backgroundColor: 'white' }} />
+
+        </Fragment>
     )
 }
 

@@ -34,10 +34,10 @@ const { Navigator, Screen } = createStackNavigator();
 const AuthStack = () => (
   <Navigator headerMode='none'>
     <Screen name="LoginScreen" component={LoginScreen} />
+    <Screen name='Signup' component={Signup} />
 
     <Screen name='Payment' component={Payment} />
 
-    <Screen name='Signup' component={Signup} />
 
     <Screen name='SpaceDetail' component={SpaceDetail} />
     <Screen name='Filter' component={Filter} />

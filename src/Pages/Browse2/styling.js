@@ -14,7 +14,6 @@ export const styling = StyleSheet.create({
     },
     innerContainer: {
         height: hp('22%'),
-
     },
     labelView: {
         justifyContent: 'center',

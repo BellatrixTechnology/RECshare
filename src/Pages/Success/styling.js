@@ -71,13 +71,13 @@ export const styling = StyleSheet.create({
         fontFamily: fontFamily.SFUIText
     },
     signupView: {
-        width: wp('80%'),
+        width: wp('85%'),
         height: hp('17%'),
         justifyContent: 'center',
         alignSelf: 'center'
     },
     signupOpacity: {
-        width: wp('80%'),
+        width: wp('85%'),
         height: hp('8%'),
         borderRadius: 8,
         backgroundColor: '#FF2D55',

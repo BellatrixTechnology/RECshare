@@ -49,44 +49,44 @@ export default function App(props) {
             <Tab.Navigator
                 tabBarOptions={{
                     iconStyle: { color: "rgb(17,129,176)" },
-                    activeTintColor: 'rgb(17,129,176)',
+                    activeTintColor: '#FF2D55',
                 }}
             >
                 <Tab.Screen name="Browse" component={Browse}
                     options={{
                         // tabBarColor: '#6bfaf3',
-                        tabBarIcon: () => (
-                            <Icon name="search1" color="black" size={22} />
+                        tabBarIcon: ({ color }) => (
+                            <Icon name="search1" color={color} size={22} />
                         ),
                     }}
                 />
                 <Tab.Screen name="Booking" component={Booking}
                     options={{
                         // tabBarColor: '#6bfaf3',
-                        tabBarIcon: () => (
-                            <Icons name="bookmark" color="black" size={22} />
+                        tabBarIcon: ({ color }) => (
+                            <Icons name="bookmark" color={color} size={22} />
                         ),
                     }}
                 />
                 <Tab.Screen name="Discover" component={Connect}
                     options={{
                         // tabBarColor: '#6bfaf3',
-                        tabBarIcon: () => (
-                            <Iconss name="discover" color="black" size={22} />
+                        tabBarIcon: ({ color }) => (
+                            <Iconss name="discover" color={color} size={22} />
                         ),
                     }} />
                 <Tab.Screen name="Map" component={Notification}
                     options={{
                         // tabBarColor: '#6bfaf3',
-                        tabBarIcon: () => (
-                            <Icons name="map-pin" color="black" size={22} />
+                        tabBarIcon: ({ color }) => (
+                            <Icons name="map-pin" color={color} size={22} />
                         ),
                     }}
                 />
                 <Tab.Screen name="Account" component={cate} options={{
                     // tabBarColor: '#6bfaf3',
-                    tabBarIcon: () => (
-                        <Icons name="user" color="black" size={22} />
+                    tabBarIcon: ({ color }) => (
+                        <Icons name="user" color={color} size={22} />
                     ),
                 }} />
 

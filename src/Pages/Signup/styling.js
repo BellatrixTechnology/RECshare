@@ -30,19 +30,19 @@ export const styling = StyleSheet.create({
         width: wp('40%'),
         height: hp('13%'),
     },
+
+    signupHeader: {
+        height: hp('5%'),
+        width: wp('40%'),
+        alignSelf: 'flex-start',
+
+    },
     avatarView: {
         height: hp('20%'),
         width: wp('40%'),
         alignItems: 'center',
         // alignSelf: 'center',
         justifyContent: 'center',
-
-    },
-
-    signupHeader: {
-        height: hp('5%'),
-        width: wp('40%'),
-        alignSelf: 'flex-start',
 
     },
     formView: {
@@ -97,7 +97,6 @@ export const styling = StyleSheet.create({
 
     },
     signinView: {
-        // flex: 1,
         height: hp('8%'),
         width: wp('90%'),
         alignItems: 'flex-end',
@@ -119,9 +118,6 @@ export const styling = StyleSheet.create({
         color: '#666666',
         fontSize: fontSize.Login.signinhead
     },
-
-
-
 
     opacitysigninTXT: {
         color: 'black',

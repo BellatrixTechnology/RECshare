@@ -117,7 +117,7 @@ export const styling = StyleSheet.create({
     },
     dayView: {
         height: hp(6),
-        backgroundColor: '#F9F9F9',
+        // backgroundColor: '#F9F9F9',
         borderRadius: 10,
         flexDirection: 'row',
         borderRadius: 10,
@@ -131,7 +131,7 @@ export const styling = StyleSheet.create({
         backgroundColor: '#F9F9F9',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+
     },
     hourTXT: {
         fontSize: fontSize.Account.txt,
@@ -167,13 +167,13 @@ export const styling = StyleSheet.create({
         justifyContent: 'center'
     },
     OpacityLog: {
-        height: hp('6%'),
-        width: wp('90%'),
+        width: wp('85%'),
+        height: hp('8%'),
+        borderRadius: 8,
         backgroundColor: '#FF2D55',
         alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 10,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        justifyContent: 'center'
     },
     Opacitytxt: {
         fontFamily: 'SFUIText-Bold',

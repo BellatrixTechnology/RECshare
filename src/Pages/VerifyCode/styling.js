@@ -43,7 +43,7 @@ export const styling = StyleSheet.create({
         // justifyContent: 'center',
     },
     verifyView: {
-        width: wp('80%'),
+        width: wp('85%'),
         height: hp('15%'),
         justifyContent: 'flex-end',
         alignItems: 'center',
@@ -52,7 +52,7 @@ export const styling = StyleSheet.create({
     },
     verifyOpacity: {
 
-        width: wp('80%'),
+        width: wp('85%'),
         height: hp('8%'),
         borderRadius: 8,
         backgroundColor: '#FF2D55',

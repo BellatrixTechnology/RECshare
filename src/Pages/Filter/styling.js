@@ -7,7 +7,7 @@ export const styling = StyleSheet.create({
         flex: 1
     },
     mainContainer: {
-        height: hp(89),
+        height: hp(90),
         width: wp(100),
         paddingLeft: 20,
         paddingRight: 20,
@@ -121,10 +121,10 @@ export const styling = StyleSheet.create({
     opacityView: {
         height: hp(10),
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     OpacityLog: {
-        height: hp('6%'),
+        height: hp('8%'),
         width: wp('90%'),
         backgroundColor: '#FF2D55',
         alignItems: 'center',
