@@ -16,7 +16,6 @@ export const styling = StyleSheet.create({
         backgroundColor: 'white'
     },
     headView: {
-        paddingRight: 20,
         height: hp('8%'),
         width: wp('100%'),
         alignItems: 'center',
@@ -125,12 +124,12 @@ export const styling = StyleSheet.create({
         justifyContent: 'center',
     },
     innerDayView: {
-        paddingLeft: 5,
         borderWidth: 0.5,
         width: wp(42),
         backgroundColor: '#F9F9F9',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-around'
 
     },
     hourTXT: {

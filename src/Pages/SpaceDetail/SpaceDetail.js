@@ -91,40 +91,40 @@ const SpaceDetail = (props) => {
                         <View style={styling.dayView}>
                             <View style={styling.innerDayView}>
                                 <Text style={styling.dayTXT}>Monday:</Text>
-                                <Text style={styling.hourTXT}>8:00AM-8:00PM </Text>
+                                <Text style={styling.hourTXT}>8 AM-8 PM </Text>
                             </View>
                             <View style={styling.innerDayView}>
                                 <Text style={styling.dayTXT}>Friday: </Text>
-                                <Text style={styling.hourTXT}>8:00AM-8:00PM </Text>
+                                <Text style={styling.hourTXT}>8 AM-8 PM </Text>
                             </View>
 
                         </View>
                         <View style={styling.dayView}>
                             <View style={styling.innerDayView}>
                                 <Text style={styling.dayTXT}>Tuesday:</Text>
-                                <Text style={styling.hourTXT}>8:00AM-8:00PM </Text>
+                                <Text style={styling.hourTXT}>8 AM-8PM </Text>
                             </View>
                             <View style={styling.innerDayView}>
                                 <Text style={styling.dayTXT}>Saturday:</Text>
-                                <Text style={styling.hourTXT}>OFF </Text>
+                                <Text style={styling.hourTXT}>Closed </Text>
                             </View>
 
                         </View>
                         <View style={styling.dayView}>
                             <View style={styling.innerDayView}>
                                 <Text style={styling.dayTXT}>Wednesday:</Text>
-                                <Text style={styling.hourTXT}>8:00AM-8:00PM </Text>
+                                <Text style={styling.hourTXT}>8 AM-8 PM </Text>
                             </View>
                             <View style={styling.innerDayView}>
                                 <Text style={styling.dayTXT}>Sunday:</Text>
-                                <Text style={styling.hourTXT}>OFF </Text>
+                                <Text style={styling.hourTXT}>Closed </Text>
                             </View>
 
                         </View>
                         <View style={styling.dayView}>
                             <View style={styling.innerDayView}>
                                 <Text style={styling.dayTXT}>Thursday: </Text>
-                                <Text style={styling.hourTXT}>8:00AM-8:00PM </Text>
+                                <Text style={styling.hourTXT}>8 AM-8 PM </Text>
                             </View>
                             <View style={styling.innerDayView}>
                                 <Text style={styling.dayTXT}> </Text>
