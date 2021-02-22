@@ -116,20 +116,19 @@ export const styling = StyleSheet.create({
     },
     dayView: {
         height: hp(6),
-        // backgroundColor: '#F9F9F9',
         borderRadius: 10,
         flexDirection: 'row',
         borderRadius: 10,
-        width: wp(90),
-        justifyContent: 'center',
+        width: wp(85),
+        backgroundColor: 'white'
     },
     innerDayView: {
         borderWidth: 0.5,
-        width: wp(42),
+        width: wp(40),
         backgroundColor: '#F9F9F9',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-around'
+        justifyContent: 'space-between'
 
     },
     hourTXT: {
