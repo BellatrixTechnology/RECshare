@@ -3,6 +3,7 @@ import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, Switch, Sc
 import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/AntDesign';
+import Iconss from 'react-native-vector-icons/Ionicons';
 
 
 import { styling } from './styling';
@@ -51,7 +52,7 @@ const SpaceDetail = (props) => {
                                 <Text style={styling.timeTXT}>Irene Lacoste</Text>
                             </View>
                             <View style={styling.iconView}>
-                                <Icons.Button name='message1' backgroundColor='white' color='black' ></Icons.Button>
+                                <Iconss name='chatbubble-sharp' color='white' size={26} />
                             </View>
 
                         </View>
@@ -83,52 +84,59 @@ const SpaceDetail = (props) => {
                                 <Text style={styling.amenTXT}>Visual Equipment</Text>
                             </TouchableOpacity>
                         </View>
-
-                        <View style={styling.availheadView}>
-                            <Text style={styling.availTXT}>Open Hour</Text>
+                        <View style={styling.amenityMoreView}>
+                            <Icons name='pluscircleo' color='#666666' />
+                            <Text style={styling.labelTXT}>   7 More Amenities</Text>
                         </View>
-
-                        <View style={styling.dayView}>
-                            <View style={styling.innerDayView}>
-                                <Text style={styling.dayTXT}>Monday:</Text>
-                                <Text style={styling.hourTXT}>8 AM-8 PM </Text>
-                            </View>
-                            <View style={styling.innerDayView}>
-                                <Text style={styling.dayTXT}>Friday: </Text>
-                                <Text style={styling.hourTXT}>8 AM-8 PM </Text>
+                        <View style={styling.openMainView}>
+                            <View style={styling.availheadView}>
+                                <Text style={styling.availTXT}>Open Hour</Text>
                             </View>
 
-                        </View>
-                        <View style={styling.dayView}>
-                            <View style={styling.innerDayView}>
-                                <Text style={styling.dayTXT}>Tuesday:</Text>
-                                <Text style={styling.hourTXT}>8 AM-8PM </Text>
-                            </View>
-                            <View style={styling.innerDayView}>
-                                <Text style={styling.dayTXT}>Saturday:</Text>
-                                <Text style={styling.hourTXT}>Closed </Text>
-                            </View>
+                            <View style={styling.innerOpenView}>
+                                <View style={styling.dayView}>
+                                    <View style={styling.innerDay1View}>
+                                        <Text style={styling.dayTXT}>Monday:</Text>
+                                        <Text style={styling.hourTXT}>8 AM-8 PM </Text>
+                                    </View>
+                                    <View style={styling.innerDayView}>
+                                        <Text style={styling.dayTXT}>Friday: </Text>
+                                        <Text style={styling.hourTXT}>8 AM-8 PM </Text>
+                                    </View>
 
-                        </View>
-                        <View style={styling.dayView}>
-                            <View style={styling.innerDayView}>
-                                <Text style={styling.dayTXT}>Wednesday:</Text>
-                                <Text style={styling.hourTXT}>8 AM-8 PM </Text>
-                            </View>
-                            <View style={styling.innerDayView}>
-                                <Text style={styling.dayTXT}>Sunday:</Text>
-                                <Text style={styling.hourTXT}>Closed </Text>
-                            </View>
+                                </View>
+                                <View style={styling.dayView}>
+                                    <View style={styling.innerDay1View}>
+                                        <Text style={styling.dayTXT}>Tuesday:</Text>
+                                        <Text style={styling.hourTXT}>8 AM-8PM </Text>
+                                    </View>
+                                    <View style={styling.innerDayView}>
+                                        <Text style={styling.dayTXT}>Saturday:</Text>
+                                        <Text style={styling.hourTXT}>Closed </Text>
+                                    </View>
 
-                        </View>
-                        <View style={styling.dayView}>
-                            <View style={styling.innerDayView}>
-                                <Text style={styling.dayTXT}>Thursday: </Text>
-                                <Text style={styling.hourTXT}>8 AM-8 PM </Text>
-                            </View>
-                            <View style={styling.innerDayView}>
-                                <Text style={styling.dayTXT}> </Text>
-                                <Text style={styling.hourTXT}></Text>
+                                </View>
+                                <View style={styling.dayView}>
+                                    <View style={styling.innerDay1View}>
+                                        <Text style={styling.dayTXT}>Wednesday:</Text>
+                                        <Text style={styling.hourTXT}>8 AM-8 PM </Text>
+                                    </View>
+                                    <View style={styling.innerDayView}>
+                                        <Text style={styling.dayTXT}>Sunday:</Text>
+                                        <Text style={styling.hourTXT}>Closed </Text>
+                                    </View>
+
+                                </View>
+                                <View style={styling.day2View}>
+                                    <View style={styling.innerDay1View}>
+                                        <Text style={styling.dayTXT}>Thursday: </Text>
+                                        <Text style={styling.hourTXT}>8 AM-8 PM </Text>
+                                    </View>
+                                    <View style={styling.innerDayView}>
+                                        <Text style={styling.dayTXT}> </Text>
+                                        <Text style={styling.hourTXT}></Text>
+                                    </View>
+                                </View>
                             </View>
                         </View>
 
@@ -136,6 +144,27 @@ const SpaceDetail = (props) => {
                             <Text style={styling.availTXT}>Description</Text>
                         </View>
                         <Text style={styling.hourTXT}>This locations central proximity to all of the major companies, nonprofit organizations, and Federal agencies in the area make it ideal for those business executives on the  </Text>
+
+                        <View style={styling.mainSchdView}>
+                            <View style={styling.SchedueleCiew}>
+                                <Text style={styling.availTXT}>Scheduel</Text>
+                                <View style={styling.seeallView}>
+                                    <Text style={styling.amenTXT}>See All</Text>
+                                    <Icons name='right' size={14} />
+                                </View>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
+                                <View style={styling.timeView}>
+                                    <Text style={styling.timeSchduleTXT}>07:30 AM</Text>
+                                    <Text style={styling.availbleTXT}>Available</Text>
+                                </View>
+                                <View style={styling.timeView}>
+                                    <Text style={styling.timeSchduleTXT}>08:30 AM</Text>
+                                    <Text style={styling.availbleTXT}>Available</Text>
+                                </View>
+                            </View>
+                        </View>
                         <View style={styling.availheadView}>
                             <Text style={styling.availTXT}>Location</Text>
                         </View>
@@ -144,13 +173,16 @@ const SpaceDetail = (props) => {
                             <Text style={styling.addressTXT}>43 Bourke Street, Newbridge NSW 837
 Raffles Place, Boat Band M83</Text>
                         </View>
+
+
+
                         <View style={styling.mapView}>
 
                         </View>
                         <View style={styling.availheadView}>
                             <Text style={styling.availTXT}>Reviews</Text>
                         </View>
-                        <View style={styling.headerView}>
+                        <View style={styling.header2View}>
                             <View style={styling.userView}>
                                 <Icon name='user-circle' size={40} color='#C8C7CC' />
 
@@ -160,6 +192,10 @@ Raffles Place, Boat Band M83</Text>
                             </View>
                         </View>
                         <Text style={styling.hourTXT}>Mindspace Solution is the latest piece of the sharing economy, eliminating extra office space by giving it to freelancers looking for a more steady place to work.</Text>
+                        <View style={styling.amenityMoreView}>
+                            <Icons name='pluscircleo' color='#666666' />
+                            <Text style={styling.labelTXT}>   7 More Amenities</Text>
+                        </View>
                         <View style={styling.opacityView}>
                             <TouchableOpacity style={styling.OpacityLog} onPress={() => {
                                 props.navigation.navigate('ReviewBooking')

@@ -50,6 +50,16 @@ export const styling = StyleSheet.create({
         fontSize: fontSize.Space.tag,
         fontFamily: fontFamily.SFUITextBold
     },
+    timeSchduleTXT: {
+        fontSize: fontSize.Space.labels,
+        fontFamily: fontFamily.SFUITextBold,
+        color: 'white'
+    },
+    availbleTXT: {
+        fontSize: fontSize.Space.line,
+        fontFamily: fontFamily.SFUITextBold,
+        color: 'white'
+    },
     nameView: {
         height: hp(15),
         justifyContent: 'center'
@@ -74,13 +84,29 @@ export const styling = StyleSheet.create({
         height: hp(10),
         alignItems: 'center',
         flexDirection: 'row',
-        padding: 5
+        padding: 5,
+        borderRadius: 10,
+        justifyContent: 'space-between',
+        backgroundColor: '#F9F9F9',
+        marginTop: 10,
+    },
+    header2View: {
+        height: hp(10),
+        alignItems: 'center',
+        flexDirection: 'row',
+        padding: 5,
+        borderRadius: 10,
+        backgroundColor: '#F9F9F9',
+        marginTop: 10,
     },
     iconView: {
-        width: wp(30),
+        width: wp(10),
+        height: hp(6),
+        backgroundColor: '#FF2D55',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderRadius: 30
     },
     userView: {
         width: wp(20),
@@ -93,18 +119,28 @@ export const styling = StyleSheet.create({
     },
     availTXT: {
         fontSize: fontSize.Account.labels,
-        fontFamily: fontFamily.SFUITextSemiBold,
+        fontFamily: fontFamily.SFUITextBold,
     },
     amenityView: {
+        marginTop: hp(2),
         flexDirection: 'row',
-        height: hp(8),
+        height: hp(4),
         width: wp(85),
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'space-evenly'
     },
+    amenityMoreView: {
+        marginTop: hp(2),
+        flexDirection: 'row',
+        height: hp(4),
+        width: wp(85),
+        alignItems: 'center',
+        alignSelf: 'center',
+        justifyContent: 'center'
+    },
     amenOpacity: {
-        height: hp(7),
+        // height: hp(4),
         width: wp(40),
         backgroundColor: 'white',
         alignItems: 'center',
@@ -115,21 +151,66 @@ export const styling = StyleSheet.create({
         fontFamily: fontFamily.SFUIText,
     },
     dayView: {
-        height: hp(6),
-        borderRadius: 10,
         flexDirection: 'row',
-        borderRadius: 10,
-        width: wp(85),
-        backgroundColor: 'white'
+        width: wp(84),
+        height: hp(5),
+        alignSelf: 'center',
+        justifyContent: 'center',
+        borderBottomWidth: 0.2,
+        // backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    day2View: {
+        flexDirection: 'row',
+        width: wp(84),
+        height: hp(5),
+        alignSelf: 'center',
+        justifyContent: 'center',
+        // backgroundColor: 'white',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     innerDayView: {
-        borderWidth: 0.5,
-        width: wp(40),
-        backgroundColor: '#F9F9F9',
+        height: hp(5),
+        borderRadius: 4,
+        width: wp(42),
+        // backgroundColor: '#F9F9F9',
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
 
+    },
+    mainSchdView: {
+        height: hp(15),
+        marginTop: hp(2),
+        justifyContent: 'space-evenly'
+    },
+    SchedueleCiew: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    seeallView: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    timeView: {
+        height: hp(8),
+        width: wp(40),
+        borderRadius: 10,
+        backgroundColor: '#AA4AFF',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    innerDay1View: {
+        height: hp(5),
+        // borderRadius: 4,
+        borderRightWidth: 0.2,
+        width: wp(42),
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     },
     hourTXT: {
         fontSize: fontSize.Account.txt,
@@ -178,4 +259,17 @@ export const styling = StyleSheet.create({
         fontSize: fontSize.Space.line,
         color: 'white'
     },
+    openMainView: {
+        height: hp(25),
+        // width: wp(90),
+    },
+    innerOpenView: {
+        marginTop: hp(1),
+        marginBottom: hp(2),
+        height: hp(21),
+        backgroundColor: "#EFEFF4",
+        borderRadius: 10,
+        justifyContent: 'space-evenly',
+
+    }
 })
