@@ -178,7 +178,7 @@ export const styling = StyleSheet.create({
         // backgroundColor: '#F9F9F9',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-evenly'
 
     },
     mainSchdView: {
@@ -206,19 +206,24 @@ export const styling = StyleSheet.create({
     innerDay1View: {
         height: hp(5),
         // borderRadius: 4,
-        borderRightWidth: 0.2,
+        // borderRightWidth: 0.2,
         width: wp(42),
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-evenly'
     },
     hourTXT: {
         fontSize: fontSize.Account.txt,
         fontFamily: fontFamily.SFUIText,
         textAlign: 'justify'
     },
+    hour1TXT: {
+        fontSize: fontSize.Account.line,
+        fontFamily: fontFamily.SFUITextSemiBold,
+        textAlign: 'justify'
+    },
     dayTXT: {
-        fontSize: fontSize.Account.txt,
+        fontSize: fontSize.Account.line,
         fontFamily: fontFamily.SFUIText,
         color: '#666666',
 
