@@ -4,41 +4,35 @@ import { hp, wp } from '../../Global/Styles/Scalling';
 
 export const styling = StyleSheet.create({
     safeContainer: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'white'
     },
     mainContainer: {
         height: hp('100%'),
         width: hp('100%'),
         padding: 20,
-        backgroundColor: 'white'
+        justifyContent: 'space-evenly'
     },
     innerContainer: {
-
-        height: hp('30%'),
         width: wp('90%'),
         flexDirection: 'row',
-        alignItems: 'flex-end',
-        justifyContent: 'flex-end',
 
     },
     headerView: {
         width: wp('50%'),
-        height: hp('20%'),
-        justifyContent: 'flex-end'
+        justifyContent: 'center'
     },
     welcomeView: {
         width: wp('40%'),
-        height: hp('13%'),
     },
 
     signupHeader: {
-        height: hp('5%'),
         width: wp('40%'),
         alignSelf: 'flex-start',
 
     },
     avatarView: {
-        height: hp('20%'),
+        // height: hp('20%'),
         width: wp('40%'),
         alignItems: 'center',
         // alignSelf: 'center',
@@ -47,7 +41,6 @@ export const styling = StyleSheet.create({
     },
     formView: {
         width: wp('90%'),
-        height: hp('38%'),
         alignItems: 'center',
         justifyContent: 'center',
 
@@ -58,11 +51,7 @@ export const styling = StyleSheet.create({
         alignItems: 'center',
         marginLeft: wp('2%')
     },
-    iconCheckBox: {
-        backgroundColor: 'white',
-        width: 45
 
-    },
     agreeTXT: {
         fontSize: fontSize.Signup.terms,
         fontFamily: fontFamily.SFUIText,
@@ -76,8 +65,6 @@ export const styling = StyleSheet.create({
 
     signupView: {
         width: wp('90%'),
-        height: hp('10%'),
-        justifyContent: 'center',
     },
     signupOpacity: {
         width: wp('85%'),
@@ -97,9 +84,7 @@ export const styling = StyleSheet.create({
 
     },
     signinView: {
-        height: hp('8%'),
         width: wp('90%'),
-        alignItems: 'flex-end',
         flexDirection: 'row',
         justifyContent: 'center',
     },
@@ -108,11 +93,7 @@ export const styling = StyleSheet.create({
         fontFamily: fontFamily.SFUITextHeavy,
         fontWeight: "bold",
         lineHeight: 47.5,
-
-
     },
-
-
     siguplabel: {
         fontFamily: fontFamily.SFUIText,
         color: '#666666',
@@ -129,7 +110,6 @@ export const styling = StyleSheet.create({
     signinTXT:
     {
         color: 'black',
-
         fontSize: fontSize.Login.signinhead,
         fontFamily: fontFamily.SFUIText,
 

@@ -4,39 +4,34 @@ import { hp, wp } from '../../Global/Styles/Scalling';
 
 export const styling = StyleSheet.create({
     safeContainer: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'white'
     },
     mainContainer: {
-        height: hp('100%'),
-        width: hp('100%'),
+        flex: 1,
         padding: 20,
+        justifyContent: 'space-evenly',
     },
     innerContainer: {
-        height: hp('30%'),
         width: wp('50%'),
-        justifyContent: 'flex-end',
     },
     welcomeHeader: {
         width: wp('40%'),
-        height: hp('13%'),
 
     },
     signinHeader: {
-        height: hp('5%'),
         width: wp('40%'),
         alignSelf: 'flex-start',
 
     },
     formView: {
         width: wp('90%'),
-        height: hp('50%'),
         alignItems: 'center',
         justifyContent: 'center',
 
     },
     forgetView: {
 
-        height: hp('5%'),
         width: wp('34%'),
         alignItems: 'center',
         alignSelf: 'flex-start',
@@ -48,8 +43,6 @@ export const styling = StyleSheet.create({
 
     },
     signupView: {
-        // flex: 1,
-        height: hp('15%'),
         width: wp('90%'),
         alignItems: 'flex-end',
         flexDirection: 'row',
@@ -59,7 +52,6 @@ export const styling = StyleSheet.create({
         fontSize: fontSize.Login.welcomeHead,
         fontFamily: fontFamily.SFUITextHeavy,
         fontWeight: "bold",
-        lineHeight: 47.5,
 
 
     },
@@ -68,7 +60,9 @@ export const styling = StyleSheet.create({
     siginlabel: {
         fontFamily: fontFamily.SFUIText,
         color: '#666666',
-        fontSize: fontSize.Login.signinhead
+        fontSize: fontSize.Login.signinhead,
+        lineHeight: hp(8),
+
     },
 
     opacityForgetTXT:
