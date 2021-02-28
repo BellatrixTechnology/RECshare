@@ -20,7 +20,11 @@ const Signup = (props) => {
     const Signin = () => {
         auth()
             .createUserWithEmailAndPassword(Email, Password)
-            .then(() => {
+            .then((userCredentials) => {
+                userCredentials.user.updateProfile({
+                    displayName: Names,
+                })
+
                 props.navigation.navigate('VerfiyCode')
             })
             .catch(error => {
@@ -34,7 +38,7 @@ const Signup = (props) => {
 
                 if (error.code === 'auth/invalid-email') {
                     {
-                        seterrEmail('invalid email')
+                        seterrEmail('Enter valid email')
                     }
                 }
 

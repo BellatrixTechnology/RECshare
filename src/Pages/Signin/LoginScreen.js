@@ -4,7 +4,6 @@ import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
-import { ScrollViewBase } from 'react-native';
 
 const LoginScreen = (props) => {
     const [Names, setName] = useState('');
@@ -16,21 +15,25 @@ const LoginScreen = (props) => {
     const [nameError, seterrName] = useState('');
 
     const upload = () => {
-        firebase.auth()
+        auth()
             .signInWithEmailAndPassword(Email, Password)
             .then((res) => {
                 console.log(res)
                 console.log('User logged-in successfully!')
-                this.setState({
-                    isLoading: false,
-                    email: '',
-                    password: ''
-                })
-                this.props.navigation.navigate('Dashboard')
+                props.navigation.navigate('tabs')
             })
-            .catch(error => this.setState({ errorMessage: error.message }))
+            .catch(error => {
+                seterrEmail('Enter Vaild Email')
+                seterrPass('Enter Valid Password')
+            })
     }
-
+    const checkDetails = () => {
+        if (Email == '') { seterrEmail('Enter Email') }
+        if (Password == '') { seterrPass('Enter Password') }
+        if (Email != '' && Password != '') {
+            upload()
+        }
+    }
 
     return (
         <Fragment>
@@ -56,6 +59,8 @@ const LoginScreen = (props) => {
                             onChangeText={(Email) => {
                                 setEmail(Email)
                             }}
+                            errorMessage={emailError}
+
                         />
                         <Input
                             placeholder='Password'
@@ -64,6 +69,8 @@ const LoginScreen = (props) => {
                             onChangeText={(Pass) => {
                                 setPassword(Pass)
                             }}
+                            errorMessage={passError}
+
                         />
                         <View style={styling.forgetView}>
                             <TouchableOpacity onPress={() => props.navigation.navigate('ForgetPassword')}>
@@ -72,8 +79,8 @@ const LoginScreen = (props) => {
                         </View>
                         <View style={styling.signinView}>
                             <TouchableOpacity style={styling.signinOpacity} onPress={() => {
-                                upload()
-                                // , props.navigation.navigate('tabs')
+                                checkDetails()
+
                             }}>
                                 <Text style={styling.signinText}>Sign In</Text>
                             </TouchableOpacity>

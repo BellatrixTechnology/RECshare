@@ -1,10 +1,30 @@
-import React from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { View, ToastAndroid, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/AntDesign';
 import { styling } from './styling';
-// import   {}
+import auth from '@react-native-firebase/auth';
+
 const ForgetPassword = (props) => {
+    const [Email, setEmail] = useState('');
+
+    const [emailError, seterrEmail] = useState('');
+
+    const check = () => {
+        if (Email == '') { seterrEmail('Enter Email') }
+        if (Email != '') {
+            upload()
+        }
+    }
+    const upload = () => {
+        auth().sendPasswordResetEmail(Email)
+        ToastAndroid.show(
+            "Check your email",
+            ToastAndroid.LONG,
+            ToastAndroid.CENTER
+        );
+        props.navigation.navigate('LoginScreen')
+    }
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor='white' translucent={false} />
@@ -24,10 +44,16 @@ const ForgetPassword = (props) => {
                     <Input
                         label='Email'
                         placeholder='Email'
+                        value={Email}
+                        onChangeText={(Email) => {
+                            setEmail(Email)
+                        }}
+                        errorMessage={emailError}
+
                     />
                 </View>
                 <View style={styling.sendView}>
-                    <TouchableOpacity style={styling.sendOpacity}>
+                    <TouchableOpacity style={styling.sendOpacity} onPress={() => check()}>
                         <Text style={styling.sendText}>Send</Text>
                     </TouchableOpacity>
                 </View>
