@@ -59,7 +59,13 @@ const Account = ({ props }) => {
                                 <Icons name='right' size={16} color='#C8C7CC' />
                             </TouchableOpacity>
                         </View>
-
+                        <View style={styling.accountView}>
+                            <Text style={styling.accountlTXT}>Add Space</Text>
+                            <TouchableOpacity style={styling.workOpacity} onPress={() => { props.navigation.navigate('AddSpace') }} >
+                                <Text style={styling.workTXT} >workspaces</Text>
+                                <Icons name='right' size={16} color='#C8C7CC' />
+                            </TouchableOpacity>
+                        </View>
                         <View style={styling.addressView}>
                             <Text style={styling.addressTXT}>Address</Text>
                         </View>

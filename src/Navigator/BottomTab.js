@@ -19,7 +19,7 @@ const Tab = createBottomTabNavigator();
 export default function App(props) {
     function Browse() {
         return (
-            <Browse2 />
+            <Browse2 props={props} />
         );
     }
 

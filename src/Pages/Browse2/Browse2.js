@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icons from 'react-native-vector-icons/FontAwesome5';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const Browse2 = () => {
+const Browse2 = ({ props }) => {
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
@@ -47,7 +47,7 @@ const Browse2 = () => {
                         </View>
                         <View style={styling.cardContainer}>
                             <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                <View style={styling.mainCardView}>
+                                <TouchableOpacity style={styling.mainCardView} onPress={() => props.navigation.navigate('SpaceDetail')}>
                                     <View style={styling.cardView}>
                                         <Icons name='building' color='white' size={50} />
                                     </View>
@@ -55,7 +55,7 @@ const Browse2 = () => {
                                         <Text style={styling.carHeading}>Private</Text>
                                         <Text style={styling.carLabel}>93 Spaces</Text>
                                     </View>
-                                </View>
+                                </TouchableOpacity>
                                 <View style={styling.mainCardView}>
                                     <View style={styling.cardView1}>
                                         <Icons name='people-carry' color='white' size={50} />

@@ -29,6 +29,7 @@ import Filter from './src/Pages/Filter/Filter';
 import SpaceDetail from './src/Pages/SpaceDetail/SpaceDetail';
 import tabs from './src/Navigator/BottomTab';
 import Payment from './src/Pages/Payment/Payment';
+import AddSpace from './src/Pages/AddSpace/AddSpace';
 const { Navigator, Screen } = createStackNavigator();
 
 const AuthStack = () => (
@@ -79,6 +80,7 @@ const AuthStack = () => (
     <Screen name='ChooseLocation' component={ChooseLocation} />
     <Screen name='Browse' component={Browse} />
     <Screen name='tabs' component={tabs} />
+    <Screen name='AddSpace' component={AddSpace} />
 
   </Navigator>
 );

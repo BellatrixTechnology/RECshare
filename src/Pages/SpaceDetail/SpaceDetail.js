@@ -1,16 +1,46 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, Switch, ScrollView } from 'react-native';
 import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/AntDesign';
 import Iconss from 'react-native-vector-icons/Ionicons';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 
 import { styling } from './styling';
 const SpaceDetail = (props) => {
+    const [usern, setuserName] = useState('');
     const [isEnabled, setIsEnabled] = useState(false);
-    const [checked, setcheck] = useState(false)
+    const [checked, setcheck] = useState(false);
+    const [obj, setobj] = useState('')
 
+    useEffect(() => {
+        get()
+
+    }, [])
+    async function get() {
+        auth().onAuthStateChanged((user) => {
+            if (user) {
+                setuserName(user.uid)
+                console.log(user.uid)
+
+            } else {
+                return false
+            }
+        })
+        const object = await firestore().collection('Data').doc(usern).collection('spaces').doc('Midway station');
+        object.get().then((doc) => {
+            if (doc.exists) {
+                console.log("Document data:", doc.data());
+                setobj(doc.data())
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        })
+
+    }
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
@@ -33,12 +63,12 @@ const SpaceDetail = (props) => {
 
                         <View style={styling.nameView}>
                             <Text style={styling.labelTXT}>Meeting</Text>
-                            <Text style={styling.nameTXT}>Mindspace Solution</Text>
-                            <Text style={styling.timeTXT}>$48/hr</Text>
+                            <Text style={styling.nameTXT}>{obj.Space}</Text>
+                            <Text style={styling.timeTXT}>${obj.credit}</Text>
                         </View>
                         <View style={styling.dataView}>
-                            <Text>7 miles away</Text>
-                            <Text>12 guest</Text>
+                            <Text>{obj.distance}miles away</Text>
+                            <Text>{obj.guest}guest</Text>
                             <Text>120 m2</Text>
                         </View>
                         <View style={styling.headerView}>
@@ -97,40 +127,40 @@ const SpaceDetail = (props) => {
                                 <View style={styling.dayView}>
                                     <View style={styling.innerDay1View}>
                                         <Text style={styling.dayTXT}>Monday:</Text>
-                                        <Text style={styling.hour1TXT}>8 AM-8 PM </Text>
+                                        <Text style={styling.hour1TXT}>{obj.monday}</Text>
                                     </View>
                                     <View style={styling.innerDayView}>
-                                        <Text style={styling.dayTXT}>Friday: </Text>
-                                        <Text style={styling.hour1TXT}>8 AM-8 PM </Text>
+                                        <Text style={styling.dayTXT}>  Friday: </Text>
+                                        <Text style={styling.hour1TXT}>{obj.Friday}</Text>
                                     </View>
 
                                 </View>
                                 <View style={styling.dayView}>
                                     <View style={styling.innerDay1View}>
                                         <Text style={styling.dayTXT}>Tuesday:</Text>
-                                        <Text style={styling.hour1TXT}>8 AM-8PM </Text>
+                                        <Text style={styling.hour1TXT}>{obj.Tuesday}</Text>
                                     </View>
                                     <View style={styling.innerDayView}>
-                                        <Text style={styling.dayTXT}>Saturday:</Text>
-                                        <Text style={styling.hour1TXT}>Closed </Text>
+                                        <Text style={styling.dayTXT}>  Saturday:</Text>
+                                        <Text style={styling.hour1TXT}>{obj.Saturday} </Text>
                                     </View>
 
                                 </View>
                                 <View style={styling.dayView}>
                                     <View style={styling.innerDay1View}>
                                         <Text style={styling.dayTXT}>Wednesday:</Text>
-                                        <Text style={styling.hour1TXT}>8 AM-8 PM </Text>
+                                        <Text style={styling.hour1TXT}>{obj.Wednesday}</Text>
                                     </View>
                                     <View style={styling.innerDayView}>
-                                        <Text style={styling.dayTXT}>Sunday:</Text>
-                                        <Text style={styling.hour1TXT}>Closed </Text>
+                                        <Text style={styling.dayTXT}>  Sunday:</Text>
+                                        <Text style={styling.hour1TXT}>{obj.sunday}</Text>
                                     </View>
 
                                 </View>
                                 <View style={styling.day2View}>
                                     <View style={styling.innerDay1View}>
                                         <Text style={styling.dayTXT}>Thursday: </Text>
-                                        <Text style={styling.hour1TXT}>8 AM-8 PM </Text>
+                                        <Text style={styling.hour1TXT}>{obj.Thrusday}</Text>
                                     </View>
                                     <View style={styling.innerDayView}>
                                         <Text style={styling.dayTXT}> </Text>
@@ -143,7 +173,7 @@ const SpaceDetail = (props) => {
                         <View style={styling.availheadView}>
                             <Text style={styling.availTXT}>Description</Text>
                         </View>
-                        <Text style={styling.hourTXT}>This locations central proximity to all of the major companies, nonprofit organizations, and Federal agencies in the area make it ideal for those business executives on the  </Text>
+                        <Text style={styling.hourTXT}>{obj.Descript}</Text>
 
                         <View style={styling.mainSchdView}>
                             <View style={styling.SchedueleCiew}>
@@ -170,8 +200,7 @@ const SpaceDetail = (props) => {
                         </View>
 
                         <View style={styling.adressView}>
-                            <Text style={styling.addressTXT}>43 Bourke Street, Newbridge NSW 837
-Raffles Place, Boat Band M83</Text>
+                            <Text style={styling.addressTXT}>{obj.Location}</Text>
                         </View>
 
 

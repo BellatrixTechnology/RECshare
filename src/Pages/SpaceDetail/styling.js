@@ -175,10 +175,9 @@ export const styling = StyleSheet.create({
         height: hp(5),
         borderRadius: 4,
         width: wp(42),
-        // backgroundColor: '#F9F9F9',
+        justifyContent: 'space-between',
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-evenly'
 
     },
     mainSchdView: {
@@ -210,7 +209,7 @@ export const styling = StyleSheet.create({
         width: wp(42),
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-between'
     },
     hourTXT: {
         fontSize: fontSize.Account.txt,
@@ -267,6 +266,7 @@ export const styling = StyleSheet.create({
     openMainView: {
         height: hp(25),
         // width: wp(90),
+        marginBottom: hp(2)
     },
     innerOpenView: {
         marginTop: hp(1),
