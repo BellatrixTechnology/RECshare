@@ -7,6 +7,8 @@ import Iconss from 'react-native-vector-icons/Entypo';
 import ImagePicker from 'react-native-image-crop-picker';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
+import { Platform } from 'react-native';
 
 
 const AddSpace = ({ props }) => {
@@ -34,14 +36,17 @@ const AddSpace = ({ props }) => {
             height: 200,
             cropping: true,
         }).then(image => {
-            setImage([{ uri: image.path, width: image.width, height: image.height, mime: image.mime }]);
+            setImage(image.path)
         });
-
     }
+
     const Checks = () => {
         uploaddata()
     }
     const uploaddata = () => {
+
+        console.log(Images)
+
         auth().onAuthStateChanged((user) => {
             if (user) {
                 setuserName(user.uid)
@@ -65,9 +70,10 @@ const AddSpace = ({ props }) => {
             Friday: Friday,
             Saturday: Saturday,
             sunday: sunday,
-            image: Images.uri
         })
+        storage().ref(Images).putFile(Images)
     }
+
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
