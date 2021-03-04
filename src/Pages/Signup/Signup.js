@@ -4,18 +4,22 @@ import { Text, Input, colors } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
+import PhoneInput from 'react-native-phone-input';
+import { wp, hp } from '../../Global/Styles/Scalling';
 
 
 const Signup = (props) => {
     const [Names, setName] = useState('');
     const [Email, setEmail] = useState('');
-    const [Password, setPassword] = useState('')
+    const [Password, setPassword] = useState('');
+    const [phone, setPhone] = useState('');
     const [check, setcheck] = useState(false)
     const [emailError, seterrEmail] = useState('');
     const [passError, seterrPass] = useState('');
     const [nameError, seterrName] = useState('');
+    const [phoneError, seterrPhone] = useState(false);
 
-
+    const [confirm, setConfirm] = useState('')
 
     const Signin = () => {
         auth()
@@ -25,7 +29,7 @@ const Signup = (props) => {
                     displayName: Names,
                 })
 
-                props.navigation.navigate('VerfiyCode')
+                props.navigation.navigate('VerfiyCode', { Phone: phone })
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -47,13 +51,19 @@ const Signup = (props) => {
     }
 
     // Handle the button press
-    // async function signInWithPhoneNumber(phone) {
-    //     const confirmation = await auth().signInWithPhoneNumber(phone);
-    //     setConfirm(confirmation);
-    //     console.log('hellowiorldncnakfjkdjf kaskasjdk ', confirmation)
+    async function signInWithPhoneNumber(phone) {
+        const confirmation = await auth().signInWithPhoneNumber(phone);
+        setConfirm(confirmation);
+        console.log('hellowiorldncnakfjkdjf kaskasjdk ', confirmation)
+    }
+
+    // function confirmCode() {
+    //     try {
+    //         await confirm.confirm(code);
+    //     } catch (error) {
+    //         console.log('Invalid code.');
+    //     }
     // }
-
-
     // Handle confirm code button press
     // async function confirmCode() {
     //     try {
@@ -75,8 +85,8 @@ const Signup = (props) => {
         if (Email == '') { seterrEmail('Enter Email') }
         if (Password == '') { seterrPass('Enter Password') }
         if (Names == '') { seterrName('Enter Name') }
-
-        if (Email != '' && Password != '' && Names != '') {
+        if (phone == '') { seterrPhone('true') }
+        if (Email != '' && Password != '' && Names != '' && phone != '') {
             Signin()
 
         }
@@ -137,19 +147,22 @@ const Signup = (props) => {
                                 errorMessage={emailError}
 
                             />
+                            <PhoneInput
+                                style={{ width: wp(85), height: hp(7), borderBottomWidth: 0.5, alignSelf: 'center' }}
+                                onChangePhoneNumber={(val) => setPhone(val)}
+                            />
+                            {phoneError && <Text style={{ color: 'red', lineHeight: hp(5), marginHorizontal: wp(3) }}>Enter Valid Number</Text>}
                             <Input
                                 label="Password"
                                 placeholder='Password'
-                                value='0000000000'
+                                value={Password}
                                 secureTextEntry
                                 value={Password}
                                 onChangeText={(Pass) => {
                                     setPassword(Pass)
                                 }}
                                 errorMessage={passError}
-
                             />
-
                         </View>
                         <View style={styling.checkView}>
                             <Icons name='check-circle' size={20}
@@ -171,7 +184,7 @@ const Signup = (props) => {
                             <TouchableOpacity style={styling.signupOpacity} onPress={() => {
                                 checkField()
                                 // 
-
+                                // signInWithPhoneNumber('+923446021955')
                                 // props.navigation.navigate('VerfiyCode')
                             }}>
                                 <Text style={styling.signupText}>Sign Up</Text>

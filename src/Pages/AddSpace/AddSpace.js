@@ -13,7 +13,6 @@ import { Platform } from 'react-native';
 
 const AddSpace = ({ props }) => {
 
-    const [Images, setImage] = useState('');
     const [SpaceName, setSpace] = useState('');
     const [credit, setCredit] = useState('');
     const [distance, setDistance] = useState('');
@@ -28,6 +27,8 @@ const AddSpace = ({ props }) => {
     const [Saturday, setSat] = useState('');
     const [sunday, setSun] = useState('');
     const [usern, setuserName] = useState('');
+    const [Images, setImage] = useState('');
+    const [Path, setPath] = useState('');
 
     const selectImage = () => {
 
@@ -37,42 +38,42 @@ const AddSpace = ({ props }) => {
             cropping: true,
         }).then(image => {
             setImage(image.path)
+            setPath(image.mime)
         });
     }
-
-    const Checks = () => {
-        uploaddata()
-    }
     const uploaddata = () => {
-
         console.log(Images)
-
         auth().onAuthStateChanged((user) => {
             if (user) {
                 setuserName(user.uid)
                 console.log(user.uid)
 
+                firestore().collection('Data').doc(user.uid).collection('spaces').doc(SpaceName).set({
+                    Space: SpaceName,
+                    credit: credit,
+                    distance: distance,
+                    guest: guest,
+                    Descript: Descript,
+                    Location, Location,
+                    monday: monday,
+                    Tuesday: Tuesday,
+                    Wednesday: Wednesday,
+                    Thrusday: Thrusday,
+                    Friday: Friday,
+                    Saturday: Saturday,
+                    sunday: sunday,
+                })
+                let reference = storage().ref(Path);         // 2
+                let task = reference.putFile(Images);
+                task.then(() => {                                 // 4
+                    console.log('Image uploaded to the bucket!');
+                }).catch((e) => console.log('uploading image error => ', e));
             } else {
                 return false
             }
         })
-        firestore().collection('Data').doc(usern).collection('spaces').doc(SpaceName).set({
-            Space: SpaceName,
-            credit: credit,
-            distance: distance,
-            guest: guest,
-            Descript: Descript,
-            Location, Location,
-            monday: monday,
-            Tuesday: Tuesday,
-            Wednesday: Wednesday,
-            Thrusday: Thrusday,
-            Friday: Friday,
-            Saturday: Saturday,
-            sunday: sunday,
-        })
-        storage().ref(Images).putFile(Images)
     }
+
 
     return (
         <Fragment>
@@ -238,7 +239,7 @@ const AddSpace = ({ props }) => {
 
                             <View style={styles.signupView}>
                                 <TouchableOpacity style={styles.signupOpacity} onPress={() => {
-                                    Checks()
+                                    uploaddata()
                                 }}>
                                     <Text style={styles.signupText}>Save</Text>
                                 </TouchableOpacity>

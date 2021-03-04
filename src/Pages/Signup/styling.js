@@ -41,7 +41,7 @@ export const styling = StyleSheet.create({
     },
     formView: {
         width: wp('90%'),
-        alignItems: 'center',
+        // alignItems: 'center',
         justifyContent: 'center',
 
     },
