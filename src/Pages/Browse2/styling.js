@@ -12,7 +12,7 @@ export const styling = StyleSheet.create({
         width: wp('100%'),
         paddingHorizontal: wp(4),
         paddingBottom: hp(1),
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
     },
     innerContainer: {
     },
@@ -35,22 +35,22 @@ export const styling = StyleSheet.create({
         color: '#FF2D55'
     },
     searchBar: {
-        marginTop: 5,
         backgroundColor: 'white',
         flexDirection: 'row',
         alignItems: 'center',
         width: wp('90%'),
         borderRadius: 6,
         paddingLeft: 10,
+        marginTop: hp(5)
     },
 
     categoryView: {
-        marginTop: hp(3),
         width: wp('90%'),
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius: 10,
         justifyContent: 'space-between',
+
     },
     maininnerContainer: {
         flexDirection: 'row',

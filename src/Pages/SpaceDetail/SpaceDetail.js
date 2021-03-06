@@ -6,6 +6,7 @@ import Icons from 'react-native-vector-icons/AntDesign';
 import Iconss from 'react-native-vector-icons/Ionicons';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import storage from '@react-native-firebase/storage';
 
 
 import { styling } from './styling';
@@ -39,6 +40,15 @@ const SpaceDetail = (props) => {
                 console.log("No such document!");
             }
         })
+
+        let imageRef = storage().ref('/Images/Midway station');
+        imageRef
+            .getDownloadURL()
+            .then((url) => {
+                //from url you can fetched the uploaded image easily
+                console.log(url)
+            })
+            .catch((e) => console.log('getting downloadURL of image error => ', e));
 
     }
     return (

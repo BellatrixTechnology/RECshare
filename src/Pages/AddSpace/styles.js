@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
         padding: 10,
         marginHorizontal: hp(1),
         width: wp(25),
-        height: hp(5),
+        // height: hp(5),
         borderWidth: 0.5
     },
     desView: {

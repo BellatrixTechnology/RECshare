@@ -27,26 +27,35 @@ const AddSpace = ({ props }) => {
     const [Saturday, setSat] = useState('');
     const [sunday, setSun] = useState('');
     const [usern, setuserName] = useState('');
-    const [Images, setImage] = useState('');
-    const [Path, setPath] = useState('');
-
+    const [Images, setImage] = useState([]);
+    const [count, setCount] = useState(0);
     const selectImage = () => {
 
         ImagePicker.openPicker({
             width: 200,
             height: 200,
             cropping: true,
+            multiple: true
         }).then(image => {
-            setImage(image.path)
-            setPath(image.mime)
+            let newImages = [...Images];
+            console.log(image)
+            image.map(val => {
+
+                setCount(count + 1)
+                newImages.push({
+                    Path: val.path
+
+                })
+                setImage(newImages)
+            })
         });
     }
-    const uploaddata = () => {
+
+    function uploaddata() {
         console.log(Images)
         auth().onAuthStateChanged((user) => {
             if (user) {
                 setuserName(user.uid)
-                console.log(user.uid)
 
                 firestore().collection('Data').doc(user.uid).collection('spaces').doc(SpaceName).set({
                     Space: SpaceName,
@@ -63,15 +72,23 @@ const AddSpace = ({ props }) => {
                     Saturday: Saturday,
                     sunday: sunday,
                 })
-                let reference = storage().ref(Path);         // 2
-                let task = reference.putFile(Images);
-                task.then(() => {                                 // 4
-                    console.log('Image uploaded to the bucket!');
-                }).catch((e) => console.log('uploading image error => ', e));
+
+                Images.forEach((element, index) => {
+                    console.log(index)
+                    let reference = storage().ref('Images/' + SpaceName + '/' + index);         // 2
+                    let task = reference.putFile(element.Path);
+                    // setCount(count + 1)
+
+                    task.then(() => {
+                        console.log('Image uploaded to the bucket!');
+                    }).catch((e) => console.log('uploading image error => ', e));
+                });
+
             } else {
                 return false
             }
         })
+
     }
 
 
