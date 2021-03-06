@@ -19,15 +19,9 @@ const ChooseLanguage = (props) => {
     const [Russian, setRussian] = useState(false);
     const [Bulgarian, setBulgarian] = useState(false);
 
-
-
-
-
-
-
     return (
         <SafeAreaView style={styling.safeContainer} >
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
             <View style={styling.mainContainer}>
 
                 <View style={styling.avatarView}>

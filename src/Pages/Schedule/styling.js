@@ -11,9 +11,8 @@ export const styling = StyleSheet.create({
     mainContainer: {
         height: hp('100%'),
         width: wp('100%'),
-        paddingLeft: 20,
-        paddingBottom: 20,
-        paddingRight: 20,
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
         backgroundColor: 'white'
     },
     headerView: {
@@ -28,37 +27,34 @@ export const styling = StyleSheet.create({
         fontSize: fontSize.Schedule.labels
     },
     calendarView: {
-        height: hp('40%'),
         // width: wp('70%'),
     },
-    availableView: {
-        height: hp('5%'),
-        justifyContent: 'flex-end'
 
-    },
     TimeView: {
-        height: hp('10%'),
-        borderBottomWidth: 0.5
+        borderBottomWidth: 0.5,
+        paddingVertical: hp(1)
     },
     availableTXT: {
         fontSize: fontSize.Schedule.labels,
-        fontFamily: fontFamily.SFUITextBold
+        fontFamily: fontFamily.SFUITextBold,
+        lineHeight: hp(8)
     },
     TimeOpacity1: {
         backgroundColor: 'pink',
-        margin: 10,
-        height: 40,
+        height: hp(4),
         width: wp('20%'),
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 20,
-        backgroundColor: '#AA4AFF'
+        backgroundColor: '#AA4AFF',
+        marginVertical: hp(1),
+        marginHorizontal: wp(1)
 
     },
     TimeOpacity: {
-        margin: 10,
-        height: 40,
-
+        height: hp(4),
+        marginVertical: hp(1),
+        marginHorizontal: wp(1),
         width: wp('20%'),
         alignItems: 'center',
         justifyContent: 'center',
@@ -79,7 +75,7 @@ export const styling = StyleSheet.create({
 
     },
     reminderView: {
-        height: hp('8%'),
+        paddingVertical: hp(2),
         borderBottomWidth: 0.5,
         flexDirection: 'row',
         alignItems: 'center',
@@ -100,9 +96,7 @@ export const styling = StyleSheet.create({
         fontSize: fontSize.Schedule.line
     },
     signupView: {
-        // width: wp('90%'),
-        height: hp('30%'),
-        justifyContent: 'center',
+        marginVertical: hp(1)
     },
     signupOpacity: {
         width: wp('85%'),

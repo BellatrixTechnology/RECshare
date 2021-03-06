@@ -10,25 +10,22 @@ export const styling = StyleSheet.create({
     mainContainer: {
         height: hp(70),
         width: wp(100),
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingBottom: 20,
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
 
     },
     mainHeaderView: {
         backgroundColor: '#F9F9F9'
     },
     headerView: {
-        height: hp('8%'),
+        marginTop: hp(5),
         flexDirection: 'row',
-        padding: 10,
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: '#F9F9F9'
 
     },
     avatarView: {
-        height: hp(15),
         width: wp(80),
         flexDirection: 'row',
         alignItems: 'center',
@@ -37,15 +34,15 @@ export const styling = StyleSheet.create({
         // backgroundColor: 'red'
     },
     nameView: {
-        width: wp('55%'),
-        padding: 10,
+        paddingHorizontal: wp(5),
+        paddingVertical: hp(3)
     },
 
 
     nameTXT: {
         fontSize: fontSize.Account.tag,
         fontFamily: fontFamily.SFUITextBold,
-        lineHeight: 45
+        lineHeight: hp(6)
 
     },
     emailTXT: {
@@ -58,7 +55,8 @@ export const styling = StyleSheet.create({
         flexDirection: 'row',
         borderBottomWidth: 0.5,
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        borderColor: 'grey',
     },
     accountOpacity: {
         backgroundColor: '#AA4AFF',
@@ -76,6 +74,7 @@ export const styling = StyleSheet.create({
     accountlTXT: {
         fontSize: fontSize.Account.line,
         fontFamily: fontFamily.SFUITextSemiBold,
+        lineHeight: hp(10)
     },
     workOpacity: {
         flexDirection: 'row',
@@ -89,8 +88,8 @@ export const styling = StyleSheet.create({
     },
     addressView: {
         width: wp(40),
-        height: hp(8),
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginVertical: hp(1)
     },
     addressTXT: {
         fontSize: fontSize.Account.line,
@@ -98,10 +97,9 @@ export const styling = StyleSheet.create({
     },
     inputView: {
         borderBottomWidth: 0.5,
-        height: hp('10%')
     },
     addAdrsView: {
-        height: hp('6%'),
+        marginVertical: hp(1),
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
@@ -112,7 +110,6 @@ export const styling = StyleSheet.create({
         color: '#FF2D55'
     },
     paymentView: {
-        height: hp(12),
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -120,7 +117,6 @@ export const styling = StyleSheet.create({
         borderBottomWidth: 0.5
     },
     paymentInnerView: {
-        height: hp(12),
         width: wp(70),
         flexDirection: 'row',
         alignItems: 'center',
@@ -133,10 +129,9 @@ export const styling = StyleSheet.create({
 
     },
     cardTXTView: {
-        height: hp(10),
         width: wp(40),
         justifyContent: 'center',
-        paddingLeft: 10
+        paddingHorizontal: wp(2)
     },
     cardTXT: {
         fontSize: fontSize.Account.line,

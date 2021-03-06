@@ -12,28 +12,27 @@ export const styling = StyleSheet.create({
     mainContainer: {
         height: hp('100%'),
         width: wp('100%'),
-        padding: 10,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
     },
     headerView: {
-        height: hp('7%'),
         width: wp('20%'),
         justifyContent: 'flex-end',
-        padding: 5,
+        paddingTop: hp(5),
+        paddingHorizontal: wp(2)
     },
     headTXTView: {
-        height: hp('7%'),
         width: wp('43%'),
         justifyContent: 'flex-start',
-        // alignSelf: 'center',
         alignItems: 'center',
         alignContent: 'flex-start',
-        // backgroundColor: 'red'
 
     },
     headTXT: {
         fontSize: fontSize.Search.heading,
-        fontFamily: fontFamily.SFUITextBold
+        fontFamily: fontFamily.SFUITextBold,
+        lineHeight: hp(10)
     },
     searchbarView: {
         width: wp('100%'),
@@ -41,11 +40,12 @@ export const styling = StyleSheet.create({
     },
     inputView: {
         width: wp('90%'),
-        height: hp('45%'),
+    },
+    inputField: {
+        marginTop: hp(-4)
     },
     findView: {
         width: wp('90%'),
-        height: hp('30%'),
         justifyContent: 'center',
     },
     findOpacity: {

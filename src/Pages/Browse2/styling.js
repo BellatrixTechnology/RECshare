@@ -8,18 +8,17 @@ export const styling = StyleSheet.create({
         flex: 1,
     },
     mainContainer: {
-        height: hp('100%'),
+        height: hp(100),
         width: wp('100%'),
-        padding: 20,
+        paddingHorizontal: wp(4),
+        paddingBottom: hp(1),
+        justifyContent: 'space-between',
     },
     innerContainer: {
-        height: hp('22%'),
     },
     labelView: {
         justifyContent: 'center',
         width: wp('90%'),
-        height: hp('10%'),
-        // backgroundColor: 'blue'
     },
     labelTXT: {
         fontSize: fontSize.Browse2.heading,
@@ -27,7 +26,6 @@ export const styling = StyleSheet.create({
     },
     cityView: {
         width: wp('90%'),
-        height: hp('5%'),
         flexDirection: 'row'
     },
     cityTXT: {
@@ -42,15 +40,13 @@ export const styling = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         width: wp('90%'),
-        height: hp('8%'),
         borderRadius: 6,
         paddingLeft: 10,
     },
 
     categoryView: {
-        marginTop: 20,
+        marginTop: hp(3),
         width: wp('90%'),
-        height: hp('5%'),
         flexDirection: 'row',
         alignItems: 'center',
         borderRadius: 10,
@@ -61,8 +57,7 @@ export const styling = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         width: wp('90%'),
-        height: hp('5%'),
-
+        marginVertical: hp(1)
     },
     seeALLOpacity: {
         flexDirection: 'row',
@@ -70,12 +65,11 @@ export const styling = StyleSheet.create({
     },
     cardContainer: {
         width: wp('90%'),
-        height: hp('30%'),
         flexDirection: 'row',
     },
     mainCardView: {
         width: wp('32%'),
-        height: hp('26%'),
+        marginVertical: hp(1)
     },
     cardView: {
         marginTop: 10,
@@ -122,7 +116,7 @@ export const styling = StyleSheet.create({
 
     },
     nearInnerView: {
-        marginRight: 10
+        marginRight: wp(2)
     },
     nearbyCard: {
         width: wp('80%'),
@@ -146,16 +140,6 @@ export const styling = StyleSheet.create({
         marginRight: 1,
         borderTopLeftRadius: 15,
         borderBottomLeftRadius: 15,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    filterOpacity: {
-        width: wp('45%'),
-        height: hp('8%'),
-        backgroundColor: '#F9F9F9',
-        marginRight: 0.5,
-        borderTopRightRadius: 15,
-        borderBottomRightRadius: 15,
         alignItems: 'center',
         justifyContent: 'center'
     },

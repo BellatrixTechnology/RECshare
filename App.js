@@ -64,6 +64,7 @@ const AuthStack = () => (
 
     <Screen name='ChooseLanguage' component={ChooseLanguage} />
 
+
     <Screen name='ReviewBooking' component={ReviewBooking} />
 
     <Screen name='BookingDetails' component={BookingDetails} />
@@ -74,10 +75,14 @@ const AuthStack = () => (
 
     <Screen name='Categories' component={Categories} />
     <Screen name='VerfiyCode' component={VerfiyCode} />
+
+
     <Screen name='Browse3' component={Browse3} />
     <Screen name='ForgetPassword' component={ForgetPassword} />
     <Screen name='setlocation' component={set_location} />
+
     <Screen name='ChooseLocation' component={ChooseLocation} />
+
     <Screen name='Browse' component={Browse} />
     <Screen name='tabs' component={tabs} />
     <Screen name='AddSpace' component={AddSpace} />

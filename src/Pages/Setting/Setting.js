@@ -10,15 +10,14 @@ const Setting = (props) => {
 
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
             <SafeAreaView style={{ backgroundColor: 'white' }} />
 
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headView}>
-                    <Icons.Button name="left" style={styling.headIcon} color='black' size={30}
+                    <Icons name="left" color='black' size={30}
                         onPress={() => props.navigation.navigate('LoginScreen')}
-                    >
-                    </Icons.Button>
+                    />
                 </View>
                 <View style={styling.headingView}>
                     <Text style={styling.headTXT}>Setting</Text>

@@ -29,7 +29,7 @@ const SpaceDetail = (props) => {
                 return false
             }
         })
-        const object = await firestore().collection('Data').doc(usern).collection('spaces').doc('Midway station');
+        const object = await firestore().collection('Data').doc('qv72anqm4raqRI2tavtM1FVPhhg1').collection('spaces').doc('Midway station');
         object.get().then((doc) => {
             if (doc.exists) {
                 console.log("Document data:", doc.data());
@@ -43,7 +43,7 @@ const SpaceDetail = (props) => {
     }
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
             <SafeAreaView backgroundColor='white' />
 
             <SafeAreaView style={styling.safeContainer} >

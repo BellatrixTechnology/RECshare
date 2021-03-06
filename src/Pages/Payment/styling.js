@@ -9,30 +9,27 @@ export const styling = StyleSheet.create({
 
     },
     mainContainer: {
-        height: hp('100%'),
-        width: wp('100%'),
-        padding: 10,
+        height: hp(95),
+        width: wp(100),
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
         backgroundColor: 'white'
     },
     headerView: {
-        height: hp('7%'),
         width: wp('20%'),
-        justifyContent: 'flex-end',
-        padding: 5,
     },
     headTXTView: {
-        height: hp('7%'),
         width: wp('45%'),
         justifyContent: 'flex-start',
-        // alignSelf: 'center',
         alignItems: 'center',
         alignContent: 'flex-start',
-        // backgroundColor: 'red'
-
+        marginHorizontal: wp(4),
+        marginVertical: hp(1)
     },
     headTXT: {
         fontSize: fontSize.Search.heading,
-        fontFamily: fontFamily.SFUITextBold
+        fontFamily: fontFamily.SFUITextBold,
+        lineHeight: hp(8),
     },
     opacityView: {
         flexDirection: 'row',
@@ -50,24 +47,20 @@ export const styling = StyleSheet.create({
     },
     cardContainer: {
         justifyContent: 'center',
-        height: hp('30%'),
         flexDirection: 'row',
-        marginBottom: 10,
+        marginVertical: hp(2),
         alignItems: 'center',
-        // justifyContent: 'center'
     },
     cardView: {
         backgroundColor: 'black',
         width: wp('90%'),
-        height: hp('30%'),
+        height: hp('25%'),
         borderRadius: 10,
         alignSelf: 'center'
-        // justifyContent: 'flex-end',
-        // padding: 10
     },
     inputView: {
         height: hp(10),
-        padding: 15,
+        paddingHorizontal: wp(2),
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -86,10 +79,10 @@ export const styling = StyleSheet.create({
     },
     signupView: {
         width: wp('90%'),
-        height: hp('20%'),
         justifyContent: 'center',
         alignItems: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginVertical: hp(5)
     },
     signupOpacity: {
         width: wp('85%'),

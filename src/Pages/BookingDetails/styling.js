@@ -8,11 +8,12 @@ export const styling = StyleSheet.create({
         backgroundColor: 'white'
     },
     mainContainer: {
-        height: hp('88%'),
-        width: wp('100%'),
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingBottom: 20,
+        height: hp(88),
+        width: wp(100),
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
+        justifyContent: 'space-between',
+        backgroundColor: 'white',
 
     },
     headerView: {
@@ -24,11 +25,17 @@ export const styling = StyleSheet.create({
         justifyContent: 'space-between',
 
     },
+    profileView: {
+        width: wp(15),
+        height: wp(15),
+        backgroundColor: 'grey',
+        borderRadius: wp(10)
+    },
     avatarView: {
-        height: hp('15%'),
-        justifyContent: 'center',
+        width: wp(90),
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+
     },
     nameView: {
         width: wp('50%'),
@@ -44,19 +51,19 @@ export const styling = StyleSheet.create({
     },
     iconView: {
         width: wp('18%'),
-        height: hp('6%'),
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
     },
     phoneView: {
-        width: 30,
+        width: wp(10),
         borderColor: 'black',
-        height: 30,
-        borderRadius: 50,
+        height: wp(10),
+        borderRadius: wp(10),
         borderWidth: 0.5,
         alignItems: 'center',
         justifyContent: 'center',
+        marginHorizontal: wp(1)
 
     },
     nameTXT: {
@@ -71,37 +78,38 @@ export const styling = StyleSheet.create({
         color: 'white'
     },
     innerView: {
-        height: hp('15%'),
-        padding: 10,
+        width: wp(90),
     },
     labelView: {
         flexDirection: 'row',
-        // justifyContent: 'space-between'
+        alignItems: 'center',
+        width: wp(60),
+        marginHorizontal: wp(2),
+        justifyContent: 'space-between'
+
     },
     labelTXT: {
         fontFamily: fontFamily.SFUIText,
         fontSize: fontSize.BookingDetails.txt,
         color: '#666666',
-        lineHeight: 20
+        lineHeight: hp(5)
     },
     labelendTXT: {
         fontFamily: fontFamily.SFUIText,
         fontSize: fontSize.BookingDetails.txt,
         color: '#666666',
-        lineHeight: 20,
-        marginLeft: 186
+        lineHeight: hp(5),
     },
     mainDayView: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        width: wp(90),
     },
     dayView: {
         height: hp('15%'),
         width: wp('30%'),
-        marginRight: 5,
-        paddingTop: 10
+        marginHorizontal: wp(2)
     },
     arrowView: {
-        height: hp('15%'),
         width: wp('20%'),
         marginRight: 5,
         alignItems: 'center',
@@ -113,16 +121,13 @@ export const styling = StyleSheet.create({
 
     },
     timeTXT: {
-        lineHeight: 40,
         fontFamily: fontFamily.SFUIText,
         fontSize: fontSize.BookingDetails.txt,
-        color: '#666666'
+        color: '#666666',
+        lineHeight: wp(6)
     },
     cityView: {
-        height: hp('15%'),
-        width: wp('60%'),
-        marginRight: 5,
-        paddingTop: 10
+        marginHorizontal: wp(2),
     },
     mapIconView: {
         height: hp('10%'),
@@ -136,7 +141,6 @@ export const styling = StyleSheet.create({
     },
     signupView: {
         width: wp('90%'),
-        height: hp('16%'),
         justifyContent: 'center',
     },
     signupOpacity: {

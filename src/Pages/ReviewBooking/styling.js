@@ -8,43 +8,34 @@ export const styling = StyleSheet.create({
         backgroundColor: 'white'
 
     },
-    mainContainer: {
-        height: hp('82%'),
-        width: wp('100%'),
-        padding: 20,
-        backgroundColor: 'white'
-    },
+
     headerView: {
-        height: hp('7%'),
         width: wp('20%'),
-        justifyContent: 'flex-end',
-        padding: 5,
     },
     headTXTView: {
-        height: hp('7%'),
-        width: wp('70%'),
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        alignContent: 'flex-start',
-        // backgroundColor: 'red'
+        marginHorizontal: wp(5)
 
+    },
+    mainContainer: {
+        height: hp(80),
+        width: wp(100),
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
+        justifyContent: 'space-between',
     },
     headTXT: {
         fontSize: fontSize.Search.heading,
         fontFamily: fontFamily.SFUITextBold
     },
     cardView: {
-        height: hp('15%'),
-        marginBottom: 10,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
-        borderBottomWidth: 0.5
+        borderBottomWidth: 0.5,
     },
     detailView: {
         justifyContent: 'center',
-        width: wp('60%'),
     },
     labelTXT: {
         color: '#666666',
@@ -54,7 +45,7 @@ export const styling = StyleSheet.create({
     mainTXT: {
         fontSize: fontSize.ReviewBooking.labels,
         fontFamily: fontFamily.SFUITextBold,
-        lineHeight: 50
+        lineHeight: hp(10)
     },
     lineTXT: {
         fontSize: fontSize.ReviewBooking.txt,
@@ -77,14 +68,13 @@ export const styling = StyleSheet.create({
         justifyContent: 'center',
         borderWidth: 1,
         borderRadius: 10,
-        marginRight: 10
+        marginRight: wp(2)
     },
     totalView: {
-        height: hp('18%'),
         padding: 10,
+
     },
     totalLabelView: {
-        height: hp('8%')
     },
     totalinnerView: {
         flexDirection: 'row',
@@ -97,7 +87,6 @@ export const styling = StyleSheet.create({
     },
     signupView: {
         width: wp('90%'),
-        height: hp('10%'),
         justifyContent: 'center',
     },
     signupOpacity: {

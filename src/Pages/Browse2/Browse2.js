@@ -9,7 +9,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 const Browse2 = ({ props }) => {
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
 
             <SafeAreaView style={{ backgroundColor: 'white' }} />
 

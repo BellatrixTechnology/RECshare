@@ -4,15 +4,17 @@ import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import InputF from '../../Component/InputField/index';
 
 const LoginScreen = (props) => {
     const [Names, setName] = useState('');
     const [Email, setEmail] = useState('');
     const [Password, setPassword] = useState('')
     const [check, setcheck] = useState(false)
-    const [emailError, seterrEmail] = useState('');
-    const [passError, seterrPass] = useState('');
-    const [nameError, seterrName] = useState('');
+    const [emailError, seterrEmail] = useState(false);
+    const [passError, seterrPass] = useState(false);
+
+    let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const upload = () => {
         auth()
@@ -37,61 +39,74 @@ const LoginScreen = (props) => {
 
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
             <SafeAreaView backgroundColor='white'
             />
             <SafeAreaView style={styling.safeContainer} >
-                <ScrollView contentContainerStyle={styling.mainContainer}>
+                <ScrollView>
 
-                    <View style={styling.innerContainer}>
-                        <View style={styling.welcomeHeader}>
-                            <Text style={styling.welcomeLabel}>Welcome back</Text>
+                    <View style={styling.mainContainer}>
+                        <View style={styling.innerContainer}>
+                            <View style={styling.welcomeHeader}>
+                                <Text style={styling.welcomeLabel}>Welcome</Text>
+                                <Text style={styling.welcomeLabel}>back</Text>
+                            </View>
+                            <View style={styling.signinHeader}>
+                                <Text style={styling.siginlabel}>Sign in to continue</Text>
+                            </View>
                         </View>
-                        <View style={styling.signinHeader}>
-                            <Text style={styling.siginlabel}>Sign in to continue</Text>
+                        <View style={styling.formView}>
+                            <InputF
+                                label='Email'
+                                placeholder='Email'
+                                onChange={(val) => {
+                                    setEmail(val)
+                                    console.log(val)
+                                    {
+                                        reg.test(Email) ? seterrEmail(false) : seterrEmail(true)
+                                    }
+                                }}
+                                value={Email}
+                                errorEmail={emailError}
+                            />
+                            <InputF
+                                label='Password'
+                                placeholder='Password'
+                                onChange={(val) => {
+                                    setPassword(val)
+                                    console.log(val)
+                                    if (val == '') {
+                                        seterrPass(true)
+                                    }
+                                    else seterrPass(false)
+                                }}
+                                value={Password}
+                                errName={passError}
+                                secureTextEntry
+
+                            />
+                            <View style={styling.forgetView}>
+                                <TouchableOpacity onPress={() => props.navigation.navigate('ForgetPassword')}>
+                                    <Text style={styling.opacityForgetTXT}>Forget Password?</Text>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styling.signinView}>
+                                <TouchableOpacity style={styling.signinOpacity} onPress={() => {
+                                    checkDetails()
+
+                                }}>
+                                    <Text style={styling.signinText}>Sign In</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                    </View>
-                    <View style={styling.formView}>
-                        <Input
-                            placeholder='Email'
-                            label='Email'
-                            value={Email}
-                            onChangeText={(Email) => {
-                                setEmail(Email)
-                            }}
-                            errorMessage={emailError}
 
-                        />
-                        <Input
-                            placeholder='Password'
-                            label='Password'
-                            value={Password}
-                            onChangeText={(Pass) => {
-                                setPassword(Pass)
-                            }}
-                            errorMessage={passError}
-
-                        />
-                        <View style={styling.forgetView}>
-                            <TouchableOpacity onPress={() => props.navigation.navigate('ForgetPassword')}>
-                                <Text style={styling.opacityForgetTXT}>Forget Password?</Text>
+                        <View style={styling.signupView}>
+                            <Text style={styling.signupTXT}>Don't have an Account? </Text>
+                            <TouchableOpacity onPress={() => { props.navigation.navigate('Signup') }}>
+                                <Text style={styling.opacitysignupTXT}>Sign Up</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={styling.signinView}>
-                            <TouchableOpacity style={styling.signinOpacity} onPress={() => {
-                                checkDetails()
 
-                            }}>
-                                <Text style={styling.signinText}>Sign In</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-                    <View style={styling.signupView}>
-                        <Text style={styling.signupTXT}>Don't have an Account? </Text>
-                        <TouchableOpacity onPress={() => { props.navigation.navigate('Signup') }}>
-                            <Text style={styling.opacitysignupTXT}>Sign Up</Text>
-                        </TouchableOpacity>
                     </View>
                 </ScrollView>
 

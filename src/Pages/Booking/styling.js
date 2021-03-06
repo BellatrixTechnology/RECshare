@@ -12,22 +12,18 @@ export const styling = StyleSheet.create({
     mainContainer: {
         height: hp('80%'),
         width: wp('100%'),
+        paddingBottom: hp(1),
     },
     headerView: {
-        height: hp('8%'),
         width: wp('95%'),
-        justifyContent: 'flex-end',
         alignItems: 'flex-end',
-        padding: 10,
+        marginTop: hp(5)
     },
     headTXTView: {
-        height: hp('7%'),
         width: wp('43%'),
         justifyContent: 'flex-start',
-        // alignSelf: 'center',
         alignItems: 'center',
         alignContent: 'flex-start',
-        // backgroundColor: 'red'
 
     },
     headTXT: {

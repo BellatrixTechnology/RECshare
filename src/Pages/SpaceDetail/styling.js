@@ -16,7 +16,6 @@ export const styling = StyleSheet.create({
         backgroundColor: 'white'
     },
     headView: {
-        height: hp('8%'),
         width: wp('100%'),
         alignItems: 'center',
         flexDirection: 'row',

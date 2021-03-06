@@ -8,7 +8,7 @@ import { styling } from './styling';
 const Success = (props) => {
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor='#F2F2F2' translucent={false} />
             <SafeAreaView backgroundColor='white' />
             <SafeAreaView style={styling.safeContainer} >
 
@@ -23,14 +23,7 @@ const Success = (props) => {
                     </View>
                     <View style={styling.mainInnerContainer}>
                         <View style={styling.avatarView}>
-                            <Avatar
-                                rounded
-                                size={65}
-                                icon={{
-                                    name: 'user', type: IconTypes.AntDesign,
-                                }}
 
-                            />
                         </View>
 
                         <View style={styling.LabelView}>

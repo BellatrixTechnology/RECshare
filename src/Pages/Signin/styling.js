@@ -8,20 +8,21 @@ export const styling = StyleSheet.create({
         backgroundColor: 'white'
     },
     mainContainer: {
-        flex: 1,
-        padding: 20,
-        justifyContent: 'space-evenly',
+        height: hp(95),
+        width: wp(100),
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
+        justifyContent: 'center'
     },
     innerContainer: {
         width: wp('50%'),
     },
     welcomeHeader: {
-        width: wp('40%'),
-
+        marginHorizontal: wp(1)
     },
     signinHeader: {
         width: wp('40%'),
-        alignSelf: 'flex-start',
+        marginHorizontal: wp(1)
 
     },
     formView: {
@@ -31,22 +32,22 @@ export const styling = StyleSheet.create({
 
     },
     forgetView: {
-
-        width: wp('34%'),
         alignItems: 'center',
         alignSelf: 'flex-start',
+        marginHorizontal: wp(3)
     },
     signinView: {
-        width: wp('90%'),
-        height: hp('15%'),
-        justifyContent: 'center',
 
+        justifyContent: 'center',
+        width: wp('90%'),
+        marginVertical: hp(3)
     },
     signupView: {
         width: wp('90%'),
         alignItems: 'flex-end',
         flexDirection: 'row',
         justifyContent: 'center',
+        marginVertical: hp(3)
     },
     welcomeLabel: {
         fontSize: fontSize.Login.welcomeHead,
@@ -70,6 +71,7 @@ export const styling = StyleSheet.create({
         color: 'black',
         fontSize: fontSize.Login.signinhead,
         fontFamily: fontFamily.SFUIText,
+        lineHeight: hp(10)
 
     },
 

@@ -7,25 +7,26 @@ export const styling = StyleSheet.create({
         flex: 1
     },
     mainContainer: {
-        height: hp('100%'),
-        width: wp('100%'),
-        padding: 20,
+        height: hp(95),
+        width: wp(100),
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
+        justifyContent: 'space-between',
         backgroundColor: '#F2F2F2'
     },
     headView: {
-        height: hp('15%'),
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginVertical: hp(3)
     },
     innerView: {
-        height: hp('15%'),
         width: wp('60%'),
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'center'
     },
     mainInnerContainer: {
-        height: hp('45%'),
+        marginVertical: hp(2),
         width: wp('80%'),
         alignSelf: 'center',
         backgroundColor: 'white',
@@ -33,15 +34,16 @@ export const styling = StyleSheet.create({
         padding: 10
     },
     avatarView: {
-        height: hp('12%'),
-        width: wp('40%'),
+        height: wp('20%'),
+        width: wp('20%'),
         alignItems: 'center',
         alignSelf: 'center',
         justifyContent: 'center',
+        backgroundColor: 'grey',
+        borderRadius: wp(10)
 
     },
     LabelView: {
-        width: wp('50%'),
         height: hp('10%'),
         alignSelf: 'center',
         alignItems: 'center',
@@ -72,7 +74,6 @@ export const styling = StyleSheet.create({
     },
     signupView: {
         width: wp('85%'),
-        height: hp('17%'),
         justifyContent: 'center',
         alignSelf: 'center'
     },

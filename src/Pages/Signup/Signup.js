@@ -6,7 +6,7 @@ import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
 import PhoneInput from 'react-native-phone-input';
 import { wp, hp } from '../../Global/Styles/Scalling';
-
+import InputF from '../../Component/InputField/index';
 
 const Signup = (props) => {
     const [Names, setName] = useState('');
@@ -14,10 +14,11 @@ const Signup = (props) => {
     const [Password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
     const [check, setcheck] = useState(false)
-    const [emailError, seterrEmail] = useState('');
-    const [passError, seterrPass] = useState('');
-    const [nameError, seterrName] = useState('');
+    const [emailError, seterrEmail] = useState(false);
+    const [passError, seterrPass] = useState(false);
+    const [nameError, seterrName] = useState(false);
     const [phoneError, seterrPhone] = useState(false);
+    let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const [confirm, setConfirm] = useState('')
 
@@ -57,30 +58,6 @@ const Signup = (props) => {
         console.log('hellowiorldncnakfjkdjf kaskasjdk ', confirmation)
     }
 
-    // function confirmCode() {
-    //     try {
-    //         await confirm.confirm(code);
-    //     } catch (error) {
-    //         console.log('Invalid code.');
-    //     }
-    // }
-    // Handle confirm code button press
-    // async function confirmCode() {
-    //     try {
-    //         const credential = auth.PhoneAuthProvider.credential(
-    //             confirm.verificationId,
-    //             code,
-    //         );
-    //         let userData = await auth().currentUser.linkWithCredential(credential);
-    //         setUser(userData.user);
-    //     } catch (error) {
-    //         if (error.code == 'auth/invalid-verification-code') {
-    //             console.log('Invalid code.');
-    //         } else {
-    //             console.log('Account linking error');
-    //         }
-    //     }
-    // }
     const checkField = () => {
         if (Email == '') { seterrEmail('Enter Email') }
         if (Password == '') { seterrPass('Enter Password') }
@@ -94,74 +71,85 @@ const Signup = (props) => {
 
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
             <SafeAreaView backgroundColor='white' />
             <SafeAreaView style={styling.safeContainer} >
-                <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
                 <ScrollView>
 
                     <View style={styling.mainContainer}>
+
                         <View style={styling.innerContainer}>
                             <View style={styling.headerView}>
 
                                 <View style={styling.welcomeView}>
-                                    <Text style={styling.welcomeLabel}>Welcome user</Text>
+                                    <Text style={styling.welcomeLabel}>Welcome </Text>
+                                    <Text style={styling.welcomeLabel}>user</Text>
                                 </View>
                                 <View style={styling.signupHeader}>
                                     <Text style={styling.siguplabel}>Sign up to join</Text>
                                 </View>
                             </View>
                             <View style={styling.avatarView}>
-                                {/* <Avatar
-                                rounded
-                                showEditButton
-                                size={86}
-                                icon={{
-                                    name: 'user', type: IconTypes.AntDesign,
-                                }}
-
-                                editButton={{
-                                    name: 'pluscircle', type: IconTypes.AntDesign, color: '#4CD964', size: 30
-                                }}
-
-                            /> */}
                             </View>
                         </View>
                         <View style={styling.formView}>
-                            <Input
+                            <InputF
                                 label='Name'
                                 placeholder='Joe Doe'
-                                value={Names}
-                                onChangeText={(val) => {
+                                onChange={(val) => {
                                     setName(val)
+                                    console.log(val)
+                                    if (val == '') {
+                                        seterrName(true)
+                                    }
+                                    else seterrName(false)
                                 }}
-                                errorMessage={nameError}
+                                value={Names}
+                                errName={nameError}
                             />
-                            <Input
+
+                            <InputF
                                 label='Email'
                                 placeholder='abc@gmail.com'
-                                value={Email}
-                                onChangeText={(Email) => {
-                                    setEmail(Email)
+                                onChange={(val) => {
+                                    setEmail(val)
+                                    console.log(val)
+                                    {
+                                        reg.test(Email) ? seterrEmail(false) : seterrEmail(true)
+                                    }
                                 }}
-                                errorMessage={emailError}
+                                value={Email}
+                                errorEmail={emailError}
 
                             />
+                            <Text style={styling.inputLabel}>Phone Number</Text>
+
                             <PhoneInput
-                                style={{ width: wp(85), height: hp(7), borderBottomWidth: 0.5, alignSelf: 'center' }}
+                                style={{
+                                    width: wp(85), height: hp(8), borderBottomWidth: 0.5, borderColor: 'grey'
+                                    , alignSelf: 'center'
+                                }}
                                 onChangePhoneNumber={(val) => setPhone(val)}
                             />
-                            {phoneError && <Text style={{ color: 'red', lineHeight: hp(5), marginHorizontal: wp(3) }}>Enter Valid Number</Text>}
-                            <Input
-                                label="Password"
+                            {phoneError && <Text style={{
+                                color: 'red',
+                                marginTop: hp(0.3),
+                                fontSize: wp(3), marginHorizontal: wp(4)
+                            }}>Enter Valid Number</Text>}
+                            <InputF
+                                label='Password'
                                 placeholder='Password'
-                                value={Password}
-                                secureTextEntry
-                                value={Password}
-                                onChangeText={(Pass) => {
-                                    setPassword(Pass)
+                                onChange={(val) => {
+                                    setPassword(val)
+                                    console.log(val)
+                                    if (val == '') {
+                                        seterrPass(true)
+                                    }
+                                    else seterrPass(false)
                                 }}
-                                errorMessage={passError}
+                                value={Password}
+                                errName={passError}
+                                secureTextEntry
                             />
                         </View>
                         <View style={styling.checkView}>
@@ -183,9 +171,6 @@ const Signup = (props) => {
                         <View style={styling.signupView}>
                             <TouchableOpacity style={styling.signupOpacity} onPress={() => {
                                 checkField()
-                                // 
-                                // signInWithPhoneNumber('+923446021955')
-                                // props.navigation.navigate('VerfiyCode')
                             }}>
                                 <Text style={styling.signupText}>Sign Up</Text>
                             </TouchableOpacity>
@@ -196,6 +181,7 @@ const Signup = (props) => {
                                 <Text style={styling.opacitysigninTXT}>Sign in</Text>
                             </TouchableOpacity>
                         </View>
+
                     </View>
                 </ScrollView>
 

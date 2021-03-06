@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 const Payment = (props) => {
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
             <SafeAreaView backgroundColor='white' />
 
             <SafeAreaView style={styling.safeContainer} >
@@ -60,7 +60,10 @@ const Payment = (props) => {
 
                     </View>
                     <View style={styling.signupView}>
-                        <TouchableOpacity style={styling.signupOpacity} onPress={() => { props.navigation.navigate('Chat') }} >
+                        <TouchableOpacity style={styling.signupOpacity}
+                            onPress={() => {
+                                props.navigation.navigate('Chat')
+                            }} >
                             <Text style={styling.signupText}>Save</Text>
                         </TouchableOpacity>
                     </View>

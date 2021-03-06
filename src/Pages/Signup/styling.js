@@ -8,63 +8,65 @@ export const styling = StyleSheet.create({
         backgroundColor: 'white'
     },
     mainContainer: {
-        height: hp('100%'),
-        width: hp('100%'),
-        padding: 20,
-        justifyContent: 'space-evenly'
+        height: hp(95),
+        width: wp(100),
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
+        justifyContent: 'space-between',
+
     },
     innerContainer: {
-        width: wp('90%'),
         flexDirection: 'row',
 
     },
     headerView: {
         width: wp('50%'),
-        justifyContent: 'center'
     },
     welcomeView: {
-        width: wp('40%'),
+        marginHorizontal: wp(1)
     },
-
     signupHeader: {
         width: wp('40%'),
-        alignSelf: 'flex-start',
-
+        marginHorizontal: wp(1)
     },
     avatarView: {
-        // height: hp('20%'),
         width: wp('40%'),
         alignItems: 'center',
-        // alignSelf: 'center',
         justifyContent: 'center',
 
     },
     formView: {
         width: wp('90%'),
-        // alignItems: 'center',
-        justifyContent: 'center',
-
     },
     checkView: {
         flexDirection: 'row',
         width: wp('80%'),
+        marginLeft: wp('2%'),
         alignItems: 'center',
-        marginLeft: wp('2%')
-    },
+        marginVertical: hp(1)
 
+    },
+    inputLabel: {
+        color: 'grey',
+        marginLeft: wp(2)
+    },
     agreeTXT: {
         fontSize: fontSize.Signup.terms,
         fontFamily: fontFamily.SFUIText,
-        fontWeight: '500'
+        fontWeight: '500',
+        lineHeight: hp(6)
     },
     termsTXT: {
         fontSize: fontSize.Signup.terms,
         fontFamily: fontFamily.SFUITextHeavy,
-        fontWeight: '700'
+        fontWeight: '700',
+        lineHeight: hp(6)
+
     },
 
     signupView: {
         width: wp('90%'),
+        marginVertical: hp(1)
     },
     signupOpacity: {
         width: wp('85%'),
@@ -83,6 +85,9 @@ export const styling = StyleSheet.create({
         lineHeight: 22,
 
     },
+    textInputStyle: {
+        marginBottom: hp(0)
+    },
     signinView: {
         width: wp('90%'),
         flexDirection: 'row',
@@ -92,7 +97,7 @@ export const styling = StyleSheet.create({
         fontSize: fontSize.Login.welcomeHead,
         fontFamily: fontFamily.SFUITextHeavy,
         fontWeight: "bold",
-        lineHeight: 47.5,
+        lineHeight: hp(8),
     },
     siguplabel: {
         fontFamily: fontFamily.SFUIText,

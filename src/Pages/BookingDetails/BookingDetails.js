@@ -11,27 +11,19 @@ import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 const BookingDetails = (props) => {
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
             <SafeAreaView backgroundColor='white' />
 
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headerView}>
                     <Icons.Button name='left' backgroundColor='white' color='black' size={30} onPress={() => { props.navigation.navigate('Success') }} />
-
-
                     <Iconss.Button name='dots-three-horizontal' size={30} backgroundColor='white' color='black' />
-
-
-
                 </View>
                 <View style={styling.mainContainer}>
                     <View style={styling.avatarView}>
-                        <Avatar
-                            rounded
-                            size={80}
-                            icon={{
-                                name: 'user', type: IconTypes.AntDesign,
-                            }} />
+                        <View style={styling.profileView}>
+
+                        </View>
                         <View style={styling.nameView}>
                             <Text style={styling.nameTXT}>Barbara Michelle</Text>
                             <TouchableOpacity style={styling.confirmOpacity}>
@@ -77,7 +69,6 @@ const BookingDetails = (props) => {
                         </View>
                     </View>
                     <View style={styling.innerView}>
-
                         <View style={styling.mainDayView}>
                             <View style={styling.cityView}>
 
@@ -91,25 +82,21 @@ const BookingDetails = (props) => {
                             </View>
                         </View>
                     </View>
-                    <View style={styling.innerView}>
 
-                        <View style={styling.cityView}>
+                    <View style={styling.cityView}>
 
-                            <Text style={styling.timeTXT}>Price</Text>
-                            <Text style={styling.dayTXT}>Total price $60</Text>
-                            <Text style={styling.timeTXT}>for 4h 0m </Text>
+                        <Text style={styling.timeTXT}>Price</Text>
+                        <Text style={styling.dayTXT}>Total price $60</Text>
+                        <Text style={styling.timeTXT}>for 4h 0m </Text>
 
 
-                        </View>
                     </View>
-                    <View style={styling.innerView}>
 
-                        <View style={styling.cityView}>
-                            <Text style={styling.timeTXT}>Reminder</Text>
-                            <Text style={styling.dayTXT}>30 minutes before</Text>
-                            <Text style={styling.timeTXT}>30 minutes before</Text>
+                    <View style={styling.cityView}>
+                        <Text style={styling.timeTXT}>Reminder</Text>
+                        <Text style={styling.dayTXT}>30 minutes before</Text>
+                        <Text style={styling.timeTXT}>30 minutes before</Text>
 
-                        </View>
                     </View>
 
                     <View style={styling.signupView}>

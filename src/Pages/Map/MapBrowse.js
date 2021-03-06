@@ -9,7 +9,7 @@ const MapBrowse = ({ props }) => {
     const [check, setcheck] = useState(false)
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
 
             <SafeAreaView style={{ backgroundColor: 'white' }} />
 
@@ -28,7 +28,7 @@ const MapBrowse = ({ props }) => {
                     <View style={styling.locationView}>
                         <Icon name='map-marker-alt' size={50} color='#FF2D55' />
                     </View>
-                    <ScrollView horizontal={true}>
+                    <ScrollView horizontal={true} contentContainerStyle={{ justifyContent: 'flex-end' }}>
                         <View style={styling.floatingView}>
 
                             <View style={styling.floatingInnerView}>

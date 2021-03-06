@@ -10,17 +10,15 @@ export const styling = StyleSheet.create({
     },
 
     headView: {
-        height: hp('8%'),
+        marginTop: hp(5),
         width: wp('100%'),
-        alignItems: 'center',
-        flexDirection: 'row',
         backgroundColor: 'white',
-
+        paddingHorizontal: wp(2)
     },
     mainContainer: {
-        backgroundColor: 'white',
         height: hp('100%'),
-        padding: 20,
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
 
     },
     labelView: {
@@ -34,45 +32,38 @@ export const styling = StyleSheet.create({
         color: 'black'
     },
     headingView: {
-        height: hp('6%'),
-        width: wp('40%'),
+        width: wp('45%'),
         alignItems: 'center',
-        backgroundColor: 'white',
 
     },
     headTXT: {
         fontSize: fontSize.Setting.heading,
-        fontFamily: fontFamily.SFUITextBold
+        fontFamily: fontFamily.SFUITextBold,
+        lineHeight: hp(8)
     },
-    accountView: {
-        height: hp('5%'),
-        width: wp('20%'),
-        alignItems: 'center'
-    },
-    optionView: {
-        height: hp('5%'),
-        width: wp('30%'),
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-    },
+
+
     accountTXT: {
         fontSize: fontSize.Setting.labels,
         fontFamily: fontFamily.SFUITextHeavy,
-
+        lineHeight: hp(6),
+        marginHorizontal: hp(2)
     },
     passwrdView: {
         width: wp('10%'),
-        height: hp('6%'),
         backgroundColor: '#4CD964',
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
+        marginVertical: hp(1)
     },
     innerView: {
-        width: wp('80%'),
-        height: hp('8%'),
+        width: wp('90%'),
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        marginVertical: hp(1),
+        alignSelf: 'center'
+
     },
     detailView: {
         marginLeft: 10,
@@ -126,7 +117,7 @@ export const styling = StyleSheet.create({
     moreoptionView: {
         alignSelf: 'center',
         width: wp('85%'),
-        height: hp('8%'),
+        marginVertical: hp(2),
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

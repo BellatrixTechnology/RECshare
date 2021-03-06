@@ -11,17 +11,17 @@ export const styling = StyleSheet.create({
     mainContainer: {
         height: hp('100%'),
         width: wp('100%'),
-        padding: 20,
-        backgroundColor: '#C8C7CC'
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
+        backgroundColor: '#C8C7CC',
     },
     headView: {
-        height: hp('8%'),
+        marginVertical: hp(5),
         width: wp('95%'),
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
         backgroundColor: '#C8C7CC',
-        padding: 10
     },
     headIcon: {
         backgroundColor: '#C8C7CC',
@@ -29,7 +29,7 @@ export const styling = StyleSheet.create({
     },
     locationView: {
         width: wp('90%'),
-        height: hp('60%'),
+        height: hp('55%'),
         alignItems: 'center',
         justifyContent: 'center',
         // backgroundColor: 'red',

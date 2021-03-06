@@ -27,12 +27,12 @@ function Recentbar() {
 const Search = ({ props }) => {
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
 
             <SafeAreaView style={{ backgroundColor: 'white' }} />
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headerView}>
-                    <Icon.Button name='left' size={30} color='black' backgroundColor={'white'} onPress={() => { props.navigation.navigate('LoginScreen') }}></Icon.Button>
+                    <Icon name='left' size={30} color='black' onPress={() => { props.navigation.navigate('LoginScreen') }} />
                 </View>
                 <View style={styling.headTXTView}>
                     <Text style={styling.headTXT}> Discover</Text>

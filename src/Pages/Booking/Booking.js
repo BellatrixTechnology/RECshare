@@ -27,12 +27,12 @@ function Complete() {
 const Booking = () => {
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
 
             <SafeAreaView style={{ backgroundColor: 'white' }} />
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headerView}>
-                    <Icon name='search1' size={30} />
+                    <Icon name='search1' size={26} />
                 </View>
                 <View style={styling.headTXTView}>
                     <Text style={styling.headTXT}> Booking</Text>

@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 const ReviewBooking = (props) => {
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
             <SafeAreaView backgroundColor='white' />
 
             <SafeAreaView style={styling.safeContainer} >

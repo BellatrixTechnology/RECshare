@@ -8,46 +8,47 @@ export const styling = StyleSheet.create({
         flex: 1
     },
     mainContainer: {
-        backgroundColor: 'white',
-        height: hp('100%'),
-        width: wp('100%'),
-        padding: 30,
+        height: hp(95),
+        width: wp(100),
+        paddingHorizontal: wp(3),
+        paddingBottom: hp(1),
+        backgroundColor: 'white'
 
     },
     headingView: {
-        width: wp('60%'),
-        height: hp('16%'),
+        // width: wp('60%'),
         justifyContent: 'center',
+        marginVertical: hp(2),
+        marginHorizontal: wp(4)
     },
     headingTEXT: {
         fontFamily: fontFamily.SFUITextHeavy,
         fontSize: fontSize.VerifyCode.heading,
         fontWeight: "700",
-        lineHeight: 47.5,
+        lineHeight: hp(8),
     },
     headingLabelView: {
-        height: hp('6%'),
         width: wp('80%'),
+        marginVertical: hp(2),
+        marginHorizontal: wp(4)
 
     },
     headingLabelTEXT: {
         fontFamily: fontFamily.SFUIText,
         fontSize: fontSize.VerifyCode.labels,
         fontWeight: '400',
+        lineHeight: hp(3),
 
     },
     codeView: {
-        width: wp('86%'),
-        height: hp('10%'),
-        // alignItems: 'center',
-        // justifyContent: 'center',
+        marginVertical: hp(2)
     },
     verifyView: {
         width: wp('85%'),
-        height: hp('15%'),
         justifyContent: 'flex-end',
         alignItems: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginVertical: hp(4)
 
     },
     verifyOpacity: {
@@ -61,8 +62,7 @@ export const styling = StyleSheet.create({
         justifyContent: 'center'
     },
     resendView: {
-        width: wp('70%'),
-        height: hp('8%'),
+        width: wp('80%'),
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignSelf: 'center',

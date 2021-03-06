@@ -7,12 +7,12 @@ import Iconss from 'react-native-vector-icons/Entypo';
 import { fontFamily, fontSize } from '../../Global/Styles/font';
 
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
-import { wp } from '../../Global/Styles/Scalling';
+import { hp, wp } from '../../Global/Styles/Scalling';
 
 const Account = ({ props }) => {
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
 
             <SafeAreaView style={{ backgroundColor: 'white' }} />
             <SafeAreaView style={styling.safeContainer} >
@@ -31,7 +31,7 @@ const Account = ({ props }) => {
                     <View style={styling.avatarView}>
                         <Avatar
                             rounded
-                            size={80}
+                            size={60}
                             icon={{
                                 name: 'user', type: IconTypes.AntDesign,
                             }} />
@@ -76,7 +76,7 @@ const Account = ({ props }) => {
                                 rightIcon={
                                     <Icons name='right' size={16} color='#C8C7CC' />
                                 }
-                                inputContainerStyle={{ borderBottomWidth: 0, width: wp(88), marginRight: 10 }}
+                                inputContainerStyle={{ borderBottomWidth: 0, width: wp(88), height: hp(4), marginBottom: hp(-3) }}
                                 inputStyle={{ fontSize: 15, fontFamily: fontFamily.SFUIText }}
                             />
                         </View>
@@ -119,6 +119,7 @@ const Account = ({ props }) => {
                             <Icons name='right' size={16} color='#C8C7CC' />
 
                         </View>
+
                         <View style={styling.addAdrsView}>
                             <Text style={styling.newAdrsTXT}>Add new card</Text>
                             <Icons name='pluscircle' size={24} color='#FF2D55' />

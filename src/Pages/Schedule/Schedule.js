@@ -47,6 +47,12 @@ const Schedule = (props) => {
                             <TouchableOpacity style={styling.TimeOpacity}>
                                 <Text style={styling.TimeTXT}>02:00 PM</Text>
                             </TouchableOpacity>
+                            <TouchableOpacity style={styling.TimeOpacity}>
+                                <Text style={styling.TimeTXT}>01:00 PM</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styling.TimeOpacity}>
+                                <Text style={styling.TimeTXT}>02:00 PM</Text>
+                            </TouchableOpacity>
                         </ScrollView>
                     </View>
                     <View style={styling.availableView}>

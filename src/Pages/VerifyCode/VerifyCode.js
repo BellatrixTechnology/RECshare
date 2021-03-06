@@ -3,8 +3,7 @@ import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, ToastAndro
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
-// import CountDown from 'react-native-countdown-component';
-
+import InputF from '../../Component/InputField/index';
 const VerifyCode = ({ route }) => {
     const phone = route.params.Phone;
     const [confirm, setConfirm] = useState(null);
@@ -22,8 +21,8 @@ const VerifyCode = ({ route }) => {
     async function confirmCode() {
         try {
             await confirm.confirm(code).then(() => {
-                ToastAndroid.show("valid code.!", ToastAndroid.LONG)
                 props.navigation.navigate('ChooseLanguage')
+                console.log(code)
             })
 
         } catch (error) {
@@ -34,7 +33,7 @@ const VerifyCode = ({ route }) => {
 
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
             <SafeAreaView backgroundColor='white' />
 
             <SafeAreaView style={styling.safeContainer} >
@@ -48,11 +47,11 @@ const VerifyCode = ({ route }) => {
                     </View>
 
                     <View style={styling.codeView}>
-                        <Input
+                        <InputF
                             label="Enter Code"
                             placeholder='Code'
                             value={code}
-                            onChangeText={text => setCode(text)}
+                            onChange={text => setCode(text)}
                         />
                     </View>
 
@@ -71,12 +70,7 @@ const VerifyCode = ({ route }) => {
 
                         <Text style={styling.mintTxt}>1:20 mint left</Text>
                     </View>
-                    {/* <CountDown
-                        until={10}
-                        onFinish={() => console.log('finished')}
-                        onPress={() => console.log('hello')}
-                        size={20}
-                    /> */}
+
                 </View>
             </SafeAreaView >
             <SafeAreaView style={{ backgroundColor: 'white' }} />
