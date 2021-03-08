@@ -12,23 +12,24 @@ export const styling = StyleSheet.create({
         width: wp(100),
         paddingHorizontal: wp(3),
         paddingBottom: hp(1),
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     innerContainer: {
         width: wp('50%'),
     },
     welcomeHeader: {
-        marginHorizontal: wp(1)
+        marginHorizontal: wp(3)
     },
     signinHeader: {
         width: wp('40%'),
-        marginHorizontal: wp(1)
+        marginHorizontal: wp(3)
 
     },
     formView: {
         width: wp('90%'),
         alignItems: 'center',
         justifyContent: 'center',
+        alignSelf: "center"
 
     },
     forgetView: {
@@ -37,7 +38,7 @@ export const styling = StyleSheet.create({
         marginHorizontal: wp(3)
     },
     signinView: {
-
+        alignSelf: 'center',
         justifyContent: 'center',
         width: wp('90%'),
         marginVertical: hp(3)

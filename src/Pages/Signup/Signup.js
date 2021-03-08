@@ -51,12 +51,6 @@ const Signup = (props) => {
             });
     }
 
-    // Handle the button press
-    async function signInWithPhoneNumber(phone) {
-        const confirmation = await auth().signInWithPhoneNumber(phone);
-        setConfirm(confirmation);
-        console.log('hellowiorldncnakfjkdjf kaskasjdk ', confirmation)
-    }
 
     const checkField = () => {
         if (Email == '') { seterrEmail('Enter Email') }

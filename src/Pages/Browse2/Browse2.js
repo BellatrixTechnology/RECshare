@@ -5,17 +5,28 @@ import { styling } from './styling';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icons from 'react-native-vector-icons/FontAwesome5';
 import { ScrollView } from 'react-native-gesture-handler';
+import SearchableDropdown from 'react-native-searchable-dropdown';
 
 const Browse2 = ({ props }) => {
+    var items = [
+        {
+            id: 1,
+            name: 'JavaScript',
+        },
+        {
+            id: 2,
+            name: 'Java',
+        },
+        {
+            id: 3,
+            name: 'Ruby',
+        },]
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
-
             <SafeAreaView style={{ backgroundColor: 'white' }} />
-
             <SafeAreaView style={styling.safeContainer} >
                 <ScrollView >
-
                     <View style={styling.mainContainer}>
                         <View style={styling.innerContainer}>
                             <View style={styling.labelView}>
@@ -27,12 +38,26 @@ const Browse2 = ({ props }) => {
                             </View>
                             <View style={styling.searchBar}>
                                 <Icon name='search1' size={18} style={{ color: '#C8C7CC' }} />
-
-                                <TextInput
+                                {/* <TextInput
                                     placeholder='Enter Your Location'
+                                /> */}
 
+                                <SearchableDropdown
+                                    // itemStyle={{
+                                    //     padding: 10,
+                                    //     marginTop: 2,
+                                    //     backgroundColor: '#ddd',
+                                    //     borderColor: '#bbb',
+                                    //     borderWidth: 1,
+                                    //     borderRadius: 5,
+                                    // }}
+                                    itemTextStyle={{ color: '#222' }}
+                                    itemsContainerStyle={{ maxHeight: 140 }}
+                                    items={items}
                                 />
+
                             </View>
+
                         </View>
                         <View style={styling.categoryView}>
                             <View >

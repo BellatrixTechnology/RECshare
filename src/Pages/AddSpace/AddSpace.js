@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { View, StyleSheet, StatusBar, TextInput, SafeAreaView, ToastAndroid, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Image, StatusBar, TextInput, SafeAreaView, ToastAndroid, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styles } from './styles';
 import Icons from 'react-native-vector-icons/AntDesign';
@@ -8,7 +8,6 @@ import ImagePicker from 'react-native-image-crop-picker';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import { Platform } from 'react-native';
 
 
 const AddSpace = ({ props }) => {
@@ -81,6 +80,8 @@ const AddSpace = ({ props }) => {
 
                     task.then(() => {
                         console.log('Image uploaded to the bucket!');
+                        ToastAndroid.show("Uploaded Successfully.!", ToastAndroid.LONG);
+
                     }).catch((e) => console.log('uploading image error => ', e));
                 });
 
@@ -88,10 +89,9 @@ const AddSpace = ({ props }) => {
                 return false
             }
         })
-
     }
 
-
+    console.log(Images)
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
@@ -108,7 +108,18 @@ const AddSpace = ({ props }) => {
                             <TouchableOpacity onPress={() => selectImage()}>
                                 <Text>Upload Images</Text>
                             </TouchableOpacity>
-
+                            <FlatList
+                                horizontal={true}
+                                showsHorizontalScrollIndicator={false}
+                                data={Images}
+                                renderItem={({ item }) => {
+                                    return (
+                                        <View style={{ marginRight: 10 }}>
+                                            <Image source={{ uri: item.Path }} style={{ height: 200, width: 200 }} />
+                                        </View>
+                                    )
+                                }}
+                            />
                             <Input
                                 placeholder='Enter Space Name'
                                 style={styles.fieldView}

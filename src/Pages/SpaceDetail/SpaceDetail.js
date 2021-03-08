@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, Switch, ScrollView } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, Image, ScrollView } from 'react-native';
 import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/AntDesign';
@@ -10,12 +10,13 @@ import storage from '@react-native-firebase/storage';
 
 
 import { styling } from './styling';
+import { wp } from '../../Global/Styles/Scalling';
 const SpaceDetail = (props) => {
     const [usern, setuserName] = useState('');
     const [isEnabled, setIsEnabled] = useState(false);
     const [checked, setcheck] = useState(false);
     const [obj, setobj] = useState('')
-
+    const [images, setImages] = useState('');
     useEffect(() => {
         get()
 
@@ -30,7 +31,7 @@ const SpaceDetail = (props) => {
                 return false
             }
         })
-        const object = await firestore().collection('Data').doc('qv72anqm4raqRI2tavtM1FVPhhg1').collection('spaces').doc('Midway station');
+        const object = await firestore().collection('Data').doc('uP5FCRF1yMWy5nts3pJ2L9xAoH03').collection('spaces').doc('Midway station');
         object.get().then((doc) => {
             if (doc.exists) {
                 console.log("Document data:", doc.data());
@@ -41,12 +42,14 @@ const SpaceDetail = (props) => {
             }
         })
 
-        let imageRef = storage().ref('/Images/Midway station');
+        let imageRef = storage().ref('/Images/Midway station/' + '0');
         imageRef
             .getDownloadURL()
             .then((url) => {
                 //from url you can fetched the uploaded image easily
                 console.log(url)
+                setImages(url)
+
             })
             .catch((e) => console.log('getting downloadURL of image error => ', e));
 
@@ -67,10 +70,16 @@ const SpaceDetail = (props) => {
                 </View>
                 <View style={styling.mainContainer}>
                     <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 5 }}>
-                        <View style={styling.imageView}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', width: wp(100), }}>
+                            <ScrollView horizontal={true}>
+
+                                <Image style={styling.imageView} source={{ uri: images }} />
+                                <Image style={styling.imageView} source={{ uri: images }} />
+                                <Image style={styling.imageView} source={{ uri: images }} />
+                            </ScrollView>
 
                         </View>
-
+                        {/* <Image style={styling.imageView} source={{ uri: images }} /> */}
                         <View style={styling.nameView}>
                             <Text style={styling.labelTXT}>Meeting</Text>
                             <Text style={styling.nameTXT}>{obj.Space}</Text>
