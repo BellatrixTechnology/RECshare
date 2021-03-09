@@ -25,33 +25,33 @@ const SpaceDetail = (props) => {
         auth().onAuthStateChanged((user) => {
             if (user) {
                 setuserName(user.uid)
-                console.log(user.uid)
+                const object = firestore().collection('Data').doc(user.uid).collection('spaces').doc('Midway station')
+                object.get().then((doc) => {
+                    if (doc.exists) {
+                        console.log("Document data:", doc.data());
+                        setobj(doc.data())
+                    } else {
+                        // doc.data() will be undefined in this case
+                        console.log("No such document!");
+                    }
+                })
+
+                let imageRef = storage().ref('/Images/Midway station/' + '0');
+                imageRef
+                    .getDownloadURL()
+                    .then((url) => {
+                        //from url you can fetched the uploaded image easily
+                        console.log(url)
+                        setImages(url)
+
+                    })
+                    .catch((e) => console.log('getting downloadURL of image error => ', e));
 
             } else {
                 return false
             }
         })
-        const object = await firestore().collection('Data').doc('uP5FCRF1yMWy5nts3pJ2L9xAoH03').collection('spaces').doc('Midway station');
-        object.get().then((doc) => {
-            if (doc.exists) {
-                console.log("Document data:", doc.data());
-                setobj(doc.data())
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        })
 
-        let imageRef = storage().ref('/Images/Midway station/' + '0');
-        imageRef
-            .getDownloadURL()
-            .then((url) => {
-                //from url you can fetched the uploaded image easily
-                console.log(url)
-                setImages(url)
-
-            })
-            .catch((e) => console.log('getting downloadURL of image error => ', e));
 
     }
     return (
@@ -70,16 +70,7 @@ const SpaceDetail = (props) => {
                 </View>
                 <View style={styling.mainContainer}>
                     <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 5 }}>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', width: wp(100), }}>
-                            <ScrollView horizontal={true}>
-
-                                <Image style={styling.imageView} source={{ uri: images }} />
-                                <Image style={styling.imageView} source={{ uri: images }} />
-                                <Image style={styling.imageView} source={{ uri: images }} />
-                            </ScrollView>
-
-                        </View>
-                        {/* <Image style={styling.imageView} source={{ uri: images }} /> */}
+                        <Image style={styling.imageView} source={{ uri: images }} />
                         <View style={styling.nameView}>
                             <Text style={styling.labelTXT}>Meeting</Text>
                             <Text style={styling.nameTXT}>{obj.Space}</Text>
@@ -259,7 +250,7 @@ const SpaceDetail = (props) => {
             </SafeAreaView >
             <SafeAreaView style={{ backgroundColor: 'white' }} />
 
-        </Fragment>
+        </Fragment >
     )
 }
 

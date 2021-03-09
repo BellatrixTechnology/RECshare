@@ -28,6 +28,7 @@ const AddSpace = ({ props }) => {
     const [usern, setuserName] = useState('');
     const [Images, setImage] = useState([]);
     const [count, setCount] = useState(0);
+    const [GetImage, setGetImage] = useState('')
     const selectImage = () => {
 
         ImagePicker.openPicker({
@@ -89,6 +90,24 @@ const AddSpace = ({ props }) => {
                 return false
             }
         })
+
+        let imageRef = storage().ref('/Images/Midway station/' + '0');
+        imageRef
+            .getDownloadURL()
+            .then((url) => {
+                //from url you can fetched the uploaded image easily
+                console.log(url)
+                setGetImage(url)
+            }).then(() => {
+                console.log(GetImage)
+                firestore().collection('Space').doc(SpaceName).set({
+                    Space: SpaceName,
+                    Guest: guest,
+                    distance: distance,
+                    Image: GetImage
+                })
+            })
+
     }
 
     console.log(Images)

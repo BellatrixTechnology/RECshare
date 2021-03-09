@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, TextInput, SafeAreaView, ImageBackground } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
@@ -6,21 +6,90 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icons from 'react-native-vector-icons/FontAwesome5';
 import { ScrollView } from 'react-native-gesture-handler';
 import SearchableDropdown from 'react-native-searchable-dropdown';
-
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import storage from '@react-native-firebase/storage';
+import { set } from 'react-native-reanimated';
 const Browse2 = ({ props }) => {
-    var items = [
-        {
-            id: 1,
-            name: 'JavaScript',
-        },
-        {
-            id: 2,
-            name: 'Java',
-        },
-        {
-            id: 3,
-            name: 'Ruby',
-        },]
+    useEffect(() => {
+        get()
+
+    }, [])
+    const [imagess, setImages] = useState('');
+    const [name, setName] = useState('');
+    const [guest, setGuest] = useState('');
+    const [distance, setDistance] = useState('');
+    async function get() {
+
+        const response = firestore().collection('Space');
+        const data = await response.get();
+        // const data = firestore().collection('Space').get()
+        console.log(data.docs)
+        data.docs.forEach(item => {
+            console.log(item.data())
+            setName(item.data().Space)
+            setGuest(item.data().Guest)
+            setDistance(item.data().distance)
+            setImages(item.data().Image)
+            // let newId = [...id];
+
+            // newId.push({
+            //     SpaceName: item.data().Space,
+            //     Guest: item.data().Guest,
+            //     Distance: item.data().distance,
+            //     Iamge: item.data().Image
+
+            // })
+            // setId(newId)
+            // console.log(id)
+        })
+
+
+        //     .get().then((querySnapshot) => {
+        //     querySnapshot.forEach((doc) => {
+        //         setId(doc.data())
+
+        //         // newId.push({
+        //         //     SpaceName: doc.id,
+        //         //     Guest: guest,
+        //         //     Distance: distance,
+        //         //     Iamge: img
+
+        //         // })
+        //         // setId(newId)
+        //         console.log(id)
+
+        //     })
+        // });
+
+        // object.get().then((doc) => {
+        //     if (doc.exists) {
+        //         console.log("Document data:", doc.data());
+        //     } else {
+        //         // doc.data() will be undefined in this case
+        //         console.log("No such document!");
+        //     }
+        // })
+
+        // let imageRef = storage().ref('/Images/Midway station/' + '0');
+        // imageRef
+        //     .getDownloadURL()
+        //     .then((url) => {
+        //         //from url you can fetched the uploaded image easily
+        //         console.log(url)
+        //         setImages(url)
+
+        //     })
+        //     .catch((e) => console.log('getting downloadURL of image error => ', e));
+
+        //  else {
+        //     return false
+        // }
+
+    }
+
+
+    console.log(imagess)
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -38,11 +107,11 @@ const Browse2 = ({ props }) => {
                             </View>
                             <View style={styling.searchBar}>
                                 <Icon name='search1' size={18} style={{ color: '#C8C7CC' }} />
-                                {/* <TextInput
+                                <TextInput
                                     placeholder='Enter Your Location'
-                                /> */}
+                                />
 
-                                <SearchableDropdown
+                                {/* <SearchableDropdown
                                     // itemStyle={{
                                     //     padding: 10,
                                     //     marginTop: 2,
@@ -54,7 +123,7 @@ const Browse2 = ({ props }) => {
                                     itemTextStyle={{ color: '#222' }}
                                     itemsContainerStyle={{ maxHeight: 140 }}
                                     items={items}
-                                />
+                                /> */}
 
                             </View>
 
@@ -128,12 +197,12 @@ const Browse2 = ({ props }) => {
                             <ScrollView horizontal={true}
                                 showsHorizontalScrollIndicator={false}
                             >
-                                <View style={styling.nearInnerView}>
-                                    <View style={styling.nearbyCard}>
+                                <View style={styling.nearInnerView} >
+                                    <ImageBackground style={styling.nearbyCard} source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/rec-shape.appspot.com/o/Images%2FMidway%20station%2F0?alt=media&token=8dd58cd5-c7fd-403f-895f-04c1608bdc2e' }} imageStyle={styling.nearbyCard} >
                                         <Icon name='heart' size={20} color='red' />
 
-                                    </View>
-                                    <Text style={styling.CategoryTXT} >Green Heritage Office</Text>
+                                    </ImageBackground>
+                                    <Text style={styling.CategoryTXT} >{name}</Text>
                                     <View style={{ flexDirection: 'row' }}>
                                         <Icons name='map-marker-alt' color='#666666' size={15} />
                                         <Text style={styling.carLabel}>  0.31 mi away 12 Guest</Text>

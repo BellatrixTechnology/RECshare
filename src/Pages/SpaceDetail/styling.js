@@ -1,11 +1,13 @@
 import { StyleSheet } from 'react-native'
 import { colors } from 'react-native-elements';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { fontFamily, fontSize } from '../../Global/Styles/font';
 import { hp, wp } from '../../Global/Styles/Scalling';
 
 export const styling = StyleSheet.create({
     safeContainer: {
-        flex: 1
+        flex: 1,
+        backgroundColor: 'white'
     },
     mainContainer: {
         height: hp(89),
@@ -34,7 +36,7 @@ export const styling = StyleSheet.create({
     },
     imageView: {
         height: hp('30'),
-        width: wp(60),
+        width: wp(85),
         // backgroundColor: '#C8C7CC'
         marginRight: wp(2)
     },
