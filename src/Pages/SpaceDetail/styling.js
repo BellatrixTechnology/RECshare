@@ -23,7 +23,6 @@ export const styling = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: 'white',
-        marginVertical: hp(3)
 
     },
     headIcon: {
@@ -38,7 +37,7 @@ export const styling = StyleSheet.create({
         height: hp('30'),
         width: wp(85),
         // backgroundColor: '#C8C7CC'
-        marginRight: wp(2)
+        alignSelf: 'center'
     },
     labelTXT: {
         fontSize: fontSize.Space.line,

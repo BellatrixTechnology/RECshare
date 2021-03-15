@@ -26,8 +26,9 @@ const AddSpace = ({ props }) => {
     const [Saturday, setSat] = useState('');
     const [sunday, setSun] = useState('');
     const [usern, setuserName] = useState('');
-    const [Images, setImage] = useState([]);
+    const [Images, setImage] = useState('');
     const [count, setCount] = useState(0);
+    const [Host, setHost] = useState('');
     const [GetImage, setGetImage] = useState('')
     const selectImage = () => {
 
@@ -35,19 +36,10 @@ const AddSpace = ({ props }) => {
             width: 200,
             height: 200,
             cropping: true,
-            multiple: true
         }).then(image => {
-            let newImages = [...Images];
             console.log(image)
-            image.map(val => {
+            setImage({ Path: image.path })
 
-                setCount(count + 1)
-                newImages.push({
-                    Path: val.path
-
-                })
-                setImage(newImages)
-            })
         });
     }
 
@@ -57,8 +49,9 @@ const AddSpace = ({ props }) => {
             if (user) {
                 setuserName(user.uid)
 
-                firestore().collection('Data').doc(user.uid).collection('spaces').doc(SpaceName).set({
+                firestore().collection('Data').doc(SpaceName).set({
                     Space: SpaceName,
+                    Host: Host,
                     credit: credit,
                     distance: distance,
                     guest: guest,
@@ -73,41 +66,34 @@ const AddSpace = ({ props }) => {
                     sunday: sunday,
                 })
 
-                Images.forEach((element, index) => {
-                    console.log(index)
-                    let reference = storage().ref('Images/' + SpaceName + '/' + index);         // 2
-                    let task = reference.putFile(element.Path);
-                    // setCount(count + 1)
 
-                    task.then(() => {
-                        console.log('Image uploaded to the bucket!');
-                        ToastAndroid.show("Uploaded Successfully.!", ToastAndroid.LONG);
+                let reference = storage().ref('Images/' + SpaceName);         // 2
+                let task = reference.putFile(Images.Path);
 
-                    }).catch((e) => console.log('uploading image error => ', e));
-                });
+
+                task.then(() => {
+                    getImage()
+                }).catch((e) => console.log('uploading image error => ', e));
 
             } else {
                 return false
             }
         })
 
-        let imageRef = storage().ref('/Images/Midway station/' + '0');
+    }
+    const getImage = () => {
+        let imageRef = storage().ref('/Images/' + SpaceName);
         imageRef
             .getDownloadURL()
             .then((url) => {
                 //from url you can fetched the uploaded image easily
-                console.log(url)
-                setGetImage(url)
-            }).then(() => {
-                console.log(GetImage)
-                firestore().collection('Space').doc(SpaceName).set({
+                firestore().collection('Space').add({
                     Space: SpaceName,
                     Guest: guest,
                     distance: distance,
-                    Image: GetImage
+                    Image: url
                 })
-            })
-
+            }).catch = (err => { console.log(err) })
     }
 
     console.log(Images)
@@ -127,24 +113,25 @@ const AddSpace = ({ props }) => {
                             <TouchableOpacity onPress={() => selectImage()}>
                                 <Text>Upload Images</Text>
                             </TouchableOpacity>
-                            <FlatList
-                                horizontal={true}
-                                showsHorizontalScrollIndicator={false}
-                                data={Images}
-                                renderItem={({ item }) => {
-                                    return (
-                                        <View style={{ marginRight: 10 }}>
-                                            <Image source={{ uri: item.Path }} style={{ height: 200, width: 200 }} />
-                                        </View>
-                                    )
-                                }}
-                            />
+                            {Images != '' &&
+                                <View style={{ marginRight: 10 }}>
+                                    <Image source={{ uri: Images.Path }} style={{ height: 200, width: 200 }} />
+                                </View>}
+
                             <Input
                                 placeholder='Enter Space Name'
                                 style={styles.fieldView}
                                 value={SpaceName}
                                 onChangeText={(val) =>
                                     setSpace(val)
+                                }
+                            />
+                            <Input
+                                placeholder='Enter Host Name'
+                                style={styles.fieldView}
+                                value={Host}
+                                onChangeText={(val) =>
+                                    setHost(val)
                                 }
                             />
                             <Input

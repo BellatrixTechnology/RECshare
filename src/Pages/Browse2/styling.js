@@ -9,10 +9,12 @@ export const styling = StyleSheet.create({
     },
     mainContainer: {
         height: hp(100),
-        width: wp('100%'),
+        width: wp(100),
         paddingHorizontal: wp(4),
         paddingBottom: hp(1),
-        justifyContent: 'space-evenly',
+        // justifyContent: 'space-between',
+        backgroundColor: 'white'
+
     },
     innerContainer: {
     },
@@ -35,15 +37,26 @@ export const styling = StyleSheet.create({
         color: '#FF2D55'
     },
     searchBar: {
-        backgroundColor: 'white',
         flexDirection: 'row',
         alignItems: 'center',
         width: wp('90%'),
         borderRadius: 6,
-        paddingLeft: 10,
-        marginTop: hp(5)
+        marginTop: hp(5),
+        justifyContent: 'space-evenly'
     },
-
+    searchableContainer: {
+        // padding: wp(3),
+        width: wp(80)
+    },
+    searchItemStyle: {
+        padding: wp(1),
+        marginTop: hp(1),
+        backgroundColor: '#ddd',
+        borderColor: '#bbb',
+        borderWidth: wp(0.3),
+        borderRadius: hp(1),
+        width: wp(80)
+    },
     categoryView: {
         width: wp('90%'),
         flexDirection: 'row',
@@ -124,8 +137,18 @@ export const styling = StyleSheet.create({
         backgroundColor: '#C8C7CC',
         borderRadius: 13,
         alignItems: 'flex-end',
-        padding: 10
+        padding: 10,
+        justifyContent: 'space-between'
     },
+    imageViewText: {
+        paddingHorizontal: wp(4),
+        paddingVertical: hp(1),
+        backgroundColor: 'black',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: wp(2)
+    },
+
     cardTXTView: {
         height: hp('6%'),
         width: wp('28%'),

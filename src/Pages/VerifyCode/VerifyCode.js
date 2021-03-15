@@ -4,7 +4,7 @@ import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
 import InputF from '../../Component/InputField/index';
-const VerifyCode = ({ route }) => {
+const VerifyCode = ({ route }, props) => {
     const phone = route.params.Phone;
     const [confirm, setConfirm] = useState(null);
     const [code, setCode] = useState('');

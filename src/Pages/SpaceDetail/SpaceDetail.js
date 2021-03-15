@@ -11,7 +11,9 @@ import storage from '@react-native-firebase/storage';
 
 import { styling } from './styling';
 import { wp } from '../../Global/Styles/Scalling';
-const SpaceDetail = (props) => {
+const SpaceDetail = ({ route }) => {
+    const SpaceStation = route.params.Space
+    const props = route.params.props
     const [usern, setuserName] = useState('');
     const [isEnabled, setIsEnabled] = useState(false);
     const [checked, setcheck] = useState(false);
@@ -25,7 +27,7 @@ const SpaceDetail = (props) => {
         auth().onAuthStateChanged((user) => {
             if (user) {
                 setuserName(user.uid)
-                const object = firestore().collection('Data').doc(user.uid).collection('spaces').doc('Midway station')
+                const object = firestore().collection('Data').doc(SpaceStation)
                 object.get().then((doc) => {
                     if (doc.exists) {
                         console.log("Document data:", doc.data());
@@ -36,7 +38,7 @@ const SpaceDetail = (props) => {
                     }
                 })
 
-                let imageRef = storage().ref('/Images/Midway station/' + '0');
+                let imageRef = storage().ref('/Images/' + SpaceStation);
                 imageRef
                     .getDownloadURL()
                     .then((url) => {
@@ -61,24 +63,25 @@ const SpaceDetail = (props) => {
 
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headView}>
-                    <Icons.Button name="left" style={styling.headIcon} color='black' size={28} onPress={() => { props.navigation.navigate('ChooseLanguage') }}>
+                    <Icons.Button name="left" style={styling.headIcon} color='black' size={28} onPress={() => { props.goBack() }}>
 
                     </Icons.Button>
                     <Text style={styling.headTXT}>Space Details</Text>
 
                     <Icons.Button name='heart' style={styling.headIcon} color='black' size={28}></Icons.Button>
                 </View>
-                <View style={styling.mainContainer}>
+
+                {obj == '' ? <Text>No Record Found</Text> : <View style={styling.mainContainer}>
                     <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 5 }}>
                         <Image style={styling.imageView} source={{ uri: images }} />
                         <View style={styling.nameView}>
                             <Text style={styling.labelTXT}>Meeting</Text>
                             <Text style={styling.nameTXT}>{obj.Space}</Text>
-                            <Text style={styling.timeTXT}>${obj.credit}</Text>
+                            <Text style={styling.timeTXT}>${obj.credit}/hr</Text>
                         </View>
                         <View style={styling.dataView}>
-                            <Text>{obj.distance}miles away</Text>
-                            <Text>{obj.guest}guest</Text>
+                            <Text>{obj.distance} miles away</Text>
+                            <Text>{obj.guest} guest</Text>
                             <Text>120 m2</Text>
                         </View>
                         <View style={styling.headerView}>
@@ -89,7 +92,7 @@ const SpaceDetail = (props) => {
                             <View style={styling.statusView}>
                                 <Text style={styling.labelTXT}>Meet the host</Text>
 
-                                <Text style={styling.timeTXT}>Irene Lacoste</Text>
+                                <Text style={styling.timeTXT}>{obj.Host}</Text>
                             </View>
                             <View style={styling.iconView}>
                                 <Iconss name='chatbubble-sharp' color='white' size={26} />
@@ -245,7 +248,7 @@ const SpaceDetail = (props) => {
 
                     </ScrollView>
 
-                </View>
+                </View>}
 
             </SafeAreaView >
             <SafeAreaView style={{ backgroundColor: 'white' }} />

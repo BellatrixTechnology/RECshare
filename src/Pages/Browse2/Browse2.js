@@ -9,87 +9,38 @@ import SearchableDropdown from 'react-native-searchable-dropdown';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
-import { set } from 'react-native-reanimated';
+
+import { FlatList } from 'react-native';
+import { wp, hp } from '../../Global/Styles/Scalling';
 const Browse2 = ({ props }) => {
     useEffect(() => {
-        get()
+        get().then(() => list())
 
     }, [])
-    const [imagess, setImages] = useState('');
-    const [name, setName] = useState('');
-    const [guest, setGuest] = useState('');
-    const [distance, setDistance] = useState('');
+
+    const [data, setDAta] = useState([]);
+    const [listData, setListData] = useState([]);
+    const [search, setSearch] = useState();
     async function get() {
 
         const response = firestore().collection('Space');
-        const data = await response.get();
-        // const data = firestore().collection('Space').get()
-        console.log(data.docs)
-        data.docs.forEach(item => {
-            console.log(item.data())
-            setName(item.data().Space)
-            setGuest(item.data().Guest)
-            setDistance(item.data().distance)
-            setImages(item.data().Image)
-            // let newId = [...id];
-
-            // newId.push({
-            //     SpaceName: item.data().Space,
-            //     Guest: item.data().Guest,
-            //     Distance: item.data().distance,
-            //     Iamge: item.data().Image
-
-            // })
-            // setId(newId)
-            // console.log(id)
-        })
-
-
-        //     .get().then((querySnapshot) => {
-        //     querySnapshot.forEach((doc) => {
-        //         setId(doc.data())
-
-        //         // newId.push({
-        //         //     SpaceName: doc.id,
-        //         //     Guest: guest,
-        //         //     Distance: distance,
-        //         //     Iamge: img
-
-        //         // })
-        //         // setId(newId)
-        //         console.log(id)
-
-        //     })
-        // });
-
-        // object.get().then((doc) => {
-        //     if (doc.exists) {
-        //         console.log("Document data:", doc.data());
-        //     } else {
-        //         // doc.data() will be undefined in this case
-        //         console.log("No such document!");
-        //     }
-        // })
-
-        // let imageRef = storage().ref('/Images/Midway station/' + '0');
-        // imageRef
-        //     .getDownloadURL()
-        //     .then((url) => {
-        //         //from url you can fetched the uploaded image easily
-        //         console.log(url)
-        //         setImages(url)
-
-        //     })
-        //     .catch((e) => console.log('getting downloadURL of image error => ', e));
-
-        //  else {
-        //     return false
-        // }
+        const snapshot = await response.get();
+        const list = [];
+        snapshot.forEach((doc) => {
+            list.push(doc.data());
+        });
+        setDAta([...list]);
 
     }
-
-
-    console.log(imagess)
+    const list = () => {
+        data.forEach(item => {
+            let list = [...listData]
+            list.push({
+                Type: item.Space
+            })
+            setListData(list)
+        })
+    }
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -106,112 +57,118 @@ const Browse2 = ({ props }) => {
                                 <Icons name='angle-down' size={30} color='#FF2D55' />
                             </View>
                             <View style={styling.searchBar}>
-                                <Icon name='search1' size={18} style={{ color: '#C8C7CC' }} />
+                                {/* <Icon name='search1' size={18} style={{ color: 'white' }} /> */}
                                 <TextInput
-                                    placeholder='Enter Your Location'
+                                    placeholder='Type Space Station Name'
+                                    style={{ height: hp(7), width: wp(80), borderWidth: wp(0.1), borderRadius: wp(2) }}
+                                    onChangeText={(val) =>
+                                        setSearch(val)
+                                    }
+                                    value={search}
                                 />
-
-                                {/* <SearchableDropdown
-                                    // itemStyle={{
-                                    //     padding: 10,
-                                    //     marginTop: 2,
-                                    //     backgroundColor: '#ddd',
-                                    //     borderColor: '#bbb',
-                                    //     borderWidth: 1,
-                                    //     borderRadius: 5,
-                                    // }}
-                                    itemTextStyle={{ color: '#222' }}
-                                    itemsContainerStyle={{ maxHeight: 140 }}
-                                    items={items}
-                                /> */}
+                                <Icon name='search1' size={18} style={{ color: '#bbb' }} onPress={() => {
+                                    props.navigation.navigate('SpaceDetail', {
+                                        Space: search,
+                                        props: props.navigation
+                                    })
+                                }} />
 
                             </View>
 
                         </View>
-                        <View style={styling.categoryView}>
-                            <View >
-                                <Text style={styling.CategoryTXT}>Categories</Text>
-                            </View >
-                            <View>
-                                <TouchableOpacity style={styling.seeALLOpacity} >
-                                    <Text style={styling.seeALLTXT}>See All</Text>
-                                    <Icon name='right' size={10} />
-                                </TouchableOpacity>
+                        <View style={{ marginVertical: hp(3) }}>
+                            <View style={styling.categoryView}>
+                                <View >
+                                    <Text style={styling.CategoryTXT}>Categories</Text>
+                                </View >
+                                <View>
+                                    <TouchableOpacity style={styling.seeALLOpacity} >
+                                        <Text style={styling.seeALLTXT}>See All</Text>
+                                        <Icon name='right' size={10} />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            <View style={styling.cardContainer}>
+                                <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+                                    <TouchableOpacity style={styling.mainCardView} >
+                                        <View style={styling.cardView}>
+                                            <Icons name='building' color='white' size={50} />
+                                        </View>
+                                        <View style={styling.cardTXTView}>
+                                            <Text style={styling.carHeading}>Private</Text>
+                                            <Text style={styling.carLabel}>93 Spaces</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <View style={styling.mainCardView}>
+                                        <View style={styling.cardView1}>
+                                            <Icons name='people-carry' color='white' size={50} />
+                                        </View>
+                                        <View style={styling.cardTXTView}>
+                                            <Text style={styling.carHeading}>Meeting</Text>
+                                            <Text style={styling.carLabel}>70 Spaces</Text>
+                                        </View>
+                                    </View>
+                                    <View style={styling.mainCardView}>
+                                        <View style={styling.cardView2}>
+                                            <Icons name='chalkboard-teacher' color='white' size={50} />
+                                        </View>
+                                        <View style={styling.cardTXTView}>
+                                            <Text style={styling.carHeading}>Seminar</Text>
+                                            <Text style={styling.carLabel}>90 Spaces</Text>
+                                        </View>
+                                    </View>
+                                    <View style={styling.mainCardView}>
+                                        <View style={styling.cardView2}>
+                                            <Icons name='building' color='white' size={50} />
+                                        </View>
+                                        <View style={styling.cardTXTView}>
+                                            <Text style={styling.carHeading}>Seminar</Text>
+                                            <Text style={styling.carLabel}>93 Spaces</Text>
+                                        </View>
+                                    </View>
+
+                                </ScrollView>
                             </View>
                         </View>
-                        <View style={styling.cardContainer}>
-                            <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                <TouchableOpacity style={styling.mainCardView} onPress={() => props.navigation.navigate('SpaceDetail')}>
-                                    <View style={styling.cardView}>
-                                        <Icons name='building' color='white' size={50} />
-                                    </View>
-                                    <View style={styling.cardTXTView}>
-                                        <Text style={styling.carHeading}>Private</Text>
-                                        <Text style={styling.carLabel}>93 Spaces</Text>
-                                    </View>
-                                </TouchableOpacity>
-                                <View style={styling.mainCardView}>
-                                    <View style={styling.cardView1}>
-                                        <Icons name='people-carry' color='white' size={50} />
-                                    </View>
-                                    <View style={styling.cardTXTView}>
-                                        <Text style={styling.carHeading}>Meeting</Text>
-                                        <Text style={styling.carLabel}>70 Spaces</Text>
-                                    </View>
-                                </View>
-                                <View style={styling.mainCardView}>
-                                    <View style={styling.cardView2}>
-                                        <Icons name='chalkboard-teacher' color='white' size={50} />
-                                    </View>
-                                    <View style={styling.cardTXTView}>
-                                        <Text style={styling.carHeading}>Seminar</Text>
-                                        <Text style={styling.carLabel}>90 Spaces</Text>
-                                    </View>
-                                </View>
-                                <View style={styling.mainCardView}>
-                                    <View style={styling.cardView2}>
-                                        <Icons name='building' color='white' size={50} />
-                                    </View>
-                                    <View style={styling.cardTXTView}>
-                                        <Text style={styling.carHeading}>Seminar</Text>
-                                        <Text style={styling.carLabel}>93 Spaces</Text>
-                                    </View>
-                                </View>
-
-                            </ScrollView>
-                        </View>
-                        <View style={styling.maininnerContainer}>
-                            <View>
-                                <Text style={styling.CategoryTXT}>
-                                    Nearby Spaces
+                        <View>
+                            <View style={styling.maininnerContainer}>
+                                <View>
+                                    <Text style={styling.CategoryTXT}>
+                                        Nearby Spaces
                             </Text>
-                            </View>
-                            <View>
-                                <TouchableOpacity style={styling.seeALLOpacity} >
-                                    <Text style={styling.seeALLTXT}>See All</Text>
-                                    <Icon name='right' size={10} />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        <View style={styling.cardContainer}>
-                            <ScrollView horizontal={true}
-                                showsHorizontalScrollIndicator={false}
-                            >
-                                <View style={styling.nearInnerView} >
-                                    <ImageBackground style={styling.nearbyCard} source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/rec-shape.appspot.com/o/Images%2FMidway%20station%2F0?alt=media&token=8dd58cd5-c7fd-403f-895f-04c1608bdc2e' }} imageStyle={styling.nearbyCard} >
-                                        <Icon name='heart' size={20} color='red' />
-
-                                    </ImageBackground>
-                                    <Text style={styling.CategoryTXT} >{name}</Text>
-                                    <View style={{ flexDirection: 'row' }}>
-                                        <Icons name='map-marker-alt' color='#666666' size={15} />
-                                        <Text style={styling.carLabel}>  0.31 mi away 12 Guest</Text>
-                                    </View>
                                 </View>
-                                <View style={styling.nearbyCard}>
-
+                                <View>
+                                    <TouchableOpacity style={styling.seeALLOpacity} >
+                                        <Text style={styling.seeALLTXT}>See All</Text>
+                                        <Icon name='right' size={10} />
+                                    </TouchableOpacity>
                                 </View>
-                            </ScrollView>
+                            </View>
+                            <View style={styling.cardContainer}>
+
+                                <FlatList
+                                    data={data}
+                                    showsHorizontalScrollIndicator={false}
+                                    horizontal={true}
+                                    renderItem={({ item }) => {
+                                        return (
+                                            <View style={styling.nearInnerView} >
+                                                <ImageBackground style={styling.nearbyCard} source={{ uri: item.Image }} imageStyle={styling.nearbyCard} >
+                                                    <Icon name='heart' size={20} color='red' />
+                                                    <View style={styling.imageViewText}>
+                                                        <Text style={{ color: 'white' }}>${item.credit}/hr</Text>
+                                                    </View>
+                                                </ImageBackground>
+                                                <Text style={styling.CategoryTXT} >{item.Space}</Text>
+                                                <View style={{ flexDirection: 'row' }}>
+                                                    <Icons name='map-marker-alt' color='#666666' size={15} />
+                                                    <Text style={styling.carLabel}>  {item.distance} mi away {item.Guest} Guest</Text>
+                                                </View>
+                                            </View>
+                                        )
+                                    }}
+                                />
+                            </View>
                         </View>
 
                     </View>
