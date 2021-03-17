@@ -75,7 +75,7 @@ const SpaceDetail = ({ route }) => {
                     <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 5 }}>
                         <Image style={styling.imageView} source={{ uri: images }} />
                         <View style={styling.nameView}>
-                            <Text style={styling.labelTXT}>Meeting</Text>
+                            <Text style={styling.labelTXT}>{obj.type}</Text>
                             <Text style={styling.nameTXT}>{obj.Space}</Text>
                             <Text style={styling.timeTXT}>${obj.credit}/hr</Text>
                         </View>

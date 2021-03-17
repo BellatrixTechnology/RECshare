@@ -49,21 +49,24 @@ export const styling = StyleSheet.create({
         flexDirection: 'row'
     },
     cardContainer: {
-        // backgroundColor: 'red',
-        // width: wp('90%'),
-        height: hp('30%'),
-        flexDirection: 'row',
-        marginBottom: 10,
+        flexDirection: 'column',
         alignItems: 'center',
-        // justifyContent: 'center'
+        flexWrap: 'wrap',
     },
     cardView: {
         backgroundColor: '#C8C7CC',
-        marginRight: 10,
+        marginHorizontal: wp(1),
         width: wp('45%'),
         height: hp('20%'),
         borderRadius: 10,
         // justifyContent: 'flex-end',
         // padding: 10
     },
+    innerCardContainer: {
+        marginBottom: hp(2)
+    },
+    cardheadTXT: {
+        fontSize: fontSize.Account.labels,
+        fontFamily: fontFamily.SFUITextBold,
+    }
 })

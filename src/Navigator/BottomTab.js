@@ -51,6 +51,7 @@ export default function App(props) {
                     iconStyle: { color: "rgb(17,129,176)" },
                     activeTintColor: '#FF2D55',
                 }}
+                initialRouteName={Browse}
             >
                 <Tab.Screen name="Browse" component={Browse}
                     options={{

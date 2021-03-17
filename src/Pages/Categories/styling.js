@@ -5,27 +5,35 @@ import { hp, wp } from '../../Global/Styles/Scalling';
 export const styling = StyleSheet.create({
     safeContainer: {
         flex: 1,
+        backgroundColor: 'white'
     },
     mainContainer: {
-        height: hp('80%'),
+        height: hp('90%'),
         width: wp('100%'),
-        padding: 20,
+        paddingHorizontal: wp(2),
+        paddingBottom: hp(2),
+        alignItems: 'center',
         backgroundColor: 'white'
 
     },
     headerView: {
-        height: hp('10%'),
         width: wp('100%'),
         flexDirection: 'row',
-        padding: 10,
+        paddingHorizontal: wp(2),
+        paddingVertical: hp(1),
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: 'white'
 
     },
+    mainCardView: {
+        width: wp(100),
+        alignItems: 'center'
+    },
     innerView: {
-        height: hp('10%'),
-        width: wp('98%'),
+        width: wp('90%'),
+        alignSelf: 'center',
+        justifyContent: 'center'
+
     },
     cardContainer: {
         width: wp('90%'),
@@ -40,12 +48,18 @@ export const styling = StyleSheet.create({
         width: wp('42%'),
         height: hp('30%'),
         borderRadius: 10,
-        justifyContent: 'flex-end',
-        padding: 10
+        justifyContent: 'space-between',
+        paddingHorizontal: wp(2),
+        paddingBottom: hp(2),
+        paddingTop: hp(8)
     },
     categoryTXT: {
         fontSize: fontSize.Browse3.heading,
-        fontFamily: fontFamily.SFUITextHeavy
+        fontFamily: fontFamily.SFUITextHeavy,
+        lineHeight: hp(8)
+    },
+    iconsStyles: {
+        alignSelf: 'center',
     },
     headTXT: {
         fontSize: fontSize.Browse3.labels,

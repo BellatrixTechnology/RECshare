@@ -54,8 +54,8 @@ const Account = ({ props }) => {
 
                         <View style={styling.accountView}>
                             <Text style={styling.accountlTXT}>Favourite</Text>
-                            <TouchableOpacity style={styling.workOpacity} >
-                                <Text style={styling.workTXT} >87 workspaces</Text>
+                            <TouchableOpacity style={styling.workOpacity} onPress={() => props.navigation.navigate('Favourites')} >
+                                <Text style={styling.workTXT} >workspaces</Text>
                                 <Icons name='right' size={16} color='#C8C7CC' />
                             </TouchableOpacity>
                         </View>

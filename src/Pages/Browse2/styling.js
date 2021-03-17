@@ -5,18 +5,20 @@ import { hp, wp } from '../../Global/Styles/Scalling';
 
 export const styling = StyleSheet.create({
     safeContainer: {
+        paddingTop: hp(2),
         flex: 1,
+        backgroundColor: 'white'
     },
     mainContainer: {
         height: hp(100),
         width: wp(100),
-        paddingHorizontal: wp(4),
-        paddingBottom: hp(1),
-        // justifyContent: 'space-between',
-        backgroundColor: 'white'
-
+        paddingHorizontal: wp(2),
+        alignSelf: 'center',
+        paddingVertical: hp(1),
+        backgroundColor: 'white',
     },
     innerContainer: {
+        alignSelf: 'center'
     },
     labelView: {
         justifyContent: 'center',
@@ -63,7 +65,13 @@ export const styling = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         justifyContent: 'space-between',
-
+        alignSelf: 'center'
+    },
+    innerDetailView: {
+        marginVertical: hp(2),
+        height: hp(70),
+        width: wp(95),
+        alignSelf: 'center'
     },
     maininnerContainer: {
         flexDirection: 'row',
@@ -77,15 +85,17 @@ export const styling = StyleSheet.create({
         alignItems: 'center'
     },
     cardContainer: {
-        width: wp('90%'),
+        width: wp('100%'),
+        paddingLeft: wp(3),
         flexDirection: 'row',
+        alignSelf: 'center'
+
     },
     mainCardView: {
         width: wp('32%'),
-        marginVertical: hp(1)
+        marginVertical: hp(1),
     },
     cardView: {
-        marginTop: 10,
         marginRight: 5,
         backgroundColor: '#AA4AFF',
         width: wp('30%'),
@@ -96,7 +106,6 @@ export const styling = StyleSheet.create({
         padding: 10
     },
     cardView1: {
-        marginTop: 10,
         marginRight: 5,
         backgroundColor: '#4CD964',
         width: wp('30%'),
@@ -107,7 +116,6 @@ export const styling = StyleSheet.create({
         padding: 10
     },
     cardView2: {
-        marginTop: 10,
         marginRight: 5,
         backgroundColor: '#5AC8FA',
         width: wp('30%'),
@@ -187,7 +195,7 @@ export const styling = StyleSheet.create({
     carLabel: {
         fontSize: fontSize.Browse.txt,
         fontFamily: fontFamily.SFUIText,
-        color: '#8A8A8F'
+        color: '#8A8A8F',
     },
 
 })

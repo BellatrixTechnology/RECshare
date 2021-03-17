@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { View, Image, StatusBar, TextInput, SafeAreaView, ToastAndroid, TouchableOpacity, ScrollView, FlatList } from 'react-native';
+import { View, Image, StatusBar, TextInput, SafeAreaView, ToastAndroid, ActivityIndicator, TouchableOpacity, ScrollView, FlatList } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styles } from './styles';
 import Icons from 'react-native-vector-icons/AntDesign';
@@ -8,9 +8,10 @@ import ImagePicker from 'react-native-image-crop-picker';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import { Picker } from '@react-native-picker/picker';
 
 
-const AddSpace = ({ props }) => {
+const AddSpace = (props) => {
 
     const [SpaceName, setSpace] = useState('');
     const [credit, setCredit] = useState('');
@@ -29,7 +30,8 @@ const AddSpace = ({ props }) => {
     const [Images, setImage] = useState('');
     const [count, setCount] = useState(0);
     const [Host, setHost] = useState('');
-    const [GetImage, setGetImage] = useState('')
+    const [SelectedValue, setSelectedValue] = useState('')
+    const [isVisible, setIsVisble] = useState(false)
     const selectImage = () => {
 
         ImagePicker.openPicker({
@@ -42,7 +44,21 @@ const AddSpace = ({ props }) => {
 
         });
     }
-
+    const CheckData = () => {
+        if (SpaceName != '', credit != '' && distance != '' && guest != '' && Descript != '' && Location != '' && monday != '' && Tuesday != '' && Wednesday != '' && Thrusday != '' &&
+            Friday != '' && Saturday != '' && sunday != '' && Images != '' && Host != '' && SelectedValue != ''
+        ) {
+            uploaddata()
+            setIsVisble(true)
+        }
+        else {
+            ToastAndroid.showWithGravity(
+                "Fill all Fields",
+                ToastAndroid.LONG,
+                ToastAndroid.CENTER
+            );
+        }
+    }
     function uploaddata() {
         console.log(Images)
         auth().onAuthStateChanged((user) => {
@@ -64,6 +80,7 @@ const AddSpace = ({ props }) => {
                     Friday: Friday,
                     Saturday: Saturday,
                     sunday: sunday,
+                    type: SelectedValue
                 })
 
 
@@ -91,10 +108,27 @@ const AddSpace = ({ props }) => {
                     Space: SpaceName,
                     Guest: guest,
                     distance: distance,
-                    Image: url
+                    Image: url,
+                    credit: credit,
                 })
+            }).then(() =>
+                firestore().collection(SelectedValue).add({
+                    Type: SelectedValue,
+                    Space: SpaceName
+                })
+
+            ).then(() => {
+                setIsVisble(false)
+                ToastAndroid.showWithGravity(
+                    "Uploaded",
+                    ToastAndroid.LONG,
+                    ToastAndroid.CENTER
+                );
+            }).then(() => {
+                props.navigation.goBack()
             }).catch = (err => { console.log(err) })
     }
+
 
     console.log(Images)
     return (
@@ -134,6 +168,20 @@ const AddSpace = ({ props }) => {
                                     setHost(val)
                                 }
                             />
+                            <Picker
+                                selectedValue={SelectedValue}
+                                onValueChange={(itemValue, itemIndex) =>
+                                    setSelectedValue(itemValue)
+                                }
+                            >
+                                <Picker.Item label="Select Type" value="1" />
+                                <Picker.Item label="Private" value="Private" />
+                                <Picker.Item label="Meeting" value="Meeting" />
+                                <Picker.Item label="Seminar" value="Seminar" />
+                                <Picker.Item label="Event" value="Event" />
+                                <Picker.Item label="Offices" value="Offices" />
+                                <Picker.Item label="Hot Desk" value="Hot Desk" />
+                            </Picker>
                             <Input
                                 placeholder='Credit per hour'
                                 style={styles.fieldView}
@@ -273,15 +321,23 @@ const AddSpace = ({ props }) => {
 
                             <View style={styles.signupView}>
                                 <TouchableOpacity style={styles.signupOpacity} onPress={() => {
-                                    uploaddata()
+                                    CheckData()
                                 }}>
                                     <Text style={styles.signupText}>Save</Text>
                                 </TouchableOpacity>
+                                <ActivityIndicator
+                                    animating={isVisible}
+                                    style={[{ height: 80 }]}
+                                    color="#C00"
+                                    size="large"
+                                    hidesWhenStopped={true}
+                                />
                             </View>
                         </View>
                     </ScrollView>
                 </View>
             </SafeAreaView >
+
             <SafeAreaView style={{ backgroundColor: 'white' }} />
 
         </Fragment >

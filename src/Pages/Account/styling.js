@@ -18,7 +18,6 @@ export const styling = StyleSheet.create({
         backgroundColor: '#F9F9F9'
     },
     headerView: {
-        marginTop: hp(5),
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',

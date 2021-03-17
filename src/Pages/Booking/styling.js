@@ -12,7 +12,6 @@ export const styling = StyleSheet.create({
     mainContainer: {
         height: hp('80%'),
         width: wp('100%'),
-        paddingBottom: hp(1),
     },
     headerView: {
         width: wp('95%'),
