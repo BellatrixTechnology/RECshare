@@ -7,11 +7,9 @@ export const styling = StyleSheet.create({
         flex: 1
     },
     mainContainer: {
-        height: hp(90),
-        width: wp(100),
+        flex: 1,
         paddingLeft: 20,
         paddingRight: 20,
-        paddingBottom: 20,
         backgroundColor: 'white'
     },
     headView: {
@@ -26,7 +24,8 @@ export const styling = StyleSheet.create({
     },
     headIcon: {
         backgroundColor: 'white',
-        color: 'black'
+        color: 'black',
+        paddingHorizontal: wp(2)
     },
     resetTXT: {
         fontSize: fontSize.Chat.labels,
@@ -95,27 +94,30 @@ export const styling = StyleSheet.create({
         height: hp(5),
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 0.5
-
+        borderWidth: 0.5,
+        flexDirection: 'row',
     },
     starOpacity1: {
         width: wp(15),
         height: hp(5),
         alignItems: 'center',
         justifyContent: 'center',
-        borderTopLeftRadius: 10,
-        borderBottomLeftRadius: 10,
-        borderWidth: 0.5
+        borderTopLeftRadius: wp(5),
+        borderBottomLeftRadius: wp(5),
+        borderWidth: 0.5,
+        flexDirection: 'row'
 
     },
+
     starOpacity2: {
         width: wp(15),
         height: hp(5),
         alignItems: 'center',
         justifyContent: 'center',
-        borderTopRightRadius: 10,
-        borderBottomRightRadius: 10,
-        borderWidth: 0.5
+        borderTopRightRadius: wp(5),
+        borderBottomRightRadius: wp(5),
+        borderWidth: 0.5,
+        flexDirection: 'row'
 
     },
     opacityView: {
@@ -137,4 +139,9 @@ export const styling = StyleSheet.create({
         fontSize: fontSize.Space.line,
         color: 'white'
     },
+    inputStyle: {
+        width: wp(40),
+        backgroundColor: 'red'
+
+    }
 })

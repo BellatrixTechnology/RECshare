@@ -5,32 +5,32 @@ import { hp, wp } from '../../Global/Styles/Scalling';
 
 export const styling = StyleSheet.create({
     safeContainer: {
-        paddingTop: hp(2),
         flex: 1,
         backgroundColor: 'white'
     },
     mainContainer: {
-        height: hp(100),
-        width: wp(100),
-        paddingHorizontal: wp(2),
-        alignSelf: 'center',
-        paddingVertical: hp(1),
+        flex: 1,
+        padding: hp(2),
+        // alignSelf: 'center',
         backgroundColor: 'white',
     },
     innerContainer: {
         alignSelf: 'center'
     },
     labelView: {
-        justifyContent: 'center',
+        marginTop: hp(5),
         width: wp('90%'),
+        height: hp(8),
     },
     labelTXT: {
         fontSize: fontSize.Browse2.heading,
-        fontFamily: fontFamily.SFUITextHeavy
+        fontFamily: fontFamily.SFUITextHeavy,
+        paddingHorizontal: wp(2),
     },
     cityView: {
         width: wp('90%'),
-        flexDirection: 'row'
+        flexDirection: 'row',
+        paddingHorizontal: wp(2),
     },
     cityTXT: {
         fontSize: fontSize.Browse2.heading,
@@ -43,7 +43,7 @@ export const styling = StyleSheet.create({
         alignItems: 'center',
         width: wp('90%'),
         borderRadius: 6,
-        marginTop: hp(5),
+        marginTop: hp(2),
         justifyContent: 'space-evenly'
     },
     searchableContainer: {
@@ -65,27 +65,28 @@ export const styling = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 10,
         justifyContent: 'space-between',
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
     innerDetailView: {
-        marginVertical: hp(2),
-        height: hp(70),
+        marginVertical: hp(1),
+        height: hp(60),
         width: wp(95),
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
     maininnerContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
         width: wp('90%'),
-        marginVertical: hp(1)
+        marginVertical: hp(1),
+        alignSelf: 'center',
     },
     seeALLOpacity: {
         flexDirection: 'row',
         alignItems: 'center'
     },
     cardContainer: {
-        width: wp('100%'),
+        width: wp('95%'),
         paddingLeft: wp(3),
         flexDirection: 'row',
         alignSelf: 'center'
@@ -115,7 +116,7 @@ export const styling = StyleSheet.create({
         justifyContent: 'center',
         padding: 10
     },
-    cardView2: {
+    cardView22: {
         marginRight: 5,
         backgroundColor: '#5AC8FA',
         width: wp('30%'),
@@ -158,7 +159,6 @@ export const styling = StyleSheet.create({
     },
 
     cardTXTView: {
-        height: hp('6%'),
         width: wp('28%'),
         justifyContent: 'center',
         alignSelf: 'center',
@@ -187,6 +187,12 @@ export const styling = StyleSheet.create({
         fontFamily: fontFamily.SFUITextHeavy
 
     },
+    cardheadLabels: {
+        fontFamily: fontFamily.SFUITextHeavy
+    },
+    cardheadLabel: {
+        fontSize: fontSize.Browse.labels
+    },
     seeALLTXT: {
         fontSize: fontSize.Browse.txt,
         fontFamily: fontFamily.SFUIText
@@ -197,5 +203,59 @@ export const styling = StyleSheet.create({
         fontFamily: fontFamily.SFUIText,
         color: '#8A8A8F',
     },
+    buttonOpacityView: {
+        width: wp('90%'),
+        height: hp('7%'),
+        flexDirection: 'row',
+        borderRadius: 10,
+        alignSelf: 'center',
 
+    },
+    mapOpacity: {
+        width: wp('45%'),
+        height: hp('6%'),
+        backgroundColor: '#F9F9F9',
+        // marginRight: 1,
+        borderRightWidth: 0.5,
+        borderTopLeftRadius: 15,
+        borderBottomLeftRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        elevation: 1
+    },
+    filterOpacity: {
+        width: wp('45%'),
+        height: hp('6%'),
+        backgroundColor: '#F9F9F9',
+        marginRight: 0.5,
+        borderTopRightRadius: 15,
+        borderBottomRightRadius: 15,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        elevation: 1
+    },
+    cardContainer22: {
+        marginVertical: hp(2),
+        // flexDirection: 'c',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        // width: wp(90),
+        alignSelf: 'center'
+    },
+    cardView2: {
+        backgroundColor: '#C8C7CC',
+        width: wp('42%'),
+        height: hp('20%'),
+        borderRadius: 10,
+    },
+    innerCardContainer22: {
+        marginBottom: hp(2),
+        marginHorizontal: hp(1)
+    },
+    cardheadTXT: {
+        fontSize: fontSize.Account.labels,
+        fontFamily: fontFamily.SFUITextBold,
+    }
 })

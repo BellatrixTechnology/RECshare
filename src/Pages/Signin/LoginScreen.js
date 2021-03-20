@@ -63,7 +63,7 @@ const LoginScreen = (props) => {
                                     setEmail(val)
                                     console.log(val)
                                     {
-                                        reg.test(Email) ? seterrEmail(false) : seterrEmail(true)
+                                        reg.test(val) ? seterrEmail(false) : seterrEmail(true)
                                     }
                                 }}
                                 value={Email}

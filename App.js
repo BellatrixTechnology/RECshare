@@ -32,18 +32,21 @@ import Payment from './src/Pages/Payment/Payment';
 import AddSpace from './src/Pages/AddSpace/AddSpace';
 const { Navigator, Screen } = createStackNavigator();
 
+console.disableYellowBox = true;
+
+
 const AuthStack = () => (
   <Navigator headerMode='none'>
 
     <Screen name="LoginScreen" component={LoginScreen} />
 
     <Screen name='Signup' component={Signup} />
+    <Screen name='tabs' component={tabs} />
 
     <Screen name='Payment' component={Payment} />
 
     <Screen name='SpaceDetail' component={SpaceDetail} />
 
-    <Screen name='Filter' component={Filter} />
     <Screen name='Chat' component={Chat} />
     <Screen name='Account' component={Account} />
     <Screen name='Search' component={Search} />
@@ -53,6 +56,7 @@ const AuthStack = () => (
     <Screen name='Map' component={MapBrowse} />
 
     <Screen name='Success' component={Success} />
+    <Screen name='Filter' component={Filter} />
 
     <Screen name='Favourites' component={Favourites} />
 
@@ -84,7 +88,6 @@ const AuthStack = () => (
     <Screen name='ChooseLocation' component={ChooseLocation} />
 
     <Screen name='Browse' component={Browse} />
-    <Screen name='tabs' component={tabs} />
     <Screen name='AddSpace' component={AddSpace} />
 
   </Navigator>

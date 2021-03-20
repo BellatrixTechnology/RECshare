@@ -9,7 +9,6 @@ export const styling = StyleSheet.create({
 
     },
     mainContainer: {
-        height: hp('100%'),
         width: wp('100%'),
         padding: 10,
         backgroundColor: 'white'

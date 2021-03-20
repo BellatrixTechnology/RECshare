@@ -32,11 +32,11 @@ const Categories = (props) => {
         const seminar = await firestore().collection('Seminar').get();
         setSeminer(seminar.size)
         const office = await firestore().collection('Offices').get();
-        setMetting(office.size)
+        setOffice(office.size)
         const events = await firestore().collection('Event').get();
-        setMetting(events.size)
+        setEvent(events.size)
         const desk = await firestore().collection('Hot Desk').get();
-        setMetting(desk.size)
+        setHotDesk(desk.size)
 
 
     }
