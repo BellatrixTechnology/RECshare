@@ -26,7 +26,7 @@ const VerifyCode = ({ route }, props) => {
             })
 
         } catch (error) {
-            console.log('Invalid code.');
+            console.log(error);
             ToastAndroid.show("Invalid code.!", ToastAndroid.LONG);
         }
     }

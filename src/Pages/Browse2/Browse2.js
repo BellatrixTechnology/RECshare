@@ -19,7 +19,7 @@ import { ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AlertModal from '../../Component/AlertModal/index'
 
-const Browse2 = ({ props }) => {
+const Browse2 = (props) => {
 
     const [status, setStatus] = useState('')
     const [data, setDAta] = useState([]);

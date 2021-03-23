@@ -10,13 +10,13 @@ export const styling = StyleSheet.create({
 
     },
     mainContainer: {
-        height: hp('80%'),
-        width: wp('100%'),
+        height: hp(100),
+        width: wp(100),
+        backgroundColor: 'white'
     },
     headerView: {
         width: wp('95%'),
         alignItems: 'flex-end',
-        marginTop: hp(5)
     },
     headTXTView: {
         width: wp('43%'),

@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/AntDesign';
 import IconMap from 'react-native-vector-icons/MaterialIcons'
 import { styling } from './styling';
-const MapBrowse = ({ props }) => {
+const MapBrowse = (props) => {
     const [check, setcheck] = useState(false)
     return (
         <Fragment>

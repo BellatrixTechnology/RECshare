@@ -14,6 +14,7 @@ import { wp } from '../../Global/Styles/Scalling';
 const SpaceDetail = ({ route }) => {
     const SpaceStation = route.params.Space
     const props = route.params.props
+    console.log(props)
     const [isVisible, setIsVisble] = useState(true)
     const [usern, setuserName] = useState('');
     const [isEnabled, setIsEnabled] = useState(false);
@@ -59,17 +60,15 @@ const SpaceDetail = ({ route }) => {
     }
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
+            <StatusBar barStyle="dark-content" backgroundColor="white" />
             <SafeAreaView backgroundColor='white' />
 
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headView}>
-                    <Icons.Button name="left" style={styling.headIcon} color='black' size={28} onPress={() => { props.goBack() }}>
-
-                    </Icons.Button>
+                    <Icons name="left" style={styling.headIcon} color='black' size={28} onPress={() => { props.goBack() }} />
                     <Text style={styling.headTXT}>Space Details</Text>
 
-                    <Icons.Button name='heart' style={styling.headIcon} color='black' size={28}></Icons.Button>
+                    <Icons.Button name='heart' style={styling.headIcon} color='black' size={28} />
                 </View>
 
                 {obj == '' ?
@@ -77,6 +76,7 @@ const SpaceDetail = ({ route }) => {
                         isVisible={isVisible}
                     />
                     : <View style={styling.mainContainer}>
+
                         <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 5 }}>
                             <Image style={styling.imageView} source={{ uri: images }} />
                             <View style={styling.nameView}>
@@ -195,7 +195,7 @@ const SpaceDetail = ({ route }) => {
 
                             <View style={styling.mainSchdView}>
                                 <View style={styling.SchedueleCiew}>
-                                    <Text style={styling.availTXT}>Scheduel</Text>
+                                    <Text style={styling.availTXT}>Scheduele</Text>
                                     <View style={styling.seeallView}>
                                         <Text style={styling.amenTXT}>See All</Text>
                                         <Icons name='right' size={14} />
@@ -245,7 +245,12 @@ const SpaceDetail = ({ route }) => {
                             </View>
                             <View style={styling.opacityView}>
                                 <TouchableOpacity style={styling.OpacityLog} onPress={() => {
-                                    props.navigation.navigate('ReviewBooking')
+                                    props.navigate('Scheduele', {
+                                        props: props,
+                                        Title: obj.Space,
+                                        type: obj.title,
+                                        credit: obj.credit
+                                    })
                                 }}>
                                     <Text style={styling.Opacitytxt}>Book Now</Text>
                                 </TouchableOpacity>

@@ -10,7 +10,6 @@ export const styling = StyleSheet.create({
         backgroundColor: 'white'
     },
     mainContainer: {
-        // height: hp(89),
         width: wp(100),
         paddingLeft: 20,
         paddingRight: 20,
@@ -18,12 +17,12 @@ export const styling = StyleSheet.create({
         backgroundColor: 'white'
     },
     headView: {
+        paddingHorizontal: wp(2),
         width: wp('100%'),
         alignItems: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: 'white',
-
     },
     headIcon: {
         backgroundColor: 'white',

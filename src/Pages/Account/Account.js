@@ -9,7 +9,7 @@ import { fontFamily, fontSize } from '../../Global/Styles/font';
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { hp, wp } from '../../Global/Styles/Scalling';
 
-const Account = ({ props }) => {
+const Account = (props) => {
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />

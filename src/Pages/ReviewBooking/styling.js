@@ -17,8 +17,7 @@ export const styling = StyleSheet.create({
 
     },
     mainContainer: {
-        height: hp(80),
-        width: wp(100),
+        flex: 1,
         paddingHorizontal: wp(3),
         paddingBottom: hp(1),
         justifyContent: 'space-between',

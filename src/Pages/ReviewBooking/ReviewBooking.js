@@ -6,7 +6,11 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 
 
-const ReviewBooking = (props) => {
+const ReviewBooking = ({ route }) => {
+    console.log(route)
+    const Datee = route.params.data.Date
+    const Time = route.params.data.Time
+
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -24,8 +28,8 @@ const ReviewBooking = (props) => {
                         <View style={styling.cardView}>
                             <View style={styling.detailView}>
                                 <Text style={styling.labelTXT}>Date & Time</Text>
-                                <Text style={styling.mainTXT}>Monday, October 24</Text>
-                                <Text style={styling.lineTXT}>10:00 AM - 11:00 AM</Text>
+                                <Text style={styling.mainTXT}>{Datee}</Text>
+                                <Text style={styling.lineTXT}>{Time}</Text>
                             </View>
                             <View>
                                 <TouchableOpacity>

@@ -8,7 +8,7 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 const Activebar = () => {
     return (
         <Fragment>
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
+            <StatusBar barStyle="dark-content" backgroundColor="white" />
 
 
             <ScrollView>

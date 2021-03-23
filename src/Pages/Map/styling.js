@@ -16,7 +16,6 @@ export const styling = StyleSheet.create({
         backgroundColor: '#C8C7CC',
     },
     headView: {
-        marginVertical: hp(5),
         width: wp('95%'),
         alignItems: 'center',
         justifyContent: 'space-between',
