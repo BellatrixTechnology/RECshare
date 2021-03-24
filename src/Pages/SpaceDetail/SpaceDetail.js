@@ -247,9 +247,12 @@ const SpaceDetail = ({ route }) => {
                                 <TouchableOpacity style={styling.OpacityLog} onPress={() => {
                                     props.navigate('Scheduele', {
                                         props: props,
+                                        type: obj.type,
                                         Title: obj.Space,
-                                        type: obj.title,
-                                        credit: obj.credit
+                                        type: obj.type,
+                                        credit: obj.credit,
+                                        distance: obj.distance,
+                                        address: obj.Location,
                                     })
                                 }}>
                                     <Text style={styling.Opacitytxt}>Book Now</Text>

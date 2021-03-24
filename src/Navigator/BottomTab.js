@@ -92,7 +92,6 @@ export default function BottomTabBar() {
         <NavigationContainer independent={true}>
             <Stack.Navigator headerMode={null} initialRouteName='HomeScreen'>
                 <Stack.Screen name="HomeScreen" component={HomeScreen} />
-                <Stack.Screen name='Payment' component={Payment} />
                 <Stack.Screen name='Chat' component={Chat} />
                 <Stack.Screen name='Search' component={Search} />
                 <Stack.Screen name='Search2' component={Search2} />
@@ -111,6 +110,8 @@ export default function BottomTabBar() {
                 <Stack.Screen name='ChooseLocation' component={ChooseLocation} />
                 <Stack.Screen name='Browse' component={Browse} />
                 <Stack.Screen name='AddSpace' component={AddSpace} />
+                <Stack.Screen name='Payment' component={Payment} />
+
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -1,15 +1,57 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import Icon from 'react-native-vector-icons/AntDesign';
-
-
+import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore';
 
 const ReviewBooking = ({ route }) => {
-    console.log(route)
+    console.log(route.params.props)
     const Datee = route.params.data.Date
     const Time = route.params.data.Time
+    const props = route.params.props;
+    const Title = route.params.data.Title;
+    const credit = route.params.data.credit;
+    const type = route.params.data.type;
+    const distance = route.params.data.distance;
+    const address = route.params.data.address;
+    const [Name, setName] = useState('')
+    async function SaveData() {
+        console.log(auth)
+        auth().onAuthStateChanged(user => {
+            if (user) {
+                console.log(user)
+                setName(user.displayName)
+                firestore().collection('Booking').doc(user.uid).set({
+                    userid: user.uid,
+                    name: user.displayName,
+                    Space: Title,
+                    Date: Datee,
+                    Time: Time,
+                    credit: credit,
+                    type: type,
+                    address: address,
+                })
+                props.navigate('Success', {
+                    name: user.displayName,
+                    Title: Title,
+                    Date: Datee,
+                    Time: Time,
+                    credit: credit,
+                    type: type,
+                    address: address,
+                    props: props,
+                    distance: distance
+                })
+
+
+
+            }
+            else console.log('null')
+        })
+
+    }
 
     return (
         <Fragment>
@@ -18,7 +60,7 @@ const ReviewBooking = ({ route }) => {
 
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headerView}>
-                    <Icon.Button name='left' size={30} backgroundColor='white' color='black' onPress={() => { props.navigation.navigate('SpaceDetail') }}></Icon.Button>
+                    <Icon name='left' size={30} backgroundColor='white' color='black' onPress={() => { props.goBack() }} />
                 </View>
                 <View style={styling.headTXTView}>
                     <Text style={styling.headTXT}>Review Booking</Text>
@@ -42,8 +84,8 @@ const ReviewBooking = ({ route }) => {
                         <View style={styling.cardView}>
                             <View style={styling.detailView}>
                                 <Text style={styling.labelTXT}>Workspace</Text>
-                                <Text style={styling.mainTXT}>Green Heritage Office</Text>
-                                <Text style={styling.lineTXT}>Private Office</Text>
+                                <Text style={styling.mainTXT}>{Title}</Text>
+                                <Text style={styling.lineTXT}>{type}</Text>
                             </View>
                             <View>
                                 <TouchableOpacity>
@@ -56,8 +98,8 @@ const ReviewBooking = ({ route }) => {
                         <View style={styling.cardView}>
                             <View style={styling.detailView}>
                                 <Text style={styling.labelTXT}>Address</Text>
-                                <Text style={styling.mainTXT}>San Francisco, California</Text>
-                                <Text style={styling.lineTXT}>0.31 mi away</Text>
+                                <Text style={styling.mainTXT}>{address}</Text>
+                                <Text style={styling.lineTXT}>{distance} mi away</Text>
                             </View>
                             <View>
                                 <TouchableOpacity>
@@ -77,7 +119,7 @@ const ReviewBooking = ({ route }) => {
                             </View>
                             <View>
                                 <TouchableOpacity>
-                                    <Icon name='right' size={20} color='#666666' />
+                                    <Icon name='right' size={20} color='#666666' onPress={() => { props.navigate('Payment') }} />
                                 </TouchableOpacity>
                             </View>
 
@@ -85,19 +127,21 @@ const ReviewBooking = ({ route }) => {
                         <View style={styling.totalView}>
                             <View style={styling.totalLabelView}>
                                 <Text style={styling.labelTXT}>Price</Text>
-                                <Text style={styling.mainTXT}>$60</Text>
+                                <Text style={styling.mainTXT}>${credit}</Text>
                             </View>
                             <View style={styling.totalinnerView}>
-                                <Text style={styling.lineTXT}>$60/hour</Text>
-                                <Text style={styling.rupeeTXT}>$60</Text>
+                                <Text style={styling.lineTXT}>${credit}/hour</Text>
+                                <Text style={styling.rupeeTXT}>${credit}</Text>
                             </View>
                             <View style={styling.totalinnerView}>
                                 <Text style={styling.lineTXT}>Total</Text>
-                                <Text style={styling.lineTXT}>$60</Text>
+                                <Text style={styling.lineTXT}>${credit}</Text>
                             </View>
                         </View>
                         <View style={styling.signupView}>
-                            <TouchableOpacity style={styling.signupOpacity} onPress={() => props.navigation.navigate('Scheduele')}>
+                            <TouchableOpacity style={styling.signupOpacity} onPress={() => {
+                                SaveData()
+                            }}>
                                 <Text style={styling.signupText}>Confirm</Text>
                             </TouchableOpacity>
                         </View>

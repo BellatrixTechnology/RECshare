@@ -5,7 +5,19 @@ import Icons from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { styling } from './styling';
-const Success = (props) => {
+const Success = ({ route }) => {
+    console.log(route)
+    const Datee = route.params.Date
+    const Time = route.params.Time
+    const props = route.params.props;
+    const Title = route.params.Title;
+    const credit = route.params.credit;
+    const type = route.params.type;
+    const distance = route.params.distance;
+    const address = route.params.address;
+
+    const name = route.params.name;
+
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor='#F2F2F2' translucent={false} />
@@ -28,32 +40,32 @@ const Success = (props) => {
 
                         <View style={styling.LabelView}>
                             <Text style={styling.headTXT}>
-                                Kristina Clark
-                        </Text>
+                                {name}
+                            </Text>
                             <Text style={styling.labelTXT}>
-                                Green Heritage Office
-                      </Text>
+                                {Title}
+                            </Text>
                         </View>
                         <View style={styling.LabelView}>
                             <Text style={styling.headTXT}>
-                                Monday, October 24
-                        </Text>
+                                {Datee}
+                            </Text>
                             <Text style={styling.labelTXT2}>
-                                10:00 AM - 11:00 AM
-                      </Text>
+                                {Time}
+                            </Text>
                         </View>
                         <View style={styling.LabelView}>
                             <Text style={styling.headTXT}>
-                                San Francisco, California
-                        </Text>
+                                {address}
+                            </Text>
                             <Text style={styling.labelTXT2}>
-                                0.31 mi away
+                                {distance} mi away
                       </Text>
                         </View>
 
                     </View>
                     <View style={styling.signupView}>
-                        <TouchableOpacity style={styling.signupOpacity} onPress={() => { props.navigation.navigate('BookingDetails') }}>
+                        <TouchableOpacity style={styling.signupOpacity} onPress={() => { props.navigate('HomeScreen') }}>
                             <Text style={styling.signupText}>Check Details</Text>
                         </TouchableOpacity>
                     </View>

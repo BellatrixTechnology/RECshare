@@ -3,16 +3,20 @@ import { View, StatusBar, TouchableOpacity, SafeAreaView, ScrollView, FlatList }
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Icons from 'react-native-vector-icons/Entypo';
-import IconFont from 'react-native-vector-icons/FontAwesome5';
 import CalendarPicker from 'react-native-calendar-picker';
-import moment from 'moment';
 
 
 const Schedule = ({ route }) => {
-    console.log(route)
+    console.log(route.params)
+    const props = route.params.props;
+    const Title = route.params.Title;
+    const credit = route.params.credit;
+    const type = route.params.type;
+    const distance = route.params.distance;
+    const address = route.params.address;
+
     const Time = [
-        { Slot: ' 10:00 AM ' }, { Slot: ' 11:00 AM ' }, { Slot: ' 12:00 AM ' }, { Slot: ' 01:00 PM ' }, { Slot: ' 02:00 PM ' }, { Slot: ' 03:00 PM' }, { Slot: ' 04:00 PM' }, { Slot: ' 05:00 PM' }, { Slot: ' 06:00 PM' }, { Slot: ' 07:00 PM' }, { Slot: ' 08:00 PM' }, { Slot: ' 09:00 PM' }, { Slot: ' 10:00 PM' }, { Slot: ' 11:00 PM' },
+        { Slot: '10:00 AM' }, { Slot: '11:00 AM' }, { Slot: '12:00 AM' }, { Slot: '01:00 PM' }, { Slot: '02:00 PM' }, { Slot: '03:00 PM' }, { Slot: '04:00 PM' }, { Slot: '05:00 PM' }, { Slot: '06:00 PM' }, { Slot: '07:00 PM' }, { Slot: '08:00 PM' }, { Slot: ' 09:00 PM' }, { Slot: '10:00 PM' }, { Slot: '11:00 PM' },
     ]
     const [status, setStatus] = useState('')
     const [Datee, setDate] = useState('')
@@ -21,14 +25,12 @@ const Schedule = ({ route }) => {
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
             <SafeAreaView backgroundColor='white' />
-
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headerView}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => { props.goBack() }}>
                         <Text style={styling.headerTXT}>Cancel</Text>
                     </TouchableOpacity>
                 </View>
-
                 <View style={styling.mainContainer}>
                     <View style={styling.calendarView}>
                         <CalendarPicker
@@ -73,12 +75,17 @@ const Schedule = ({ route }) => {
                     <View style={styling.signupView}>
                         <TouchableOpacity style={styling.signupOpacity}
                             onPress={() => {
-                                props.navigation.navigate('ReviewBooking', {
+                                props.navigate('ReviewBooking', {
                                     data: {
                                         Time: status,
-                                        Date: Datee
+                                        Date: Datee,
+                                        Title: Title,
+                                        credit: credit,
+                                        type: type,
+                                        distance: distance,
+                                        address: address
                                     },
-                                    props: props.navigation
+                                    props: props
                                 })
                             }}
                         >

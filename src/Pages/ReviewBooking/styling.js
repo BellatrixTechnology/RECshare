@@ -11,6 +11,7 @@ export const styling = StyleSheet.create({
 
     headerView: {
         width: wp('20%'),
+        paddingHorizontal: wp(2)
     },
     headTXTView: {
         marginHorizontal: wp(5)
