@@ -65,7 +65,7 @@ const Success = ({ route }) => {
 
                     </View>
                     <View style={styling.signupView}>
-                        <TouchableOpacity style={styling.signupOpacity} onPress={() => { props.navigate('HomeScreen') }}>
+                        <TouchableOpacity style={styling.signupOpacity} onPress={() => { props.navigate('BookingDetails') }}>
                             <Text style={styling.signupText}>Check Details</Text>
                         </TouchableOpacity>
                     </View>
