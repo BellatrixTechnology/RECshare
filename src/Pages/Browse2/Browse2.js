@@ -129,7 +129,7 @@ const Browse2 = (props) => {
     const favourite = (item) => {
         auth().onAuthStateChanged(function (user) {
             if (user) {
-                firestore().collection('Favourite').doc(user.uid).collection('Favourite').add({
+                firestore().collection('User').doc(user.uid).collection('Favourite').add({
                     Space: item.Space,
                     credit: item.credit,
                     distance: item.distance,

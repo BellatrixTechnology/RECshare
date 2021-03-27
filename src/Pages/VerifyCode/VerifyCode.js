@@ -4,8 +4,10 @@ import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
 import InputF from '../../Component/InputField/index';
-const VerifyCode = ({ route }, props) => {
+const VerifyCode = ({ route }) => {
     const phone = route.params.Phone;
+    const props = route.params.props;
+    console.log(props)
     const [confirm, setConfirm] = useState(null);
     const [code, setCode] = useState('');
 
@@ -21,7 +23,7 @@ const VerifyCode = ({ route }, props) => {
     async function confirmCode() {
         try {
             await confirm.confirm(code).then(() => {
-                props.navigation.navigate('ChooseLanguage')
+                props('ChooseLanguage')
                 console.log(code)
             })
 

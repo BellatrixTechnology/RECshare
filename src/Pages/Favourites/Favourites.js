@@ -25,7 +25,7 @@ const Favourites = (props) => {
     }
 
     async function fav(uid) {
-        const snapshot = await firestore().collection('Favourite').doc(uid).collection('Favourite').get();
+        const snapshot = await firestore().collection('User').doc(uid).collection('Favourite').get();
         const list = [];
         snapshot.forEach((doc) => {
             list.push(doc.data());

@@ -54,13 +54,15 @@ export const styling = StyleSheet.create({
     cardView: {
         backgroundColor: 'black',
         width: wp('90%'),
-        height: hp('25%'),
+        height: hp('30%'),
+        paddingHorizontal: wp(5),
         borderRadius: 10,
         alignSelf: 'center'
     },
     inputView: {
         height: hp(10),
-        paddingHorizontal: wp(2),
+        width: wp(90),
+        paddingHorizontal: wp(1),
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',

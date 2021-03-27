@@ -39,18 +39,6 @@ const SpaceDetail = ({ route }) => {
                         console.log("No such document!");
                     }
                 })
-
-                let imageRef = storage().ref('/Images/' + SpaceStation);
-                imageRef
-                    .getDownloadURL()
-                    .then((url) => {
-                        //from url you can fetched the uploaded image easily
-                        console.log(url)
-                        setImages(url)
-
-                    })
-                    .catch((e) => console.log('getting downloadURL of image error => ', e));
-
             } else {
                 return false
             }
@@ -78,7 +66,7 @@ const SpaceDetail = ({ route }) => {
                     : <View style={styling.mainContainer}>
 
                         <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 5 }}>
-                            <Image style={styling.imageView} source={{ uri: images }} />
+                            <Image style={styling.imageView} source={{ uri: obj.Image }} />
                             <View style={styling.nameView}>
                                 <Text style={styling.labelTXT}>{obj.type}</Text>
                                 <Text style={styling.nameTXT}>{obj.Space}</Text>
@@ -253,6 +241,7 @@ const SpaceDetail = ({ route }) => {
                                         credit: obj.credit,
                                         distance: obj.distance,
                                         address: obj.Location,
+                                        images: obj.Image
                                     })
                                 }}>
                                     <Text style={styling.Opacitytxt}>Book Now</Text>

@@ -5,7 +5,7 @@ import { hp, wp } from '../../Global/Styles/Scalling';
 export const styling = StyleSheet.create({
     safeContainer: {
         flex: 1,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     },
     mainContainer: {
         height: hp(88),
@@ -24,18 +24,19 @@ export const styling = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
 
+
     },
     profileView: {
         width: wp(15),
         height: wp(15),
         backgroundColor: 'grey',
-        borderRadius: wp(10)
+        borderRadius: wp(10),
     },
     avatarView: {
         width: wp(90),
         flexDirection: 'row',
         alignItems: 'center',
-
+        alignSelf: 'center'
     },
     nameView: {
         width: wp('50%'),
@@ -79,6 +80,7 @@ export const styling = StyleSheet.create({
     },
     innerView: {
         width: wp(90),
+        alignSelf: 'center'
     },
     labelView: {
         flexDirection: 'row',
@@ -102,6 +104,7 @@ export const styling = StyleSheet.create({
     },
     mainDayView: {
         flexDirection: 'row',
+        justifyContent: 'space-between',
         width: wp(90),
     },
     dayView: {
@@ -142,6 +145,7 @@ export const styling = StyleSheet.create({
     signupView: {
         width: wp('90%'),
         justifyContent: 'center',
+        alignSelf: 'center'
     },
     signupOpacity: {
         width: wp('85%'),

@@ -3,7 +3,6 @@ import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, TextInput 
 import { Text, Input, colors } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/AntDesign';
-import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { styling } from './styling';
 const Success = ({ route }) => {
     console.log(route)
@@ -15,7 +14,7 @@ const Success = ({ route }) => {
     const type = route.params.type;
     const distance = route.params.distance;
     const address = route.params.address;
-
+    const bookID = route.params.bookID
     const name = route.params.name;
 
     return (
@@ -65,7 +64,20 @@ const Success = ({ route }) => {
 
                     </View>
                     <View style={styling.signupView}>
-                        <TouchableOpacity style={styling.signupOpacity} onPress={() => { props.navigate('BookingDetails') }}>
+                        <TouchableOpacity style={styling.signupOpacity} onPress={() => {
+                            props.navigate('BookingDetails', {
+                                name: name,
+                                Title: Title,
+                                Date: Datee,
+                                Time: Time,
+                                credit: credit,
+                                type: type,
+                                address: address,
+                                props: props,
+                                distance: distance,
+                                bookID: bookID
+                            })
+                        }}>
                             <Text style={styling.signupText}>Check Details</Text>
                         </TouchableOpacity>
                     </View>

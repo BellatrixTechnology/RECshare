@@ -53,6 +53,7 @@ const Filter = (props) => {
                         setStartPrice('')
                         setEndprice('')
                         selectsReset()
+
                     }}><Text>Reset</Text></TouchableOpacity>
                 </View>
                 <View style={styling.mainContainer}>

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { View, ScrollView, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
@@ -18,7 +18,14 @@ const LoginScreen = (props) => {
 
     const upload = () => {
         auth()
-            .signInWithEmailAndPassword(Email, Password)
+            .signInWithEmailAndPassword(Email, Password).then(() => {
+                let obj = {
+                    Email: Email,
+                    Password: Password,
+                    auth: true
+                }
+                AsyncStorage.setItem('Login', JSON.stringify(obj))
+            })
             .then((res) => {
                 console.log(res)
                 console.log('User logged-in successfully!')

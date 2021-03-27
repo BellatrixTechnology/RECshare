@@ -16,15 +16,17 @@ const ReviewBooking = ({ route }) => {
     const type = route.params.data.type;
     const distance = route.params.data.distance;
     const address = route.params.data.address;
-    const [Name, setName] = useState('')
+    const Image = route.params.data.Image;
+    console.log(Image)
     async function SaveData() {
         console.log(auth)
         auth().onAuthStateChanged(user => {
             if (user) {
                 console.log(user)
-                setName(user.displayName)
-                firestore().collection('Booking').doc(user.uid).set({
-                    userid: user.uid,
+                const id = firestore().collection('Booking').doc().id
+                const userid = user.uid
+                firestore().collection('Booking').doc(Title).collection('Bookings').doc(userid).set({
+                    userid: userid,
                     name: user.displayName,
                     Space: Title,
                     Date: Datee,
@@ -32,6 +34,19 @@ const ReviewBooking = ({ route }) => {
                     credit: credit,
                     type: type,
                     address: address,
+                    Image: Image
+                })
+                firestore().collection('User').doc(userid).collection('Booking').doc(id).set({
+                    userid: userid,
+                    name: user.displayName,
+                    Space: Title,
+                    Date: Datee,
+                    Time: Time,
+                    credit: credit,
+                    type: type,
+                    address: address,
+                    bookingid: id,
+                    Image: Image
                 })
                 props.navigate('Success', {
                     name: user.displayName,
@@ -42,11 +57,9 @@ const ReviewBooking = ({ route }) => {
                     type: type,
                     address: address,
                     props: props,
-                    distance: distance
+                    distance: distance,
+                    bookID: id,
                 })
-
-
-
             }
             else console.log('null')
         })

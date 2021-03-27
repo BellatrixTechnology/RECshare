@@ -65,24 +65,6 @@ const AddSpace = (props) => {
             if (user) {
                 setuserName(user.uid)
 
-                firestore().collection('Data').doc(SpaceName).set({
-                    Space: SpaceName,
-                    Host: Host,
-                    credit: credit,
-                    distance: distance,
-                    guest: guest,
-                    Descript: Descript,
-                    Location, Location,
-                    monday: monday,
-                    Tuesday: Tuesday,
-                    Wednesday: Wednesday,
-                    Thrusday: Thrusday,
-                    Friday: Friday,
-                    Saturday: Saturday,
-                    sunday: sunday,
-                    type: SelectedValue
-                })
-
 
                 let reference = storage().ref('Images/' + SpaceName);         // 2
                 let task = reference.putFile(Images.Path);
@@ -90,6 +72,7 @@ const AddSpace = (props) => {
 
                 task.then(() => {
                     getImage()
+
                 }).catch((e) => console.log('uploading image error => ', e));
 
             } else {
@@ -110,6 +93,27 @@ const AddSpace = (props) => {
                     distance: distance,
                     Image: url,
                     credit: credit,
+                }).then(() => {
+                    firestore().collection('Data').doc(SpaceName).set({
+                        Space: SpaceName,
+                        Host: Host,
+                        credit: credit,
+                        distance: distance,
+                        guest: guest,
+                        Descript: Descript,
+                        Location, Location,
+                        monday: monday,
+                        Tuesday: Tuesday,
+                        Wednesday: Wednesday,
+                        Thrusday: Thrusday,
+                        Friday: Friday,
+                        Saturday: Saturday,
+                        sunday: sunday,
+                        type: SelectedValue,
+                        Image: url
+                    })
+
+
                 })
             }).then(() =>
                 firestore().collection(SelectedValue).add({

@@ -20,17 +20,15 @@ const Signup = (props) => {
     const [phoneError, seterrPhone] = useState(false);
     let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    const [confirm, setConfirm] = useState('')
-
     const Signin = () => {
         auth()
             .createUserWithEmailAndPassword(Email, Password)
             .then((userCredentials) => {
                 userCredentials.user.updateProfile({
                     displayName: Names,
-                })
 
-                props.navigation.navigate('VerfiyCode', { Phone: phone })
+                })
+                props.navigation.navigate('VerfiyCode', { Phone: phone, props: props.navigation.navigate })
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
@@ -40,18 +38,14 @@ const Signup = (props) => {
                         seterrPass('')
                     }
                 }
-
                 if (error.code === 'auth/invalid-email') {
                     {
                         seterrEmail('Enter valid email')
                     }
                 }
-
                 console.error(error);
             });
     }
-
-
     const checkField = () => {
         if (Email == '') { seterrEmail('Enter Email') }
         if (Password == '') { seterrPass('Enter Password') }
@@ -59,7 +53,6 @@ const Signup = (props) => {
         if (phone == '') { seterrPhone('true') }
         if (Email != '' && Password != '' && Names != '' && phone != '') {
             Signin()
-
         }
     }
 

@@ -7,20 +7,21 @@ import CalendarPicker from 'react-native-calendar-picker';
 
 
 const Schedule = ({ route }) => {
-    console.log(route.params)
     const props = route.params.props;
     const Title = route.params.Title;
     const credit = route.params.credit;
     const type = route.params.type;
     const distance = route.params.distance;
     const address = route.params.address;
-
+    const Image = route.params.images;
+    console.log(Image)
     const Time = [
         { Slot: '10:00 AM' }, { Slot: '11:00 AM' }, { Slot: '12:00 AM' }, { Slot: '01:00 PM' }, { Slot: '02:00 PM' }, { Slot: '03:00 PM' }, { Slot: '04:00 PM' }, { Slot: '05:00 PM' }, { Slot: '06:00 PM' }, { Slot: '07:00 PM' }, { Slot: '08:00 PM' }, { Slot: ' 09:00 PM' }, { Slot: '10:00 PM' }, { Slot: '11:00 PM' },
     ]
     const [status, setStatus] = useState('')
     const [Datee, setDate] = useState('')
     const [EndTime, setEnd] = useState('')
+    console.log(status)
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
@@ -75,18 +76,21 @@ const Schedule = ({ route }) => {
                     <View style={styling.signupView}>
                         <TouchableOpacity style={styling.signupOpacity}
                             onPress={() => {
-                                props.navigate('ReviewBooking', {
-                                    data: {
-                                        Time: status,
-                                        Date: Datee,
-                                        Title: Title,
-                                        credit: credit,
-                                        type: type,
-                                        distance: distance,
-                                        address: address
-                                    },
-                                    props: props
-                                })
+                                if (Datee != '' && status != '') {
+                                    props.navigate('ReviewBooking', {
+                                        data: {
+                                            Time: status,
+                                            Date: Datee,
+                                            Title: Title,
+                                            credit: credit,
+                                            type: type,
+                                            distance: distance,
+                                            address: address,
+                                            Image: Image
+                                        },
+                                        props: props
+                                    })
+                                }
                             }}
                         >
                             <Text style={styling.signupText}>Next</Text>
