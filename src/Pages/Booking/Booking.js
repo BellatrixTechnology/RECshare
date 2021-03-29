@@ -24,7 +24,8 @@ function Complete() {
         </View>
     );
 }
-const Booking = () => {
+const Booking = (props) => {
+    console.log(props)
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" backgroundColor="white" />
@@ -32,7 +33,7 @@ const Booking = () => {
             <SafeAreaView style={{ backgroundColor: 'white' }} />
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headerView}>
-                    <Icon name='search1' size={26} />
+                    <Icon name='search1' size={26} onPress={() => props.navigation.navigate('Search1')} />
                 </View>
                 <View style={styling.headTXTView}>
 

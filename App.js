@@ -7,7 +7,7 @@ import Signup from './src/Pages/Signup/Signup';
 import ForgetPassword from './src/Pages/ForgetPassword/ForgetPassword';
 import VerfiyCode from './src/Pages/VerifyCode/VerifyCode';
 import tabs from './src/Navigator/BottomTab';
-import Route from './src/route';
+import route from './src/route';
 const Stack = createStackNavigator();
 
 console.disableYellowBox = true;
@@ -15,7 +15,11 @@ console.disableYellowBox = true;
 
 export default function App() {
   return (
-    <Route />
+    <NavigationContainer>
+      <Stack.Navigator headerMode='none'>
+        <Stack.Screen name='route' component={route} />
+      </Stack.Navigator>
+    </NavigationContainer>
   )
 }
 

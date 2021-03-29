@@ -28,7 +28,7 @@ const Signup = (props) => {
                     displayName: Names,
 
                 })
-                props.navigation.navigate('VerfiyCode', { Phone: phone, props: props.navigation.navigate })
+                props.navigation.navigate('VerfiyCode', { Phone: phone, props: props, Email: Email, Password: Password })
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {

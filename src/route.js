@@ -7,7 +7,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import ForgetPassword from '../src/Pages/ForgetPassword/ForgetPassword';
 import VerfiyCode from '../src/Pages/VerifyCode/VerifyCode';
 import tabs from '../src/Navigator/BottomTab';
-import ChooseLanguage from '../src/Pages/ChooseLanguage/ChooseLanguage';
 
 const Stack = createStackNavigator();
 
@@ -16,10 +15,14 @@ console.disableYellowBox = true;
 
 export default function route(props) {
     const [data, setData] = useState(false)
-
+    console.log('asda', props)
     useEffect(() => {
-        get()
-
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            get()
+        });
+        return () => {
+            unsubscribe;
+        };
     }, [])
     async function get() {
         try {
@@ -35,20 +38,23 @@ export default function route(props) {
             console.log(error)
         }
     }
+    console.log('asdasd', data)
     return (
-        <NavigationContainer>
+        <NavigationContainer independent={true}>
             {!data ?
                 (<Stack.Navigator headerMode='none'>
                     <Stack.Screen name="LoginScreen" component={LoginScreen} />
                     <Stack.Screen name='Signup' component={Signup} />
                     <Stack.Screen name='VerfiyCode' component={VerfiyCode} />
-                    <Stack.Screen name='ChooseLanguage' component={ChooseLanguage} />
                     <Stack.Screen name='ForgetPassword' component={ForgetPassword} />
+                    <Stack.Screen name='HomeScreen' component={tabs} />
+
                 </Stack.Navigator>)
                 :
                 (
                     <Stack.Navigator initialRouteName='tabs' headerMode='none'>
-                        <Stack.Screen name='tabs' component={tabs} />
+                        <Stack.Screen name='HomeScreen' component={tabs} />
+
                     </Stack.Navigator>
                 )
             }

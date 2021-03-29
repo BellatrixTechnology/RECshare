@@ -5,6 +5,7 @@ import { styling } from './styling';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import InputF from '../../Component/InputField/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = (props) => {
     const [Names, setName] = useState('');
@@ -15,7 +16,30 @@ const LoginScreen = (props) => {
     const [passError, seterrPass] = useState(false);
 
     let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
+    const [data, setData] = useState(false)
+    console.log('asda', props)
+    useEffect(() => {
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            get()
+        });
+        return () => {
+            unsubscribe;
+        };
+    }, [])
+    async function get() {
+        try {
+            let Login = await AsyncStorage.getItem('Login');
+            let parsed1 = JSON.parse(Login);
+            setData(parsed1.auth)
+            console.log(parsed1)
+            if (parsed1.auth) {
+                props.navigation.navigate('HomeScreen')
+            }
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
     const upload = () => {
         auth()
             .signInWithEmailAndPassword(Email, Password).then(() => {
@@ -29,9 +53,10 @@ const LoginScreen = (props) => {
             .then((res) => {
                 console.log(res)
                 console.log('User logged-in successfully!')
-                props.navigation.navigate('tabs')
+                props.navigation.navigate('HomeScreen')
             })
             .catch(error => {
+                console.log(error)
                 seterrEmail('Enter Vaild Email')
                 seterrPass('Enter Valid Password')
             })

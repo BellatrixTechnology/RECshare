@@ -19,7 +19,6 @@ export const styling = StyleSheet.create({
     headerView: {
         width: wp('20%'),
         justifyContent: 'flex-end',
-        paddingTop: hp(5),
         paddingHorizontal: wp(2)
     },
     headTXTView: {

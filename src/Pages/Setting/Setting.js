@@ -5,9 +5,25 @@ import Icons from 'react-native-vector-icons/AntDesign';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Iconss from 'react-native-vector-icons/Feather';
 import { styling } from './styling';
+import auth from '@react-native-firebase/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const Setting = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
-
+    async function signout() {
+        auth()
+            .signOut()
+            .then(() => {
+                let obj = {
+                    Email: '',
+                    Password: '',
+                    auth: false
+                }
+                AsyncStorage.setItem('Login', JSON.stringify(obj)).then(() => {
+                    props.navigation.replace('LoginScreen')
+                })
+            }
+            );
+    }
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -59,7 +75,7 @@ const Setting = (props) => {
                         <View style={styling.signoutView} >
                             <Iconss name='log-out' size={26} color='white' />
                         </View>
-                        <TouchableOpacity style={styling.detailView}>
+                        <TouchableOpacity style={styling.detailView} onPress={() => signout()}>
                             <Text style={styling.detailHead}>Sign Out</Text>
                             <Icons name='right' size={20} color='#C8C7CC' />
                         </TouchableOpacity>

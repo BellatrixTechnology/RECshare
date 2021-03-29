@@ -206,7 +206,7 @@ const ChooseLanguage = (props) => {
 
                 <View style={styling.signupView}>
                     <TouchableOpacity style={styling.signupOpacity} onPress={() => {
-                        props.navigation.navigate('tabs')
+                        props.navigation.navigate('HomeScreen')
                     }} >
                         <Text style={styling.signupText}>Select</Text>
                     </TouchableOpacity>

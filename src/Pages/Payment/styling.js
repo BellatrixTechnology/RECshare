@@ -9,8 +9,6 @@ export const styling = StyleSheet.create({
 
     },
     mainContainer: {
-        height: hp(95),
-        width: wp(100),
         paddingHorizontal: wp(3),
         paddingBottom: hp(1),
         backgroundColor: 'white'

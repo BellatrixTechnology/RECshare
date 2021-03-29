@@ -10,10 +10,11 @@ import Icons from 'react-native-vector-icons/Feather';
 import { createStackNavigator } from '@react-navigation/stack';
 import set_location from '../Pages/setLocations/set-location';
 import ChooseLocation from '../Pages/ChooseLocation/ChooseLocation';
+import ChooseLanguage from '../Pages/ChooseLanguage/ChooseLanguage';
+import LoginScreen from '../Pages/Signin/LoginScreen';
 import Categories from '../Pages/Categories/Categories';
 import Search from '../Pages/Search/Search';
 import Search2 from '../Pages/Search2/Search2';
-import ChooseLanguage from '../Pages/ChooseLanguage/ChooseLanguage';
 import MapBrowse from '../Pages/Map/MapBrowse';
 import Success from '../Pages/Success/Success';
 import Favourites from '../Pages/Favourites/Favourites';
@@ -90,8 +91,9 @@ function HomeScreen(props) {
 export default function BottomTabBar() {
     return (
         <NavigationContainer independent={true}>
-            <Stack.Navigator headerMode={null} initialRouteName='HomeScreen'>
+            <Stack.Navigator headerMode={null} >
                 <Stack.Screen name="HomeScreen" component={HomeScreen} />
+                <Stack.Screen name='ChooseLanguage' component={ChooseLanguage} />
                 <Stack.Screen name='Chat' component={Chat} />
                 <Stack.Screen name='Search' component={Search} />
                 <Stack.Screen name='Search2' component={Search2} />
@@ -100,7 +102,6 @@ export default function BottomTabBar() {
                 <Stack.Screen name='Favourites' component={Favourites} />
                 <Stack.Screen name='Notification' component={Notification} />
                 <Stack.Screen name='Setting' component={Setting} />
-                <Stack.Screen name='ChooseLanguage' component={ChooseLanguage} />
                 <Stack.Screen name='ReviewBooking' component={ReviewBooking} />
                 <Stack.Screen name='BookingDetails' component={BookingDetails} />
                 <Stack.Screen name='SpaceDetail' component={SpaceDetail} />
@@ -111,6 +112,8 @@ export default function BottomTabBar() {
                 <Stack.Screen name='Browse' component={Browse} />
                 <Stack.Screen name='AddSpace' component={AddSpace} />
                 <Stack.Screen name='Payment' component={Payment} />
+                <Stack.Screen name="LoginScreen" component={LoginScreen} />
+
 
             </Stack.Navigator>
         </NavigationContainer>

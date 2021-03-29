@@ -4,27 +4,40 @@ import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
 import InputF from '../../Component/InputField/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import CountDown from 'react-native-countdown-component';
+
 const VerifyCode = ({ route }) => {
     const phone = route.params.Phone;
     const props = route.params.props;
-    console.log(props)
+    const email = route.params.Email;
+    const Password = route.params.Password
+    console.log(route.params.props)
     const [confirm, setConfirm] = useState(null);
     const [code, setCode] = useState('');
-
+    const [disabled, setdisabled] = useState(true)
+    const [id, setID] = useState(60 + 20)
     useEffect(() => {
         signInWithPhoneNumber()
 
     }, [])
-
     async function signInWithPhoneNumber() {
         const confirmation = await auth().signInWithPhoneNumber(phone);
+        console.log(confirmation)
         setConfirm(confirmation);
     }
     async function confirmCode() {
         try {
             await confirm.confirm(code).then(() => {
-                props('ChooseLanguage')
-                console.log(code)
+                let obj = {
+                    Email: email,
+                    Password: Password,
+                    auth: true
+                }
+                AsyncStorage.setItem('Login', JSON.stringify(obj)).then(() => {
+                    props.navigation.navigate('ChooseLanguage')
+                })
+
             })
 
         } catch (error) {
@@ -63,14 +76,27 @@ const VerifyCode = ({ route }) => {
                         </TouchableOpacity>
                     </View>
                     <View style={styling.resendView}>
-                        <TouchableOpacity onPress={() => {
+                        <TouchableOpacity disabled={disabled} onPress={() => {
                             signInWithPhoneNumber()
-
+                            setdisabled(true)
+                            setID(60 + 10)
                         }}>
                             <Text style={styling.resentTxt} >Resend Code</Text>
                         </TouchableOpacity>
 
-                        <Text style={styling.mintTxt}>1:20 mint left</Text>
+                        <View>
+                            <CountDown
+                                id
+                                until={Number(id)}
+                                onFinish={() => setdisabled(false)}
+                                onPress={() => alert()}
+                                size={20}
+                                timeToShow={['M', 'S']}
+                                timeLabels={{ m: null, s: null }}
+                                digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#FF2D55' }}
+
+                            />
+                        </View>
                     </View>
 
                 </View>

@@ -12,16 +12,19 @@ export const styling = StyleSheet.create({
         width: wp(100),
         paddingHorizontal: wp(3),
         paddingBottom: hp(1),
-
+        backgroundColor: 'white'
     },
     mainHeaderView: {
-        backgroundColor: '#F9F9F9'
+        backgroundColor: 'white'
     },
     headerView: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: '#F9F9F9'
+        width: wp(95),
+        alignSelf: 'center',
+        paddingVertical: hp(1),
+        backgroundColor: 'white'
 
     },
     avatarView: {
@@ -30,7 +33,7 @@ export const styling = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'center',
         backgroundColor: '#F9F9F9',
-        // backgroundColor: 'red'
+        backgroundColor: 'white'
     },
     nameView: {
         paddingHorizontal: wp(5),

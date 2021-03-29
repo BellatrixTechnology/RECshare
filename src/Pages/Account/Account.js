@@ -1,15 +1,52 @@
-import React, { Fragment } from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
+import React, { Fragment, useEffect, useState } from 'react';
+import { View, StyleSheet, StatusBar, TouchableOpacity, FlatList, SafeAreaView, ScrollView } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import Icons from 'react-native-vector-icons/AntDesign';
 import Iconss from 'react-native-vector-icons/Entypo';
 import { fontFamily, fontSize } from '../../Global/Styles/font';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { hp, wp } from '../../Global/Styles/Scalling';
 
 const Account = (props) => {
+    const [Name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [Pay, setPay] = useState('')
+    useEffect(() => {
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            getPeyment()
+        });
+        return () => {
+            unsubscribe;
+        };
+    }, [])
+
+    async function getPeyment() {
+        auth().onAuthStateChanged(async (user) => {
+            if (user) {
+                setName(user.displayName)
+                setEmail(user.email)
+                const Snapshot = await firestore().collection('User').doc(user.uid).collection('Payment').get()
+                const list = [];
+
+                console.log(Snapshot)
+                Snapshot.forEach((doc) => {
+                    if (doc.exists) {
+                        list.push(doc.data());
+                        console.log('exist')
+                    } else {
+                        console.log('No document found!');
+                    }
+                });
+                setPay([...list]);
+            }
+        })
+    }
+
+    console.log(Name)
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -19,13 +56,13 @@ const Account = (props) => {
                 <View style={styling.mainHeaderView}>
 
                     <View style={styling.headerView}>
-                        <Icons.Button name='setting' backgroundColor='#F9F9F9' color='black' size={25}
+                        <Icons name='setting' backgroundColor='#F9F9F9' color='black' size={25}
                             onPress={() => {
                                 props.navigation.navigate('Setting')
                             }} />
 
 
-                        <Iconss.Button name='dots-three-horizontal' size={25} backgroundColor='#F9F9F9' color='black' ></Iconss.Button>
+                        <Iconss name='dots-three-horizontal' size={25} backgroundColor='#F9F9F9' color='black' />
 
                     </View>
                     <View style={styling.avatarView}>
@@ -36,9 +73,9 @@ const Account = (props) => {
                                 name: 'user', type: IconTypes.AntDesign,
                             }} />
                         <View style={styling.nameView}>
-                            <Text style={styling.nameTXT}>Rachael Barbara</Text>
+                            <Text style={styling.nameTXT}>{Name}</Text>
 
-                            <Text style={styling.emailTXT}>barbara@mail.com</Text>
+                            <Text style={styling.emailTXT}>{email}</Text>
                         </View>
                     </View>
 
@@ -88,41 +125,34 @@ const Account = (props) => {
                         <View style={styling.addressView}>
                             <Text style={styling.addressTXT}>Payment Cards</Text>
                         </View>
+                        <FlatList
+                            data={Pay}
+                            renderItem={({ item }) => {
+                                return (
+                                    <View style={styling.paymentView}>
+                                        <View style={styling.paymentInnerView}>
+                                            <View style={styling.paymentCardView}>
 
-                        <View style={styling.paymentView}>
-                            <View style={styling.paymentInnerView}>
-                                <View style={styling.paymentCardView}>
+                                            </View>
+                                            <View style={styling.cardTXTView}>
+                                                <Text style={styling.cardTXT}>Main card</Text>
+                                                <Text style={styling.digitTXT}>{item.CardNo}</Text>
 
-                                </View>
-                                <View style={styling.cardTXTView}>
-                                    <Text style={styling.cardTXT}>Main card</Text>
-                                    <Text style={styling.digitTXT}>9432 **** **** ****</Text>
+                                            </View>
+                                        </View>
 
-                                </View>
-                            </View>
+                                        <Icons name='right' size={16} color='#C8C7CC' />
 
-                            <Icons name='right' size={16} color='#C8C7CC' />
+                                    </View>
+                                )
+                            }}
+                        />
 
-                        </View>
-                        <View style={styling.paymentView}>
-                            <View style={styling.paymentInnerView}>
-                                <View style={styling.paymentCardView}>
 
-                                </View>
-                                <View style={styling.cardTXTView}>
-                                    <Text style={styling.cardTXT}>Oscar card</Text>
-                                    <Text style={styling.digitTXT}>**** 34</Text>
-
-                                </View>
-                            </View>
-
-                            <Icons name='right' size={16} color='#C8C7CC' />
-
-                        </View>
 
                         <View style={styling.addAdrsView}>
                             <Text style={styling.newAdrsTXT}>Add new card</Text>
-                            <Icons name='pluscircle' size={24} color='#FF2D55' />
+                            <Icons name='pluscircle' size={24} color='#FF2D55' onPress={() => { props.navigation.navigate('Payment') }} />
                         </View>
                     </ScrollView>
                 </View>

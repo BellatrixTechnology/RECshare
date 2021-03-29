@@ -11,6 +11,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const Favourites = (props) => {
     const [Data, setData] = useState([])
+    const [Uid, setUid] = useState('')
     useEffect(() => {
         getFav()
     }, [])
@@ -19,6 +20,7 @@ const Favourites = (props) => {
         auth().onAuthStateChanged(function (user) {
             if (user) {
                 fav(user.uid)
+                setUid(user.uid)
             }
             else console.log('error')
         })
@@ -29,8 +31,21 @@ const Favourites = (props) => {
         const list = [];
         snapshot.forEach((doc) => {
             list.push(doc.data());
+            console.log(doc.data())
         });
         setData([...list]);
+    }
+    async function sorting() {
+        console.log('hello')
+
+        const snapshot = await firestore().collection('User').doc(Uid).collection('Favourite').orderBy('Space', 'asc').get();
+        console.log(snapshot)
+        const list = [];
+        snapshot.forEach((doc) => {
+            list.push(doc.data());
+        });
+        setData([...list]);
+
     }
 
     return (
@@ -45,7 +60,7 @@ const Favourites = (props) => {
             <ScrollView>
                 <View style={styling.mainContainer}>
                     <View style={styling.opacityView}>
-                        <TouchableOpacity style={styling.buttonOpacity}>
+                        <TouchableOpacity style={styling.buttonOpacity} onPress={() => { sorting() }}>
                             <Icons name='swap-vertical-outline' size={20} />
                             <Text> Sort</Text>
                         </TouchableOpacity>
@@ -60,7 +75,6 @@ const Favourites = (props) => {
                         <FlatList
                             numColumns={2}
                             data={Data}
-                            // contentContainerStyle={{ flexDirection: "row", flexWrap: "wrap" }}
                             renderItem={({ item }) => {
                                 return (
                                     <View style={styling.innerCardContainer}>

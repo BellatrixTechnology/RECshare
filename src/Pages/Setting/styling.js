@@ -112,7 +112,8 @@ export const styling = StyleSheet.create({
         fontFamily: fontFamily.SFUIText
     },
     innerOptionView: {
-        height: hp('38%'),
+        height: hp('35%'),
+        marginBottom: hp(5)
     },
     moreoptionView: {
         alignSelf: 'center',
