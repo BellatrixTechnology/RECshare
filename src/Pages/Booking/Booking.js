@@ -33,7 +33,7 @@ const Booking = (props) => {
             <SafeAreaView style={{ backgroundColor: 'white' }} />
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headerView}>
-                    <Icon name='search1' size={26} onPress={() => props.navigation.navigate('Search1')} />
+                    <Icon name='search1' size={26} onPress={() => props.navigation.navigate('Search2')} />
                 </View>
                 <View style={styling.headTXTView}>
 

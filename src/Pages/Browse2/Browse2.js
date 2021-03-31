@@ -135,6 +135,7 @@ const Browse2 = (props) => {
                     distance: item.distance,
                     Image: item.Image,
                     Guest: item.Guest,
+                    Rating: item.Rating
                 }).then(() => {
                     ToastAndroid.showWithGravity(
                         item.Space + " Added in Favourite",
@@ -162,20 +163,18 @@ const Browse2 = (props) => {
                         </View>
                         <View style={styling.innerContainer}>
                             <View style={styling.searchBar}>
-                                <TextInput
-                                    placeholder='Type Space Station Name'
-                                    style={{ height: hp(7), width: wp(80), borderWidth: wp(0.1), borderRadius: wp(2) }}
-                                    onChangeText={(val) =>
-                                        setSearch(val)
-                                    }
-                                    value={search}
-                                />
-                                <Icon name='search1' size={18} style={{ color: '#bbb' }} onPress={() => {
-                                    props.navigation.navigate('SpaceDetail', {
-                                        Space: search,
-                                        props: props.navigation
-                                    })
-                                }} />
+                                <TouchableOpacity
+                                    style={{ height: hp(7), width: wp(85), borderWidth: wp(0.1), borderRadius: wp(2), flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: wp(2) }}
+                                    onPress={() => props.navigation.navigate('Search2')}
+                                >
+                                    <Text style={{ color: '#bbb' }}>Search</Text>
+                                    <Icon name='search1' size={18} style={{ color: '#bbb' }} onPress={() => {
+                                        props.navigation.navigate('SpaceDetail', {
+                                            Space: search,
+                                            props: props.navigation
+                                        })
+                                    }} />
+                                </TouchableOpacity>
                             </View>
                         </View>
 
@@ -239,7 +238,7 @@ const Browse2 = (props) => {
                                         </Text>
                                     </View>
                                     <View>
-                                        <TouchableOpacity style={styling.seeALLOpacity} >
+                                        <TouchableOpacity style={styling.seeALLOpacity} onPress={() => props.navigation.navigate('Search2')}>
                                             <Text style={styling.seeALLTXT}>See All</Text>
                                             <Icon name='right' size={10} />
                                         </TouchableOpacity>

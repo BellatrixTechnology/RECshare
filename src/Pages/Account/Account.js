@@ -7,7 +7,7 @@ import Iconss from 'react-native-vector-icons/Entypo';
 import { fontFamily, fontSize } from '../../Global/Styles/font';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-
+import { InputModal } from '../../Component/Modal/index'
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { hp, wp } from '../../Global/Styles/Scalling';
 
@@ -15,6 +15,9 @@ const Account = (props) => {
     const [Name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [Pay, setPay] = useState('')
+    const [isVisible, setisVisible] = useState(false)
+    const [temp, setTemp] = useState('');
+    const [Address, setAddress] = useState([])
     useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             getPeyment()
@@ -23,7 +26,16 @@ const Account = (props) => {
             unsubscribe;
         };
     }, [])
-
+    function addAddress(a) {
+        auth().onAuthStateChanged(function (user) {
+            if (user) {
+                firestore().collection('User').doc(user.uid).collection('Personal').doc('address').set({
+                    address: a
+                })
+            }
+            else console.log('error')
+        })
+    }
     async function getPeyment() {
         auth().onAuthStateChanged(async (user) => {
             if (user) {
@@ -42,11 +54,24 @@ const Account = (props) => {
                     }
                 });
                 setPay([...list]);
+                {
+                    const Snapshot = await firestore().collection('User').doc(user.uid).collection('Personal').doc('address').get()
+                    const ader = [];
+                    console.log(Snapshot)
+                    Snapshot.address.forEach((doc) => {
+                        if (doc.exists) {
+                            ader.push(doc.data());
+                            console.log('exist')
+                        } else {
+                            console.log('No document found!');
+                        }
+                    });
+                    setAddress([...ader]);
+                    console.log('asdasd', ader)
+                }
             }
         })
     }
-
-    console.log(Name)
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -106,21 +131,29 @@ const Account = (props) => {
                         <View style={styling.addressView}>
                             <Text style={styling.addressTXT}>Address</Text>
                         </View>
-                        <View style={styling.inputView}>
-                            <Input
-                                label='Home'
-                                value='43 Bourke Street, Newbridge NSW 837 R…'
-                                rightIcon={
-                                    <Icons name='right' size={16} color='#C8C7CC' />
-                                }
-                                inputContainerStyle={{ borderBottomWidth: 0, width: wp(88), height: hp(4), marginBottom: hp(-3) }}
-                                inputStyle={{ fontSize: 15, fontFamily: fontFamily.SFUIText }}
-                            />
-                        </View>
-                        <View style={styling.addAdrsView}>
+                        <FlatList
+                            data={Address}
+                            renderItem={({ item }) => {
+                                return (
+                                    <View style={styling.inputView}>
+                                        <Input
+                                            label='Home'
+                                            editable={false}
+                                            value={item.add}
+                                            rightIcon={
+                                                <Icons name='right' size={16} color='#C8C7CC' />
+                                            }
+                                            inputContainerStyle={{ borderBottomWidth: 0, width: wp(88), height: hp(4), marginBottom: hp(-3) }}
+                                            inputStyle={{ fontSize: 15, fontFamily: fontFamily.SFUIText }}
+                                        />
+                                    </View>
+                                )
+                            }}
+                        />
+                        <TouchableOpacity style={styling.addAdrsView} onPress={() => setisVisible(true)}>
                             <Text style={styling.newAdrsTXT}>Add new address</Text>
                             <Icons name='pluscircle' size={24} color='#FF2D55' />
-                        </View>
+                        </TouchableOpacity>
 
                         <View style={styling.addressView}>
                             <Text style={styling.addressTXT}>Payment Cards</Text>
@@ -156,6 +189,22 @@ const Account = (props) => {
                         </View>
                     </ScrollView>
                 </View>
+                <InputModal
+                    isVisible={isVisible}
+                    onBackButtonPress={() => setisVisible(false)}
+                    onBackdropPress={() => setisVisible(false)}
+                    onChange={(val) => { setTemp(val) }}
+                    onPressYes={() => {
+                        let a = [...Address]
+                        a.push({
+                            temp
+                        })
+                        setAddress(a)
+                        setTemp('')
+                        setisVisible(false)
+                        addAddress(a)
+                    }}
+                />
             </SafeAreaView >
             <SafeAreaView style={{ backgroundColor: 'white' }} />
 

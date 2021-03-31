@@ -36,7 +36,6 @@ const Favourites = (props) => {
         setData([...list]);
     }
     async function sorting() {
-        console.log('hello')
 
         const snapshot = await firestore().collection('User').doc(Uid).collection('Favourite').orderBy('Space', 'asc').get();
         console.log(snapshot)
@@ -47,7 +46,17 @@ const Favourites = (props) => {
         setData([...list]);
 
     }
+    async function filters() {
 
+        const snapshot = await firestore().collection('User').doc(Uid).collection('Favourite').orderBy('Rating', 'desc').get();
+        console.log(snapshot)
+        const list = [];
+        snapshot.forEach((doc) => {
+            list.push(doc.data());
+        });
+        setData([...list]);
+
+    }
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
@@ -64,7 +73,7 @@ const Favourites = (props) => {
                             <Icons name='swap-vertical-outline' size={20} />
                             <Text> Sort</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styling.buttonOpacity}>
+                        <TouchableOpacity style={styling.buttonOpacity} onPress={() => { filters() }}>
                             <Icon name='filter' style={styling.headIcon} color='black' size={20} />
                             <Text >Filter</Text>
                         </TouchableOpacity>
@@ -88,6 +97,9 @@ const Favourites = (props) => {
                                                 <Text style={styling.cardheadLabel}>  {item.distance} mi away </Text>
                                             </View>
                                         </View>
+                                        {
+                                            item.Rating == 5 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★★★★</Text> || item.Rating == 4 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★★★</Text> || item.Rating == 3 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★★</Text> || item.Rating == 2 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★</Text> || item.Rating && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★</Text>
+                                        }
                                     </View>
                                 )
                             }}

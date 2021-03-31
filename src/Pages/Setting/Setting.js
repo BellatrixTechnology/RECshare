@@ -7,6 +7,7 @@ import Iconss from 'react-native-vector-icons/Feather';
 import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ToastAndroid } from 'react-native';
 const Setting = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
     async function signout() {
@@ -19,10 +20,24 @@ const Setting = (props) => {
                     auth: false
                 }
                 AsyncStorage.setItem('Login', JSON.stringify(obj)).then(() => {
-                    props.navigation.replace('LoginScreen')
-                })
+                    props.navigation.goBack()
+                }).then(() => {
+                    props.navigation.goBack()
+                }).then(() => props.navigation.replace('LoginScreen'))
             }
             );
+    }
+    async function changePass() {
+        auth().onAuthStateChanged((user) => {
+            // console.log(user.email)
+            auth().sendPasswordResetEmail(user.email).then(() => {
+                ToastAndroid.showWithGravity(
+                    "Password Change Link Send to your Email",
+                    ToastAndroid.LONG,
+                    ToastAndroid.BOTTOM
+                );
+            })
+        })
     }
     return (
         <Fragment>
@@ -46,7 +61,7 @@ const Setting = (props) => {
                         <View style={styling.passwrdView} >
                             <Icons name='lock1' size={26} color='white' />
                         </View>
-                        <TouchableOpacity style={styling.detailView}>
+                        <TouchableOpacity style={styling.detailView} onPress={() => { changePass() }}>
                             <Text style={styling.detailHead}>Change Password</Text>
                             <Icons name='right' size={20} color='#C8C7CC' />
                         </TouchableOpacity>
