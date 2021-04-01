@@ -24,7 +24,7 @@ import Schedule from '../Pages/Schedule/Schedule';
 import ReviewBooking from '../Pages/ReviewBooking/ReviewBooking';
 import BookingDetails from '../Pages/BookingDetails/BookingDetails';
 import Account from '../Pages/Account/Account';
-import Chat from '../Pages/Chat/Chat';
+import Chat from '../Pages/Chat/index';
 import Filter from '../Pages/Filter/Filter';
 import SpaceDetail from '../Pages/SpaceDetail/SpaceDetail';
 import Payment from '../Pages/Payment/Payment';
@@ -62,13 +62,6 @@ function HomeScreen(props) {
                     ),
                 }}
             />
-            {/* <Tab.Screen name="Discover" component={Connect}
-                        options={{
-                            // tabBarColor: '#6bfaf3',
-                            tabBarIcon: ({ color }) => (
-                                <Iconss name="discover" color={color} size={22} />
-                            ),
-                        }} /> */}
             <Tab.Screen name="Map" component={MapBrowse}
                 options={{
                     // tabBarColor: '#6bfaf3',
@@ -77,6 +70,14 @@ function HomeScreen(props) {
                     ),
                 }}
             />
+            <Tab.Screen name="Discover" component={Notification}
+                options={{
+                    // tabBarColor: '#6bfaf3',
+                    tabBarIcon: ({ color }) => (
+                        <Icon name="notification" color={color} size={22} />
+                    ),
+                }} />
+
             <Tab.Screen name="Account" component={Account} options={{
                 // tabBarColor: '#6bfaf3',
                 tabBarIcon: ({ color }) => (
@@ -100,7 +101,6 @@ export default function BottomTabBar() {
                 <Stack.Screen name='Success' component={Success} />
                 <Stack.Screen name='Filter' component={Filter} />
                 <Stack.Screen name='Favourites' component={Favourites} />
-                <Stack.Screen name='Notification' component={Notification} />
                 <Stack.Screen name='Setting' component={Setting} />
                 <Stack.Screen name='ReviewBooking' component={ReviewBooking} />
                 <Stack.Screen name='BookingDetails' component={BookingDetails} />

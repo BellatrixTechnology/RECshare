@@ -58,7 +58,7 @@ const BookingDetails = ({ route }) => {
                             </TouchableOpacity>
 
 
-                            <TouchableOpacity style={styling.phoneView}>
+                            <TouchableOpacity style={styling.phoneView} onPress={() => { props.navigate('Chat') }}>
                                 <Icon name='comment' color='#FF2D55' />
                             </TouchableOpacity>
 

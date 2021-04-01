@@ -10,9 +10,8 @@ export const styling = StyleSheet.create({
 
     },
     mainContainer: {
-        height: hp(100),
-        width: wp(100),
-        backgroundColor: 'white'
+        // height: hp(80),
+        backgroundColor: 'red'
     },
     headerView: {
         width: wp('95%'),

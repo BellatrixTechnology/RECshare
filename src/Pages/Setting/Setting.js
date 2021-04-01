@@ -47,7 +47,7 @@ const Setting = (props) => {
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headView}>
                     <Icons name="left" color='black' size={30}
-                        onPress={() => props.navigation.navigate('LoginScreen')}
+                        onPress={() => props.navigation.goBack()}
                     />
                 </View>
                 <View style={styling.headingView}>

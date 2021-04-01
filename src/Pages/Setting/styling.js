@@ -10,7 +10,6 @@ export const styling = StyleSheet.create({
     },
 
     headView: {
-        marginTop: hp(5),
         width: wp('100%'),
         backgroundColor: 'white',
         paddingHorizontal: wp(2)
