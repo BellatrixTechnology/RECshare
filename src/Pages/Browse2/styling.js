@@ -237,11 +237,10 @@ export const styling = StyleSheet.create({
         elevation: 1
     },
     cardContainer22: {
-        marginVertical: hp(2),
-        // flexDirection: 'c',
+        marginVertical: hp(4),
+        marginLeft: wp(3),
         alignItems: 'center',
         flexWrap: 'wrap',
-        // width: wp(90),
         alignSelf: 'center'
     },
     cardView2: {

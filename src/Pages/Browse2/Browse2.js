@@ -294,7 +294,7 @@ const Browse2 = (props) => {
                         <View style={styling.cardContainer22}>
                             <FlatList
                                 data={filterData}
-                                contentContainerStyle={{ flexWrap: 'wrap', flexDirection: 'row' }}
+                                contentContainerStyle={{ flexWrap: 'wrap', flexDirection: 'row', alignSelf: 'center' }}
                                 renderItem={({ item }) => {
                                     return (
                                         <TouchableOpacity style={styling.innerCardContainer22} onPress={() => {

@@ -57,13 +57,13 @@ const Payment = (props) => {
                                 </View>
                                 <View style={[styling.inputView, { borderBottomWidth: 0, width: wp(80) }]}>
                                     <Text style={[styling.cardTXT, { color: 'white' }]}>Card Holder</Text>
-                                    <Text style={[styling.valueTXT, { color: 'white' }]}>   {CardNo}</Text>
+                                    <Text style={[styling.valueTXT, { color: 'white' }]}>   {holder}</Text>
                                 </View>
                                 <View style={[styling.inputView, { borderBottomWidth: 0, width: wp(80) }]}>
                                     <Text style={[styling.cardTXT, { color: 'white' }]}>Expires</Text>
-                                    <Text style={[styling.valueTXT, { color: 'white' }]}>   {CardNo}</Text>
+                                    <Text style={[styling.valueTXT, { color: 'white' }]}>   {expire}</Text>
                                     <Text style={[styling.cardTXT, { color: 'white' }]}>CVC</Text>
-                                    <Text style={[styling.valueTXT, { color: 'white' }]}>   {CardNo}</Text>
+                                    <Text style={[styling.valueTXT, { color: 'white' }]}>   {cvc}</Text>
                                 </View>
                             </View>
                         </View>

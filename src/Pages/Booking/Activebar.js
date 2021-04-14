@@ -7,15 +7,25 @@ import Icons from 'react-native-vector-icons/MaterialCommunityIcons';
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore';
 
-const Activebar = () => {
+const Activebar = ({ props }) => {
     const [data, setdata] = useState('')
     useEffect(() => {
+
+        const unsubscribe = props.navigation.addListener('focus', () => {
+            authytt()
+        });
+        return () => {
+            unsubscribe;
+        };
+    }, []);
+    function authytt() {
         auth().onAuthStateChanged((user) => {
             if (user) {
                 get(user.uid)
             }
         })
-    }, []);
+    }
+
     async function get(id) {
         console.log(id)
         const Snapshot = await firestore().collection('User').doc(id).collection('Booking').get()
@@ -25,7 +35,7 @@ const Activebar = () => {
         Snapshot.forEach((doc) => {
             if (doc.exists) {
                 list.push(doc.data());
-                console.log('exist')
+
             } else {
                 console.log('No document found!');
             }
@@ -38,6 +48,7 @@ const Activebar = () => {
             <SafeAreaView style={styling.safeContainer} >
 
                 <View style={styling.mainContainer}>
+
                     <FlatList
                         data={data}
                         renderItem={({ item }) => {

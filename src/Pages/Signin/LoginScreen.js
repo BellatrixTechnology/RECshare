@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { View, ScrollView, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, ScrollView, StatusBar, TouchableOpacity, SafeAreaView, ActivityIndicator } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import firestore from '@react-native-firebase/firestore';
@@ -14,7 +14,7 @@ const LoginScreen = (props) => {
     const [check, setcheck] = useState(false)
     const [emailError, seterrEmail] = useState(false);
     const [passError, seterrPass] = useState(false);
-
+    const [activity, setactivity] = useState(false)
     let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const [data, setData] = useState(false)
     console.log('asda', props)
@@ -52,18 +52,29 @@ const LoginScreen = (props) => {
             })
             .then((res) => {
                 console.log(res)
+                setactivity(false)
                 console.log('User logged-in successfully!')
                 props.navigation.navigate('HomeScreen')
             })
             .catch(error => {
                 console.log(error)
                 seterrEmail('Enter Vaild Email')
+                setactivity(false)
+
                 seterrPass('Enter Valid Password')
             })
     }
     const checkDetails = () => {
-        if (Email == '') { seterrEmail('Enter Email') }
-        if (Password == '') { seterrPass('Enter Password') }
+        setactivity(true)
+        if (Email == '') {
+            seterrEmail('Enter Email')
+            setactivity(false)
+        }
+        if (Password == '') {
+            seterrPass('Enter Password')
+            setactivity(false)
+
+        }
         if (Email != '' && Password != '') {
             upload()
         }
@@ -127,7 +138,8 @@ const LoginScreen = (props) => {
                                     checkDetails()
 
                                 }}>
-                                    <Text style={styling.signinText}>Sign In</Text>
+                                    {!activity ? <Text style={styling.signinText}>Sign Up</Text> : <ActivityIndicator size='large' color="white" />
+                                    }
                                 </TouchableOpacity>
                             </View>
                         </View>

@@ -35,7 +35,7 @@ const VerifyCode = ({ route }) => {
                     auth: true
                 }
                 AsyncStorage.setItem('Login', JSON.stringify(obj)).then(() => {
-                    props.navigation.navigate('ChooseLanguage')
+                    props.navigation.navigate('HomeScreen')
                 })
 
             })

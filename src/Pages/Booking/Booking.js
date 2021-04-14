@@ -9,23 +9,23 @@ import { hp, wp } from '../../Global/Styles/Scalling';
 import Activebar from './Activebar';
 
 const Tab = createMaterialTopTabNavigator();
-function Active() {
-    return (
-        <View style={styling.searchbarView}>
-            <Activebar />
-        </View>
-    );
-}
 
-function Complete() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Complete!</Text>
-        </View>
-    );
-}
 const Booking = (props) => {
-    console.log(props)
+    function Active() {
+        return (
+            // <View style={styling.searchbarView}>
+            <Activebar props={props} />
+            // </View>
+        );
+    }
+
+    function Complete() {
+        return (
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Text>Complete!</Text>
+            </View>
+        );
+    }
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" backgroundColor="white" />
