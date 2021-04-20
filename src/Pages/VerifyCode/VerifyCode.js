@@ -12,6 +12,7 @@ const VerifyCode = ({ route }) => {
     const props = route.params.props;
     const email = route.params.Email;
     const Password = route.params.Password
+    const uid = route.params.uid
     console.log(route.params.props)
     const [confirm, setConfirm] = useState(null);
     const [code, setCode] = useState('');
@@ -34,9 +35,9 @@ const VerifyCode = ({ route }) => {
                     Password: Password,
                     auth: true
                 }
-                AsyncStorage.setItem('Login', JSON.stringify(obj)).then(() => {
-                    props.navigation.navigate('HomeScreen')
-                })
+                AsyncStorage.setItem('Login', JSON.stringify(obj))
+                dispatch(login({ userName: uid }))
+
 
             })
 

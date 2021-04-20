@@ -10,7 +10,7 @@ export const styling = StyleSheet.create({
     },
     mainContainer: {
         flex: 1,
-        padding: wp(2),
+        paddingRight: wp(2),
         // alignSelf: 'center',
         backgroundColor: 'white',
     },

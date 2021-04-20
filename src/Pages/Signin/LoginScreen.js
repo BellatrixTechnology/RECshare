@@ -6,7 +6,8 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import InputF from '../../Component/InputField/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../Redux/Actions/Auth';
 const LoginScreen = (props) => {
     const [Names, setName] = useState('');
     const [Email, setEmail] = useState('');
@@ -17,50 +18,51 @@ const LoginScreen = (props) => {
     const [activity, setactivity] = useState(false)
     let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const [data, setData] = useState(false)
+    const user = useSelector((state) => state.Auth.user);
+    const dispatch = useDispatch();
     console.log('asda', props)
-    useEffect(() => {
-        const unsubscribe = props.navigation.addListener('focus', () => {
-            get()
-        });
-        return () => {
-            unsubscribe;
-        };
-    }, [])
-    async function get() {
-        try {
-            let Login = await AsyncStorage.getItem('Login');
-            let parsed1 = JSON.parse(Login);
-            setData(parsed1.auth)
-            console.log(parsed1)
-            if (parsed1.auth) {
-                props.navigation.navigate('HomeScreen')
-            }
-        }
-        catch (error) {
-            console.log(error)
-        }
-    }
+    // useEffect(() => {
+    //     const unsubscribe = props.navigation.addListener('focus', () => {
+    //         get()
+    //     });
+    //     return () => {
+    //         unsubscribe;
+    //     };
+    // }, [])
+    // async function get() {
+    //     try {
+    //         let Login = await AsyncStorage.getItem('Login');
+    //         let parsed1 = JSON.parse(Login);
+    //         setData(parsed1.auth)
+    //         console.log(parsed1)
+    //         if (parsed1.auth) {
+    //             props.navigation.navigate('HomeScreen')
+    //         }
+    //     }
+    //     catch (error) {
+    //         console.log(error)
+    //     }
+    // }
     const upload = () => {
         auth()
-            .signInWithEmailAndPassword(Email, Password).then(() => {
+            .signInWithEmailAndPassword(Email, Password).then((user) => {
                 let obj = {
                     Email: Email,
                     Password: Password,
                     auth: true
                 }
                 AsyncStorage.setItem('Login', JSON.stringify(obj))
+                AsyncStorage.setItem('token', JSON.stringify(user.user.uid))
             })
             .then((res) => {
                 console.log(res)
                 setactivity(false)
-                console.log('User logged-in successfully!')
-                props.navigation.navigate('HomeScreen')
+                dispatch(login({ userName: Email }))
             })
             .catch(error => {
                 console.log(error)
                 seterrEmail('Enter Vaild Email')
                 setactivity(false)
-
                 seterrPass('Enter Valid Password')
             })
     }

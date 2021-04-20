@@ -8,35 +8,47 @@ import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ToastAndroid } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../Redux/Actions/Auth';
+import { InputModal } from '../../Component/Modal/index'
 const Setting = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
+    const user = useSelector((state) => state.Auth.user);
+    const [isVisible, setisVisible] = useState(false)
+    const dispatch = useDispatch();
+    const [Email, setEmail] = useState('')
     async function signout() {
-        auth()
-            .signOut()
-            .then(() => {
-                let obj = {
-                    Email: '',
-                    Password: '',
-                    auth: false
-                }
-                AsyncStorage.setItem('Login', JSON.stringify(obj)).then(() => {
-                    props.navigation.goBack()
-                }).then(() => {
-                    props.navigation.goBack()
-                }).then(() => props.navigation.replace('LoginScreen'))
-            }
-            );
+        // auth()
+        //     .signOut()
+        //     .then(() => {
+        dispatch(logout({}))
+        AsyncStorage.removeItem('Login')
+        AsyncStorage.removeItem('token')
+
+
+        // })
+
+
     }
     async function changePass() {
         auth().onAuthStateChanged((user) => {
-            // console.log(user.email)
-            auth().sendPasswordResetEmail(user.email).then(() => {
+            if (user.email == Email) {
+                auth().sendPasswordResetEmail(user.email).then(() => {
+                    ToastAndroid.showWithGravity(
+                        "Password Change Link Send to your Email",
+                        ToastAndroid.LONG,
+                        ToastAndroid.BOTTOM
+                    );
+                })
+            }
+            else {
                 ToastAndroid.showWithGravity(
-                    "Password Change Link Send to your Email",
+                    "Enter Valid Email",
                     ToastAndroid.LONG,
                     ToastAndroid.BOTTOM
                 );
-            })
+            }
+
         })
     }
     return (
@@ -61,7 +73,9 @@ const Setting = (props) => {
                         <View style={styling.passwrdView} >
                             <Icons name='lock1' size={26} color='white' />
                         </View>
-                        <TouchableOpacity style={styling.detailView} onPress={() => { changePass() }}>
+                        <TouchableOpacity style={styling.detailView} onPress={() => {
+                            setisVisible(true)
+                        }}>
                             <Text style={styling.detailHead}>Change Password</Text>
                             <Icons name='right' size={20} color='#C8C7CC' />
                         </TouchableOpacity>
@@ -90,7 +104,12 @@ const Setting = (props) => {
                         <View style={styling.signoutView} >
                             <Iconss name='log-out' size={26} color='white' />
                         </View>
-                        <TouchableOpacity style={styling.detailView} onPress={() => signout()}>
+                        <TouchableOpacity style={styling.detailView} onPress={() => {
+                            dispatch(logout({}))
+                            AsyncStorage.removeItem('Login')
+                            AsyncStorage.removeItem('token')
+
+                        }}>
                             <Text style={styling.detailHead}>Sign Out</Text>
                             <Icons name='right' size={20} color='#C8C7CC' />
                         </TouchableOpacity>
@@ -157,7 +176,17 @@ const Setting = (props) => {
                     </View>
                 </View>
             </SafeAreaView>
-
+            <InputModal
+                isVisible={isVisible}
+                isAddress
+                onBackButtonPress={() => setisVisible(false)}
+                onBackdropPress={() => setisVisible(false)}
+                onChange={(val) => { setEmail(val) }}
+                onPressYes={() => {
+                    changePass()
+                    setisVisible(false)
+                }}
+            />
             <SafeAreaView style={{ backgroundColor: 'white' }} />
         </Fragment>
     )

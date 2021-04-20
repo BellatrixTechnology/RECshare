@@ -37,12 +37,14 @@ const AlertCancel = ({ isVisible, onBackdropPress, onBackButtonPress, onPressYes
     </Modal >)
 };
 
-const InputModal = ({ isVisible, onBackdropPress, onBackButtonPress, onPressYes, onPressNo, value, onChange }) => {
+const InputModal = ({ isVisible, onBackdropPress, onBackButtonPress, onPressYes, onPressNo, value, onChange, isAddress }) => {
     return (<Modal isVisible={isVisible}
         onBackdropPress={onBackdropPress} onBackButtonPress={onBackButtonPress} backdropOpacity={0.70}>
         <View style={{ width: wp(90), height: hp(30), backgroundColor: 'white', borderRadius: wp(5), justifyContent: 'center' }}>
             <View style={{ alignItems: 'center', marginTop: hp(2) }}>
-                <Text style={styles.noText}>Address</Text>
+                {!isAddress && <Text style={styles.noText}>Address</Text>}
+                {isAddress && <Text style={styles.noText}>Enter your email</Text>}
+
                 <TextInput
                     multiline={true}
                     value={value}
@@ -52,7 +54,7 @@ const InputModal = ({ isVisible, onBackdropPress, onBackButtonPress, onPressYes,
                 />
                 <TouchableOpacity onPress={onPressYes}
                     style={styles.yesButton}>
-                    <Text style={styles.yesText}>Add</Text>
+                    <Text style={styles.yesText}>Done</Text>
                 </TouchableOpacity>
             </View>
         </View>

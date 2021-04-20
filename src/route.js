@@ -6,59 +6,69 @@ import Signup from '../src/Pages/Signup/Signup';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import ForgetPassword from '../src/Pages/ForgetPassword/ForgetPassword';
 import VerfiyCode from '../src/Pages/VerifyCode/VerifyCode';
-import tabs from '../src/Navigator/BottomTab';
-
+import Tabs from '../src/Navigator/BottomTab';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from './Redux/Actions/Auth';
+import { ActivityIndicator, View } from 'react-native';
 const Stack = createStackNavigator();
 
 console.disableYellowBox = true;
 
 
 export default function route(props) {
-    const [data, setData] = useState(false)
-    console.log('asda', props)
+    const [Load, setLoad] = useState(true)
+    const isLogin = useSelector(state => state.Auth.isLogin)
+    const dispatch = useDispatch();
+    // const [data, setData] = useState(false)
+    // console.log('asda', props)
     useEffect(() => {
-        const unsubscribe = props.navigation.addListener('focus', () => {
-            get()
-        });
-        return () => {
-            unsubscribe;
-        };
+        get()
+
     }, [])
     async function get() {
+
         try {
-            let Login = await AsyncStorage.getItem('Login');
-            let parsed1 = JSON.parse(Login);
-            setData(parsed1.auth)
-            console.log(parsed1)
-            if (parsed1.auth) {
-                console.log('true')
+            let Login = await AsyncStorage.getItem('token');
+            if (Login) {
+                setLoad(false)
+                dispatch(login({ userName: 'Email' }))
+
             }
+            else {
+                setLoad(false)
+            }
+
+
         }
         catch (error) {
             console.log(error)
         }
     }
-    console.log('asdasd', data)
     return (
-        <NavigationContainer independent={true}>
-            {!data ?
-                (<Stack.Navigator headerMode='none'>
-                    <Stack.Screen name="LoginScreen" component={LoginScreen} />
-                    <Stack.Screen name='Signup' component={Signup} />
-                    <Stack.Screen name='VerfiyCode' component={VerfiyCode} />
-                    <Stack.Screen name='ForgetPassword' component={ForgetPassword} />
-                    <Stack.Screen name='HomeScreen' component={tabs} />
+        (!Load ?
+            <NavigationContainer independent={true}>
+                {!isLogin ?
+                    (<Stack.Navigator headerMode='none'>
+                        <Stack.Screen name="LoginScreen" component={LoginScreen} />
+                        <Stack.Screen name='Signup' component={Signup} />
+                        <Stack.Screen name='VerfiyCode' component={VerfiyCode} />
+                        <Stack.Screen name='ForgetPassword' component={ForgetPassword} />
+                    </Stack.Navigator>)
+                    :
+                    (
+                        // <Tabs />
+                        <Stack.Navigator initialRouteName='Tabs' headerMode='none'>
+                            <Stack.Screen name='HomeScreen' component={Tabs} />
 
-                </Stack.Navigator>)
-                :
-                (
-                    <Stack.Navigator initialRouteName='tabs' headerMode='none'>
-                        <Stack.Screen name='HomeScreen' component={tabs} />
+                        </Stack.Navigator>
+                    )
+                }
+            </NavigationContainer> :
+            <View style={{ flex: 1, justifyContent: 'center' }}>
+                <ActivityIndicator color={'red'} size={'large'} />
+            </View>
 
-                    </Stack.Navigator>
-                )
-            }
-        </NavigationContainer>
+        )
     )
 }
 

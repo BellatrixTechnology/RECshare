@@ -70,7 +70,7 @@ function HomeScreen(props) {
                     ),
                 }}
             />
-            <Tab.Screen name="Discover" component={Notification}
+            <Tab.Screen name="Notification" component={Notification}
                 options={{
                     // tabBarColor: '#6bfaf3',
                     tabBarIcon: ({ color }) => (
@@ -92,7 +92,7 @@ function HomeScreen(props) {
 export default function BottomTabBar() {
     return (
         <NavigationContainer independent={true}>
-            <Stack.Navigator headerMode={null} >
+            <Stack.Navigator initialRouteName={HomeScreen} headerMode={null} >
                 <Stack.Screen name="HomeScreen" component={HomeScreen} />
                 <Stack.Screen name='ChooseLanguage' component={ChooseLanguage} />
                 <Stack.Screen name='Chat' component={Chat} />
@@ -112,9 +112,6 @@ export default function BottomTabBar() {
                 <Stack.Screen name='Browse' component={Browse} />
                 <Stack.Screen name='AddSpace' component={AddSpace} />
                 <Stack.Screen name='Payment' component={Payment} />
-                <Stack.Screen name="LoginScreen" component={LoginScreen} />
-
-
             </Stack.Navigator>
         </NavigationContainer>
     )

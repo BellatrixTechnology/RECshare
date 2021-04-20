@@ -10,6 +10,7 @@ import firestore from '@react-native-firebase/firestore';
 import { InputModal } from '../../Component/Modal/index'
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { hp, wp } from '../../Global/Styles/Scalling';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Account = (props) => {
     const [Name, setName] = useState('')
@@ -26,15 +27,12 @@ const Account = (props) => {
             unsubscribe;
         };
     }, [])
-    function addAddress(a) {
-        auth().onAuthStateChanged(function (user) {
-            if (user) {
-                firestore().collection('User').doc(user.uid).collection('Personal').doc('address').set({
-                    address: a
-                })
-            }
-            else console.log('error')
+    async function addAddress(a) {
+        let Loginid = await AsyncStorage.getItem('token');
+        firestore().collection('User').doc(Loginid).collection('Personal').doc('address').set({
+            address: a
         })
+
     }
     async function getPeyment() {
         auth().onAuthStateChanged(async (user) => {
@@ -48,7 +46,6 @@ const Account = (props) => {
                 Snapshot.forEach((doc) => {
                     if (doc.exists) {
                         list.push(doc.data());
-                        console.log('exist')
                     } else {
                         console.log('No document found!');
                     }
@@ -57,7 +54,6 @@ const Account = (props) => {
                 {
                     const Snapshot = await firestore().collection('User').doc(user.uid).collection('Personal').doc('address').get()
                     const ader = [];
-                    console.log(Snapshot)
                     Snapshot.address.forEach((doc) => {
                         if (doc.exists) {
                             ader.push(doc.data());

@@ -156,10 +156,12 @@ const Browse2 = (props) => {
             <SafeAreaView style={styling.safeContainer} >
                 <ScrollView>
                     <View style={styling.mainContainer}>
-                        <Text style={styling.labelTXT}>Will you plan to work with in </Text>
-                        <View style={styling.cityView}>
-                            <Text style={styling.cityTXT}>San Francisco? </Text>
-                            <Icons name='angle-down' size={30} color='#FF2D55' />
+                        <View style={{ marginLeft: wp(3) }}>
+                            <Text style={styling.labelTXT}>Will you plan to work with in </Text>
+                            <View style={styling.cityView}>
+                                <Text style={styling.cityTXT}>San Francisco? </Text>
+                                <Icons name='angle-down' size={30} color='#FF2D55' />
+                            </View>
                         </View>
                         <View style={styling.innerContainer}>
                             <View style={styling.searchBar}>

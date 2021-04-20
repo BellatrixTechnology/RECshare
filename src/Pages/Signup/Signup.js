@@ -7,6 +7,7 @@ import auth from '@react-native-firebase/auth';
 import PhoneInput from 'react-native-phone-input';
 import { wp, hp } from '../../Global/Styles/Scalling';
 import InputF from '../../Component/InputField/index';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Signup = (props) => {
     const [Names, setName] = useState('');
@@ -28,7 +29,9 @@ const Signup = (props) => {
                     displayName: Names,
 
                 })
-                props.navigation.navigate('VerfiyCode', { Phone: phone, props: props, Email: Email, Password: Password })
+                AsyncStorage.setItem('token', JSON.stringify(userCredentials.user.uid))
+
+                props.navigation.navigate('VerfiyCode', { Phone: phone, props: props, Email: Email, Password: Password, uid: userCredentials.user.uid })
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
