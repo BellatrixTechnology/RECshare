@@ -28,21 +28,27 @@ const Account = (props) => {
         };
     }, [])
     async function addAddress(a) {
-        let Loginid = await AsyncStorage.getItem('token');
-        firestore().collection('User').doc(Loginid).collection('Personal').doc('address').set({
-            address: a
+        auth().onAuthStateChanged(async (user) => {
+            if (user) {
+                const id = await firestore().collection('User').doc().id
+                console.log(id)
+                await firestore().collection('User').doc(user.uid).collection('address').doc(id).set({
+                    address: a
+                })
+            }
         })
 
+        getPeyment()
     }
     async function getPeyment() {
         auth().onAuthStateChanged(async (user) => {
             if (user) {
+                console.log(user)
                 setName(user.displayName)
                 setEmail(user.email)
                 const Snapshot = await firestore().collection('User').doc(user.uid).collection('Payment').get()
                 const list = [];
 
-                console.log(Snapshot)
                 Snapshot.forEach((doc) => {
                     if (doc.exists) {
                         list.push(doc.data());
@@ -52,18 +58,16 @@ const Account = (props) => {
                 });
                 setPay([...list]);
                 {
-                    const Snapshot = await firestore().collection('User').doc(user.uid).collection('Personal').doc('address').get()
+                    const Snapshot = await firestore().collection('User').doc(user.uid).collection('address').get()
                     const ader = [];
-                    Snapshot.address.forEach((doc) => {
+                    Snapshot.forEach((doc) => {
                         if (doc.exists) {
                             ader.push(doc.data());
-                            console.log('exist')
                         } else {
                             console.log('No document found!');
                         }
                     });
                     setAddress([...ader]);
-                    console.log('asdasd', ader)
                 }
             }
         })
@@ -127,25 +131,29 @@ const Account = (props) => {
                         <View style={styling.addressView}>
                             <Text style={styling.addressTXT}>Address</Text>
                         </View>
-                        <FlatList
-                            data={Address}
-                            renderItem={({ item }) => {
-                                return (
-                                    <View style={styling.inputView}>
-                                        <Input
-                                            label='Home'
-                                            editable={false}
-                                            value={item.add}
-                                            rightIcon={
-                                                <Icons name='right' size={16} color='#C8C7CC' />
-                                            }
-                                            inputContainerStyle={{ borderBottomWidth: 0, width: wp(88), height: hp(4), marginBottom: hp(-3) }}
-                                            inputStyle={{ fontSize: 15, fontFamily: fontFamily.SFUIText }}
-                                        />
-                                    </View>
-                                )
-                            }}
-                        />
+                        <View>
+                            <FlatList
+                                data={Address}
+                                renderItem={({ item, index }) => {
+                                    return (
+
+                                        <View style={styling.inputView}>
+                                            <Input
+                                                label='Home'
+                                                editable={false}
+                                                value={item.address}
+                                                rightIcon={
+                                                    <Icons name='right' size={16} color='#C8C7CC' />
+                                                }
+                                                inputContainerStyle={{ borderBottomWidth: 0, width: wp(88), height: hp(4), marginBottom: hp(-3) }}
+                                                inputStyle={{ fontSize: 15, fontFamily: fontFamily.SFUIText }}
+                                            />
+                                        </View>
+
+                                    )
+                                }}
+                            />
+                        </View>
                         <TouchableOpacity style={styling.addAdrsView} onPress={() => setisVisible(true)}>
                             <Text style={styling.newAdrsTXT}>Add new address</Text>
                             <Icons name='pluscircle' size={24} color='#FF2D55' />
@@ -156,7 +164,7 @@ const Account = (props) => {
                         </View>
                         <FlatList
                             data={Pay}
-                            renderItem={({ item }) => {
+                            renderItem={({ item, index }) => {
                                 return (
                                     <View style={styling.paymentView}>
                                         <View style={styling.paymentInnerView}>
@@ -190,15 +198,13 @@ const Account = (props) => {
                     onBackButtonPress={() => setisVisible(false)}
                     onBackdropPress={() => setisVisible(false)}
                     onChange={(val) => { setTemp(val) }}
-                    onPressYes={() => {
-                        let a = [...Address]
-                        a.push({
-                            temp
-                        })
-                        setAddress(a)
+                    onPressYes={(val) => {
+                        // let a = [...Address]
+                        // a.push(temp)
+                        // setAddress(a)
                         setTemp('')
                         setisVisible(false)
-                        addAddress(a)
+                        addAddress(temp)
                     }}
                 />
             </SafeAreaView >

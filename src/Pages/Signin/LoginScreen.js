@@ -20,7 +20,6 @@ const LoginScreen = (props) => {
     const [data, setData] = useState(false)
     const user = useSelector((state) => state.Auth.user);
     const dispatch = useDispatch();
-    console.log('asda', props)
     // useEffect(() => {
     //     const unsubscribe = props.navigation.addListener('focus', () => {
     //         get()

@@ -6,7 +6,8 @@ import auth from '@react-native-firebase/auth';
 import InputF from '../../Component/InputField/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CountDown from 'react-native-countdown-component';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../Redux/Actions/Auth';
 const VerifyCode = ({ route }) => {
     const phone = route.params.Phone;
     const props = route.params.props;
@@ -14,6 +15,9 @@ const VerifyCode = ({ route }) => {
     const Password = route.params.Password
     const uid = route.params.uid
     console.log(route.params.props)
+    const isLogin = useSelector(state => state.Auth.isLogin)
+    const dispatch = useDispatch();
+
     const [confirm, setConfirm] = useState(null);
     const [code, setCode] = useState('');
     const [disabled, setdisabled] = useState(true)
@@ -29,19 +33,24 @@ const VerifyCode = ({ route }) => {
     }
     async function confirmCode() {
         try {
-            await confirm.confirm(code).then(() => {
+            await confirm.confirm(code).then(async () => {
                 let obj = {
                     Email: email,
                     Password: Password,
                     auth: true
                 }
+                auth()
+                    .signInWithEmailAndPassword(email, Password)
                 AsyncStorage.setItem('Login', JSON.stringify(obj))
-                dispatch(login({ userName: uid }))
+                let Login = await AsyncStorage.getItem('token');
+
+                dispatch(login({ userName: Login }))
 
 
             })
 
-        } catch (error) {
+        }
+        catch (error) {
             console.log(error);
             ToastAndroid.show("Invalid code.!", ToastAndroid.LONG);
         }

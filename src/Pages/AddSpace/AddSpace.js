@@ -101,7 +101,7 @@ const AddSpace = (props) => {
                         distance: distance,
                         guest: guest,
                         Descript: Descript,
-                        Location, Location,
+                        Location: Location,
                         monday: monday,
                         Tuesday: Tuesday,
                         Wednesday: Wednesday,
