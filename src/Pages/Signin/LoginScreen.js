@@ -8,6 +8,8 @@ import InputF from '../../Component/InputField/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../Redux/Actions/Auth';
+import { I18n } from '../../../i18n/I18n';
+
 const LoginScreen = (props) => {
     const [Names, setName] = useState('');
     const [Email, setEmail] = useState('');
@@ -92,7 +94,7 @@ const LoginScreen = (props) => {
                     <View style={styling.mainContainer}>
                         <View style={styling.innerContainer}>
                             <View style={styling.welcomeHeader}>
-                                <Text style={styling.welcomeLabel}>Welcome</Text>
+                                <Text style={styling.welcomeLabel}>{I18n.t('Welcome')}</Text>
                                 <Text style={styling.welcomeLabel}>back</Text>
                             </View>
                             <View style={styling.signinHeader}>
