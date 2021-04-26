@@ -20,7 +20,7 @@ const LoginScreen = (props) => {
     const [activity, setactivity] = useState(false)
     let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     const [data, setData] = useState(false)
-    const user = useSelector((state) => state.Auth.user);
+
     const dispatch = useDispatch();
     // useEffect(() => {
     //     const unsubscribe = props.navigation.addListener('focus', () => {
@@ -30,6 +30,10 @@ const LoginScreen = (props) => {
     //         unsubscribe;
     //     };
     // }, [])
+    // function get() {
+    //     switchLanguage(lg)
+
+    // }
     // async function get() {
     //     try {
     //         let Login = await AsyncStorage.getItem('Login');
@@ -95,16 +99,16 @@ const LoginScreen = (props) => {
                         <View style={styling.innerContainer}>
                             <View style={styling.welcomeHeader}>
                                 <Text style={styling.welcomeLabel}>{I18n.t('Welcome')}</Text>
-                                <Text style={styling.welcomeLabel}>back</Text>
+                                <Text style={styling.welcomeLabel}>{I18n.t('back')}</Text>
                             </View>
                             <View style={styling.signinHeader}>
-                                <Text style={styling.siginlabel}>Sign in to continue</Text>
+                                <Text style={styling.siginlabel}>{I18n.t('SigninContinue')}</Text>
                             </View>
                         </View>
                         <View style={styling.formView}>
                             <InputF
-                                label='Email'
-                                placeholder='Email'
+                                label={I18n.t('Email')}
+                                placeholder={I18n.t('Email')}
                                 onChange={(val) => {
                                     setEmail(val)
                                     console.log(val)
@@ -116,8 +120,8 @@ const LoginScreen = (props) => {
                                 errorEmail={emailError}
                             />
                             <InputF
-                                label='Password'
-                                placeholder='Password'
+                                label={I18n.t('Password')}
+                                placeholder={I18n.t('Password')}
                                 onChange={(val) => {
                                     setPassword(val)
                                     console.log(val)
@@ -133,7 +137,7 @@ const LoginScreen = (props) => {
                             />
                             <View style={styling.forgetView}>
                                 <TouchableOpacity onPress={() => props.navigation.navigate('ForgetPassword')}>
-                                    <Text style={styling.opacityForgetTXT}>Forget Password?</Text>
+                                    <Text style={styling.opacityForgetTXT}>{I18n.t('ForgotPassword')}</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={styling.signinView}>
@@ -141,16 +145,16 @@ const LoginScreen = (props) => {
                                     checkDetails()
 
                                 }}>
-                                    {!activity ? <Text style={styling.signinText}>Sign Up</Text> : <ActivityIndicator size='large' color="white" />
+                                    {!activity ? <Text style={styling.signinText}>{I18n.t('SignIn')}</Text> : <ActivityIndicator size='large' color="white" />
                                     }
                                 </TouchableOpacity>
                             </View>
                         </View>
 
                         <View style={styling.signupView}>
-                            <Text style={styling.signupTXT}>Don't have an Account? </Text>
+                            <Text style={styling.signupTXT}>{I18n.t('Donthaveanaccount?')} </Text>
                             <TouchableOpacity onPress={() => { props.navigation.navigate('Signup') }}>
-                                <Text style={styling.opacitysignupTXT}>Sign Up</Text>
+                                <Text style={styling.opacitysignupTXT}>{I18n.t('SignUp')}</Text>
                             </TouchableOpacity>
                         </View>
 

@@ -20,13 +20,13 @@ export const styling = StyleSheet.create({
 
     },
     headerView: {
-        width: wp('50%'),
+        width: wp('90%'),
     },
     welcomeView: {
         marginHorizontal: wp(1)
     },
     signupHeader: {
-        width: wp('40%'),
+        width: wp('90%'),
         marginHorizontal: wp(1)
     },
     avatarView: {

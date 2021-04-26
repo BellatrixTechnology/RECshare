@@ -4,7 +4,7 @@ import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import Icon from 'react-native-vector-icons/AntDesign';
 import CalendarPicker from 'react-native-calendar-picker';
-
+import { I18n } from '../../../i18n/I18n';
 
 const Schedule = ({ route }) => {
     const props = route.params.props;
@@ -41,7 +41,7 @@ const Schedule = ({ route }) => {
                         />
                     </View>
                     <View style={styling.availableView}>
-                        <Text style={styling.availableTXT}>Available Time</Text>
+                        <Text style={styling.availableTXT}>{I18n.t('AvailableTime')}</Text>
                     </View>
                     <View style={styling.TimeView}>
                         <FlatList
@@ -63,10 +63,10 @@ const Schedule = ({ route }) => {
 
                     </View>
                     <View style={styling.availableView}>
-                        <Text style={styling.availableTXT}>Reminder</Text>
+                        <Text style={styling.availableTXT}>{I18n.t('Reminder')}</Text>
                     </View>
                     <View style={styling.reminderView}>
-                        <Text style={styling.reminderHead}>Select alert</Text>
+                        <Text style={styling.reminderHead}>{I18n.t('Selectalert')}</Text>
 
                         <View style={styling.reminderinnerView}>
                             <Text style={styling.reminderLabel}>30 Minute before </Text>
@@ -93,7 +93,7 @@ const Schedule = ({ route }) => {
                                 }
                             }}
                         >
-                            <Text style={styling.signupText}>Next</Text>
+                            <Text style={styling.signupText}>{I18n.t('Next')}</Text>
                         </TouchableOpacity>
                     </View>
 

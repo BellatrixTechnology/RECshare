@@ -111,7 +111,7 @@ export default {
     "AccountCredits": "Account Credits",
     "Favourties": "Favorites",
     "home": "Home",
-    "Payment Cards": "Payment Cards",
+    "PaymentCards": "Payment Cards",
     "AddnewCard": "Add new card",
     "AddAdres": "Add new address",
     "Account": "Account",

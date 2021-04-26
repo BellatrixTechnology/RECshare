@@ -5,6 +5,7 @@ import { styling } from './styling';
 import Icon from 'react-native-vector-icons/AntDesign';
 import auth from '@react-native-firebase/auth'
 import firestore from '@react-native-firebase/firestore';
+import { I18n } from '../../../i18n/I18n';
 
 const ReviewBooking = ({ route }) => {
     console.log(route.params.props)
@@ -76,13 +77,13 @@ const ReviewBooking = ({ route }) => {
                     <Icon name='left' size={30} backgroundColor='white' color='black' onPress={() => { props.goBack() }} />
                 </View>
                 <View style={styling.headTXTView}>
-                    <Text style={styling.headTXT}>Review Booking</Text>
+                    <Text style={styling.headTXT}>{I18n.t('ReviewBooking')}</Text>
                 </View>
                 <View style={styling.mainContainer}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={styling.cardView}>
                             <View style={styling.detailView}>
-                                <Text style={styling.labelTXT}>Date & Time</Text>
+                                <Text style={styling.labelTXT}>{I18n.t('DateT')}</Text>
                                 <Text style={styling.mainTXT}>{Datee}</Text>
                                 <Text style={styling.lineTXT}>{Time}</Text>
                             </View>
@@ -96,7 +97,7 @@ const ReviewBooking = ({ route }) => {
 
                         <View style={styling.cardView}>
                             <View style={styling.detailView}>
-                                <Text style={styling.labelTXT}>Workspace</Text>
+                                <Text style={styling.labelTXT}>{I18n.t('Workspace')}</Text>
                                 <Text style={styling.mainTXT}>{Title}</Text>
                                 <Text style={styling.lineTXT}>{type}</Text>
                             </View>
@@ -110,9 +111,9 @@ const ReviewBooking = ({ route }) => {
 
                         <View style={styling.cardView}>
                             <View style={styling.detailView}>
-                                <Text style={styling.labelTXT}>Address</Text>
+                                <Text style={styling.labelTXT}>{I18n.t('Address')}</Text>
                                 <Text style={styling.mainTXT}>{address}</Text>
-                                <Text style={styling.lineTXT}>{distance} mi away</Text>
+                                <Text style={styling.lineTXT}>{distance} mi {I18n.t('Away')}</Text>
                             </View>
                             <View>
                                 <TouchableOpacity>
@@ -139,11 +140,11 @@ const ReviewBooking = ({ route }) => {
                         </View>
                         <View style={styling.totalView}>
                             <View style={styling.totalLabelView}>
-                                <Text style={styling.labelTXT}>Price</Text>
+                                <Text style={styling.labelTXT}>{I18n.t('Price')}</Text>
                                 <Text style={styling.mainTXT}>${credit}</Text>
                             </View>
                             <View style={styling.totalinnerView}>
-                                <Text style={styling.lineTXT}>${credit}/hour</Text>
+                                <Text style={styling.lineTXT}>${credit}/{I18n.t('hour')}</Text>
                                 <Text style={styling.rupeeTXT}>${credit}</Text>
                             </View>
                             <View style={styling.totalinnerView}>
@@ -155,7 +156,7 @@ const ReviewBooking = ({ route }) => {
                             <TouchableOpacity style={styling.signupOpacity} onPress={() => {
                                 SaveData()
                             }}>
-                                <Text style={styling.signupText}>Confirm</Text>
+                                <Text style={styling.signupText}>{I18n.t('Confirm')}</Text>
                             </TouchableOpacity>
                         </View>
 

@@ -111,7 +111,7 @@ export default {
     "AccountCredits": "Кредиты на счет",
     "Favourties": "Избранное",
     "home": "Дом",
-    "Payment Cards": "Платежные карты",
+    "PaymentCards": "Платежные карты",
     "AddnewCard": "Добавить новую карту",
     "AddAdres": "Добавить новый адрес",
     "Account": "Счет",

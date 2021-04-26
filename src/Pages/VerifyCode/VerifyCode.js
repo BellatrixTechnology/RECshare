@@ -8,6 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import CountDown from 'react-native-countdown-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../Redux/Actions/Auth';
+import { I18n } from '../../../i18n/I18n';
+
 const VerifyCode = ({ route }) => {
     const phone = route.params.Phone;
     const props = route.params.props;
@@ -64,16 +66,16 @@ const VerifyCode = ({ route }) => {
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.mainContainer}>
                     <View style={styling.headingView}>
-                        <Text style={styling.headingTEXT}>Verifying </Text>
-                        <Text style={styling.headingTEXT}>your number</Text>
+                        <Text style={styling.headingTEXT}>{I18n.t('Verifying')} </Text>
+                        <Text style={styling.headingTEXT}>{I18n.t('yourNumber')} </Text>
                     </View>
                     <View style={styling.headingLabelView}>
-                        <Text style={styling.headingLabelTEXT}>We’ve sent your verification code to {phone}</Text>
+                        <Text style={styling.headingLabelTEXT}>{I18n.t('Weverificationcode')} {phone}</Text>
                     </View>
 
                     <View style={styling.codeView}>
                         <InputF
-                            label="Enter Code"
+                            label={I18n.t('EnterCode')}
                             placeholder='Code'
                             value={code}
                             onChange={text => setCode(text)}
@@ -82,7 +84,7 @@ const VerifyCode = ({ route }) => {
 
                     <View style={styling.verifyView}>
                         <TouchableOpacity style={styling.verifyOpacity} onPress={() => { confirmCode() }}>
-                            <Text style={styling.verifyText}>Verify</Text>
+                            <Text style={styling.verifyText}>{I18n.t('Verfiy')}</Text>
                         </TouchableOpacity>
                     </View>
                     <View style={styling.resendView}>
@@ -91,7 +93,7 @@ const VerifyCode = ({ route }) => {
                             setdisabled(true)
                             setID(60 + 10)
                         }}>
-                            <Text style={styling.resentTxt} >Resend Code</Text>
+                            <Text style={styling.resentTxt} >{I18n.t('ResendCode')}</Text>
                         </TouchableOpacity>
 
                         <View>

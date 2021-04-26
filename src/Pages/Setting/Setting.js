@@ -11,6 +11,8 @@ import { ToastAndroid } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../Redux/Actions/Auth';
 import { InputModal } from '../../Component/Modal/index'
+import { I18n } from '../../../i18n/I18n';
+
 const Setting = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const user = useSelector((state) => state.Auth.user);
@@ -63,11 +65,11 @@ const Setting = (props) => {
                     />
                 </View>
                 <View style={styling.headingView}>
-                    <Text style={styling.headTXT}>Setting</Text>
+                    <Text style={styling.headTXT}>{I18n.t('Setting')}</Text>
                 </View>
                 <View style={styling.mainContainer}>
                     <View style={styling.accountView}>
-                        <Text style={styling.accountTXT}>Account</Text>
+                        <Text style={styling.accountTXT}>{I18n.t('Account')}</Text>
                     </View>
                     <View style={styling.innerView}>
                         <View style={styling.passwrdView} >
@@ -76,7 +78,7 @@ const Setting = (props) => {
                         <TouchableOpacity style={styling.detailView} onPress={() => {
                             setisVisible(true)
                         }}>
-                            <Text style={styling.detailHead}>Change Password</Text>
+                            <Text style={styling.detailHead}>{I18n.t('ChangePassword')}</Text>
                             <Icons name='right' size={20} color='#C8C7CC' />
                         </TouchableOpacity>
                     </View>
@@ -85,7 +87,7 @@ const Setting = (props) => {
                             <Icon name='bell' size={26} color='white' />
                         </View>
                         <TouchableOpacity style={styling.detailView}>
-                            <Text style={styling.detailHead}>Notification</Text>
+                            <Text style={styling.detailHead}>{I18n.t('Notfications')}</Text>
                             <Icons name='right' size={20} color='#C8C7CC' />
                         </TouchableOpacity>
                     </View>
@@ -95,7 +97,7 @@ const Setting = (props) => {
                             <Icon name='hand-stop-o' size={26} color='white' />
                         </View>
                         <TouchableOpacity style={styling.detailView}>
-                            <Text style={styling.detailHead}>Privacy Setting</Text>
+                            <Text style={styling.detailHead}>{I18n.t('PrivacySetting')}</Text>
                             <Icons name='right' size={20} color='#C8C7CC' />
                         </TouchableOpacity>
                     </View>
@@ -110,17 +112,17 @@ const Setting = (props) => {
                             AsyncStorage.removeItem('token')
 
                         }}>
-                            <Text style={styling.detailHead}>Sign Out</Text>
+                            <Text style={styling.detailHead}>{I18n.t('Signout')}</Text>
                             <Icons name='right' size={20} color='#C8C7CC' />
                         </TouchableOpacity>
                     </View>
                     <View style={styling.optionView}>
-                        <Text style={styling.accountTXT}>More Option</Text>
+                        <Text style={styling.accountTXT}>{I18n.t('MoreOptiosn')}</Text>
                     </View>
                     <View style={styling.innerOptionView}>
                         <ScrollView showsVerticalScrollIndicator={false}>
                             <View style={styling.moreoptionView}>
-                                <Text style={styling.detailHead}>NewsLetter</Text>
+                                <Text style={styling.detailHead}>{I18n.t('Newsletter')}</Text>
                                 <Switch
                                     trackColor={{ false: "#767577", true: "#FF2D55" }}
                                     thumbColor={isEnabled ? "#E5E5E5" : "#f4f3f4"}
@@ -132,7 +134,7 @@ const Setting = (props) => {
                                 />
                             </View>
                             <View style={styling.moreoptionView}>
-                                <Text style={styling.detailHead}>Text Message</Text>
+                                <Text style={styling.detailHead}>{I18n.t('TextMsg')}</Text>
                                 <Switch
                                     trackColor="#C8C7CC"
                                     thumbColor="#C8C7CC"
@@ -141,7 +143,7 @@ const Setting = (props) => {
                                 />
                             </View>
                             <View style={styling.moreoptionView}>
-                                <Text style={styling.detailHead}>Phone Callr</Text>
+                                <Text style={styling.detailHead}>{I18n.t('PhoneCalls')}</Text>
                                 <Switch
                                     trackColor="#C8C7CC"
                                     thumbColor="#C8C7CC"
@@ -150,7 +152,7 @@ const Setting = (props) => {
                                 />
                             </View>
                             <View style={styling.moreoptionView}>
-                                <Text style={styling.detailHead}>Currency</Text>
+                                <Text style={styling.detailHead}>{I18n.t('Currency')}</Text>
 
                                 <TouchableOpacity style={styling.rightView}>
                                     <Text style={styling.labelTXT}>$-USD</Text>
@@ -159,7 +161,7 @@ const Setting = (props) => {
 
                             </View>
                             <View style={styling.moreoptionView}>
-                                <Text style={styling.detailHead}>Languages</Text>
+                                <Text style={styling.detailHead}>{I18n.t('Languages')}</Text>
                                 <TouchableOpacity style={styling.rightView}>
                                     <Text style={styling.labelTXT}>Emglish </Text>
                                     <Icons name='right' size={20} color='#C8C7CC' />

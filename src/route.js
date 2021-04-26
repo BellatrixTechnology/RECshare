@@ -8,35 +8,54 @@ import ForgetPassword from '../src/Pages/ForgetPassword/ForgetPassword';
 import VerfiyCode from '../src/Pages/VerifyCode/VerifyCode';
 import Tabs from '../src/Navigator/BottomTab';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from './Redux/Actions/Auth';
+import { login, select } from './Redux/Actions/Auth';
 import { ActivityIndicator, View } from 'react-native';
+import { switchLanguage } from '../i18n/I18n';
+// import { select, deselect } from '../../Redux/Actions/Auth';
+
+import ChooseLanguage from './Pages/ChooseLanguage/ChooseLanguage';
 const Stack = createStackNavigator();
 
 console.disableYellowBox = true;
 
 
-export default function route(props) {
+export default function route() {
+    const Lang = useSelector(state => state.Auth.Languages.Types)
     const [Load, setLoad] = useState(true)
     const isLogin = useSelector(state => state.Auth.isLogin)
     const dispatch = useDispatch();
     // const [data, setData] = useState(false)
+    const [state, setState] = useState(0);
     // console.log('asda', props)
     useEffect(() => {
         get()
-
+        // getLag()
     }, [])
-    async function get() {
+    const forceUpdate = () => setState(state + 1);
+    if (Lang) {
+        switchLanguage(Lang)
+    }
 
+
+    async function get() {
         try {
             let Login = await AsyncStorage.getItem('token');
+            let Langauge = await AsyncStorage.getItem('Langauge');
             if (Login) {
-                setLoad(false)
                 dispatch(login({ userName: 'Email' }))
+                setLoad(false)
 
             }
-            else {
+
+            // if (Langauge != '') {
+            //     dispatch(select({ Types: Langauge }))
+
+            //     // switchLanguage(Langauge)
+            //     setLoad(false)
+            //     console.log(Langauge)
+            // }
+            else
                 setLoad(false)
-            }
 
 
         }
@@ -49,10 +68,14 @@ export default function route(props) {
             <NavigationContainer independent={true}>
                 {!isLogin ?
                     (<Stack.Navigator headerMode='none'>
+
+
                         <Stack.Screen name="LoginScreen" component={LoginScreen} />
                         <Stack.Screen name='Signup' component={Signup} />
-                        <Stack.Screen name='VerfiyCode' component={VerfiyCode} />
                         <Stack.Screen name='ForgetPassword' component={ForgetPassword} />
+                        <Stack.Screen name='VerfiyCode' component={VerfiyCode} />
+
+
                     </Stack.Navigator>)
                     :
                     (

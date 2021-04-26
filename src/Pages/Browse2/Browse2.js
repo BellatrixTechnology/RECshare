@@ -18,6 +18,7 @@ import IconFont from 'react-native-vector-icons/FontAwesome5';
 import { ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AlertModal from '../../Component/AlertModal/index'
+import { I18n } from '../../../i18n/I18n';
 
 const Browse2 = (props) => {
 
@@ -71,13 +72,11 @@ const Browse2 = (props) => {
 
     }
     async function sortData(parsed1) {
-        console.log(parsed1.Checked)
         let a = parsed1.Rating
-        let end = parsed1.EPrice
-        let start = parsed1.SPrice
+
         const list = [];
-        if (parsed1.Rating != '') {
-            if (parsed1.Checked == 'HighestFirst') {
+        if (parsed1?.Rating != '') {
+            if (parsed1?.Checked == 'HighestFirst') {
                 const snapshot = await firestore().collection('Space').where('Rating', '<=', a).orderBy('Rating', 'desc').get();
                 snapshot.forEach((doc) => {
                     list.push(doc.data());
@@ -85,7 +84,7 @@ const Browse2 = (props) => {
                 console.log(filterData)
                 setFilterData([...list])
             }
-            else if (parsed1.Checked == 'LowestFirst') {
+            else if (parsed1?.Checked == 'LowestFirst') {
                 const snapshot = await firestore().collection('Space').where('Rating', '<=', a).orderBy('Rating', 'asc').get();
                 snapshot.forEach((doc) => {
                     list.push(doc.data());
@@ -94,10 +93,9 @@ const Browse2 = (props) => {
                 setFilterData([...list])
             }
         }
-        else if (parsed1.SPrice != '' && parsed1.EPrice != '') {
+        else if (parsed1?.SPrice != '' && parsed1?.EPrice != '') {
             console.log('price')
-            if (parsed1.Checked == 'Pricelowestfirst') {
-                console.log(parsed1.Checked)
+            if (parsed1?.Checked == 'Pricelowestfirst') {
 
                 const snapshot = await firestore().collection('Space').orderBy('credit', 'asc').get();
                 snapshot.forEach((doc) => {
@@ -106,7 +104,7 @@ const Browse2 = (props) => {
                 console.log(filterData)
                 setFilterData([...list])
             }
-            else if (parsed1.Checked == 'Pricehigestfirst') {
+            else if (parsed1?.Checked == 'Pricehigestfirst') {
                 const snapshot = await firestore().collection('Space').orderBy('credit', 'desc').get();
                 snapshot.forEach((doc) => {
                     list.push(doc.data());
@@ -157,7 +155,7 @@ const Browse2 = (props) => {
                 <ScrollView>
                     <View style={styling.mainContainer}>
                         <View style={{ marginLeft: wp(3) }}>
-                            <Text style={styling.labelTXT}>Will you plan to work with in </Text>
+                            <Text style={styling.labelTXT}>{I18n.t('Willyouplan')}</Text>
                             <View style={styling.cityView}>
                                 <Text style={styling.cityTXT}>San Francisco? </Text>
                                 <Icons name='angle-down' size={30} color='#FF2D55' />
@@ -185,11 +183,11 @@ const Browse2 = (props) => {
                             <View style={{}}>
                                 <View style={styling.categoryView}>
                                     <View >
-                                        <Text style={styling.CategoryTXT}>Categories</Text>
+                                        <Text style={styling.CategoryTXT}>{I18n.t('Categories')}</Text>
                                     </View >
                                     <View>
                                         <TouchableOpacity style={styling.seeALLOpacity} onPress={() => { props.navigation.navigate('Categories') }} >
-                                            <Text style={styling.seeALLTXT}>See All</Text>
+                                            <Text style={styling.seeALLTXT}>{I18n.t('See all')}</Text>
                                             <Icon name='right' size={10} />
                                         </TouchableOpacity>
                                     </View>
@@ -201,7 +199,7 @@ const Browse2 = (props) => {
                                                 <Icons name='building' color='white' size={50} />
                                             </View>
                                             <View style={styling.cardTXTView}>
-                                                <Text style={styling.carHeading}>Private</Text>
+                                                <Text style={styling.carHeading}>{I18n.t('Private')}</Text>
                                             </View>
                                         </TouchableOpacity>
                                         <View style={styling.mainCardView}>
@@ -209,7 +207,7 @@ const Browse2 = (props) => {
                                                 <Icons name='people-carry' color='white' size={50} />
                                             </View>
                                             <View style={styling.cardTXTView}>
-                                                <Text style={styling.carHeading}>Meeting</Text>
+                                                <Text style={styling.carHeading}>{I18n.t('Meeting')}</Text>
                                             </View>
                                         </View>
                                         <View style={styling.mainCardView}>
@@ -217,7 +215,7 @@ const Browse2 = (props) => {
                                                 <Icons name='chalkboard-teacher' color='white' size={50} />
                                             </View>
                                             <View style={styling.cardTXTView}>
-                                                <Text style={styling.carHeading}>Seminar</Text>
+                                                <Text style={styling.carHeading}>{I18n.t('Seminar')}</Text>
                                             </View>
                                         </View>
                                         <View style={styling.mainCardView}>
@@ -225,7 +223,7 @@ const Browse2 = (props) => {
                                                 <Matriel name='office-building' color='white' size={60} />
                                             </View>
                                             <View style={styling.cardTXTView}>
-                                                <Text style={styling.carHeading}>Office</Text>
+                                                <Text style={styling.carHeading}>{I18n.t('Office')}</Text>
                                             </View>
                                         </View>
 
@@ -241,7 +239,7 @@ const Browse2 = (props) => {
                                     </View>
                                     <View>
                                         <TouchableOpacity style={styling.seeALLOpacity} onPress={() => props.navigation.navigate('Search2')}>
-                                            <Text style={styling.seeALLTXT}>See All</Text>
+                                            <Text style={styling.seeALLTXT}>{I18n.t('See all')}</Text>
                                             <Icon name='right' size={10} />
                                         </TouchableOpacity>
                                     </View>
@@ -274,7 +272,7 @@ const Browse2 = (props) => {
 
                                                     <View style={{ flexDirection: 'row' }}>
                                                         <Icons name='map-marker-alt' color='#666666' size={15} />
-                                                        <Text style={styling.carLabel}>  {item.distance} mi away {item.Guest} Guest</Text>
+                                                        <Text style={styling.carLabel}>  {item.distance} mi {I18n.t('Away')} {item.Guest} {I18n.t('guest')}</Text>
                                                     </View>
                                                 </View>
                                             )
@@ -286,11 +284,11 @@ const Browse2 = (props) => {
                         <View style={styling.buttonOpacityView}>
                             <TouchableOpacity style={styling.mapOpacity}>
                                 <Entypo name='map' size={20} />
-                                <Text> Map</Text>
+                                <Text>  {I18n.t('Map')}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={styling.filterOpacity} onPress={() => { props.navigation.navigate('Filter') }}>
                                 <AntDesign name='filter' size={20} />
-                                <Text> Filter</Text>
+                                <Text>  {I18n.t('Filter')}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styling.cardContainer22}>
@@ -312,7 +310,7 @@ const Browse2 = (props) => {
                                                 </Text>
                                                 <View style={{ flexDirection: 'row' }}>
                                                     <IconFont name='map-marker-alt' color='#666666' size={16} />
-                                                    <Text style={styling.cardheadLabels}>  {item.distance} mi away </Text>
+                                                    <Text style={styling.cardheadLabels}>  {item.distance} mi {I18n.t('Away')} </Text>
                                                 </View>
                                                 {
                                                     item.Rating == 5 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★★★★</Text> || item.Rating == 4 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★★★</Text> || item.Rating == 3 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★★</Text> || item.Rating == 2 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★</Text> || item.Rating && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★</Text>

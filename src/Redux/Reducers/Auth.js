@@ -2,10 +2,8 @@ import { LOGIN, LOGOUT, SELECT, DESELECT } from '../Types';
 const intialState = {
     user: {
     },
-    Service: {
-        isTravel: false,
-        isFood: false,
-        isGrocery: false
+    Languages: {
+        Types: 'bg'
     },
     isLogin: false,
 
@@ -29,13 +27,13 @@ const reducer = (state = intialState, action) => {
         case SELECT: {
             return {
                 ...state,
-                Service: action.payload,
+                Languages: action.payload,
             }
         }
         case DESELECT: {
             return {
                 ...state,
-                Service: {},
+                Languages: {},
 
             }
         }

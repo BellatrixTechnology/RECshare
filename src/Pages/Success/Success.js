@@ -4,6 +4,8 @@ import { Text, Input, colors } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/FontAwesome5';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { styling } from './styling';
+import { I18n } from '../../../i18n/I18n';
+
 const Success = ({ route }) => {
     console.log(route)
     const Datee = route.params.Date
@@ -29,8 +31,8 @@ const Success = ({ route }) => {
 
                     </View>
                     <View style={styling.innerView}>
-                        <Text style={styling.successTXT} >Success!</Text>
-                        <Text style={styling.successLabel}>Thank you for choosing our service and trust our host to handle your workplace needs</Text>
+                        <Text style={styling.successTXT} >{I18n.t('Success')}</Text>
+                        <Text style={styling.successLabel}>{I18n.t('Thankyouforchoosingus')}</Text>
                     </View>
                     <View style={styling.mainInnerContainer}>
                         <View style={styling.avatarView}>
@@ -58,8 +60,8 @@ const Success = ({ route }) => {
                                 {address}
                             </Text>
                             <Text style={styling.labelTXT2}>
-                                {distance} mi away
-                      </Text>
+                                {distance} mi {I18n.t('Away')}
+                            </Text>
                         </View>
 
                     </View>
@@ -78,7 +80,7 @@ const Success = ({ route }) => {
                                 bookID: bookID
                             })
                         }}>
-                            <Text style={styling.signupText}>Check Details</Text>
+                            <Text style={styling.signupText}>{I18n.t('CheckDetail')}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

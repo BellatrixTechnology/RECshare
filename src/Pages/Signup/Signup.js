@@ -8,6 +8,7 @@ import PhoneInput from 'react-native-phone-input';
 import { wp, hp } from '../../Global/Styles/Scalling';
 import InputF from '../../Component/InputField/index';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { I18n } from '../../../i18n/I18n';
 
 const Signup = (props) => {
     const [Names, setName] = useState('');
@@ -72,11 +73,11 @@ const Signup = (props) => {
                             <View style={styling.headerView}>
 
                                 <View style={styling.welcomeView}>
-                                    <Text style={styling.welcomeLabel}>Welcome </Text>
-                                    <Text style={styling.welcomeLabel}>user</Text>
+                                    <Text style={styling.welcomeLabel}>{I18n.t('Welcome')} </Text>
+                                    <Text style={styling.welcomeLabel}>{I18n.t('User')} </Text>
                                 </View>
                                 <View style={styling.signupHeader}>
-                                    <Text style={styling.siguplabel}>Sign up to join</Text>
+                                    <Text style={styling.siguplabel}>{I18n.t('SignupContinure')}</Text>
                                 </View>
                             </View>
                             <View style={styling.avatarView}>
@@ -84,8 +85,8 @@ const Signup = (props) => {
                         </View>
                         <View style={styling.formView}>
                             <InputF
-                                label='Name'
-                                placeholder='Joe Doe'
+                                label={I18n.t('Name')}
+                                placeholder={I18n.t('Name')}
                                 onChange={(val) => {
                                     setName(val)
                                     console.log(val)
@@ -99,7 +100,7 @@ const Signup = (props) => {
                             />
 
                             <InputF
-                                label='Email'
+                                label={I18n.t('Email')}
                                 placeholder='abc@gmail.com'
                                 onChange={(val) => {
                                     setEmail(val)
@@ -127,8 +128,8 @@ const Signup = (props) => {
                                 fontSize: wp(3), marginHorizontal: wp(4)
                             }}>Enter Valid Number</Text>}
                             <InputF
-                                label='Password'
-                                placeholder='Password'
+                                label={I18n.t('Password')}
+                                placeholder={I18n.t('Password')}
                                 onChange={(val) => {
                                     setPassword(val)
                                     console.log(val)
@@ -152,9 +153,9 @@ const Signup = (props) => {
                                 }}
                                 color={check ? '#4CD964' : 'black'}
                             />
-                            <Text style={styling.agreeTXT}>  I agree to the</Text>
+                            <Text style={styling.agreeTXT}>  {I18n.t('agreeto')}</Text>
                             <TouchableOpacity>
-                                <Text style={styling.termsTXT}> Terms and Condition</Text>
+                                <Text style={styling.termsTXT}> {I18n.t('termscondition')}</Text>
 
                             </TouchableOpacity>
                         </View>
@@ -162,13 +163,13 @@ const Signup = (props) => {
                             <TouchableOpacity style={styling.signupOpacity} onPress={() => {
                                 checkField()
                             }}>
-                                <Text style={styling.signupText}>Sign Up</Text>
+                                <Text style={styling.signupText}>{I18n.t('SignUp')}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styling.signinView}>
-                            <Text style={styling.signinTXT}>Have an account? </Text>
+                            <Text style={styling.signinTXT}>{I18n.t('HaveAccount')} </Text>
                             <TouchableOpacity onPress={() => { props.navigation.navigate('LoginScreen') }}>
-                                <Text style={styling.opacitysigninTXT}>Sign in</Text>
+                                <Text style={styling.opacitysigninTXT}>{I18n.t('SignIn')}</Text>
                             </TouchableOpacity>
                         </View>
 

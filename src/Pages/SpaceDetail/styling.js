@@ -247,10 +247,11 @@ export const styling = StyleSheet.create({
         fontFamily: fontFamily.SFUITextSemiBold
     },
     opacityView: {
+        marginVertical: hp(4),
         height: hp(10),
         alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: hp(5)
+        // marginBottom: (5)
     },
     OpacityLog: {
         width: wp('85%'),

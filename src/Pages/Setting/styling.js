@@ -31,8 +31,9 @@ export const styling = StyleSheet.create({
         color: 'black'
     },
     headingView: {
-        width: wp('45%'),
-        alignItems: 'center',
+        width: wp('60%'),
+        marginHorizontal: wp(3)
+        // alignItems: 'center',
 
     },
     headTXT: {

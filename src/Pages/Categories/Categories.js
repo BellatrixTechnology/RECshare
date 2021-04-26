@@ -9,6 +9,7 @@ import Matriel from 'react-native-vector-icons/MaterialCommunityIcons';
 import MatrielIcon from 'react-native-vector-icons/MaterialIcons';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
+import { I18n } from '../../../i18n/I18n';
 
 const Categories = (props) => {
     const [Private, setPrivate] = useState(0);
@@ -51,7 +52,7 @@ const Categories = (props) => {
             <View style={styling.mainContainer}>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styling.innerView}>
-                        <Text style={styling.categoryTXT}>Categories</Text>
+                        <Text style={styling.categoryTXT}>{I18n.t('Categories')}</Text>
 
                     </View>
                     <View style={styling.mainCardView}>
@@ -63,8 +64,8 @@ const Categories = (props) => {
                                     <FontAwesome name='building' color='white' size={70} />
                                 </View>
                                 <View>
-                                    <Text style={styling.headTXT}>Private</Text>
-                                    <Text style={styling.labelTXT}>{Private} WorkSpaces</Text>
+                                    <Text style={styling.headTXT}>{I18n.t('Private')}</Text>
+                                    <Text style={styling.labelTXT}>{Private} {I18n.t('Workspace')}</Text>
                                 </View>
                             </View>
                             <View style={[styling.cardView, {
@@ -74,8 +75,8 @@ const Categories = (props) => {
                                     <Matriel name='account-group' color='white' size={70} />
                                 </View>
                                 <View>
-                                    <Text style={styling.headTXT}>Meeting</Text>
-                                    <Text style={styling.labelTXT} >{Metting} WorkSpaces</Text>
+                                    <Text style={styling.headTXT}>{I18n.t('Meeting')}</Text>
+                                    <Text style={styling.labelTXT} >{Metting} {I18n.t('Workspace')}</Text>
                                 </View>
 
                             </View>
@@ -88,8 +89,8 @@ const Categories = (props) => {
                                     <FontAwesome name='chalkboard-teacher' color='white' size={70} />
                                 </View>
                                 <View>
-                                    <Text style={styling.headTXT}>Seminar</Text>
-                                    <Text style={styling.labelTXT}>{Seminer} WorkSpaces</Text>
+                                    <Text style={styling.headTXT}>{I18n.t('Seminar')}</Text>
+                                    <Text style={styling.labelTXT}>{Seminer} {I18n.t('Workspace')}</Text>
                                 </View>
                             </View>
                             <View style={[styling.cardView, {
@@ -99,8 +100,8 @@ const Categories = (props) => {
                                     <Matriel name='office-building' color='white' size={80} />
                                 </View>
                                 <View>
-                                    <Text style={styling.headTXT}>Offices</Text>
-                                    <Text style={styling.labelTXT}>{Office} WorkSpaces</Text>
+                                    <Text style={styling.headTXT}>{I18n.t('Office')}</Text>
+                                    <Text style={styling.labelTXT}>{Office} {I18n.t('Workspace')}</Text>
                                 </View>
                             </View>
                         </View>
@@ -110,8 +111,8 @@ const Categories = (props) => {
                                     <MatrielIcon name='event' color='white' size={80} />
                                 </View>
                                 <View>
-                                    <Text style={styling.headTXT}>Event</Text>
-                                    <Text style={styling.labelTXT}>{Event} WorkSpaces</Text>
+                                    <Text style={styling.headTXT}>{I18n.t('Event')}</Text>
+                                    <Text style={styling.labelTXT}>{Event} {I18n.t('Workspace')}</Text>
                                 </View>
                             </View>
                             <View style={[styling.cardView, {
@@ -121,8 +122,8 @@ const Categories = (props) => {
                                     <Matriel name='table-large' color='white' size={80} />
                                 </View>
                                 <View>
-                                    <Text style={styling.headTXT}>Hot Desk</Text>
-                                    <Text style={styling.labelTXT}>{HotDesk} WorkSpaces</Text>
+                                    <Text style={styling.headTXT}>{I18n.t('Hot Desk')}</Text>
+                                    <Text style={styling.labelTXT}>{HotDesk} {I18n.t('Workspace')}</Text>
                                 </View>
 
                             </View>

@@ -6,6 +6,8 @@ import { Checkbox } from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styling } from './styling';
 import { wp } from '../../Global/Styles/Scalling';
+import { I18n } from '../../../i18n/I18n';
+
 const Filter = (props) => {
 
     const [isEnabled, setIsEnabled] = useState(false);
@@ -59,12 +61,12 @@ const Filter = (props) => {
                 <View style={styling.mainContainer}>
                     <ScrollView showsVerticalScrollIndicator={false}>
 
-                        <Text style={styling.filterTXT}>Filter</Text>
+                        <Text style={styling.filterTXT}>{I18n.t('Filter')}</Text>
                         <View style={styling.availheadView}>
-                            <Text style={styling.availTXT}>Availabilty</Text>
+                            <Text style={styling.availTXT}>{I18n.t('Availabilty')}</Text>
                         </View>
                         <View style={styling.availTodayView}>
-                            <Text style={styling.availTodayTXT}>Available Today</Text>
+                            <Text style={styling.availTodayTXT}>{I18n.t('AvailaleToday')}</Text>
                             <Switch
                                 trackColor={{ false: "#767577", true: "#FF2D55" }}
                                 thumbColor={isEnabled ? "#E5E5E5" : "#f4f3f4"}
@@ -79,10 +81,10 @@ const Filter = (props) => {
                             />
                         </View>
                         <View style={styling.availheadView}>
-                            <Text style={styling.availTXT}>Sort Option</Text>
+                            <Text style={styling.availTXT}>{I18n.t('SortOptions')}</Text>
                         </View>
                         <View style={styling.availTodayView}>
-                            <Text style={styling.availTodayTXT}>Popularity</Text>
+                            <Text style={styling.availTodayTXT}>{I18n.t('Popularity')}</Text>
                             <Checkbox
                                 status={checked == 'Popularity' ? 'checked' : 'unchecked'}
                                 onPress={() => { setcheck('Popularity') }}
@@ -91,7 +93,7 @@ const Filter = (props) => {
                             />
                         </View>
                         <View style={styling.availTodayView}>
-                            <Text style={styling.availTodayTXT}>Star Rating (Highest First)</Text>
+                            <Text style={styling.availTodayTXT}>{I18n.t('StarRatingH')}</Text>
                             <Checkbox
                                 status={checked == 'HighestFirst' ? 'checked' : 'unchecked'}
                                 onPress={() => { setcheck('HighestFirst') }}
@@ -99,7 +101,7 @@ const Filter = (props) => {
                             />
                         </View>
                         <View style={styling.availTodayView}>
-                            <Text style={styling.availTodayTXT}>Star Rating (Lowest First)</Text>
+                            <Text style={styling.availTodayTXT}>{I18n.t('StarRatingL')}</Text>
                             <Checkbox
                                 status={checked == 'LowestFirst' ? 'checked' : 'unchecked'}
                                 onPress={() => { setcheck('LowestFirst') }}
@@ -107,7 +109,7 @@ const Filter = (props) => {
                             />
                         </View>
                         <View style={styling.availTodayView}>
-                            <Text style={styling.availTodayTXT}>Best Reviewed First</Text>
+                            <Text style={styling.availTodayTXT}>{I18n.t('BestReviewedFirst')}</Text>
                             <Checkbox
                                 status={checked == 'BestFirst' ? 'checked' : 'unchecked'}
                                 onPress={() => { setcheck('BestFirst') }}
@@ -116,78 +118,78 @@ const Filter = (props) => {
                         </View>
 
                         <View style={styling.availTodayView}>
-                            <Text style={styling.availTodayTXT}>Most Reviewed First</Text>
+                            <Text style={styling.availTodayTXT}>{I18n.t('MostReviewedFirst')}</Text>
                             <Checkbox
                                 status={checked == 'MostFirst' ? 'checked' : 'unchecked'}
                                 onPress={() => { setcheck('MostFirst') }}
                             />
                         </View>
                         <View style={styling.availTodayView}>
-                            <Text style={styling.availTodayTXT}>Price (lowest first)</Text>
+                            <Text style={styling.availTodayTXT}>{I18n.t('PriceL')}</Text>
                             <Checkbox
                                 status={checked == 'Pricelowestfirst' ? 'checked' : 'unchecked'}
                                 onPress={() => { setcheck('Pricelowestfirst') }}
                             />
                         </View>
                         <View style={styling.availTodayView}>
-                            <Text style={styling.availTodayTXT}>Price (higest first)</Text>
+                            <Text style={styling.availTodayTXT}>{I18n.t('PriceH')}</Text>
                             <Checkbox
                                 status={checked == 'Pricehigestfirst' ? 'checked' : 'unchecked'}
                                 onPress={() => { setcheck('Pricehigestfirst') }}
                             />
                         </View>
                         <View style={styling.availheadView}>
-                            <Text style={styling.availTXT}>More Option</Text>
+                            <Text style={styling.availTXT}>{I18n.t('MoreOptions')}</Text>
                         </View>
                         <View style={styling.availTodayView}>
-                            <Text style={styling.availTodayTXT}>Capacity</Text>
-                            <TextInput style={styling.anyTXT} placeholder='Any' keyboardType='numeric' />
+                            <Text style={styling.availTodayTXT}>{I18n.t('Capacity')}</Text>
+                            <TextInput style={styling.anyTXT} placeholder={I18n.t('Any')} keyboardType='numeric' />
                         </View>
                         <View style={styling.availTodayView}>
-                            <Text style={styling.availTodayTXT}>Space Size (sq ft)</Text>
-                            <TextInput style={styling.anyTXT} placeholder='Any' keyboardType='numeric' />
+                            <Text style={styling.availTodayTXT}>{I18n.t('SpaceSize')}</Text>
+                            <TextInput style={styling.anyTXT} placeholder={I18n.t('Any')} keyboardType='numeric' />
                         </View>
                         <View style={styling.availheadView}>
-                            <Text style={styling.availTXT}>Amenities</Text>
+                            <Text style={styling.availTXT}>{I18n.t('Amenities')}</Text>
                         </View>
                         <View style={styling.amenityView}>
                             <TouchableOpacity style={Amenitie == 'Wifi' ? [styling.amenOpacity, { borderColor: '#FF2D55' }] : styling.amenOpacity} onPress={() => {
                                 setAmenisties('Wifi')
                             }}>
-                                <Text style={styling.amenTXT}>Wifi</Text>
+                                <Text style={styling.amenTXT}>{I18n.t('Wifi')}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={Amenitie == 'Projector' ? [styling.amenOpacity, { borderColor: '#FF2D55' }] : styling.amenOpacity} onPress={() => {
                                 setAmenisties('Projector')
                             }}>
-                                <Text style={styling.amenTXT}>Projector</Text>
+                                <Text style={styling.amenTXT}>{I18n.t('Projector')}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styling.amenityView}>
                             <TouchableOpacity style={Amenitie == 'White' ? [styling.amenOpacity, { borderColor: '#FF2D55' }] : styling.amenOpacity} onPress={() => {
                                 setAmenisties('White')
                             }}>
-                                <Text style={styling.amenTXT}>White Board</Text>
+                                <Text style={styling.amenTXT}>{I18n.t('Whiteboard')}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={Amenitie == 'Printer' ? [styling.amenOpacity, { borderColor: '#FF2D55' }] : styling.amenOpacity} onPress={() => {
                                 setAmenisties('Printer')
                             }} >
-                                <Text style={styling.amenTXT}>Printer</Text>
+                                <Text style={styling.amenTXT}>{I18n.t('PrinterS')}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styling.amenityView}>
                             <TouchableOpacity style={Amenitie == 'Monitor' ? [styling.amenOpacity, { borderColor: '#FF2D55' }] : styling.amenOpacity} onPress={() => {
                                 setAmenisties('Monitor')
                             }} >
-                                <Text style={styling.amenTXT}>TV/Monitor</Text>
+                                <Text style={styling.amenTXT}>{I18n.t('TvM')}r</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={Amenitie == 'Kitchen' ? [styling.amenOpacity, { borderColor: '#FF2D55' }] : styling.amenOpacity} onPress={() => {
                                 setAmenisties('Kitchen')
                             }}>
-                                <Text style={styling.amenTXT}>Kitchen</Text>
+                                <Text style={styling.amenTXT}>{I18n.t('Kitchen')}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styling.availheadView}>
-                            <Text style={styling.availTXT}>Price Range</Text>
+                            <Text style={styling.availTXT}>{I18n.t('PriceRange')}</Text>
                         </View>
                         <View style={{ alignSelf: 'center', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly', width: wp(85) }}>
                             <TextInput
@@ -218,7 +220,7 @@ const Filter = (props) => {
                             />
                         </View>
                         <View style={styling.availheadView}>
-                            <Text style={styling.availTXT}>Star Range</Text>
+                            <Text style={styling.availTXT}>{I18n.t('StartRating')}</Text>
                         </View>
                         <View style={styling.starView}>
                             <TouchableOpacity style={rate == 1 || rate == 2 || rate == 3 || rate == 4 || rate == 5 ? [styling.starOpacity1, { backgroundColor: '#FF2D55', borderColor: '#FF2D55' }] : styling.starOpacity1} onPress={() => {
@@ -273,7 +275,7 @@ const Filter = (props) => {
                             <TouchableOpacity style={styling.OpacityLog} onPress={() => {
                                 selects()
                             }}>
-                                <Text style={styling.Opacitytxt}>Apple Filter</Text>
+                                <Text style={styling.Opacitytxt}>{I18n.t('ApplyFilter')}</Text>
                             </TouchableOpacity>
                         </View>
 

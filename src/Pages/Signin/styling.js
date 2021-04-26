@@ -18,10 +18,12 @@ export const styling = StyleSheet.create({
         width: wp('50%'),
     },
     welcomeHeader: {
-        marginHorizontal: wp(3)
+        marginHorizontal: wp(3),
+        alignItems: 'flex-start',
+        width: wp(70),
     },
     signinHeader: {
-        width: wp('40%'),
+        width: wp('70%'),
         marginHorizontal: wp(3)
 
     },

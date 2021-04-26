@@ -111,7 +111,7 @@ export default {
     "AccountCredits": "帳戶積分",
     "Favourties": "收藏夾",
     "home": "家",
-    "Payment Cards": "付款卡",
+    "PaymentCards": "付款卡",
     "AddnewCard": "新增卡",
     "AddAdres": "添加新地址",
     "Account": "帳戶",

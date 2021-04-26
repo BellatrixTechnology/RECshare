@@ -8,6 +8,7 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import AlertModal from '../../Component/AlertModal/index';
+import { I18n } from '../../../i18n/I18n';
 
 import { styling } from './styling';
 import { wp } from '../../Global/Styles/Scalling';
@@ -55,7 +56,7 @@ const SpaceDetail = ({ route }) => {
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.headView}>
                     <Icons name="left" style={styling.headIcon} color='black' size={28} onPress={() => { props.goBack() }} />
-                    <Text style={styling.headTXT}>Space Details</Text>
+                    <Text style={styling.headTXT}>{I18n.t('SpaceDetail')}</Text>
 
                     <Icons.Button name='heart' style={styling.headIcon} color='black' size={28} />
                 </View>
@@ -78,8 +79,8 @@ const SpaceDetail = ({ route }) => {
                                     <Text style={styling.timeTXT}>${obj.credit}/hr</Text>
                                 </View>
                                 <View style={styling.dataView}>
-                                    <Text>{obj.distance} miles away</Text>
-                                    <Text>{obj.guest} guest</Text>
+                                    <Text>{obj.distance} miles {I18n.t('Away')}</Text>
+                                    <Text>{obj.guest} {I18n.t('guest')}</Text>
                                     <Text>120 m2</Text>
                                 </View>
                                 <View style={styling.headerView}>
@@ -88,7 +89,7 @@ const SpaceDetail = ({ route }) => {
 
                                     </View>
                                     <View style={styling.statusView}>
-                                        <Text style={styling.labelTXT}>Meet the host</Text>
+                                        <Text style={styling.labelTXT}>{I18n.t('Meethost')}</Text>
 
                                         <Text style={styling.timeTXT}>{obj.Host}</Text>
                                     </View>
@@ -99,78 +100,78 @@ const SpaceDetail = ({ route }) => {
                                 </View>
 
                                 <View style={styling.availheadView}>
-                                    <Text style={styling.availTXT}>Amenities</Text>
+                                    <Text style={styling.availTXT}>{I18n.t('Amenities')}</Text>
                                 </View>
                                 <View style={styling.amenityView}>
                                     <TouchableOpacity style={styling.amenOpacity}>
-                                        <Text style={styling.amenTXT}>Air Conditioning</Text>
+                                        <Text style={styling.amenTXT}>{I18n.t('Wifi')}</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styling.amenOpacity}>
-                                        <Text style={styling.amenTXT}>Kitchen</Text>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={styling.amenityView}>
-                                    <TouchableOpacity style={styling.amenOpacity}>
-                                        <Text style={styling.amenTXT}>High Speed WiFi</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styling.amenOpacity}>
-                                        <Text style={styling.amenTXT}>Personal Lockers</Text>
+                                        <Text style={styling.amenTXT}>{I18n.t('Projector')}</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View style={styling.amenityView}>
                                     <TouchableOpacity style={styling.amenOpacity}>
-                                        <Text style={styling.amenTXT}>Printer</Text>
+                                        <Text style={styling.amenTXT}>{I18n.t('Whiteboard')}</Text>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={styling.amenOpacity}>
-                                        <Text style={styling.amenTXT}>Visual Equipment</Text>
+                                        <Text style={styling.amenTXT}>{I18n.t('PrinterS')}</Text>
                                     </TouchableOpacity>
                                 </View>
-                                <View style={styling.amenityMoreView}>
+                                <View style={styling.amenityView}>
+                                    <TouchableOpacity style={styling.amenOpacity}>
+                                        <Text style={styling.amenTXT}>{I18n.t('TvM')}</Text>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={styling.amenOpacity}>
+                                        <Text style={styling.amenTXT}>{I18n.t('Kitchen')}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                                {/* <View style={styling.amenityMoreView}>
                                     <Icons name='pluscircleo' color='#666666' />
                                     <Text style={styling.labelTXT}>   7 More Amenities</Text>
-                                </View>
+                                </View> */}
                                 <View style={styling.openMainView}>
                                     <View style={styling.availheadView}>
-                                        <Text style={styling.availTXT}>Open Hour</Text>
+                                        <Text style={styling.availTXT}>{I18n.t('openhour')}</Text>
                                     </View>
 
                                     <View style={styling.innerOpenView}>
                                         <View style={styling.dayView}>
                                             <View style={styling.innerDay1View}>
-                                                <Text style={styling.dayTXT}>Monday:</Text>
+                                                <Text style={styling.dayTXT}>{I18n.t('Monday')}:</Text>
                                                 <Text style={styling.hour1TXT}>{obj.monday}</Text>
                                             </View>
                                             <View style={styling.innerDayView}>
-                                                <Text style={styling.dayTXT}>  Friday: </Text>
+                                                <Text style={styling.dayTXT}>  {I18n.t('Firday')}: </Text>
                                                 <Text style={styling.hour1TXT}>{obj.Friday}</Text>
                                             </View>
 
                                         </View>
                                         <View style={styling.dayView}>
                                             <View style={styling.innerDay1View}>
-                                                <Text style={styling.dayTXT}>Tuesday:</Text>
+                                                <Text style={styling.dayTXT}>{I18n.t('Tuesday')}:</Text>
                                                 <Text style={styling.hour1TXT}>{obj.Tuesday}</Text>
                                             </View>
                                             <View style={styling.innerDayView}>
-                                                <Text style={styling.dayTXT}>  Saturday:</Text>
+                                                <Text style={styling.dayTXT}>  {I18n.t('Saturday')}:</Text>
                                                 <Text style={styling.hour1TXT}>{obj.Saturday} </Text>
                                             </View>
 
                                         </View>
                                         <View style={styling.dayView}>
                                             <View style={styling.innerDay1View}>
-                                                <Text style={styling.dayTXT}>Wednesday:</Text>
+                                                <Text style={styling.dayTXT}>{I18n.t('Wednesday')}:</Text>
                                                 <Text style={styling.hour1TXT}>{obj.Wednesday}</Text>
                                             </View>
                                             <View style={styling.innerDayView}>
-                                                <Text style={styling.dayTXT}>  Sunday:</Text>
+                                                <Text style={styling.dayTXT}>  {I18n.t('Sunday')}:</Text>
                                                 <Text style={styling.hour1TXT}>{obj.sunday}</Text>
                                             </View>
 
                                         </View>
                                         <View style={styling.day2View}>
                                             <View style={styling.innerDay1View}>
-                                                <Text style={styling.dayTXT}>Thursday: </Text>
+                                                <Text style={styling.dayTXT}>{I18n.t('Thursday')}: </Text>
                                                 <Text style={styling.hour1TXT}>{obj.Thrusday}</Text>
                                             </View>
                                             <View style={styling.innerDayView}>
@@ -182,15 +183,15 @@ const SpaceDetail = ({ route }) => {
                                 </View>
 
                                 <View style={styling.availheadView}>
-                                    <Text style={styling.availTXT}>Description</Text>
+                                    <Text style={styling.availTXT}>{I18n.t('Description')}</Text>
                                 </View>
                                 <Text style={styling.hourTXT}>{obj.Descript}</Text>
 
                                 <View style={styling.mainSchdView}>
                                     <View style={styling.SchedueleCiew}>
-                                        <Text style={styling.availTXT}>Scheduele</Text>
+                                        <Text style={styling.availTXT}>{I18n.t('Schedule')}</Text>
                                         <View style={styling.seeallView}>
-                                            <Text style={styling.amenTXT}>See All</Text>
+                                            <Text style={styling.amenTXT}>{I18n.t('See all')}</Text>
                                             <Icons name='right' size={14} />
                                         </View>
                                     </View>
@@ -207,7 +208,7 @@ const SpaceDetail = ({ route }) => {
                                     </View>
                                 </View>
                                 <View style={styling.availheadView}>
-                                    <Text style={styling.availTXT}>Location</Text>
+                                    <Text style={styling.availTXT}>{I18n.t('Location')}</Text>
                                 </View>
 
                                 <View style={styling.adressView}>
@@ -220,7 +221,7 @@ const SpaceDetail = ({ route }) => {
 
                                 </View>
                                 <View style={styling.availheadView}>
-                                    <Text style={styling.availTXT}>Reviews</Text>
+                                    <Text style={styling.availTXT}>{I18n.t('Reviews')}</Text>
                                 </View>
                                 <View style={styling.header2View}>
                                     <View style={styling.userView}>
@@ -232,10 +233,10 @@ const SpaceDetail = ({ route }) => {
                                     </View>
                                 </View>
                                 <Text style={styling.hourTXT}>Mindspace Solution is the latest piece of the sharing economy, eliminating extra office space by giving it to freelancers looking for a more steady place to work.</Text>
-                                <View style={styling.amenityMoreView}>
+                                {/* <View style={styling.amenityMoreView}>
                                     <Icons name='pluscircleo' color='#666666' />
                                     <Text style={styling.labelTXT}>   7 More Amenities</Text>
-                                </View>
+                                </View> */}
                                 <View style={styling.opacityView}>
                                     <TouchableOpacity style={styling.OpacityLog} onPress={() => {
                                         props.navigate('Scheduele', {
@@ -249,7 +250,7 @@ const SpaceDetail = ({ route }) => {
                                             images: obj.Image
                                         })
                                     }}>
-                                        <Text style={styling.Opacitytxt}>Book Now</Text>
+                                        <Text style={styling.Opacitytxt}>{I18n.t('Book Now')}</Text>
                                     </TouchableOpacity>
                                 </View>
 

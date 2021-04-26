@@ -11,7 +11,7 @@ import { InputModal } from '../../Component/Modal/index'
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { hp, wp } from '../../Global/Styles/Scalling';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import { I18n } from '../../../i18n/I18n';
 const Account = (props) => {
     const [Name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -108,28 +108,28 @@ const Account = (props) => {
                 <View style={styling.mainContainer}>
                     <ScrollView showsVerticalScrollIndicator={false}>
                         <View style={styling.accountView}>
-                            <Text style={styling.accountlTXT}>Account Credits</Text>
+                            <Text style={styling.accountlTXT}>{I18n.t('AccountCredits')}</Text>
                             <TouchableOpacity style={styling.accountOpacity}>
                                 <Text style={styling.creditTXT}>$0.00</Text>
                             </TouchableOpacity>
                         </View>
 
                         <View style={styling.accountView}>
-                            <Text style={styling.accountlTXT}>Favourite</Text>
+                            <Text style={styling.accountlTXT}>{I18n.t('Favourties')}</Text>
                             <TouchableOpacity style={styling.workOpacity} onPress={() => props.navigation.navigate('Favourites')} >
-                                <Text style={styling.workTXT} >workspaces</Text>
+                                <Text style={styling.workTXT} >{I18n.t('Address')}</Text>
                                 <Icons name='right' size={16} color='#C8C7CC' />
                             </TouchableOpacity>
                         </View>
                         <View style={styling.accountView}>
                             <Text style={styling.accountlTXT}>Add Space</Text>
                             <TouchableOpacity style={styling.workOpacity} onPress={() => { props.navigation.navigate('AddSpace') }} >
-                                <Text style={styling.workTXT} >workspaces</Text>
+                                <Text style={styling.workTXT} >{I18n.t('Address')}</Text>
                                 <Icons name='right' size={16} color='#C8C7CC' />
                             </TouchableOpacity>
                         </View>
                         <View style={styling.addressView}>
-                            <Text style={styling.addressTXT}>Address</Text>
+                            <Text style={styling.addressTXT}>{I18n.t('Address')}</Text>
                         </View>
                         <View>
                             <FlatList
@@ -139,7 +139,7 @@ const Account = (props) => {
 
                                         <View style={styling.inputView}>
                                             <Input
-                                                label='Home'
+                                                label={I18n.t('home')}
                                                 editable={false}
                                                 value={item.address}
                                                 rightIcon={
@@ -155,12 +155,12 @@ const Account = (props) => {
                             />
                         </View>
                         <TouchableOpacity style={styling.addAdrsView} onPress={() => setisVisible(true)}>
-                            <Text style={styling.newAdrsTXT}>Add new address</Text>
+                            <Text style={styling.newAdrsTXT}>{I18n.t('AddnewCard')}</Text>
                             <Icons name='pluscircle' size={24} color='#FF2D55' />
                         </TouchableOpacity>
 
                         <View style={styling.addressView}>
-                            <Text style={styling.addressTXT}>Payment Cards</Text>
+                            <Text style={styling.addressTXT}>{I18n.t('PaymentCards')}</Text>
                         </View>
                         <FlatList
                             data={Pay}
@@ -188,7 +188,7 @@ const Account = (props) => {
 
 
                         <View style={styling.addAdrsView}>
-                            <Text style={styling.newAdrsTXT}>Add new card</Text>
+                            <Text style={styling.newAdrsTXT}>{I18n.t('AddnewCard')}</Text>
                             <Icons name='pluscircle' size={24} color='#FF2D55' onPress={() => { props.navigation.navigate('Payment') }} />
                         </View>
                     </ScrollView>

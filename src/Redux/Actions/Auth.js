@@ -20,6 +20,6 @@ export const select = payload => {
 export const deselect = () => {
     return {
         type: DESELECT,
-        payload: { type: '' }
+        payload: { Types: '' }
     }
 };

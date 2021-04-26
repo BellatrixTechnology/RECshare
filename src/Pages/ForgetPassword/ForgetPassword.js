@@ -4,6 +4,7 @@ import { Text, Input } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/AntDesign';
 import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
+import { I18n } from '../../../i18n/I18n';
 
 const ForgetPassword = (props) => {
     const [Email, setEmail] = useState('');
@@ -33,17 +34,17 @@ const ForgetPassword = (props) => {
 
                 </Icons.Button>
 
-                <Text style={styling.headForget}>Forget Password</Text>
+                <Text style={styling.headForget}>{I18n.t('ForgotPassword')}</Text>
             </View>
             <View style={styling.mainContainer}>
                 <View style={styling.labelView}>
-                    <Text style={styling.labeltxt}>Enter your email and will send you instruction on how to reset it</Text>
+                    <Text style={styling.labeltxt}>{I18n.t('Enteryouremailandwillsendyouintruction')}</Text>
                 </View>
 
                 <View style={styling.inputView}>
                     <Input
-                        label='Email'
-                        placeholder='Email'
+                        label={I18n.t('Email')}
+                        placeholder={I18n.t('Email')}
                         value={Email}
                         onChangeText={(Email) => {
                             setEmail(Email)
@@ -54,7 +55,7 @@ const ForgetPassword = (props) => {
                 </View>
                 <View style={styling.sendView}>
                     <TouchableOpacity style={styling.sendOpacity} onPress={() => check()}>
-                        <Text style={styling.sendText}>Send</Text>
+                        <Text style={styling.sendText}>{I18n.t('Send')}</Text>
                     </TouchableOpacity>
                 </View>
             </View>

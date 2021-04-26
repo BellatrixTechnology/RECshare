@@ -8,6 +8,8 @@ import Iconss from 'react-native-vector-icons/Entypo';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { AlertCancel } from '../../Component/Modal/index';
+import { I18n } from '../../../i18n/I18n';
+
 const BookingDetails = ({ route }) => {
     const Datee = route.params.Date
     const Time = route.params.Time
@@ -49,7 +51,7 @@ const BookingDetails = ({ route }) => {
                         <View style={styling.nameView}>
                             <Text style={styling.nameTXT}>{name}</Text>
                             <TouchableOpacity style={styling.confirmOpacity}>
-                                <Text style={styling.confirmTXT}>Confirmed</Text>
+                                <Text style={styling.confirmTXT}>{I18n.t('confirmed')}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={styling.iconView}>
@@ -67,8 +69,8 @@ const BookingDetails = ({ route }) => {
 
                     <View style={styling.innerView}>
                         <View style={styling.labelView}>
-                            <Text style={styling.labelTXT}>Start</Text>
-                            <Text style={styling.labelendTXT}>End</Text>
+                            <Text style={styling.labelTXT}>{I18n.t('start')}</Text>
+                            <Text style={styling.labelendTXT}>{I18n.t('end')}</Text>
 
                         </View>
                         <View style={styling.mainDayView}>
@@ -83,7 +85,6 @@ const BookingDetails = ({ route }) => {
 
                             </View>
                             <View style={styling.dayView}>
-                                <Text style={styling.dayTXT}>Monday,</Text>
                                 <Text style={styling.dayTXT}>{Datee}</Text>
                                 <Text style={styling.timeTXT}>{Time}</Text>
                             </View>
@@ -93,9 +94,9 @@ const BookingDetails = ({ route }) => {
                         <View style={styling.mainDayView}>
                             <View style={styling.cityView}>
 
-                                <Text style={styling.timeTXT}>Address</Text>
+                                <Text style={styling.timeTXT}>{I18n.t('Address')}</Text>
                                 <Text style={styling.dayTXT}>{address}</Text>
-                                <Text style={styling.timeTXT}>{distance} mi away</Text>
+                                <Text style={styling.timeTXT}>{distance} mi {I18n.t('Away')}</Text>
                             </View>
 
                             <View style={styling.mapIconView}>
@@ -106,13 +107,13 @@ const BookingDetails = ({ route }) => {
 
                     <View style={styling.cityView}>
 
-                        <Text style={styling.timeTXT}>Price</Text>
+                        <Text style={styling.timeTXT}>{I18n.t('Price')}</Text>
                         <Text style={styling.dayTXT}>Total price ${credit}</Text>
                         <Text style={styling.timeTXT}>for 1 hr </Text>
                     </View>
 
                     <View style={styling.cityView}>
-                        <Text style={styling.timeTXT}>Reminder</Text>
+                        <Text style={styling.timeTXT}>{I18n.t('Reminder')}</Text>
                         <Text style={styling.dayTXT}>30 minutes before</Text>
                         <Text style={styling.timeTXT}>30 minutes before</Text>
 
