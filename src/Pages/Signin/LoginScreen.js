@@ -5,11 +5,11 @@ import { styling } from './styling';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import InputF from '../../Component/InputField/index';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
-import { login } from '../../Redux/Actions/Auth';
-import { I18n } from '../../../i18n/I18n';
-
+import { select, login } from '../../Redux/Actions/Auth';
+import { I18n, switchLanguage } from '../../../i18n/I18n';
+// import { login } from '../../Redux/Actions/Auth';
 const LoginScreen = (props) => {
     const [Names, setName] = useState('');
     const [Email, setEmail] = useState('');
@@ -50,14 +50,25 @@ const LoginScreen = (props) => {
     // }
     const upload = () => {
         auth()
-            .signInWithEmailAndPassword(Email, Password).then((user) => {
+            .signInWithEmailAndPassword(Email, Password).then(async (user) => {
                 let obj = {
                     Email: Email,
                     Password: Password,
                     auth: true
                 }
+                let temp
+                await firestore().collection('User').doc(user.user.uid).get().then(function (doc) {
+                    doc.data()
+                    temp = doc.data()
+                })
+                let lang = temp.Language
+                // console.log(lang, 'sdfsd', tem)
+                AsyncStorage.setItem('Langauge', lang)
+                switchLanguage(lang)
+                dispatch(select({ Types: lang }))
+
                 AsyncStorage.setItem('Login', JSON.stringify(obj))
-                AsyncStorage.setItem('token', JSON.stringify(user.user.uid))
+                AsyncStorage.setItem('token', user.user.uid)
             })
             .then((res) => {
                 console.log(res)

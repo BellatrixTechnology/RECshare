@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState, Fragment, useEffect } from 'react';
 import { View, Switch, StatusBar, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/AntDesign';
@@ -6,31 +6,26 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Iconss from 'react-native-vector-icons/Feather';
 import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import { ToastAndroid } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../Redux/Actions/Auth';
 import { InputModal } from '../../Component/Modal/index'
 import { I18n } from '../../../i18n/I18n';
-
+import Picker from '@react-native-picker/picker'
 const Setting = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const user = useSelector((state) => state.Auth.user);
     const [isVisible, setisVisible] = useState(false)
     const dispatch = useDispatch();
     const [Email, setEmail] = useState('')
-    async function signout() {
-        // auth()
-        //     .signOut()
-        //     .then(() => {
-        dispatch(logout({}))
-        AsyncStorage.removeItem('Login')
-        AsyncStorage.removeItem('token')
-
-
-        // })
-
-
+    const [lang, setLang] = useState('')
+    useEffect(() => {
+        starter()
+    }, []);
+    const starter = async () => {
+        let Langauge = await AsyncStorage.getItem('Langauge');
+        setLang(Langauge)
     }
     async function changePass() {
         auth().onAuthStateChanged((user) => {
@@ -163,7 +158,7 @@ const Setting = (props) => {
                             <View style={styling.moreoptionView}>
                                 <Text style={styling.detailHead}>{I18n.t('Languages')}</Text>
                                 <TouchableOpacity style={styling.rightView}>
-                                    <Text style={styling.labelTXT}>Emglish </Text>
+                                    <Text style={styling.labelTXT}>{lang} </Text>
                                     <Icons name='right' size={20} color='#C8C7CC' />
                                 </TouchableOpacity>
                             </View>
@@ -189,6 +184,19 @@ const Setting = (props) => {
                     setisVisible(false)
                 }}
             />
+            <Picker
+
+            >
+                <Picker.Item label="English" value="en" />
+                <Picker.Item label="Arabic" value="ara" />
+                <Picker.Item label="Bulgarian" value="bg" />
+                <Picker.Item label="Chinese" value="chi" />
+                <Picker.Item label="Hindi" value="Hindi" />
+                <Picker.Item label="Portuguese" value="Portuguese" />
+                <Picker.Item label="Russian" value="Russian" />
+                <Picker.Item label="Spanish" value="Spanish" />
+
+            </Picker>
             <SafeAreaView style={{ backgroundColor: 'white' }} />
         </Fragment>
     )

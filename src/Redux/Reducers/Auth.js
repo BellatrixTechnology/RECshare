@@ -3,7 +3,7 @@ const intialState = {
     user: {
     },
     Languages: {
-        Types: 'bg'
+        Types: ''
     },
     isLogin: false,
 

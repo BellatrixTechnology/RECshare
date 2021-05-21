@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack'
 import LoginScreen from '../src/Pages/Signin/LoginScreen';
 import Signup from '../src/Pages/Signup/Signup';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import ForgetPassword from '../src/Pages/ForgetPassword/ForgetPassword';
 import VerfiyCode from '../src/Pages/VerifyCode/VerifyCode';
 import Tabs from '../src/Navigator/BottomTab';
@@ -31,33 +31,28 @@ export default function route() {
         get()
         // getLag()
     }, [])
-    const forceUpdate = () => setState(state + 1);
-    if (Lang) {
-        switchLanguage(Lang)
-    }
+    // const forceUpdate = () => setState(state + 1);
+    // if (Lang) {
+    //     switchLanguage(Lang)
+    // }
 
 
     async function get() {
         try {
             let Login = await AsyncStorage.getItem('token');
             let Langauge = await AsyncStorage.getItem('Langauge');
+            console.log(Login, '=====')
             if (Login) {
                 dispatch(login({ userName: 'Email' }))
-                setLoad(false)
-
+                // setLoad(false)
             }
-
-            // if (Langauge != '') {
-            //     dispatch(select({ Types: Langauge }))
-
-            //     // switchLanguage(Langauge)
-            //     setLoad(false)
-            //     console.log(Langauge)
-            // }
+            if (Langauge != '') {
+                dispatch(select({ Types: Langauge }))
+                switchLanguage(Langauge)
+                setLoad(false)
+            }
             else
                 setLoad(false)
-
-
         }
         catch (error) {
             console.log(error)
@@ -74,6 +69,7 @@ export default function route() {
                         <Stack.Screen name='Signup' component={Signup} />
                         <Stack.Screen name='ForgetPassword' component={ForgetPassword} />
                         <Stack.Screen name='VerfiyCode' component={VerfiyCode} />
+                        <Stack.Screen name='ChooseLanguage' component={ChooseLanguage} />
 
 
                     </Stack.Navigator>)

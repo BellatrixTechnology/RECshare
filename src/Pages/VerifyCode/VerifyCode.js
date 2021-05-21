@@ -4,7 +4,7 @@ import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
 import InputF from '../../Component/InputField/index';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import CountDown from 'react-native-countdown-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../Redux/Actions/Auth';
@@ -45,8 +45,7 @@ const VerifyCode = ({ route }) => {
                     .signInWithEmailAndPassword(email, Password)
                 AsyncStorage.setItem('Login', JSON.stringify(obj))
                 let Login = await AsyncStorage.getItem('token');
-
-                dispatch(login({ userName: Login }))
+                props.navigation.navigate('ChooseLanguage', { login: Login })
 
 
             })

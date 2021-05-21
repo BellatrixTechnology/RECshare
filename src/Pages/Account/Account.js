@@ -10,7 +10,7 @@ import firestore from '@react-native-firebase/firestore';
 import { InputModal } from '../../Component/Modal/index'
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { hp, wp } from '../../Global/Styles/Scalling';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import { I18n } from '../../../i18n/I18n';
 const Account = (props) => {
     const [Name, setName] = useState('')

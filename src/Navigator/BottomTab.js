@@ -94,7 +94,7 @@ export default function BottomTabBar() {
         <NavigationContainer independent={true}>
             <Stack.Navigator initialRouteName={HomeScreen} headerMode={null} >
                 <Stack.Screen name="HomeScreen" component={HomeScreen} />
-                <Stack.Screen name='ChooseLanguage' component={ChooseLanguage} />
+                {/* <Stack.Screen name='ChooseLanguage' component={ChooseLanguage} /> */}
                 <Stack.Screen name='Chat' component={Chat} />
                 <Stack.Screen name='Search' component={Search} />
                 <Stack.Screen name='Search2' component={Search2} />

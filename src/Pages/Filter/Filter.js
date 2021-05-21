@@ -3,7 +3,7 @@ import { View, StyleSheet, StatusBar, TouchableOpacity, TextInput, SafeAreaView,
 import { Text } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/AntDesign';
 import { Checkbox } from 'react-native-paper';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import { styling } from './styling';
 import { wp } from '../../Global/Styles/Scalling';
 import { I18n } from '../../../i18n/I18n';

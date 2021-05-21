@@ -16,7 +16,8 @@ import { FlatList } from 'react-native';
 import { wp, hp } from '../../Global/Styles/Scalling';
 import IconFont from 'react-native-vector-icons/FontAwesome5';
 import { ToastAndroid } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import AlertModal from '../../Component/AlertModal/index'
 import { I18n } from '../../../i18n/I18n';
 
@@ -31,9 +32,6 @@ const Browse2 = (props) => {
     const [isVisible, setisVisible] = useState(false)
 
     useEffect(() => {
-        // get().then(() => list()).then(() => {
-        //     filters()
-        // })
         const unsubscribe = props.navigation.addListener('focus', () => {
             get().then(() => list()).then(() => {
                 filters()

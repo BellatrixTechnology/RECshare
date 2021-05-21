@@ -5,13 +5,17 @@ import Icon from 'react-native-vector-icons/Entypo';
 import Icons from 'react-native-vector-icons/FontAwesome'
 import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { styling } from './styling';
-import { select, deselect } from '../../Redux/Actions/Auth';
+import { select, login } from '../../Redux/Actions/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { I18n, switchLanguage } from '../../../i18n/I18n';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+// import { login } from '../../Redux/Actions/Auth';
+import AsyncStorage from '@react-native-community/async-storage';
+import firestore from '@react-native-firebase/firestore';
 
 
 const ChooseLanguage = (props) => {
+    const logins = props.route.params.login
+    console.log(logins)
     const [checked, setcheck] = useState('en');
     const [English, setEnglish] = useState(false);
     const [Chinese, setChinese] = useState(false);
@@ -24,12 +28,23 @@ const ChooseLanguage = (props) => {
     const dispatch = useDispatch();
 
     function selection() {
-        console.log(checked, '++++++')
-        AsyncStorage.setItem('Langauge', JSON.stringify(checked))
+        AsyncStorage.setItem('Langauge', checked)
+        switchLanguage(checked)
+        {
+            if (checked == '') {
+                firestore().collection('User').doc(logins).set({
+                    Language: en
+                })
 
+            }
+            else
+                firestore().collection('User').doc(logins).set({
+                    Language: checked
+                })
+        }
         dispatch(select({ Types: checked }))
+        dispatch(login({ userName: logins }))
 
-        props.navigation.navigate('LoginScreen')
     }
     return (
         <SafeAreaView style={styling.safeContainer} >

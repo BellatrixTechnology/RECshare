@@ -7,7 +7,7 @@ import auth from '@react-native-firebase/auth';
 import PhoneInput from 'react-native-phone-input';
 import { wp, hp } from '../../Global/Styles/Scalling';
 import InputF from '../../Component/InputField/index';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 import { I18n } from '../../../i18n/I18n';
 
 const Signup = (props) => {
@@ -30,7 +30,7 @@ const Signup = (props) => {
                     displayName: Names,
 
                 })
-                AsyncStorage.setItem('token', JSON.stringify(userCredentials.user.uid))
+                AsyncStorage.setItem('token', userCredentials.user.uid)
 
                 props.navigation.navigate('VerfiyCode', { Phone: phone, props: props, Email: Email, Password: Password, uid: userCredentials.user.uid })
             })
