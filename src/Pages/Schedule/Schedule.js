@@ -86,7 +86,9 @@ const Schedule = ({ route }) => {
                                             type: type,
                                             distance: distance,
                                             address: address,
-                                            Image: Image
+                                            Image: Image,
+                                            id: route.params.id,
+
                                         },
                                         props: props
                                     })

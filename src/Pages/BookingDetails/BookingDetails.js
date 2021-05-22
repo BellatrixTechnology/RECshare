@@ -21,13 +21,14 @@ const BookingDetails = ({ route }) => {
     const address = route.params.address;
     const bookID = route.params.bookID
     const name = route.params.name;
-    console.log(route.params.bookID)
+    const spaceid = route.params.spaceid
+
     console.log(route.params)
     const [isVisible, setisVisible] = useState(false)
     function cancelBook() {
         auth().onAuthStateChanged(user => {
             if (user) {
-                firestore().collection('Booking').doc(Title).collection('Bookings').doc(user.uid).delete()
+                firestore().collection('Booking').doc(spaceid).collection('Bookings').doc(user.uid).delete()
                 firestore().collection('User').doc(user.uid).collection('Booking').doc(bookID).delete()
 
             }

@@ -261,7 +261,7 @@ const Browse2 = (props) => {
                                                     </ImageBackground>
                                                     <TouchableOpacity onPress={() => {
                                                         props.navigation.navigate('SpaceDetail', {
-                                                            Space: item.Space,
+                                                            Space: item.spaceid,
                                                             props: props.navigation
                                                         })
                                                     }} >
@@ -297,7 +297,7 @@ const Browse2 = (props) => {
                                     return (
                                         <TouchableOpacity style={styling.innerCardContainer22} onPress={() => {
                                             props.navigation.navigate('SpaceDetail', {
-                                                Space: item.Space,
+                                                Space: item.spaceid,
                                                 props: props.navigation
                                             })
                                         }}>

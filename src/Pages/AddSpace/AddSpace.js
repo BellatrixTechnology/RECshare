@@ -82,19 +82,24 @@ const AddSpace = (props) => {
 
     }
     const getImage = () => {
+        let id = firestore().collection('Data').doc().id
+        // let ids = firestore('Space').doc().id()
+
         let imageRef = storage().ref('/Images/' + SpaceName);
         imageRef
             .getDownloadURL()
             .then((url) => {
                 //from url you can fetched the uploaded image easily
-                firestore().collection('Space').add({
+                firestore().collection('Space').doc(id).set({
                     Space: SpaceName,
                     Guest: guest,
                     distance: distance,
                     Image: url,
                     credit: credit,
+                    spaceid: id
                 }).then(() => {
-                    firestore().collection('Data').doc(SpaceName).set({
+                    firestore().collection('Data').doc(id).set({
+                        spaceid: id,
                         Space: SpaceName,
                         Host: Host,
                         credit: credit,

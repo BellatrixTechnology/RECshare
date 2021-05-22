@@ -49,5 +49,66 @@ const styles = StyleSheet.create({
         color: '#8C8C8C'
 
     },
+    mainChatView: {
+        marginHorizontal: wp(2),
+        paddingHorizontal: wp(2),
+        paddingVertical: hp(2),
+        alignItems: 'flex-end',
+        alignSelf: 'flex-end',
+
+    },
+    innerChatView: {
+        backgroundColor: '#5AC8FA',
+        paddingVertical: hp(2),
+        paddingHorizontal: wp(2),
+        borderRadius: wp(2),
+
+    },
+    leftinnerChatView: {
+        paddingVertical: hp(2),
+        paddingHorizontal: wp(2),
+        borderRadius: wp(2),
+        backgroundColor: '#EFEFF4',
+
+    },
+    textMsg: {
+        textAlign: 'left',
+        fontSize: hp(2),
+        color: 'black',
+        fontFamily: 'SFUIText-Medium',
+    },
+    RightextMsg: {
+        textAlign: 'right',
+        fontSize: hp(2),
+        color: 'white',
+        fontFamily: 'SFUIText-Medium',
+
+    },
+    time: {
+        // textAlign: 'right',
+        fontSize: hp(1.6),
+        color: 'grey'
+    },
+    leftChatView: {
+        marginHorizontal: wp(2),
+        paddingHorizontal: wp(2),
+        paddingVertical: hp(2),
+        alignItems: 'flex-start',
+        alignSelf: 'flex-start',
+
+    },
+    inputStyles: {
+        borderRadius: wp(5),
+        paddingHorizontal: wp(3),
+        width: wp(80),
+        backgroundColor: '#EFEFF4'
+
+    },
+    inputView: {
+        alignItems: 'center',
+        flexDirection: 'row',
+        width: wp(100),
+        justifyContent: 'space-evenly'
+    }
 });
 export default styles;

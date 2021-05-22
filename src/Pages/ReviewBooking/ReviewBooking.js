@@ -18,6 +18,8 @@ const ReviewBooking = ({ route }) => {
     const distance = route.params.data.distance;
     const address = route.params.data.address;
     const Image = route.params.data.Image;
+    const uid = route.params.data.id
+
     console.log(Image)
     async function SaveData() {
         console.log(auth)
@@ -26,10 +28,11 @@ const ReviewBooking = ({ route }) => {
                 console.log(user)
                 const id = firestore().collection('Booking').doc().id
                 const userid = user.uid
-                firestore().collection('Booking').doc(Title).collection('Bookings').doc(userid).set({
+                firestore().collection('Booking').doc(uid).collection('Bookings').doc(userid).set({
                     userid: userid,
                     name: user.displayName,
                     Space: Title,
+                    spaceid: uid,
                     Date: Datee,
                     Time: Time,
                     credit: credit,
@@ -41,6 +44,7 @@ const ReviewBooking = ({ route }) => {
                     userid: userid,
                     name: user.displayName,
                     Space: Title,
+                    spaceid: uid,
                     Date: Datee,
                     Time: Time,
                     credit: credit,
@@ -60,6 +64,7 @@ const ReviewBooking = ({ route }) => {
                     props: props,
                     distance: distance,
                     bookID: id,
+                    spaceid: userid
                 })
             }
             else console.log('null')

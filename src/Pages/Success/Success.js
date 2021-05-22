@@ -18,6 +18,7 @@ const Success = ({ route }) => {
     const address = route.params.address;
     const bookID = route.params.bookID
     const name = route.params.name;
+    const spaceid = route.params.spaceid
 
     return (
         <Fragment>
@@ -77,7 +78,8 @@ const Success = ({ route }) => {
                                 address: address,
                                 props: props,
                                 distance: distance,
-                                bookID: bookID
+                                bookID: bookID,
+                                spaceid: spaceid
                             })
                         }}>
                             <Text style={styling.signupText}>{I18n.t('CheckDetail')}</Text>

@@ -94,7 +94,19 @@ const SpaceDetail = ({ route }) => {
                                         <Text style={styling.timeTXT}>{obj.Host}</Text>
                                     </View>
                                     <View style={styling.iconView}>
-                                        <Iconss name='chatbubble-sharp' color='white' size={26} />
+                                        <Iconss name='chatbubble-sharp' color='white' size={26} onPress={() => props.navigate('Chat', {
+                                            props: props,
+                                            type: obj.type,
+                                            Title: obj.Space,
+                                            type: obj.type,
+                                            credit: obj.credit,
+                                            distance: obj.distance,
+                                            address: obj.Location,
+                                            images: obj.Image,
+                                            id: obj.spaceid,
+                                            host: obj.Host
+
+                                        })} />
                                     </View>
 
                                 </View>
@@ -247,7 +259,9 @@ const SpaceDetail = ({ route }) => {
                                             credit: obj.credit,
                                             distance: obj.distance,
                                             address: obj.Location,
-                                            images: obj.Image
+                                            images: obj.Image,
+                                            id: obj.spaceid,
+                                            host: obj.Host
                                         })
                                     }}>
                                         <Text style={styling.Opacitytxt}>{I18n.t('Book Now')}</Text>
