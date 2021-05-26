@@ -7,7 +7,7 @@ import { styling } from './styling';
 import { I18n } from '../../../i18n/I18n';
 
 const Success = ({ route }) => {
-    console.log(route)
+    console.log(route.params)
     const Datee = route.params.Date
     const Time = route.params.Time
     const props = route.params.props;
@@ -19,6 +19,8 @@ const Success = ({ route }) => {
     const bookID = route.params.bookID
     const name = route.params.name;
     const spaceid = route.params.spaceid
+    const Image = route.params.image
+    const host = route.params.host
 
     return (
         <Fragment>
@@ -79,7 +81,9 @@ const Success = ({ route }) => {
                                 props: props,
                                 distance: distance,
                                 bookID: bookID,
-                                spaceid: spaceid
+                                spaceid: spaceid,
+                                Image: Image,
+                                host: host
                             })
                         }}>
                             <Text style={styling.signupText}>{I18n.t('CheckDetail')}</Text>

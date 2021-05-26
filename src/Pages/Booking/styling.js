@@ -18,7 +18,7 @@ export const styling = StyleSheet.create({
         alignItems: 'flex-end',
     },
     headTXTView: {
-        width: wp('43%'),
+        width: wp('50%'),
         justifyContent: 'flex-start',
         alignItems: 'center',
         alignContent: 'flex-start',

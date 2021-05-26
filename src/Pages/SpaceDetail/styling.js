@@ -86,11 +86,13 @@ export const styling = StyleSheet.create({
         height: hp(10),
         alignItems: 'center',
         flexDirection: 'row',
-        padding: 5,
+        paddingHorizontal: wp(4),
         borderRadius: 10,
         justifyContent: 'space-between',
         backgroundColor: '#F9F9F9',
-        marginTop: 10,
+        marginTop: hp(2),
+        paddingVertical: hp(1),
+        // width: wp()
     },
     header2View: {
         height: hp(10),
@@ -103,7 +105,7 @@ export const styling = StyleSheet.create({
     },
     iconView: {
         width: wp(10),
-        height: hp(6),
+        height: wp(10),
         backgroundColor: '#FF2D55',
         flexDirection: 'row',
         alignItems: 'center',

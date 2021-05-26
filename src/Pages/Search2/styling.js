@@ -34,8 +34,8 @@ export const styling = StyleSheet.create({
         backgroundColor: '#EFEFF4'
     },
     cancelView: {
-        height: hp('7%'),
-        width: wp('15'),
+        // height: hp('8%'),
+        // width: wp('15'),
         alignItems: 'center',
         justifyContent: 'center'
     },

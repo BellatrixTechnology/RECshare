@@ -15,7 +15,8 @@ const VerifyCode = ({ route }) => {
     const props = route.params.props;
     const email = route.params.Email;
     const Password = route.params.Password
-    const uid = route.params.uid
+    const Names = route.params.Names
+    // const uid = route.params.uid
     console.log(route.params.props)
     const isLogin = useSelector(state => state.Auth.isLogin)
     const dispatch = useDispatch();
@@ -42,10 +43,37 @@ const VerifyCode = ({ route }) => {
                     auth: true
                 }
                 auth()
-                    .signInWithEmailAndPassword(email, Password)
-                AsyncStorage.setItem('Login', JSON.stringify(obj))
-                let Login = await AsyncStorage.getItem('token');
-                props.navigation.navigate('ChooseLanguage', { login: Login })
+                    .createUserWithEmailAndPassword(email, Password)
+                    .then((userCredentials) => {
+                        userCredentials.user.updateProfile({
+                            displayName: Names,
+
+                        })
+                        AsyncStorage.setItem('token', userCredentials.user.uid)
+                        AsyncStorage.setItem('Login', JSON.stringify(obj))
+                        // let Login = await AsyncStorage.getItem('token');
+                        props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid })
+                    })
+                    .catch(error => {
+                        if (error.code === 'auth/email-already-in-use') {
+                            {
+                                ToastAndroid.show(error.code, LONG)
+                                // seterrEmail('Email already registered')
+                                // seterrName('')
+                                // seterrPass('')
+                            }
+                        }
+                        else if (error.code === 'auth/invalid-email') {
+                            {
+                                ToastAndroid.show(error.code, ToastAndroid.LONG)
+                            }
+                        }
+                        else
+                            ToastAndroid.show(error, ToastAndroid.LONG)
+                    });
+                // auth()
+                //     .signInWithEmailAndPassword(email, Password)
+
 
 
             })

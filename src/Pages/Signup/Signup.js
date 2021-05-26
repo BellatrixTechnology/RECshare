@@ -23,32 +23,10 @@ const Signup = (props) => {
     let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     const Signin = () => {
-        auth()
-            .createUserWithEmailAndPassword(Email, Password)
-            .then((userCredentials) => {
-                userCredentials.user.updateProfile({
-                    displayName: Names,
 
-                })
-                AsyncStorage.setItem('token', userCredentials.user.uid)
 
-                props.navigation.navigate('VerfiyCode', { Phone: phone, props: props, Email: Email, Password: Password, uid: userCredentials.user.uid })
-            })
-            .catch(error => {
-                if (error.code === 'auth/email-already-in-use') {
-                    {
-                        seterrEmail('Email already registered')
-                        seterrName('')
-                        seterrPass('')
-                    }
-                }
-                if (error.code === 'auth/invalid-email') {
-                    {
-                        seterrEmail('Enter valid email')
-                    }
-                }
-                console.error(error);
-            });
+        props.navigation.navigate('VerfiyCode', { Phone: phone, props: props, Email: Email, Password: Password, Names: Names })
+
     }
     const checkField = () => {
         if (Email == '') { seterrEmail('Enter Email') }

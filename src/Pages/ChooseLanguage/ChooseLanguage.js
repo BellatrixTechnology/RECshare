@@ -140,7 +140,7 @@ const ChooseLanguage = (props) => {
                         <TouchableOpacity style={styling.languageView} onPress={() => {
 
                             setcheck('Russian')
-                            dispatch(select({ Types: 'ara' }))
+                            dispatch(select({ Types: 'Russian' }))
                         }}>
                             {
                                 checked == 'Russian' ? <Icons name='check-circle' size={20} color='green' /> : <Icon name='circle' size={20} />

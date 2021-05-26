@@ -209,7 +209,7 @@ export const styling = StyleSheet.create({
         flexDirection: 'row',
         borderRadius: 10,
         alignSelf: 'center',
-
+        marginTop: hp(2)
     },
     mapOpacity: {
         width: wp('45%'),
@@ -237,7 +237,7 @@ export const styling = StyleSheet.create({
         elevation: 1
     },
     cardContainer22: {
-        marginVertical: hp(4),
+        marginVertical: hp(3),
         marginLeft: wp(3),
         alignItems: 'center',
         flexWrap: 'wrap',

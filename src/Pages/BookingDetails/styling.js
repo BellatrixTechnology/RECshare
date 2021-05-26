@@ -8,7 +8,7 @@ export const styling = StyleSheet.create({
         backgroundColor: 'white',
     },
     mainContainer: {
-        height: hp(88),
+        height: hp(92),
         width: wp(100),
         paddingHorizontal: wp(3),
         paddingBottom: hp(1),
@@ -44,7 +44,8 @@ export const styling = StyleSheet.create({
     },
     confirmOpacity: {
         backgroundColor: '#4CD964',
-        width: wp('20%'),
+        width: wp('30%'),
+
         height: hp('3%'),
         borderRadius: 20,
         alignItems: 'center',
@@ -105,7 +106,7 @@ export const styling = StyleSheet.create({
     mainDayView: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: wp(90),
+        width: wp(80),
     },
     dayView: {
         height: hp('15%'),
@@ -131,6 +132,7 @@ export const styling = StyleSheet.create({
     },
     cityView: {
         marginHorizontal: wp(2),
+        width: wp(65)
     },
     mapIconView: {
         height: hp('10%'),

@@ -8,7 +8,7 @@ import firestore from '@react-native-firebase/firestore';
 import { I18n } from '../../../i18n/I18n';
 
 const ReviewBooking = ({ route }) => {
-    console.log(route.params.props)
+    console.log(route.params)
     const Datee = route.params.data.Date
     const Time = route.params.data.Time
     const props = route.params.props;
@@ -19,7 +19,7 @@ const ReviewBooking = ({ route }) => {
     const address = route.params.data.address;
     const Image = route.params.data.Image;
     const uid = route.params.data.id
-
+    const host = route.params.data.host
     console.log(Image)
     async function SaveData() {
         console.log(auth)
@@ -38,7 +38,8 @@ const ReviewBooking = ({ route }) => {
                     credit: credit,
                     type: type,
                     address: address,
-                    Image: Image
+                    Image: Image,
+                    host: host
                 })
                 firestore().collection('User').doc(userid).collection('Booking').doc(id).set({
                     userid: userid,
@@ -51,7 +52,8 @@ const ReviewBooking = ({ route }) => {
                     type: type,
                     address: address,
                     bookingid: id,
-                    Image: Image
+                    Image: Image,
+                    host: host
                 })
                 props.navigate('Success', {
                     name: user.displayName,
@@ -64,7 +66,9 @@ const ReviewBooking = ({ route }) => {
                     props: props,
                     distance: distance,
                     bookID: id,
-                    spaceid: userid
+                    spaceid: uid,
+                    host: host,
+                    image: Image
                 })
             }
             else console.log('null')

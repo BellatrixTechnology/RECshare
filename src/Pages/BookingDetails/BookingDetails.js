@@ -22,7 +22,9 @@ const BookingDetails = ({ route }) => {
     const bookID = route.params.bookID
     const name = route.params.name;
     const spaceid = route.params.spaceid
-
+    const Image = route.params.Image
+    const host = route.params.host
+    console.log(route.params)
     console.log(route.params)
     const [isVisible, setisVisible] = useState(false)
     function cancelBook() {
@@ -61,7 +63,15 @@ const BookingDetails = ({ route }) => {
                             </TouchableOpacity>
 
 
-                            <TouchableOpacity style={styling.phoneView} onPress={() => { props.navigate('Chat') }}>
+                            <TouchableOpacity style={styling.phoneView} onPress={() => {
+                                props.navigate('Chat',
+                                    {
+                                        images: Image,
+                                        id: spaceid,
+                                        host: host
+                                    }
+                                )
+                            }}>
                                 <Icon name='comment' color='#FF2D55' />
                             </TouchableOpacity>
 

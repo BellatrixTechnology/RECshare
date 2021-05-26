@@ -49,14 +49,14 @@ const Search2 = (props) => {
                     <View style={styling.searchBar}>
                         <Icon name='search1' size={18} style={{ color: '#C8C7CC' }} />
                         <TextInput
-                            placeholder='Enter Your Location'
+                            placeholder='Search'
                             value={search}
                             onChangeText={(text) => {
                                 setSearch(text)
                                 searchInput(text)
                             }}
                         />
-                        <IconsCancel name='cross' onPress={() => { setSearch(''), setDAta(temp) }} size={18} style={{ color: '#C8C7CC', marginLeft: 130 }} />
+                        {/* <IconsCancel name='cross' onPress={() => { setSearch(''), setDAta(temp) }} size={18} style={{ color: '#C8C7CC', marginLeft: 130 }} /> */}
                     </View>
                     <View style={styling.cancelView}>
                         <TouchableOpacity onPress={() => { setDAta(temp) }}><Text style={styling.cancelTXT} >Cancel</Text></TouchableOpacity>

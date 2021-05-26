@@ -8,11 +8,13 @@ import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-community/async-storage';
 import { ToastAndroid } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../Redux/Actions/Auth';
 import { InputModal } from '../../Component/Modal/index'
-import { I18n } from '../../../i18n/I18n';
-import Picker from '@react-native-picker/picker'
+import { Picker } from '@react-native-picker/picker'
+import { wp } from '../../Global/Styles/Scalling';
+import { select, login, logout } from '../../Redux/Actions/Auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { I18n, switchLanguage } from '../../../i18n/I18n';
+import firestore from '@react-native-firebase/firestore';
 const Setting = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const user = useSelector((state) => state.Auth.user);
@@ -25,7 +27,25 @@ const Setting = (props) => {
     }, []);
     const starter = async () => {
         let Langauge = await AsyncStorage.getItem('Langauge');
-        setLang(Langauge)
+        if (Langauge) {
+            setLang(Langauge)
+        }
+        else setLang(English)
+    }
+    async function changeLanguage(val) {
+        switchLanguage(val)
+
+        dispatch(select({ Types: val }))
+        setLang(val)
+
+        let token = await AsyncStorage.getItem('token')
+        console.log(val)
+        AsyncStorage.setItem('Langauge', val)
+
+        await firestore().collection('User').doc(token).set({
+            Language: val
+        })
+        // }
     }
     async function changePass() {
         auth().onAuthStateChanged((user) => {
@@ -48,6 +68,7 @@ const Setting = (props) => {
 
         })
     }
+
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -157,10 +178,29 @@ const Setting = (props) => {
                             </View>
                             <View style={styling.moreoptionView}>
                                 <Text style={styling.detailHead}>{I18n.t('Languages')}</Text>
-                                <TouchableOpacity style={styling.rightView}>
-                                    <Text style={styling.labelTXT}>{lang} </Text>
-                                    <Icons name='right' size={20} color='#C8C7CC' />
-                                </TouchableOpacity>
+                                {/* <TouchableOpacity style={styling.rightView}> */}
+                                {/* <Text style={styling.labelTXT}>{lang} </Text> */}
+                                {/* <Icons name='right' size={20} color='#C8C7CC' /> */}
+
+                                <Picker
+                                    style={{ width: wp(40) }}
+                                    selectedValue={lang}
+                                    onValueChange={(val) => {
+                                        console.log(val)
+                                        changeLanguage(val)
+                                    }}
+                                >
+                                    {/* <Picker.Item label={lang} value={lang} /> */}
+                                    <Picker.Item label="English" value="en" />
+                                    <Picker.Item label="Arabic" value="ara" />
+                                    <Picker.Item label="Bulgarian" value="bg" />
+                                    <Picker.Item label="Chinese" value="chi" />
+                                    <Picker.Item label="Hindi" value="Hindi" />
+                                    <Picker.Item label="Portuguese" value="Portuguese" />
+                                    <Picker.Item label="Russian" value="Russian" />
+                                    <Picker.Item label="Spanish" value="Spanish" />
+                                </Picker>
+                                {/* </TouchableOpacity> */}
                             </View>
                             <View style={styling.moreoptionView}>
                                 <Text style={styling.detailHead}>Linked Account</Text>
@@ -184,19 +224,7 @@ const Setting = (props) => {
                     setisVisible(false)
                 }}
             />
-            <Picker
 
-            >
-                <Picker.Item label="English" value="en" />
-                <Picker.Item label="Arabic" value="ara" />
-                <Picker.Item label="Bulgarian" value="bg" />
-                <Picker.Item label="Chinese" value="chi" />
-                <Picker.Item label="Hindi" value="Hindi" />
-                <Picker.Item label="Portuguese" value="Portuguese" />
-                <Picker.Item label="Russian" value="Russian" />
-                <Picker.Item label="Spanish" value="Spanish" />
-
-            </Picker>
             <SafeAreaView style={{ backgroundColor: 'white' }} />
         </Fragment>
     )

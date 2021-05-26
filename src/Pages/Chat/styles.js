@@ -22,12 +22,13 @@ const styles = StyleSheet.create({
     },
     headerView: {
         height: hp(10),
+        paddingLeft: wp(3),
         alignItems: 'center',
         flexDirection: 'row',
-        padding: 5
+        // padding: 5
     },
     userView: {
-        width: wp(20),
+        width: wp(24),
         alignItems: 'center'
     },
     statusView: {
@@ -100,15 +101,16 @@ const styles = StyleSheet.create({
     inputStyles: {
         borderRadius: wp(5),
         paddingHorizontal: wp(3),
-        width: wp(80),
+        width: wp(75),
         backgroundColor: '#EFEFF4'
 
     },
     inputView: {
         alignItems: 'center',
         flexDirection: 'row',
-        width: wp(100),
-        justifyContent: 'space-evenly'
+        width: wp(90),
+        alignSelf: 'center',
+        justifyContent: 'space-between'
     }
 });
 export default styles;

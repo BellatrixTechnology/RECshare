@@ -7,6 +7,7 @@ import CalendarPicker from 'react-native-calendar-picker';
 import { I18n } from '../../../i18n/I18n';
 
 const Schedule = ({ route }) => {
+    console.log(route.params)
     const props = route.params.props;
     const Title = route.params.Title;
     const credit = route.params.credit;
@@ -14,7 +15,8 @@ const Schedule = ({ route }) => {
     const distance = route.params.distance;
     const address = route.params.address;
     const Image = route.params.images;
-    console.log(Image)
+    const host = route.params.host
+    const spaceid = route.params.id
     const Time = [
         { Slot: '10:00 AM' }, { Slot: '11:00 AM' }, { Slot: '12:00 AM' }, { Slot: '01:00 PM' }, { Slot: '02:00 PM' }, { Slot: '03:00 PM' }, { Slot: '04:00 PM' }, { Slot: '05:00 PM' }, { Slot: '06:00 PM' }, { Slot: '07:00 PM' }, { Slot: '08:00 PM' }, { Slot: ' 09:00 PM' }, { Slot: '10:00 PM' }, { Slot: '11:00 PM' },
     ]
@@ -87,8 +89,8 @@ const Schedule = ({ route }) => {
                                             distance: distance,
                                             address: address,
                                             Image: Image,
-                                            id: route.params.id,
-
+                                            id: spaceid,
+                                            host: host
                                         },
                                         props: props
                                     })

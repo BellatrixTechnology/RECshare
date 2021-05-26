@@ -5,7 +5,7 @@ import bg from './Languages/Bulgarian';
 import chi from './Languages/Chinese';
 import Hindi from './Languages/Hindi';
 import Portuguese from './Languages/Portuguese';
-import Russia from './Languages/Russian';
+import Russian from './Languages/Russian';
 import Spanish from './Languages/Spanish';
 I18n.fallbacks = true;
 
@@ -14,7 +14,7 @@ I18n.translations = {
     ara,
     bg,
     chi,
-    Russia,
+    Russian,
     Hindi,
     Portuguese,
     Spanish
@@ -24,7 +24,6 @@ I18n.translations = {
 
 const switchLanguage = (lang) => {
     I18n.locale = lang;
-    console.log(lang, '==')
 
     // component.forceUpdate();
 };

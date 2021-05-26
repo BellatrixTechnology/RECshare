@@ -26,7 +26,7 @@ export const styling = StyleSheet.create({
 
     headTXTView: {
         height: hp('7%'),
-        width: wp('50%'),
+        width: wp('70%'),
         justifyContent: 'flex-start',
         // alignSelf: 'center',
         // alignItems: 'center',

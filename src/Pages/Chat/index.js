@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import { View, StatusBar, SafeAreaView, Text } from 'react-native';
+import { View, StatusBar, SafeAreaView, Text, Image } from 'react-native';
 import styles from './styles';
 import { GiftedChat, Send, Bubble, Time } from 'react-native-gifted-chat'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -11,14 +11,15 @@ import firestore from "@react-native-firebase/firestore"
 import moment from "moment"
 import { FlatList } from 'react-native-gesture-handler';
 import { TextInput } from 'react-native';
+import { hp, wp } from '../../Global/Styles/Scalling';
 export default function Chat(props) {
     const [messages, setMessages] = useState([]);
-    const Title = props.route.params.Title;
-    const credit = props.route.params.credit;
-    const type = props.route.params.type;
-    const distance = props.route.params.distance;
-    const address = props.route.params.address;
-    const Image = props.route.params.images;
+    // // const Title = props.route.params.Title;
+    // const credit = props.route.params.credit;
+    // const type = props.route.params.type;
+    // const distance = props.route.params.distance;
+    // const address = props.route.params.address;
+    const Images = props.route.params.images;
     const spaceid = props.route.params.id
     const host = props.route.params.host
     const [TExt, setText] = useState('')
@@ -54,7 +55,7 @@ export default function Chat(props) {
                     StartedWithUser: {
                         StartedWith: spaceid,
                         reciverName: props.route.params.host,
-                        profilePic: Image
+                        profilePic: Images
                     },
                     creatorID: token + '_' + spaceid,
                     lastMsg: {},
@@ -81,17 +82,17 @@ export default function Chat(props) {
     }
 
     const onSend = async () => {
-        let token = await AsyncStorage.getItem('token');
         let idd = new Date().getTime().toString()
-        let idea = token + '_' + spaceid
+        let idea = uid + '_' + spaceid
         let jsonobject = {
-            addedby: token,
+            addedby: uid,
             reciver: spaceid,
             message: TExt,
             reciverName: host,
             createdAt: new Date(),
             createdTime: moment().format('hh:mm'),
-            messageid: idd
+            messageid: idd,
+            imaege: ''
         }
         let t = [...messages]
         t.push(jsonobject)
@@ -123,14 +124,13 @@ export default function Chat(props) {
             />
             <SafeAreaView style={styles.container}>
                 <View style={styles.headerView}>
-                    <Icons.Button name='left' size={26} backgroundColor='white' color='black' ></Icons.Button>
+                    <Icons name='left' size={26} backgroundColor='white' color='black' onPress={() => props.navigation.goBack()} />
                     <View style={styles.userView}>
-                        <Icon name='user-circle' size={40} color='#C8C7CC' />
+                        <Image source={{ uri: Images }} style={{ height: wp(10), width: wp(10), borderRadius: 100 }} />
 
                     </View>
                     <View style={styles.statusView}>
                         <Text style={styles.nameTXT}>{host}</Text>
-                        {/* <Text style={styles.statusTXT}>Active Now</Text> */}
                     </View>
                     <View style={styles.iconView}>
                         <Icon.Button name='phone' backgroundColor='white' color='black' />

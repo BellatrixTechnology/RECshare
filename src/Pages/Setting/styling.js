@@ -17,7 +17,7 @@ export const styling = StyleSheet.create({
     mainContainer: {
         height: hp('100%'),
         paddingHorizontal: wp(3),
-        paddingBottom: hp(1),
+        // paddingBottom: hp(1),
 
     },
     labelView: {
@@ -112,13 +112,13 @@ export const styling = StyleSheet.create({
         fontFamily: fontFamily.SFUIText
     },
     innerOptionView: {
-        height: hp('35%'),
+        // height: hp('35%'),
         marginBottom: hp(5)
     },
     moreoptionView: {
         alignSelf: 'center',
         width: wp('85%'),
-        marginVertical: hp(2),
+        marginVertical: hp(1),
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
