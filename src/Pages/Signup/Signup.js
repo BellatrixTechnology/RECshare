@@ -88,12 +88,15 @@ const Signup = (props) => {
                                     }
                                 }}
                                 value={Email}
+                                key
                                 errorEmail={emailError}
+                                keyboardTyp={'email-address'}
 
                             />
                             <Text style={styling.inputLabel}>Phone Number</Text>
 
                             <PhoneInput
+                                initialCountry={'us'}
                                 style={{
                                     width: wp(85), height: hp(8), borderBottomWidth: 0.5, borderColor: 'grey'
                                     , alignSelf: 'center'

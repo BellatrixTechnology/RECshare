@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, ToastAndroid } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, ToastAndroid, ActivityIndicator } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
@@ -16,7 +16,7 @@ const VerifyCode = ({ route }) => {
     const email = route.params.Email;
     const Password = route.params.Password
     const Names = route.params.Names
-    // const uid = route.params.uid
+    const [isloading, setisloading] = useState(false)
     console.log(route.params.props)
     const isLogin = useSelector(state => state.Auth.isLogin)
     const dispatch = useDispatch();
@@ -36,52 +36,60 @@ const VerifyCode = ({ route }) => {
     }
     async function confirmCode() {
         try {
-            await confirm.confirm(code).then(async () => {
-                let obj = {
-                    Email: email,
-                    Password: Password,
-                    auth: true
-                }
-                auth()
-                    .createUserWithEmailAndPassword(email, Password)
-                    .then((userCredentials) => {
-                        userCredentials.user.updateProfile({
-                            displayName: Names,
+            // console.log(confirm.confirm(code))
+            const credentials = auth.PhoneAuthProvider.credential(confirm.verificationId, code)
+            console.log(credentials)
+            // await confirm.confirm(code).then(async () => {
+            let obj = {
+                Email: email,
+                Password: Password,
+                auth: true
+            }
+            await auth().createUserWithEmailAndPassword(email, Password)
+                .then((userCredentials) => {
+                    console.log(userCredentials, 'sdsfsd')
+                    userCredentials.user.updateProfile({
+                        displayName: Names,
 
-                        })
-                        AsyncStorage.setItem('token', userCredentials.user.uid)
-                        AsyncStorage.setItem('Login', JSON.stringify(obj))
-                        // let Login = await AsyncStorage.getItem('token');
-                        props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid })
                     })
-                    .catch(error => {
-                        if (error.code === 'auth/email-already-in-use') {
-                            {
-                                ToastAndroid.show(error.code, LONG)
-                                // seterrEmail('Email already registered')
-                                // seterrName('')
-                                // seterrPass('')
-                            }
+                    // AsyncStorage.setItem('token', userCredentials.user.uid)
+                    // AsyncStorage.setItem('Login', JSON.stringify(obj))
+                    // props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid })
+                }).then(async () => {
+
+                    let userData = await auth().currentUser.linkWithCredential(credentials)
+                    AsyncStorage.setItem('token', userData.user.uid)
+                    AsyncStorage.setItem('Login', JSON.stringify(obj))
+                    setisloading(false)
+                    props.navigation.navigate('ChooseLanguage', { login: userData.user.uid })
+                })
+                .catch(error => {
+                    if (error.code === 'auth/email-already-in-use') {
+                        {
+                            ToastAndroid.show(error.code, ToastAndroid.LONG)
+                            setisloading(false)
+
                         }
-                        else if (error.code === 'auth/invalid-email') {
-                            {
-                                ToastAndroid.show(error.code, ToastAndroid.LONG)
-                            }
+                    }
+                    else if (error.code === 'auth/invalid-email') {
+                        {
+                            ToastAndroid.show(error.code, ToastAndroid.LONG)
+                            setisloading(false)
+
                         }
-                        else
-                            ToastAndroid.show(error, ToastAndroid.LONG)
-                    });
-                // auth()
-                //     .signInWithEmailAndPassword(email, Password)
-
-
-
-            })
+                    }
+                    else {
+                        ToastAndroid.show(error, ToastAndroid.LONG)
+                        setisloading(false)
+                    }
+                })
 
         }
         catch (error) {
             console.log(error);
             ToastAndroid.show("Invalid code.!", ToastAndroid.LONG);
+            setisloading(false)
+
         }
     }
 
@@ -110,8 +118,13 @@ const VerifyCode = ({ route }) => {
                     </View>
 
                     <View style={styling.verifyView}>
-                        <TouchableOpacity style={styling.verifyOpacity} onPress={() => { confirmCode() }}>
-                            <Text style={styling.verifyText}>{I18n.t('Verfiy')}</Text>
+                        <TouchableOpacity style={styling.verifyOpacity} disabled={isloading} onPress={() => {
+                            setisloading(true)
+
+                            confirmCode()
+                        }}>
+                            {!isloading ? <Text style={styling.verifyText}>{I18n.t('Verfiy')}</Text> :
+                                <ActivityIndicator size='small' color='white' />}
                         </TouchableOpacity>
                     </View>
                     <View style={styling.resendView}>
@@ -120,7 +133,9 @@ const VerifyCode = ({ route }) => {
                             setdisabled(true)
                             setID(60 + 10)
                         }}>
+
                             <Text style={styling.resentTxt} >{I18n.t('ResendCode')}</Text>
+
                         </TouchableOpacity>
 
                         <View>

@@ -30,17 +30,22 @@ const Browse2 = (props) => {
     const [filter, setfilter] = useState('');
     const [filterData, setFilterData] = useState('');
     const [isVisible, setisVisible] = useState(false)
-
+    const [token, setToken] = useState('')
     useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
-            get().then(() => list()).then(() => {
-                filters()
-            })
+            StartFunction()
         });
         return () => {
             unsubscribe;
         };
     }, []);
+    async function StartFunction() {
+        let t = AsyncStorage.getItem('token')
+        setToken(t)
+        get()
+        list()
+        filters()
+    }
     async function get() {
         const snapshot = await firestore().collection('Space').get();
         const list = [];
@@ -123,27 +128,33 @@ const Browse2 = (props) => {
         })
     }
     const favourite = (item) => {
-        auth().onAuthStateChanged(function (user) {
-            if (user) {
-                firestore().collection('User').doc(user.uid).collection('Favourite').add({
-                    Space: item.Space,
-                    credit: item.credit,
-                    distance: item.distance,
-                    Image: item.Image,
-                    Guest: item.Guest,
-                    Rating: item.Rating
-                }).then(() => {
-                    ToastAndroid.showWithGravity(
-                        item.Space + " Added in Favourite",
-                        ToastAndroid.LONG,
-                        ToastAndroid.BOTTOM
-                    );
-                })
-            }
-            else {
-                console.log('null')
-            }
-        })
+        console.log(item.spaceid, token)
+        // firestore().collection('Data').doc(item.spaceid).set({
+        //     favourite: [token]
+        // })
+
+
+        // auth().onAuthStateChanged(function (user) {
+        //     if (user) {
+        //         firestore().collection('User').doc(user.uid).collection('Favourite').add({
+        //             Space: item.Space,
+        //             credit: item.credit,
+        //             distance: item.distance,
+        //             Image: item.Image,
+        //             Guest: item.Guest,
+        //             Rating: item.Rating
+        //         }).then(() => {
+        //             ToastAndroid.showWithGravity(
+        //                 item.Space + " Added in Favourite",
+        //                 ToastAndroid.LONG,
+        //                 ToastAndroid.BOTTOM
+        //             );
+        //         })
+        //     }
+        //     else {
+        //         console.log('null')
+        //     }
+        // })
     }
 
     return (
