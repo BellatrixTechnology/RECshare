@@ -133,8 +133,8 @@ export default function Chat(props) {
                         <Text style={styles.nameTXT}>{host}</Text>
                     </View>
                     <View style={styles.iconView}>
-                        <Icon.Button name='phone' backgroundColor='white' color='black' />
-                        <Icon.Button name='video-camera' backgroundColor='white' color='black' />
+                        {/* <Icon.Button name='phone' backgroundColor='white' color='black' />
+                        <Icon.Button name='video-camera' backgroundColor='white' color='black' /> */}
                     </View>
 
                 </View>
@@ -155,7 +155,7 @@ export default function Chat(props) {
                         }}
                     />
                     <View style={styles.inputView}>
-                        <Iconss name='pluscircle' size={26} color='#ee737f' />
+                        {/* <Iconss name='pluscircle' size={26} color='#ee737f' /> */}
                         <TextInput
                             placeholder='Write Message'
                             style={styles.inputStyles}
@@ -164,54 +164,13 @@ export default function Chat(props) {
                             }}
                             value={TExt}
                         />
-                        <FontAwesome name='send' size={20} color='#ee737f' onPress={() => { onSend() }} />
+                        <FontAwesome name='send' size={20} color='#ee737f' onPress={() => {
+                            if (TExt != '') {
+                                onSend()
+                            }
+                        }} />
                     </View>
-                    {/* <GiftedChat
-                        messages={messages}
-                        onSend={messages => onSend(messages)}
-                        user={{
-                            _id: uid,
-                        }}
-                        placeholder='Write a message'
-                        renderAvatar={() => null}
-                        renderSend={(props) => {
-                            return (
-                                <Send
-                                    {...props}
-                                    containerStyle={{
-                                        height: 50,
-                                        width: 50,
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <FontAwesome name='send' size={20} color='#ee737f' />
 
-                                </Send>
-                            )
-                        }}
-                        alwaysShowSend={true}
-                        renderBubble={(props) => {
-                            return (
-                                <Bubble
-                                    {...props}
-                                    wrapperStyle={{
-                                        left: styles.bubbleLeft,
-                                        right: styles.bubbleRight
-                                    }}
-                                />
-
-                            );
-                        }}
-                        renderTime={(props) => {
-                            return (
-                                <Time
-                                    {...props}
-
-                                />
-                            )
-                        }}
-                    /> */}
                 </View>
             </SafeAreaView>
             <SafeAreaView style={{ backgroundColor: 'white' }} />

@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     inputStyles: {
         borderRadius: wp(5),
         paddingHorizontal: wp(3),
-        width: wp(75),
+        width: wp(80),
         backgroundColor: '#EFEFF4'
 
     },
@@ -110,7 +110,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         width: wp(90),
         alignSelf: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        marginBottom: hp(2)
     }
 });
 export default styles;

@@ -59,7 +59,7 @@ const Search2 = (props) => {
                         {/* <IconsCancel name='cross' onPress={() => { setSearch(''), setDAta(temp) }} size={18} style={{ color: '#C8C7CC', marginLeft: 130 }} /> */}
                     </View>
                     <View style={styling.cancelView}>
-                        <TouchableOpacity onPress={() => { setDAta(temp) }}><Text style={styling.cancelTXT} >Cancel</Text></TouchableOpacity>
+                        <TouchableOpacity onPress={() => { setDAta(temp), setSearch('') }}><Text style={styling.cancelTXT} >Cancel</Text></TouchableOpacity>
                     </View>
                 </View>
 
@@ -71,7 +71,7 @@ const Search2 = (props) => {
                         return (
                             <TouchableOpacity style={styling.cardContainer} onPress={() => {
                                 props.navigation.navigate('SpaceDetail', {
-                                    Space: item.Space,
+                                    Space: item.spaceid,
                                     props: props.navigation
                                 })
                             }}>

@@ -75,7 +75,8 @@ export const styling = StyleSheet.create({
     valueTXT: {
         fontFamily: fontFamily.SFUIText,
         fontSize: fontSize.Account.line,
-        color: '#8A8A8F'
+        color: '#8A8A8F',
+        paddingHorizontal: wp(2)
     },
     signupView: {
         width: wp('90%'),

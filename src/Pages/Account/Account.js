@@ -87,7 +87,7 @@ const Account = (props) => {
                             }} />
 
 
-                        <Iconss name='dots-three-horizontal' size={25} backgroundColor='#F9F9F9' color='black' />
+                        {/* <Iconss name='dots-three-horizontal' size={25} backgroundColor='#F9F9F9' color='black' /> */}
 
                     </View>
                     <View style={styling.avatarView}>
@@ -117,14 +117,14 @@ const Account = (props) => {
                         <View style={styling.accountView}>
                             <Text style={styling.accountlTXT}>{I18n.t('Favourties')}</Text>
                             <TouchableOpacity style={styling.workOpacity} onPress={() => props.navigation.navigate('Favourites')} >
-                                <Text style={styling.workTXT} >{I18n.t('Address')}</Text>
+                                {/* <Text style={styling.workTXT} >{I18n.t('Address')}</Text> */}
                                 <Icons name='right' size={16} color='#C8C7CC' />
                             </TouchableOpacity>
                         </View>
                         <View style={styling.accountView}>
                             <Text style={styling.accountlTXT}>Add Space</Text>
                             <TouchableOpacity style={styling.workOpacity} onPress={() => { props.navigation.navigate('AddSpace') }} >
-                                <Text style={styling.workTXT} >{I18n.t('Address')}</Text>
+                                {/* <Text style={styling.workTXT} >{I18n.t('Address')}</Text> */}
                                 <Icons name='right' size={16} color='#C8C7CC' />
                             </TouchableOpacity>
                         </View>
@@ -155,7 +155,7 @@ const Account = (props) => {
                             />
                         </View>
                         <TouchableOpacity style={styling.addAdrsView} onPress={() => setisVisible(true)}>
-                            <Text style={styling.newAdrsTXT}>{I18n.t('AddnewCard')}</Text>
+                            <Text style={styling.newAdrsTXT}>{I18n.t('AddAdres')}</Text>
                             <Icons name='pluscircle' size={24} color='#FF2D55' />
                         </TouchableOpacity>
 
@@ -168,11 +168,11 @@ const Account = (props) => {
                                 return (
                                     <View style={styling.paymentView}>
                                         <View style={styling.paymentInnerView}>
-                                            <View style={styling.paymentCardView}>
+                                            {/* <View style={styling.paymentCardView}>
 
-                                            </View>
+                                            </View> */}
                                             <View style={styling.cardTXTView}>
-                                                <Text style={styling.cardTXT}>Main card</Text>
+                                                <Text style={styling.cardTXT}>{item.holder}</Text>
                                                 <Text style={styling.digitTXT}>{item.CardNo}</Text>
 
                                             </View>

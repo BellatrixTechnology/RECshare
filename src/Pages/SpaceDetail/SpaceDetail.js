@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, Image, ScrollView } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/AntDesign';
@@ -62,9 +62,9 @@ const SpaceDetail = ({ route }) => {
                 </View>
 
                 {obj == '' ?
-                    <AlertModal
-                        isVisible={isVisible}
-                    />
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                        <ActivityIndicator color={'red'} size={'large'} />
+                    </View>
                     : obj == 'No Record Found' ?
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                             <Text>No Record Found</Text>

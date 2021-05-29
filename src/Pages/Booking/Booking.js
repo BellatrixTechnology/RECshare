@@ -21,8 +21,8 @@ const Booking = (props) => {
 
     function Complete() {
         return (
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <Text>Complete!</Text>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
+                <Text style={styling.cardheadTXT}>No Confirm Booking Found</Text>
             </View>
         );
     }

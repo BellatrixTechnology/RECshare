@@ -1,34 +1,60 @@
 import React, { Fragment, useState } from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, TextInput, SafeAreaView, ScrollView } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, TextInput, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { wp } from '../../Global/Styles/Scalling';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import { ToastAndroid } from 'react-native';
 
 const Payment = (props) => {
     const [CardNo, setCardNo] = useState('')
     const [holder, setHolder] = useState('')
     const [expire, setExpire] = useState('')
     const [cvc, setcvc] = useState('')
+    const [isLaoding, setloading] = useState(false)
 
     async function adddata() {
-        auth().onAuthStateChanged(function (user) {
+        setloading(true)
+        auth().onAuthStateChanged(async function (user) {
             if (user) {
-                const id = firestore().collection('User').doc().id
+                let data = []
+                await firestore().collection('User').doc(user.uid).collection('Payment').get().then(async doc => {
+                    doc.forEach(item => {
+                        if (item.data().CardNo == CardNo) {
+                            data.push(item.data())
+                        }
 
-                firestore().collection('User').doc(user.uid).collection('Payment').doc(id).set({
-                    CardNo: CardNo,
-                    holder: holder,
-                    expire: expire,
-                    cvc: cvc,
-                    id: id
-                }).then(() => {
-                    props.navigation.goBack()
+                    })
                 })
+                console.log(data)
+                if (data[0]?.CardNo === CardNo) {
+                    setloading(false)
+
+                    ToastAndroid.show('Already Exist', ToastAndroid.LONG)
+                }
+                else {
+                    const id = firestore().collection('User').doc().id
+
+                    await firestore().collection('User').doc(user.uid).collection('Payment').doc(id).set({
+                        CardNo: CardNo,
+                        holder: holder,
+                        expire: expire,
+                        cvc: cvc,
+                        id: id
+                    }).then(() => {
+                        setloading(false)
+
+                        props.navigation.goBack()
+                    })
+                }
             }
-            else console.log('error')
+            else {
+                console.log('error')
+                setloading(false)
+
+            }
         })
     }
 
@@ -121,12 +147,16 @@ const Payment = (props) => {
                         </View>
                         <View style={styling.signupView}>
                             <TouchableOpacity style={styling.signupOpacity}
+                                disabled={isLaoding}
                                 onPress={() => {
                                     if (CardNo.length == 16 && expire.length == 5 && holder != '' && cvc.length == 3) {
                                         adddata()
                                     }
                                 }} >
-                                <Text style={styling.signupText}>Save</Text>
+                                {!isLaoding ?
+                                    <Text style={styling.signupText}>Save</Text> :
+                                    <ActivityIndicator size='large' color='white' />
+                                }
                             </TouchableOpacity>
                         </View>
                     </ScrollView>

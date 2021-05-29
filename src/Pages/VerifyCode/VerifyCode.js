@@ -47,7 +47,7 @@ const VerifyCode = ({ route }) => {
             }
             await auth().createUserWithEmailAndPassword(email, Password)
                 .then((userCredentials) => {
-                    console.log(userCredentials, 'sdsfsd')
+
                     userCredentials.user.updateProfile({
                         displayName: Names,
 
@@ -56,7 +56,10 @@ const VerifyCode = ({ route }) => {
                     // AsyncStorage.setItem('Login', JSON.stringify(obj))
                     // props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid })
                 }).then(async () => {
-
+                    await firestore().collection('User').doc(userData.user.uid).set({
+                        email: email,
+                        phone: phone
+                    })
                     let userData = await auth().currentUser.linkWithCredential(credentials)
                     AsyncStorage.setItem('token', userData.user.uid)
                     AsyncStorage.setItem('Login', JSON.stringify(obj))
