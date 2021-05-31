@@ -8,10 +8,14 @@ import IconFont from 'react-native-vector-icons/FontAwesome5';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { ScrollView } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-community/async-storage';
+import { hp, wp } from '../../Global/Styles/Scalling';
 
 const Favourites = (props) => {
     const [Data, setData] = useState([])
     const [Uid, setUid] = useState('')
+        const [token, setToken] = useState('')
+
     useEffect(() => {
         getFav()
     }, [])
@@ -27,35 +31,44 @@ const Favourites = (props) => {
     }
 
     async function fav(uid) {
-        const snapshot = await firestore().collection('User').doc(uid).collection('Favourite').get();
+        const snapshot = await firestore().collection('Data').get();
         const list = [];
         snapshot.forEach((doc) => {
             list.push(doc.data());
             console.log(doc.data())
         });
-        setData([...list]);
+        let temp =list.filter(item=>{
+             return  item?.isLikedBy?.includes(uid)
+        })
+        setData(temp);
     }
     async function sorting() {
 
-        const snapshot = await firestore().collection('User').doc(Uid).collection('Favourite').orderBy('Space', 'asc').get();
-        console.log(snapshot)
+        const snapshot = await firestore().collection('Data').orderBy('Space', 'asc').get();
+
         const list = [];
         snapshot.forEach((doc) => {
             list.push(doc.data());
         });
-        setData([...list]);
+
+        let temp =list.filter(item=>{
+             return  item?.isLikedBy?.includes(Uid)
+        })
+        setData(temp);
 
     }
     async function filters() {
 
-        const snapshot = await firestore().collection('User').doc(Uid).collection('Favourite').orderBy('Rating', 'desc').get();
+        const snapshot = await firestore().collection('Data').orderBy('Rating', 'desc').get();
         console.log(snapshot)
         const list = [];
         snapshot.forEach((doc) => {
             list.push(doc.data());
         });
-        setData([...list]);
-
+        let temp =list.filter(item=>{
+             return  item?.isLikedBy?.includes(Uid)
+        })
+        setData(temp);
     }
     return (
         <SafeAreaView style={styling.safeContainer} >
@@ -85,10 +98,11 @@ const Favourites = (props) => {
                             numColumns={2}
                             data={Data}
                             renderItem={({ item }) => {
+                                console.log(item)
                                 return (
                                     <View style={styling.innerCardContainer}>
                                         <Image source={{ uri: item.Image }} style={styling.cardView} />
-                                        <View style={styling.txtView} >
+                                        <View style={{paddingHorizontal:wp(2)}} >
                                             <Text style={styling.cardheadTXT}>
                                                 {item.Space}
                                             </Text>
@@ -98,7 +112,7 @@ const Favourites = (props) => {
                                             </View>
                                         </View>
                                         {
-                                            item.Rating == 5 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★★★★</Text> || item.Rating == 4 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★★★</Text> || item.Rating == 3 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★★</Text> || item.Rating == 2 && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★★</Text> || item.Rating && <Text style={[styling.cardheadLabel, { color: '#FF9500' }]}>★</Text>
+                                            item.Rating == 5 && <Text style={[styling.cardheadLabel, { color: '#FF9500', paddingHorizontal:wp(2) }]}>★★★★★</Text> || item.Rating == 4 && <Text style={[styling.cardheadLabel, { color: '#FF9500', paddingHorizontal:wp(2) }]}>★★★★</Text> || item.Rating == 3 && <Text style={[styling.cardheadLabel, { color: '#FF9500', paddingHorizontal:wp(2) }]}>★★★</Text> || item.Rating == 2 && <Text style={[styling.cardheadLabel, { color: '#FF9500' , paddingHorizontal:wp(2)}]}>★★</Text> || item.Rating && <Text style={[styling.cardheadLabel, { color: '#FF9500' , paddingHorizontal:wp(2)}]}>★</Text>
                                         }
                                     </View>
                                 )

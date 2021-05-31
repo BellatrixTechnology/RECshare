@@ -62,7 +62,6 @@ const LoginScreen = (props) => {
                     temp = doc.data()
                 })
                 let lang = temp.Language
-                // console.log(lang, 'sdfsd', tem)
                 AsyncStorage.setItem('Langauge', lang)
                 switchLanguage(lang)
                 dispatch(select({ Types: lang }))
@@ -122,9 +121,9 @@ const LoginScreen = (props) => {
                                 placeholder={I18n.t('Email')}
                                 onChange={(val) => {
                                     setEmail(val)
-                                    console.log(val)
+                                    console.log(val.trim())
                                     {
-                                        reg.test(val) ? seterrEmail(false) : seterrEmail(true)
+                                        reg.test(val.trim()) ? seterrEmail(false) : seterrEmail(true)
                                     }
                                 }}
                                 value={Email}

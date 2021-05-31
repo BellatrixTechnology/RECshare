@@ -46,7 +46,7 @@ const Categories = (props) => {
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
             <View style={styling.headerView}>
                 <AntDesign name='left' backgroundColor='white' color='black' size={30} onPress={() => props.navigation.goBack()} />
-                <Entypo name='dots-three-horizontal' size={30} backgroundColor='white' color='black' />
+                {/* <Entypo name='dots-three-horizontal' size={30} backgroundColor='white' color='black' /> */}
 
             </View>
             <View style={styling.mainContainer}>

@@ -9,6 +9,7 @@ import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import AlertModal from '../../Component/AlertModal/index';
 import { I18n } from '../../../i18n/I18n';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { styling } from './styling';
 import { wp } from '../../Global/Styles/Scalling';
@@ -22,11 +23,14 @@ const SpaceDetail = ({ route }) => {
     const [checked, setcheck] = useState(false);
     const [obj, setobj] = useState('')
     const [images, setImages] = useState('');
+    const [token,settoken]=useState('')
     useEffect(() => {
         get()
 
     }, [])
     async function get() {
+                let tk = await AsyncStorage.getItem('token')
+settoken(tk)
         auth().onAuthStateChanged((user) => {
             if (user) {
                 setuserName(user.uid)
@@ -45,9 +49,42 @@ const SpaceDetail = ({ route }) => {
                 return false
             }
         })
-
-
     }
+     const favourite = async () => {
+         let alreadyLiked = liked(obj);
+   if (alreadyLiked == true) {
+     obj.isLikedBy = obj?.isLikedBy?.filter((like) => {
+        return like != token;
+      });
+   await  firestore().collection('Data').doc(obj.spaceid).set(obj)
+
+                    setobj(obj)
+
+    } else {
+       await obj.isLikedBy?.push(token);
+
+  await  firestore().collection('Data').doc(obj.spaceid).set(obj)
+                    setobj(obj)
+    }
+get()
+    }
+
+  const liked = (item) => {
+    if (item.isLikedBy == undefined) {
+      return false;
+    } else if (item.isLikedBy != undefined && item.isLikedBy.length == 0) {
+      return false;
+    } else if (item.isLikedBy.length > 0) {
+      let myLikes = item.isLikedBy?.filter((like) => {
+        return like === token;
+      });
+      if (myLikes.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" backgroundColor="white" />
@@ -58,7 +95,11 @@ const SpaceDetail = ({ route }) => {
                     <Icons name="left" style={styling.headIcon} color='black' size={28} onPress={() => { props.goBack() }} />
                     <Text style={styling.headTXT}>{I18n.t('SpaceDetail')}</Text>
 
-                    <Icons.Button name='heart' style={styling.headIcon} color='black' size={28} />
+                    <Icons.Button name='heart' style={styling.headIcon} color={obj?.isLikedBy?.includes(token) ? 'red' : 'grey'} size={28} 
+                    onPress={()=>{
+favourite()
+                    }}
+                    />
                 </View>
 
                 {obj == '' ?
@@ -203,8 +244,8 @@ const SpaceDetail = ({ route }) => {
                                     <View style={styling.SchedueleCiew}>
                                         <Text style={styling.availTXT}>{I18n.t('Schedule')}</Text>
                                         <View style={styling.seeallView}>
-                                            <Text style={styling.amenTXT}>{I18n.t('See all')}</Text>
-                                            <Icons name='right' size={14} />
+                                            {/* <Text style={styling.amenTXT}>{I18n.t('See all')}</Text> */}
+                                            {/* <Icons name='right' size={14} /> */}
                                         </View>
                                     </View>
 

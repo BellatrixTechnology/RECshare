@@ -23,7 +23,6 @@ export const styling = StyleSheet.create({
         height: hp('7%'),
         width: wp('50%'),
         justifyContent: 'flex-start',
-        // alignSelf: 'center',
         alignItems: 'center',
         alignContent: 'flex-start',
         // backgroundColor: 'red'

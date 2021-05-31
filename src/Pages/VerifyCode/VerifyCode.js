@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../Redux/Actions/Auth';
 import { I18n } from '../../../i18n/I18n';
 
+import AntDesign from 'react-native-vector-icons/AntDesign';
 const VerifyCode = ({ route }) => {
     const phone = route.params.Phone;
     const props = route.params.props;
@@ -37,35 +38,38 @@ const VerifyCode = ({ route }) => {
     async function confirmCode() {
         try {
             // console.log(confirm.confirm(code))
-            const credentials = auth.PhoneAuthProvider.credential(confirm.verificationId, code)
-            console.log(credentials)
-            // await confirm.confirm(code).then(async () => {
+            // const credentials = auth.PhoneAuthProvider.credential(confirm.verificationId, code)
+            // console.log(credentials)
+            await confirm.confirm(code).then(async () => {
             let obj = {
                 Email: email,
                 Password: Password,
                 auth: true
             }
             await auth().createUserWithEmailAndPassword(email, Password)
-                .then((userCredentials) => {
+                .then(async(userCredentials) => {
 
                     userCredentials.user.updateProfile({
                         displayName: Names,
 
                     })
+                    console.log(userCredentials.user.uid)
+                    // let temp = userCredentials.user.uid
+                //    await AsyncStorage.setItem('token', temp)
+                //  await AsyncStorage.setItem('Login', JSON.stringify(obj))
+                //     setisloading(false)
+
+                    props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid, email: email, phone: phone })
                     // AsyncStorage.setItem('token', userCredentials.user.uid)
                     // AsyncStorage.setItem('Login', JSON.stringify(obj))
                     // props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid })
-                }).then(async () => {
-                    await firestore().collection('User').doc(userData.user.uid).set({
-                        email: email,
-                        phone: phone
-                    })
-                    let userData = await auth().currentUser.linkWithCredential(credentials)
-                    AsyncStorage.setItem('token', userData.user.uid)
-                    AsyncStorage.setItem('Login', JSON.stringify(obj))
-                    setisloading(false)
-                    props.navigation.navigate('ChooseLanguage', { login: userData.user.uid })
                 })
+                // .then(async () => {
+
+                //     // let userData = await auth().currentUser.linkWithCredential(credentials)
+                //     console.log(userData.user.uid)
+                    
+                // })
                 .catch(error => {
                     if (error.code === 'auth/email-already-in-use') {
                         {
@@ -87,7 +91,14 @@ const VerifyCode = ({ route }) => {
                     }
                 })
 
+        }).catch(error=>{
+            console.log(error);
+            ToastAndroid.show("Invalid code.!", ToastAndroid.LONG);
+            setisloading(false)
+
+        })
         }
+
         catch (error) {
             console.log(error);
             ToastAndroid.show("Invalid code.!", ToastAndroid.LONG);
@@ -103,6 +114,8 @@ const VerifyCode = ({ route }) => {
 
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.mainContainer}>
+                                <AntDesign name='left' backgroundColor='white' color='black' size={30} onPress={() => props.navigation.goBack()} />
+
                     <View style={styling.headingView}>
                         <Text style={styling.headingTEXT}>{I18n.t('Verifying')} </Text>
                         <Text style={styling.headingTEXT}>{I18n.t('yourNumber')} </Text>
@@ -146,7 +159,6 @@ const VerifyCode = ({ route }) => {
                                 id
                                 until={Number(id)}
                                 onFinish={() => setdisabled(false)}
-                                onPress={() => alert()}
                                 size={20}
                                 timeToShow={['M', 'S']}
                                 timeLabels={{ m: null, s: null }}

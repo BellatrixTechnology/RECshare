@@ -42,14 +42,14 @@ const Browse2 = (props) => {
     }, []);
     async function StartFunction() {
         setdataload(true)
-        let t = AsyncStorage.getItem('token')
+        let t =await AsyncStorage.getItem('token')
         setToken(t)
-        get()
-        list()
-        filters()
+       await get()
+      await  list()
+      await  filters()
     }
     async function get() {
-        const snapshot = await firestore().collection('Space').get();
+        const snapshot = await firestore().collection('Data').get();
         const list = [];
         snapshot.forEach((doc) => {
             list.push(doc.data());
@@ -77,12 +77,13 @@ const Browse2 = (props) => {
 
     }
     async function sortData(parsed1) {
+        console.log(parsed1)
         let a = parsed1.Rating
 
         const list = [];
         if (parsed1?.Rating != '') {
             if (parsed1?.Checked == 'HighestFirst') {
-                const snapshot = await firestore().collection('Space').where('Rating', '<=', a).orderBy('Rating', 'desc').get();
+                const snapshot = await firestore().collection('Data').where('Rating', '<=', a).orderBy('Rating', 'desc').get();
                 snapshot.forEach((doc) => {
                     list.push(doc.data());
                 });
@@ -90,7 +91,7 @@ const Browse2 = (props) => {
                 setFilterData([...list])
             }
             else if (parsed1?.Checked == 'LowestFirst') {
-                const snapshot = await firestore().collection('Space').where('Rating', '<=', a).orderBy('Rating', 'asc').get();
+                const snapshot = await firestore().collection('Data').where('Rating', '<=', a).orderBy('Rating', 'asc').get();
                 snapshot.forEach((doc) => {
                     list.push(doc.data());
                 });
@@ -102,19 +103,17 @@ const Browse2 = (props) => {
             console.log('price')
             if (parsed1?.Checked == 'Pricelowestfirst') {
 
-                const snapshot = await firestore().collection('Space').orderBy('credit', 'asc').get();
+                const snapshot = await firestore().collection('Data').orderBy('credit', 'asc').get();
                 snapshot.forEach((doc) => {
                     list.push(doc.data());
                 });
-                console.log(filterData)
                 setFilterData([...list])
             }
             else if (parsed1?.Checked == 'Pricehigestfirst') {
-                const snapshot = await firestore().collection('Space').orderBy('credit', 'desc').get();
+                const snapshot = await firestore().collection('Data').orderBy('credit', 'desc').get();
                 snapshot.forEach((doc) => {
                     list.push(doc.data());
                 });
-                console.log(filterData)
                 setFilterData([...list])
             }
         }
@@ -129,54 +128,47 @@ const Browse2 = (props) => {
             setListData(list)
         })
     }
-    const favourite = async (item) => {
-        // let t = AsyncStorage.getItem('token')
-        // // let t = AsyncStorage.getItem('token')
-        // const list = [];
+    const favourite = async (item,index) => {
+        let tk = await AsyncStorage.getItem('token')
+         let alreadyLiked = liked(item);
 
-        // auth().onAuthStateChanged(function (user) {
-        //     //     if (user) {
-        //     console.log(list)
-        //     console.log(user.uid, item)
-        //     firestore().collection('Data').doc(item.spaceid).get().then((doc) => {
-        //         if (doc.exists) {
-        //             console.log("Document data:", doc.data());
-        //             if (doc?.data()?.favourite) {
-        //                 let t = favourite.filter(item => {
-        //                    return item==
-        //                })
-        //             }
-        //         } else {
-        //           se
-        //             console.log("No such document!");
-        //         }
-        //     })
+console.log(alreadyLiked,item,index)
+   if (alreadyLiked == true) {
+      data[index].isLikedBy = item?.isLikedBy?.filter((like) => {
+        return like != tk;
+      });
+      console.log(data,'sda')
+   await  firestore().collection('Data').doc(data[index].spaceid).set(data[index])
 
-        // })
+                    setDAta(data)
 
-        // auth().onAuthStateChanged(function (user) {
-        //     if (user) {
-        //         firestore().collection('User').doc(user.uid).collection('Favourite').add({
-        //             Space: item.Space,
-        //             credit: item.credit,
-        //             distance: item.distance,
-        //             Image: item.Image,
-        //             Guest: item.Guest,
-        //             Rating: item.Rating
-        //         }).then(() => {
-        //             ToastAndroid.showWithGravity(
-        //                 item.Space + " Added in Favourite",
-        //                 ToastAndroid.LONG,
-        //                 ToastAndroid.BOTTOM
-        //             );
-        //         })
-        //     }
-        //     else {
-        //         console.log('null')
-        //     }
-        // })
+    } else {
+       await data[index].isLikedBy?.push(tk);
+              console.log(data,'----')
+
+  await  firestore().collection('Data').doc(data[index].spaceid).set(data[index])
+                    setDAta(data)
+    }
+get()
     }
 
+  const liked = (item) => {
+    if (item.isLikedBy == undefined) {
+      return false;
+    } else if (item.isLikedBy != undefined && item.isLikedBy.length == 0) {
+      return false;
+    } else if (item.isLikedBy.length > 0) {
+      let myLikes = item.isLikedBy?.filter((like) => {
+        return like === token;
+      });
+      if (myLikes.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  };
+//   item?.isLikedBy?.includes(Token)?
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -282,13 +274,13 @@ const Browse2 = (props) => {
                                             data={data}
                                             showsHorizontalScrollIndicator={false}
                                             horizontal={true}
-                                            renderItem={({ item }) => {
+                                            renderItem={({ item,index }) => {
                                                 return (
                                                     <View style={styling.nearInnerView} >
                                                         <ImageBackground style={styling.nearbyCard} source={{ uri: item.Image }} imageStyle={styling.nearbyCard}>
-                                                            <Icon name='heart' size={20} color={status == item.Space ? 'red' : 'white'} onPress={() => {
+                                                            <Icon name='heart' size={20} color={item?.isLikedBy?.includes(token) ? 'red' : 'white'} onPress={() => {
                                                                 // setStatus(item.Space)
-                                                                favourite(item)
+                                                                favourite(item,index)
                                                             }} />
                                                             <View style={styling.imageViewText}>
                                                                 <Text style={{ color: 'white' }}>${item.credit}/hr</Text>
@@ -305,7 +297,7 @@ const Browse2 = (props) => {
 
                                                         <View style={{ flexDirection: 'row' }}>
                                                             <Icons name='map-marker-alt' color='#666666' size={15} />
-                                                            <Text style={styling.carLabel}>  {item.distance} mi {I18n.t('Away')} {item.Guest} {I18n.t('guest')}</Text>
+                                                            <Text style={styling.carLabel}>  {item.distance} mi {I18n.t('Away')}, {item.guest} {I18n.t('guest')}</Text>
                                                         </View>
                                                     </View>
                                                 )

@@ -99,6 +99,11 @@ export const styling = StyleSheet.create({
     },
     inputView: {
         borderBottomWidth: 0.5,
+        paddingVertical:hp(2),
+        paddingHorizontal:wp(2),
+        width:wp(90),
+        flexDirection:'row',
+        alignItems:'center'
     },
     addAdrsView: {
         marginVertical: hp(1),

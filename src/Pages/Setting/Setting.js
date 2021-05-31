@@ -8,7 +8,7 @@ import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
 import AsyncStorage from '@react-native-community/async-storage';
 import { ToastAndroid } from 'react-native';
-import { InputModal } from '../../Component/Modal/index'
+import { CurrntPassword } from '../../Component/Modal/index'
 import { Picker } from '@react-native-picker/picker'
 import { wp } from '../../Global/Styles/Scalling';
 import { select, login, logout } from '../../Redux/Actions/Auth';
@@ -22,6 +22,9 @@ const Setting = (props) => {
     const dispatch = useDispatch();
     const [Email, setEmail] = useState('')
     const [lang, setLang] = useState('')
+    const [confirmpass,setConfirm]=useState('')
+    const [newpas,setNew]=useState('')
+    const [Current,setCurrent]=useState('')
     useEffect(() => {
         starter()
     }, []);
@@ -42,32 +45,40 @@ const Setting = (props) => {
         console.log(val)
         AsyncStorage.setItem('Langauge', val)
 
-        await firestore().collection('User').doc(token).set({
+        await firestore().collection('User').doc(token).update({
             Language: val
         })
         // }
     }
     async function changePass() {
-        auth().onAuthStateChanged((user) => {
-            if (user.email == Email) {
-                auth().sendPasswordResetEmail(user.email).then(() => {
-                    ToastAndroid.showWithGravity(
-                        "Password Change Link Send to your Email",
-                        ToastAndroid.LONG,
-                        ToastAndroid.BOTTOM
-                    );
-                })
-            }
-            else {
-                ToastAndroid.showWithGravity(
-                    "Enter Valid Email",
-                    ToastAndroid.LONG,
-                    ToastAndroid.BOTTOM
-                );
-            }
-
-        })
+        console.log(newpas,confirmpass,Current)
+      try {
+            if(newpas ===confirmpass){
+             reauthenticates(Current).then(() => {
+    var user = auth().currentUser;
+    user.updatePassword(newpas).then(() => {
+     ToastAndroid.show('Password Updated', ToastAndroid.LONG)
+    }).catch((error) => { console.log(error,'asdasd'); });
+  }).catch((error) => {  ToastAndroid.show('The password is invalid',ToastAndroid.LONG) });
+        }
+        else{
+            ToastAndroid.show('Password not matched',ToastAndroid.LONG)
+        }
+      } catch (error) {
+          ToastAndroid.show('Invalid Password',ToastAndroid.LONG)
+          console.log(error,'0000')
+      }
     }
+   const reauthenticates = (currentPassword) => {
+try {
+      var user = auth().currentUser;
+  var cred = auth.EmailAuthProvider.credential(
+      user.email, currentPassword);
+  return user.reauthenticateWithCredential(cred);
+} catch (error) {
+    console.log(error,'0')
+}
+}
 
     return (
         <Fragment>
@@ -123,6 +134,7 @@ const Setting = (props) => {
                             <Iconss name='log-out' size={26} color='white' />
                         </View>
                         <TouchableOpacity style={styling.detailView} onPress={() => {
+                            auth().signOut()
                             dispatch(logout({}))
                             AsyncStorage.removeItem('Login')
                             AsyncStorage.removeItem('token')
@@ -213,16 +225,21 @@ const Setting = (props) => {
                     </View>
                 </View>
             </SafeAreaView>
-            <InputModal
+            <CurrntPassword
                 isVisible={isVisible}
                 isAddress
                 onBackButtonPress={() => setisVisible(false)}
                 onBackdropPress={() => setisVisible(false)}
-                onChange={(val) => { setEmail(val) }}
                 onPressYes={() => {
                     changePass()
                     setisVisible(false)
                 }}
+                Currentvalue={Current}
+                newvalue={newpas}
+                confirmvalue={confirmpass}
+                 onChangeCurent={(val) => { setCurrent(val) }}
+                 onChangenew={(val) => { setNew(val) }}
+                 onChangeConfirm={(val) => { setConfirm(val) }}
             />
 
             <SafeAreaView style={{ backgroundColor: 'white' }} />

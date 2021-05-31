@@ -15,6 +15,9 @@ import firestore from '@react-native-firebase/firestore';
 
 const ChooseLanguage = (props) => {
     const logins = props.route.params.login
+    const email = props.route.params.email
+    const phone = props.route.params.phone
+
     console.log(logins)
     const [checked, setcheck] = useState('en');
     const [English, setEnglish] = useState(false);
@@ -33,15 +36,21 @@ const ChooseLanguage = (props) => {
         {
             if (checked == '') {
                 firestore().collection('User').doc(logins).set({
-                    Language: en
+                    Language: en,
+                    phone: phone,
+                    email: email
                 })
 
             }
             else
                 firestore().collection('User').doc(logins).set({
-                    Language: checked
+                    Language: checked,
+                    phone: phone,
+                    email: email
                 })
         }
+                            AsyncStorage.setItem('token', logins)
+
         dispatch(select({ Types: checked }))
         dispatch(login({ userName: logins }))
 

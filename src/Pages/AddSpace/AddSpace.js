@@ -9,6 +9,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import { Picker } from '@react-native-picker/picker';
+import { hp, wp } from '../../Global/Styles/Scalling';
 
 
 const AddSpace = (props) => {
@@ -96,7 +97,8 @@ const AddSpace = (props) => {
                     distance: distance,
                     Image: url,
                     credit: credit,
-                    spaceid: id
+                    spaceid: id,
+                    isLikedBy:[]
                 }).then(() => {
                     firestore().collection('Data').doc(id).set({
                         spaceid: id,
@@ -115,7 +117,9 @@ const AddSpace = (props) => {
                         Saturday: Saturday,
                         sunday: sunday,
                         type: SelectedValue,
-                        Image: url
+                        Image: url,
+                                            isLikedBy:[]
+
                     })
 
 
@@ -147,18 +151,20 @@ const AddSpace = (props) => {
             <SafeAreaView style={{ backgroundColor: 'white' }} />
             <SafeAreaView style={styles.safeContainer} >
                 <View style={styles.mainContainer}>
+                                                <Icons name='left' backgroundColor='white' color='black' size={30} onPress={() => props.navigation.goBack()} />
+
                     <ScrollView>
                         <Text style={styles.headText}>
                             Add Space Details
                     </Text>
 
                         <View style={styles.inputView}>
-                            <TouchableOpacity onPress={() => selectImage()}>
-                                <Text>Upload Images</Text>
+                            <TouchableOpacity onPress={() => selectImage()} style={{backgroundColor:'lightgrey',width:wp(40), paddingVertical:hp(2), alignItems:'center',elevation:1, alignSelf:'center'}}>
+                                <Text style={{color:'white', fontSize:hp(3)}}>Upload Image</Text>
                             </TouchableOpacity>
                             {Images != '' &&
-                                <View style={{ marginRight: 10 }}>
-                                    <Image source={{ uri: Images.Path }} style={{ height: 200, width: 200 }} />
+                                <View style={{ width:wp(80), paddingVertical:hp(3),alignSelf:'center',justifyContent:'center', alignItems:'center'}}>
+                                    <Image source={{ uri: Images.Path }} style={{ height: hp(20), width: wp(70) , alignSelf:'center',}} />
                                 </View>}
 
                             <Input

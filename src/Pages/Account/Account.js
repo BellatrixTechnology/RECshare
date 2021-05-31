@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, FlatList, SafeAreaView, ScrollView } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, FlatList, SafeAreaView, ScrollView, ToastAndroid } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import Icons from 'react-native-vector-icons/AntDesign';
@@ -12,6 +12,7 @@ import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { hp, wp } from '../../Global/Styles/Scalling';
 import AsyncStorage from '@react-native-community/async-storage';
 import { I18n } from '../../../i18n/I18n';
+
 const Account = (props) => {
     const [Name, setName] = useState('')
     const [email, setEmail] = useState('')
@@ -19,6 +20,8 @@ const Account = (props) => {
     const [isVisible, setisVisible] = useState(false)
     const [temp, setTemp] = useState('');
     const [Address, setAddress] = useState([])
+            const [token, setToken] = useState('')
+
     useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             getPeyment()
@@ -33,14 +36,38 @@ const Account = (props) => {
                 const id = await firestore().collection('User').doc().id
                 console.log(id)
                 await firestore().collection('User').doc(user.uid).collection('address').doc(id).set({
-                    address: a
+                    address: a,
+                    id:id
                 })
             }
         })
 
         getPeyment()
     }
+    async function deleteadd(item){
+        console.log('hello')
+        await firestore().collection('User').doc(token).collection('address').doc(item.id).delete()
+                getAddress()
+        ToastAndroid.show('Address Deleted', ToastAndroid.LONG)
+    }
+    async function getAddress(){
+                         let tk = await AsyncStorage.getItem('token')
+
+                    const Snapshot = await firestore().collection('User').doc(tk).collection('address').get()
+                    const ader = [];
+                    Snapshot.forEach((doc) => {
+                        if (doc.exists) {
+                            ader.push(doc.data());
+                        } else {
+                            console.log('No document found!');
+                        }
+                    });
+                    setAddress([...ader]);
+                
+    }
     async function getPeyment() {
+                let tk = await AsyncStorage.getItem('token')
+        setToken(tk)
         auth().onAuthStateChanged(async (user) => {
             if (user) {
                 console.log(user)
@@ -57,18 +84,7 @@ const Account = (props) => {
                     }
                 });
                 setPay([...list]);
-                {
-                    const Snapshot = await firestore().collection('User').doc(user.uid).collection('address').get()
-                    const ader = [];
-                    Snapshot.forEach((doc) => {
-                        if (doc.exists) {
-                            ader.push(doc.data());
-                        } else {
-                            console.log('No document found!');
-                        }
-                    });
-                    setAddress([...ader]);
-                }
+               getAddress()
             }
         })
     }
@@ -114,20 +130,20 @@ const Account = (props) => {
                             </TouchableOpacity>
                         </View>
 
-                        <View style={styling.accountView}>
+                        <TouchableOpacity style={styling.accountView} onPress={() => props.navigation.navigate('Favourites')}>
                             <Text style={styling.accountlTXT}>{I18n.t('Favourties')}</Text>
-                            <TouchableOpacity style={styling.workOpacity} onPress={() => props.navigation.navigate('Favourites')} >
+                            <View style={styling.workOpacity}  >
                                 {/* <Text style={styling.workTXT} >{I18n.t('Address')}</Text> */}
                                 <Icons name='right' size={16} color='#C8C7CC' />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styling.accountView}>
+                            </View>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styling.accountView}  onPress={() => { props.navigation.navigate('AddSpace') }}>
                             <Text style={styling.accountlTXT}>Add Space</Text>
-                            <TouchableOpacity style={styling.workOpacity} onPress={() => { props.navigation.navigate('AddSpace') }} >
+                            <View style={styling.workOpacity} >
                                 {/* <Text style={styling.workTXT} >{I18n.t('Address')}</Text> */}
                                 <Icons name='right' size={16} color='#C8C7CC' />
-                            </TouchableOpacity>
-                        </View>
+                            </View>
+                        </TouchableOpacity>
                         <View style={styling.addressView}>
                             <Text style={styling.addressTXT}>{I18n.t('Address')}</Text>
                         </View>
@@ -142,12 +158,12 @@ const Account = (props) => {
                                                 label={I18n.t('home')}
                                                 editable={false}
                                                 value={item.address}
-                                                rightIcon={
-                                                    <Icons name='right' size={16} color='#C8C7CC' />
-                                                }
-                                                inputContainerStyle={{ borderBottomWidth: 0, width: wp(88), height: hp(4), marginBottom: hp(-3) }}
+                                                inputContainerStyle={{ borderBottomWidth: 0, width: wp(70), height: hp(4), marginBottom: hp(-3) }}
                                                 inputStyle={{ fontSize: 15, fontFamily: fontFamily.SFUIText }}
                                             />
+                                            <Icons name='delete' size={18} color='red' onPress={()=>{
+                                                        deleteadd(item)
+                                                    }} />
                                         </View>
 
                                     )
@@ -168,9 +184,7 @@ const Account = (props) => {
                                 return (
                                     <View style={styling.paymentView}>
                                         <View style={styling.paymentInnerView}>
-                                            {/* <View style={styling.paymentCardView}>
 
-                                            </View> */}
                                             <View style={styling.cardTXTView}>
                                                 <Text style={styling.cardTXT}>{item.holder}</Text>
                                                 <Text style={styling.digitTXT}>{item.CardNo}</Text>
@@ -178,8 +192,11 @@ const Account = (props) => {
                                             </View>
                                         </View>
 
-                                        <Icons name='right' size={16} color='#C8C7CC' />
-
+ <Icons name='delete' size={18} color='red' onPress={async()=>{
+                                                        await firestore().collection('User').doc(token).collection('Payment').doc(item.id).delete()
+                getPeyment()
+        ToastAndroid.show('Card Deleted', ToastAndroid.LONG)
+                                                    }} />
                                     </View>
                                 )
                             }}
