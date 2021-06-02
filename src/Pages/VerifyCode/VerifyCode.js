@@ -41,62 +41,62 @@ const VerifyCode = ({ route }) => {
             // const credentials = auth.PhoneAuthProvider.credential(confirm.verificationId, code)
             // console.log(credentials)
             await confirm.confirm(code).then(async () => {
-            let obj = {
-                Email: email,
-                Password: Password,
-                auth: true
-            }
-            await auth().createUserWithEmailAndPassword(email, Password)
-                .then(async(userCredentials) => {
+                let obj = {
+                    Email: email,
+                    Password: Password,
+                    auth: true
+                }
+                await auth().createUserWithEmailAndPassword(email, Password)
+                    .then(async (userCredentials) => {
 
-                    userCredentials.user.updateProfile({
-                        displayName: Names,
+                        userCredentials.user.updateProfile({
+                            displayName: Names,
 
+                        })
+                        console.log(userCredentials.user.uid)
+                        // let temp = userCredentials.user.uid
+                        //    await AsyncStorage.setItem('token', temp)
+                        //  await AsyncStorage.setItem('Login', JSON.stringify(obj))
+                        //     setisloading(false)
+
+                        props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid, email: email, phone: phone })
+                        // AsyncStorage.setItem('token', userCredentials.user.uid)
+                        // AsyncStorage.setItem('Login', JSON.stringify(obj))
+                        // props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid })
                     })
-                    console.log(userCredentials.user.uid)
-                    // let temp = userCredentials.user.uid
-                //    await AsyncStorage.setItem('token', temp)
-                //  await AsyncStorage.setItem('Login', JSON.stringify(obj))
-                //     setisloading(false)
+                    // .then(async () => {
 
-                    props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid, email: email, phone: phone })
-                    // AsyncStorage.setItem('token', userCredentials.user.uid)
-                    // AsyncStorage.setItem('Login', JSON.stringify(obj))
-                    // props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid })
-                })
-                // .then(async () => {
+                    //     // let userData = await auth().currentUser.linkWithCredential(credentials)
+                    //     console.log(userData.user.uid)
 
-                //     // let userData = await auth().currentUser.linkWithCredential(credentials)
-                //     console.log(userData.user.uid)
-                    
-                // })
-                .catch(error => {
-                    if (error.code === 'auth/email-already-in-use') {
-                        {
-                            ToastAndroid.show(error.code, ToastAndroid.LONG)
-                            setisloading(false)
+                    // })
+                    .catch(error => {
+                        if (error.code === 'auth/email-already-in-use') {
+                            {
+                                ToastAndroid.show(error.code, ToastAndroid.LONG)
+                                setisloading(false)
 
+                            }
                         }
-                    }
-                    else if (error.code === 'auth/invalid-email') {
-                        {
-                            ToastAndroid.show(error.code, ToastAndroid.LONG)
-                            setisloading(false)
+                        else if (error.code === 'auth/invalid-email') {
+                            {
+                                ToastAndroid.show(error.code, ToastAndroid.LONG)
+                                setisloading(false)
 
+                            }
                         }
-                    }
-                    else {
-                        ToastAndroid.show(error, ToastAndroid.LONG)
-                        setisloading(false)
-                    }
-                })
+                        else {
+                            ToastAndroid.show(error, ToastAndroid.LONG)
+                            setisloading(false)
+                        }
+                    })
 
-        }).catch(error=>{
-            console.log(error);
-            ToastAndroid.show("Invalid code.!", ToastAndroid.LONG);
-            setisloading(false)
+            }).catch(error => {
+                console.log(error);
+                ToastAndroid.show("Invalid code.!", ToastAndroid.LONG);
+                setisloading(false)
 
-        })
+            })
         }
 
         catch (error) {
@@ -114,7 +114,7 @@ const VerifyCode = ({ route }) => {
 
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.mainContainer}>
-                                <AntDesign name='left' backgroundColor='white' color='black' size={30} onPress={() => props.navigation.goBack()} />
+                    <AntDesign name='left' backgroundColor='white' color='black' size={30} onPress={() => props.navigation.goBack()} />
 
                     <View style={styling.headingView}>
                         <Text style={styling.headingTEXT}>{I18n.t('Verifying')} </Text>
@@ -129,6 +129,7 @@ const VerifyCode = ({ route }) => {
                             label={I18n.t('EnterCode')}
                             placeholder='Code'
                             value={code}
+                            maxLength={6}
                             onChange={text => setCode(text)}
                         />
                     </View>

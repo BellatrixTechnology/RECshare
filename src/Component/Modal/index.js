@@ -20,6 +20,7 @@ const AlertCancel = ({ isVisible, onBackdropPress, onBackButtonPress, onPressYes
     return (<Modal isVisible={isVisible}
         onBackdropPress={onBackdropPress} onBackButtonPress={onBackButtonPress} backdropOpacity={0.70}>
         <View style={styles.alertModalCancelContainer}>
+
             <View style={styles.cancelContainer}>
                 <Text style={styles.headingText}>Are you sure?</Text>
                 <View style={styles.mainOpacityView}>
@@ -60,10 +61,10 @@ const InputModal = ({ isVisible, onBackdropPress, onBackButtonPress, onPressYes,
         </View>
     </Modal >)
 };
-const CurrntPassword = ({ isVisible, onBackdropPress, onBackButtonPress, onPressYes, onPressNo, Currentvalue,newvalue,confirmvalue, onChangeCurent,onChangenew,onChangeConfirm, isAddress }) => {
+const CurrntPassword = ({ isVisible, onBackdropPress, onBackButtonPress, onPressYes, onPressNo, Currentvalue, newvalue, confirmvalue, onChangeCurent, onChangenew, onChangeConfirm, isAddress }) => {
     return (<Modal isVisible={isVisible}
         onBackdropPress={onBackdropPress} onBackButtonPress={onBackButtonPress} backdropOpacity={0.70}>
-        <View style={{ width: wp(90), paddingVertical:hp(2), backgroundColor: 'white', borderRadius: wp(5), justifyContent: 'center' }}>
+        <View style={{ width: wp(90), paddingVertical: hp(2), backgroundColor: 'white', borderRadius: wp(5), justifyContent: 'center' }}>
             <View style={{ alignItems: 'center', marginTop: hp(2) }}>
                 <TextInput
                     placeholder='Current Password'
@@ -72,18 +73,18 @@ const CurrntPassword = ({ isVisible, onBackdropPress, onBackButtonPress, onPress
                     inputStyle={{ fontSize: 15, fontFamily: fontFamily.SFUIText }}
                     style={{ borderWidth: wp(0.2), borderColor: 'black', width: wp(80), height: hp(6), marginTop: hp(2), borderRadius: wp(2), alignSelf: 'center' }}
                 />
-                 <TextInput
+                <TextInput
                     placeholder='New Password'
                     value={newvalue}
-                    secureTextEntry ={true}
+                    secureTextEntry={true}
                     onChangeText={onChangenew}
                     inputStyle={{ fontSize: 15, fontFamily: fontFamily.SFUIText }}
                     style={{ borderWidth: wp(0.2), borderColor: 'black', width: wp(80), height: hp(6), marginTop: hp(2), borderRadius: wp(2), alignSelf: 'center' }}
-                />   
-                 <TextInput
+                />
+                <TextInput
                     placeholder='Confirm Password'
                     value={confirmvalue}
-                    secureTextEntry ={true}
+                    secureTextEntry={true}
                     onChangeText={onChangeConfirm}
                     inputStyle={{ fontSize: 15, fontFamily: fontFamily.SFUIText }}
                     style={{ borderWidth: wp(0.2), borderColor: 'black', width: wp(80), height: hp(6), marginTop: hp(2), borderRadius: wp(2), alignSelf: 'center' }}
@@ -96,4 +97,4 @@ const CurrntPassword = ({ isVisible, onBackdropPress, onBackButtonPress, onPress
         </View>
     </Modal >)
 };
-export { Loading, AlertCancel, InputModal,CurrntPassword }
+export { Loading, AlertCancel, InputModal, CurrntPassword }

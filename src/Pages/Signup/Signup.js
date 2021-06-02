@@ -1,13 +1,15 @@
 import React, { useState, Fragment, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, ScrollView,ToastAndroid} from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, ScrollView, ToastAndroid } from 'react-native';
 import { Text, Input, colors } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
-import PhoneInput from 'react-native-phone-input';
+// import PhoneInput from 'react-native-phone-input';
 import { wp, hp } from '../../Global/Styles/Scalling';
 import InputF from '../../Component/InputField/index';
 import AsyncStorage from '@react-native-community/async-storage';
+import PhoneInput from "react-native-phone-number-input";
+
 import { I18n } from '../../../i18n/I18n';
 import firestore from "@react-native-firebase/firestore"
 const Signup = (props) => {
@@ -42,17 +44,17 @@ const Signup = (props) => {
     const Signin = () => {
         console.log(data)
         // var temp = false;
-        let temp =data.filter(item=>{
-            return (item?.email ===Email|| item?.phone===phone)
+        let temp = data.filter(item => {
+            return (item?.email === Email || item?.phone === phone)
         })
         // for (let index = 0; index < data.length; index++) {
         //     if (data[index]?.email === Email || data[index]?.phone == phone) {
-                console.log('hhh', temp)
+        console.log('hhh', temp)
         //         temp = true
         //     }
         // }
-        if(temp.length>0){
-                                        ToastAndroid.show('Email or Phone already registered', ToastAndroid.LONG)
+        if (temp.length > 0) {
+            ToastAndroid.show('Email or Phone already registered', ToastAndroid.LONG)
 
         }
         // if (temp) {
@@ -69,13 +71,13 @@ const Signup = (props) => {
         if (Names == '') { seterrName('Enter Name') }
         if (phone == '') { seterrPhone('true') }
         if (Email != '' && Password != '' && Names != '' && phone != '') {
-          if(check){
+            if (check) {
                 Signin()
-          }
-          else{
-                                                      ToastAndroid.show('Accept Terms and Condition First', ToastAndroid.LONG)
+            }
+            else {
+                ToastAndroid.show('Accept Terms and Condition First', ToastAndroid.LONG)
 
-          }
+            }
         }
     }
 
@@ -136,12 +138,16 @@ const Signup = (props) => {
                             <Text style={styling.inputLabel}>Phone Number</Text>
 
                             <PhoneInput
-                                initialCountry={'us'}
-                                style={{
-                                    width: wp(85), height: hp(8), borderBottomWidth: 0.5, borderColor: 'grey'
-                                    , alignSelf: 'center'
+                                defaultCode="US"
+                                containerStyle={{
+                                    width: wp(85), height: hp(10), borderBottomWidth: 0.5,
+                                    borderColor: 'grey'
+                                    , alignSelf: 'center', backgroundColor: 'white',
                                 }}
-                                onChangePhoneNumber={(val) => setPhone(val)}
+                                textContainerStyle={{ backgroundColor: 'white', color: 'black', padding: '-12%', margin: 0 }}
+                                onChangeCountry={(value) => { console.log(value, 'dsfs') }}
+                                // onChangeText={(val) => }
+                                onChangeFormattedText={(val) => { setPhone(val) }}
                             />
                             {phoneError && <Text style={{
                                 color: 'red',
@@ -164,16 +170,16 @@ const Signup = (props) => {
                                 secureTextEntry
                             />
                         </View>
-                        <TouchableOpacity style={styling.checkView} onPress={()=>{
-                           
-                                    if (check == false) {
-                                        setcheck(true)
-                                    }
-                                    else setcheck(false)
-                        
+                        <TouchableOpacity style={styling.checkView} onPress={() => {
+
+                            if (check == false) {
+                                setcheck(true)
+                            }
+                            else setcheck(false)
+
                         }}>
                             <Icons name='check-circle' size={20}
-                               
+
                                 color={check ? '#4CD964' : 'black'}
                             />
                             <Text style={styling.agreeTXT}>  {I18n.t('agreeto')}</Text>
