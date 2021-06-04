@@ -1,12 +1,32 @@
-import React, { useState, Fragment } from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, ScrollView, SafeAreaView, TextInput } from 'react-native';
+import React, { useState, useRef, Fragment, useEffect } from 'react';
+import { View, StyleSheet, StatusBar, TouchableOpacity, ScrollView, SafeAreaView, Image, FlatList } from 'react-native';
 import { Text, Input, colors } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/AntDesign';
-import IconMap from 'react-native-vector-icons/MaterialIcons'
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
+import Geolocation from 'react-native-geolocation-service';
+import firestore from "@react-native-firebase/firestore"
 import { styling } from './styling';
+import { hp, wp } from '../../Global/Styles/Scalling';
 const MapBrowse = (props) => {
     const [check, setcheck] = useState(false)
+    const mapRef = useRef(null)
+    const [reg, setReg] = useState({
+        latitude: 32.1738547,
+        longitude: 74.2230870,
+    });
+    const [data, setData] = useState([])
+    useEffect(() => {
+        get()
+    }, [])
+    async function get() {
+        const snapshot = await firestore().collection('Data').get();
+        const list = [];
+        snapshot.forEach((doc) => {
+            list.push(doc.data());
+        });
+        setData([...list]);
+    }
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -14,8 +34,64 @@ const MapBrowse = (props) => {
             <SafeAreaView style={{ backgroundColor: 'white' }} />
 
             <SafeAreaView style={styling.safeContainer} >
+                <View style={styling.container}>
 
-                <View style={styling.headView}>
+                    <MapView
+                        maxZoomLevel={10}
+                        ref={mapRef}
+                        provider={PROVIDER_GOOGLE}
+                        style={styling.map}
+                        showsUserLocation={true}
+                        showsMyLocationButton={true}
+                        followsUserLocation={true}
+
+                        initialRegion={{
+                            latitude: reg.latitude,
+                            longitude: reg.longitude,
+                            latitudeDelta: 0.05,
+                            longitudeDelta: 0.05
+                        }}
+
+                    >
+
+
+
+
+                    </MapView>
+                    <View style={{ position: 'absolute', width: wp(100), paddingVertical: hp(1), }} >
+                        <FlatList
+                            data={data}
+                            horizontal={true}
+                            showsHorizontalScrollIndicator={false}
+                            renderItem={({ item }) => {
+                                console.log(item, 'kkkk')
+                                return (
+                                    <TouchableOpacity style={{ backgroundColor: 'white', width: wp(70), elevation: 3, marginHorizontal: wp(3), paddingVertical: hp(2), flexDirection: 'row', borderRadius: 10, justifyContent: 'space-evenly' }}
+                                        onPress={() => props.navigation.navigate('SpaceDetail', {
+                                            Space: item.spaceid,
+                                            props: props.navigation
+                                        })}
+                                    >
+
+                                        <Image style={styling.floatingInnerView} source={{ uri: item.Image }} />
+                                        <View style={styling.txtView} >
+                                            <Text style={styling.cardheadTXT}>
+                                                {item.Space}
+                                            </Text>
+                                            <View style={{ flexDirection: 'row' }}>
+                                                <Icon name='map-marker-alt' color='#666666' size={16} />
+                                                <Text style={styling.cardheadLabel}> {item.distance} mi away </Text>
+                                            </View>
+                                        </View>
+                                    </TouchableOpacity>
+                                )
+                            }}
+                        />
+                    </View>
+
+
+                </View >
+                {/* <View style={styling.headView}>
                     <Icons.Button name="left" style={styling.headIcon} color='black' size={28} onPress={() => { props.navigation.navigate('LoginScreen') }}>
 
                     </Icons.Button>
@@ -61,7 +137,7 @@ const MapBrowse = (props) => {
                         </View>
                     </ScrollView>
 
-                </View>
+                </View> */}
             </SafeAreaView>
             <SafeAreaView style={{ backgroundColor: 'white' }} />
 

@@ -8,6 +8,23 @@ export const styling = StyleSheet.create({
         backgroundColor: '#C8C7CC'
 
     },
+    container: {
+        ...StyleSheet.absoluteFillObject,
+        // height: hp(100),
+        // width: wp(100),
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        // padding: 20,
+        marginBottom: hp(5)
+
+    },
+    map: {
+        height: hp(96),
+        width: wp(100),
+        ...StyleSheet.absoluteFillObject,
+    },
+
     mainContainer: {
         height: hp('100%'),
         width: wp('100%'),
@@ -35,7 +52,7 @@ export const styling = StyleSheet.create({
 
     },
     floatingView: {
-        marginRight: 10,
+        // marginRight: 10,
         height: hp('15%'),
         width: wp('65%'),
         // borderRadius: 500,
@@ -44,12 +61,15 @@ export const styling = StyleSheet.create({
         borderRadius: 15,
         padding: 5,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        position: 'absolute'
     },
     floatingInnerView: {
+        // paddingHorizontal: wp(2),
+        // paddingVertical: hp(2)
         height: hp('12%'),
         width: wp('20%'),
-        backgroundColor: '#C8C7CC',
+        // // backgroundColor: '#C8C7CC',
         borderRadius: 10
 
     },
@@ -69,3 +89,27 @@ export const styling = StyleSheet.create({
         color: '#666666'
     }
 })
+// import { StyleSheet } from 'react-native';
+// import { fontFamily, fontSize } from '../../Global/Styles/font';
+// import { hp, wp } from '../../Global/Styles/Scalling';
+
+
+// const styles = StyleSheet.create({
+//     container: {
+//         ...StyleSheet.absoluteFillObject,
+//         height: hp(100),
+//         width: wp(100),
+//         justifyContent: 'flex-end',
+//         alignItems: 'center',
+//         justifyContent: 'center',
+//         padding: 20,
+
+//     },
+//     map: {
+//         height: hp(96),
+//         width: wp(100),
+//         ...StyleSheet.absoluteFillObject,
+//     },
+
+// });
+// export default styles;

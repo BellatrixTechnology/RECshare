@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect, Fragment, useRef } from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, Image, ActivityIndicator, ScrollView } from 'react-native';
 import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
@@ -10,6 +10,7 @@ import storage from '@react-native-firebase/storage';
 import AlertModal from '../../Component/AlertModal/index';
 import { I18n } from '../../../i18n/I18n';
 import AsyncStorage from '@react-native-community/async-storage';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 
 import { styling } from './styling';
 import { wp } from '../../Global/Styles/Scalling';
@@ -23,14 +24,19 @@ const SpaceDetail = ({ route }) => {
     const [checked, setcheck] = useState(false);
     const [obj, setobj] = useState('')
     const [images, setImages] = useState('');
-    const [token,settoken]=useState('')
+    const [token, settoken] = useState('')
+    const mapRef = useRef(null)
+    const [reg, setReg] = useState({
+        latitude: 32.1738547,
+        longitude: 74.2230870,
+    });
     useEffect(() => {
         get()
 
     }, [])
     async function get() {
-                let tk = await AsyncStorage.getItem('token')
-settoken(tk)
+        let tk = await AsyncStorage.getItem('token')
+        settoken(tk)
         auth().onAuthStateChanged((user) => {
             if (user) {
                 setuserName(user.uid)
@@ -50,41 +56,41 @@ settoken(tk)
             }
         })
     }
-     const favourite = async () => {
-         let alreadyLiked = liked(obj);
-   if (alreadyLiked == true) {
-     obj.isLikedBy = obj?.isLikedBy?.filter((like) => {
-        return like != token;
-      });
-   await  firestore().collection('Data').doc(obj.spaceid).set(obj)
+    const favourite = async () => {
+        let alreadyLiked = liked(obj);
+        if (alreadyLiked == true) {
+            obj.isLikedBy = obj?.isLikedBy?.filter((like) => {
+                return like != token;
+            });
+            await firestore().collection('Data').doc(obj.spaceid).set(obj)
 
-                    setobj(obj)
+            setobj(obj)
 
-    } else {
-       await obj.isLikedBy?.push(token);
+        } else {
+            await obj.isLikedBy?.push(token);
 
-  await  firestore().collection('Data').doc(obj.spaceid).set(obj)
-                    setobj(obj)
+            await firestore().collection('Data').doc(obj.spaceid).set(obj)
+            setobj(obj)
+        }
+        get()
     }
-get()
-    }
 
-  const liked = (item) => {
-    if (item.isLikedBy == undefined) {
-      return false;
-    } else if (item.isLikedBy != undefined && item.isLikedBy.length == 0) {
-      return false;
-    } else if (item.isLikedBy.length > 0) {
-      let myLikes = item.isLikedBy?.filter((like) => {
-        return like === token;
-      });
-      if (myLikes.length > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  };
+    const liked = (item) => {
+        if (item.isLikedBy == undefined) {
+            return false;
+        } else if (item.isLikedBy != undefined && item.isLikedBy.length == 0) {
+            return false;
+        } else if (item.isLikedBy.length > 0) {
+            let myLikes = item.isLikedBy?.filter((like) => {
+                return like === token;
+            });
+            if (myLikes.length > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" backgroundColor="white" />
@@ -95,10 +101,10 @@ get()
                     <Icons name="left" style={styling.headIcon} color='black' size={28} onPress={() => { props.goBack() }} />
                     <Text style={styling.headTXT}>{I18n.t('SpaceDetail')}</Text>
 
-                    <Icons.Button name='heart' style={styling.headIcon} color={obj?.isLikedBy?.includes(token) ? 'red' : 'grey'} size={28} 
-                    onPress={()=>{
-favourite()
-                    }}
+                    <Icons.Button name='heart' style={styling.headIcon} color={obj?.isLikedBy?.includes(token) ? 'red' : 'grey'} size={28}
+                        onPress={() => {
+                            favourite()
+                        }}
                     />
                 </View>
 
@@ -268,11 +274,27 @@ favourite()
                                     <Text style={styling.addressTXT}>{obj.Location}</Text>
                                 </View>
 
+                                <MapView
+                                    maxZoomLevel={10}
+                                    ref={mapRef}
+                                    provider={PROVIDER_GOOGLE}
+                                    style={styling.mapView}
+                                    showsUserLocation={true}
+                                    showsMyLocationButton={true}
+                                    followsUserLocation={true}
 
+                                    initialRegion={{
+                                        latitude: reg.latitude,
+                                        longitude: reg.longitude,
+                                        latitudeDelta: 0.05,
+                                        longitudeDelta: 0.05
+                                    }}
 
-                                <View style={styling.mapView}>
+                                ></MapView>
 
-                                </View>
+                                {/* <View style={styling.mapView}>
+
+                                </View> */}
                                 <View style={styling.availheadView}>
                                     <Text style={styling.availTXT}>{I18n.t('Reviews')}</Text>
                                 </View>
