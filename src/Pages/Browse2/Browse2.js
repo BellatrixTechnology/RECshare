@@ -15,7 +15,6 @@ import Entypo from 'react-native-vector-icons/Entypo'
 import { FlatList } from 'react-native';
 import { wp, hp } from '../../Global/Styles/Scalling';
 import IconFont from 'react-native-vector-icons/FontAwesome5';
-import { ToastAndroid } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import AlertModal from '../../Component/AlertModal/index'
@@ -42,11 +41,11 @@ const Browse2 = (props) => {
     }, []);
     async function StartFunction() {
         setdataload(true)
-        let t =await AsyncStorage.getItem('token')
+        let t = await AsyncStorage.getItem('token')
         setToken(t)
-       await get()
-      await  list()
-      await  filters()
+        await get()
+        await list()
+        await filters()
     }
     async function get() {
         const snapshot = await firestore().collection('Data').get();
@@ -60,6 +59,20 @@ const Browse2 = (props) => {
         if (filter == '') {
             setFilterData([...list])
         }
+
+    }
+    async function catGet(data) {
+        const snapshot = await firestore().collection('Data').where('type', '==', data).get();
+        const list = [];
+        snapshot.forEach((doc) => {
+            list.push(doc.data());
+        });
+        setDAta([...list]);
+        setdataload(false)
+
+        // if (filter == '') {
+        setFilterData([...list])
+        // }
 
     }
     async function filters() {
@@ -128,47 +141,47 @@ const Browse2 = (props) => {
             setListData(list)
         })
     }
-    const favourite = async (item,index) => {
+    const favourite = async (item, index) => {
         let tk = await AsyncStorage.getItem('token')
-         let alreadyLiked = liked(item);
+        let alreadyLiked = liked(item);
 
-console.log(alreadyLiked,item,index)
-   if (alreadyLiked == true) {
-      data[index].isLikedBy = item?.isLikedBy?.filter((like) => {
-        return like != tk;
-      });
-      console.log(data,'sda')
-   await  firestore().collection('Data').doc(data[index].spaceid).set(data[index])
+        console.log(alreadyLiked, item, index)
+        if (alreadyLiked == true) {
+            data[index].isLikedBy = item?.isLikedBy?.filter((like) => {
+                return like != tk;
+            });
+            console.log(data, 'sda')
+            await firestore().collection('Data').doc(data[index].spaceid).set(data[index])
 
-                    setDAta(data)
+            setDAta(data)
 
-    } else {
-       await data[index].isLikedBy?.push(tk);
-              console.log(data,'----')
+        } else {
+            await data[index].isLikedBy?.push(tk);
+            console.log(data, '----')
 
-  await  firestore().collection('Data').doc(data[index].spaceid).set(data[index])
-                    setDAta(data)
+            await firestore().collection('Data').doc(data[index].spaceid).set(data[index])
+            setDAta(data)
+        }
+        get()
     }
-get()
-    }
 
-  const liked = (item) => {
-    if (item.isLikedBy == undefined) {
-      return false;
-    } else if (item.isLikedBy != undefined && item.isLikedBy.length == 0) {
-      return false;
-    } else if (item.isLikedBy.length > 0) {
-      let myLikes = item.isLikedBy?.filter((like) => {
-        return like === token;
-      });
-      if (myLikes.length > 0) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-  };
-//   item?.isLikedBy?.includes(Token)?
+    const liked = (item) => {
+        if (item.isLikedBy == undefined) {
+            return false;
+        } else if (item.isLikedBy != undefined && item.isLikedBy.length == 0) {
+            return false;
+        } else if (item.isLikedBy.length > 0) {
+            let myLikes = item.isLikedBy?.filter((like) => {
+                return like === token;
+            });
+            if (myLikes.length > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+    //   item?.isLikedBy?.includes(Token)?
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -209,7 +222,7 @@ get()
                                     <View style={styling.categoryView}>
                                         <View >
                                             <Text style={styling.CategoryTXT}>{I18n.t('Categories')}</Text>
-                                        </View >
+                                        </View>
                                         <View>
                                             <TouchableOpacity style={styling.seeALLOpacity} onPress={() => { props.navigation.navigate('Categories') }} >
                                                 <Text style={styling.seeALLTXT}>{I18n.t('See all')}</Text>
@@ -219,7 +232,11 @@ get()
                                     </View>
                                     <View style={styling.cardContainer}>
                                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                                            <TouchableOpacity style={styling.mainCardView} >
+                                            <TouchableOpacity style={styling.mainCardView}
+                                                onPress={() => {
+                                                    catGet('Private')
+                                                }}
+                                            >
                                                 <View style={styling.cardView}>
                                                     <Icons name='building' color='white' size={50} />
                                                 </View>
@@ -227,30 +244,38 @@ get()
                                                     <Text style={styling.carHeading}>{I18n.t('Private')}</Text>
                                                 </View>
                                             </TouchableOpacity>
-                                            <View style={styling.mainCardView}>
+                                            <TouchableOpacity style={styling.mainCardView} onPress={() => {
+                                                catGet('Meeting')
+                                            }}>
                                                 <View style={styling.cardView1}>
                                                     <Icons name='people-carry' color='white' size={50} />
                                                 </View>
                                                 <View style={styling.cardTXTView}>
                                                     <Text style={styling.carHeading}>{I18n.t('Meeting')}</Text>
                                                 </View>
-                                            </View>
-                                            <View style={styling.mainCardView}>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity style={styling.mainCardView} onPress={() => {
+                                                catGet('Seminar')
+                                            }}>
                                                 <View style={styling.cardView22}>
                                                     <Icons name='chalkboard-teacher' color='white' size={50} />
                                                 </View>
                                                 <View style={styling.cardTXTView}>
                                                     <Text style={styling.carHeading}>{I18n.t('Seminar')}</Text>
                                                 </View>
-                                            </View>
-                                            <View style={styling.mainCardView}>
+                                            </TouchableOpacity>
+                                            <TouchableOpacity style={styling.mainCardView}
+                                                onPress={() => {
+                                                    catGet('Offices')
+                                                }}
+                                            >
                                                 <View style={[styling.cardView22, { backgroundColor: '#FF9500' }]}>
                                                     <Matriel name='office-building' color='white' size={60} />
                                                 </View>
                                                 <View style={styling.cardTXTView}>
                                                     <Text style={styling.carHeading}>{I18n.t('Office')}</Text>
                                                 </View>
-                                            </View>
+                                            </TouchableOpacity>
 
                                         </ScrollView>
                                     </View>
@@ -260,7 +285,7 @@ get()
                                         <View>
                                             <Text style={styling.CategoryTXT}>
                                                 Nearby Spaces
-                                        </Text>
+                                            </Text>
                                         </View>
                                         <View>
                                             <TouchableOpacity style={styling.seeALLOpacity} onPress={() => props.navigation.navigate('Search2')}>
@@ -270,39 +295,43 @@ get()
                                         </View>
                                     </View>
                                     <View style={styling.cardContainer}>
-                                        <FlatList
-                                            data={data}
-                                            showsHorizontalScrollIndicator={false}
-                                            horizontal={true}
-                                            renderItem={({ item,index }) => {
-                                                return (
-                                                    <View style={styling.nearInnerView} >
-                                                        <ImageBackground style={styling.nearbyCard} source={{ uri: item.Image }} imageStyle={styling.nearbyCard}>
-                                                            <Icon name='heart' size={20} color={item?.isLikedBy?.includes(token) ? 'red' : 'white'} onPress={() => {
-                                                                // setStatus(item.Space)
-                                                                favourite(item,index)
-                                                            }} />
-                                                            <View style={styling.imageViewText}>
-                                                                <Text style={{ color: 'white' }}>${item.credit}/hr</Text>
-                                                            </View>
-                                                        </ImageBackground>
-                                                        <TouchableOpacity onPress={() => {
-                                                            props.navigation.navigate('SpaceDetail', {
-                                                                Space: item.spaceid,
-                                                                props: props.navigation
-                                                            })
-                                                        }} >
-                                                            <Text style={styling.CategoryTXT} >{item.Space}</Text>
-                                                        </TouchableOpacity>
+                                        {
+                                            data.length > 0 ?
+                                                <FlatList
+                                                    data={data}
+                                                    showsHorizontalScrollIndicator={false}
+                                                    horizontal={true}
+                                                    renderItem={({ item, index }) => {
+                                                        return (
+                                                            <TouchableOpacity style={styling.nearInnerView} onPress={() => {
+                                                                props.navigation.navigate('SpaceDetail', {
+                                                                    Space: item.spaceid,
+                                                                    props: props.navigation
+                                                                })
+                                                            }} >
+                                                                <ImageBackground style={styling.nearbyCard} source={{ uri: item.Image }} imageStyle={styling.nearbyCard}>
+                                                                    <Icon name='heart' size={26} color={item?.isLikedBy?.includes(token) ? 'red' : 'white'} onPress={() => {
+                                                                        // setStatus(item.Space)
+                                                                        favourite(item, index)
+                                                                    }} />
+                                                                    <View style={styling.imageViewText}>
+                                                                        <Text style={{ color: 'white' }}>${item.credit}/hr</Text>
+                                                                    </View>
+                                                                </ImageBackground>
+                                                                <View  >
+                                                                    <Text style={styling.CategoryTXT} >{item.Space}</Text>
+                                                                </View>
 
-                                                        <View style={{ flexDirection: 'row' }}>
-                                                            <Icons name='map-marker-alt' color='#666666' size={15} />
-                                                            <Text style={styling.carLabel}>  {item.distance} mi {I18n.t('Away')}, {item.guest} {I18n.t('guest')}</Text>
-                                                        </View>
-                                                    </View>
-                                                )
-                                            }}
-                                        />
+                                                                <View style={{ flexDirection: 'row' }}>
+                                                                    <Icons name='map-marker-alt' color='#666666' size={15} />
+                                                                    <Text style={styling.carLabel}>  {item.distance} mi {I18n.t('Away')}, {item.guest} {I18n.t('guest')}</Text>
+                                                                </View>
+                                                            </TouchableOpacity>
+                                                        )
+                                                    }}
+                                                /> :
+                                                <Text>No Space found</Text>
+                                        }
                                     </View>
                                 </View>
                             </View>

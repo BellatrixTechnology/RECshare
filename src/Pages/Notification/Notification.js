@@ -12,16 +12,19 @@ const Notification = () => {
     return (
         <SafeAreaView style={styling.safeContainer} >
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
-            <View style={styling.headerView}>
-                <Icon name='filter' size={25} />
-                <Icons name='dots-three-horizontal' size={25} />
-            </View>
+            {/* <View style={styling.headerView}> */}
+            {/* <Icon name='filter' size={25} />
+                <Icons name='dots-three-horizontal' size={25} /> */}
+            {/* </View> */}
 
             <View style={styling.mainContainer}>
                 <View style={styling.headTXTView}>
                     <Text style={styling.headTXT} >Notification</Text>
                 </View>
-                <View style={styling.innerView}>
+                <View style={{ height: hp(50), alignItems: 'center', justifyContent: 'center' }} >
+                    <Text style={styling.cardheadTXT}>No Notification </Text>
+                </View>
+                {/* <View style={styling.innerView}>
                     <View style={styling.cardContainer}>
                         <View style={styling.cardView}>
 
@@ -91,7 +94,7 @@ const Notification = () => {
                         </View>
                     </View>
 
-                </View>
+                </View> */}
 
 
             </View>

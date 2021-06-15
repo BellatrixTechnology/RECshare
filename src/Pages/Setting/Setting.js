@@ -15,6 +15,9 @@ import { select, login, logout } from '../../Redux/Actions/Auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { I18n, switchLanguage } from '../../../i18n/I18n';
 import firestore from '@react-native-firebase/firestore';
+import Modal from "react-native-modal"
+import { fontFamily } from '../../Global/Styles/font';
+
 const Setting = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const user = useSelector((state) => state.Auth.user);
@@ -22,9 +25,11 @@ const Setting = (props) => {
     const dispatch = useDispatch();
     const [Email, setEmail] = useState('')
     const [lang, setLang] = useState('')
-    const [confirmpass,setConfirm]=useState('')
-    const [newpas,setNew]=useState('')
-    const [Current,setCurrent]=useState('')
+    const [confirmpass, setConfirm] = useState('')
+    const [newpas, setNew] = useState('')
+    const [Current, setCurrent] = useState('')
+    const [isLogout, setisLogout] = useState(false)
+
     useEffect(() => {
         starter()
     }, []);
@@ -51,35 +56,37 @@ const Setting = (props) => {
         // }
     }
     async function changePass() {
-        console.log(newpas,confirmpass,Current)
-      try {
-            if(newpas ===confirmpass){
-             reauthenticates(Current).then(() => {
-    var user = auth().currentUser;
-    user.updatePassword(newpas).then(() => {
-     ToastAndroid.show('Password Updated', ToastAndroid.LONG)
-    }).catch((error) => { console.log(error,'asdasd'); });
-  }).catch((error) => {  ToastAndroid.show('The password is invalid',ToastAndroid.LONG) });
+        console.log(newpas, confirmpass, Current)
+        try {
+            if (newpas === confirmpass) {
+                reauthenticates(Current).then(() => {
+                    var user = auth().currentUser;
+                    user.updatePassword(newpas).then(() => {
+                        ToastAndroid.show('Password Updated', ToastAndroid.LONG)
+                    }).catch((error) => { console.log(error, 'asdasd'); });
+                }).catch((error) => { ToastAndroid.show('The password is invalid', ToastAndroid.LONG) });
+            }
+            else {
+                ToastAndroid.show('Password not matched', ToastAndroid.LONG)
+            }
+        } catch (error) {
+            ToastAndroid.show('Invalid Password', ToastAndroid.LONG)
+            console.log(error, '0000')
         }
-        else{
-            ToastAndroid.show('Password not matched',ToastAndroid.LONG)
-        }
-      } catch (error) {
-          ToastAndroid.show('Invalid Password',ToastAndroid.LONG)
-          console.log(error,'0000')
-      }
     }
-   const reauthenticates = (currentPassword) => {
-try {
-      var user = auth().currentUser;
-  var cred = auth.EmailAuthProvider.credential(
-      user.email, currentPassword);
-  return user.reauthenticateWithCredential(cred);
-} catch (error) {
-    console.log(error,'0')
-}
-}
-
+    const reauthenticates = (currentPassword) => {
+        try {
+            var user = auth().currentUser;
+            var cred = auth.EmailAuthProvider.credential(
+                user.email, currentPassword);
+            return user.reauthenticateWithCredential(cred);
+        } catch (error) {
+            console.log(error, '0')
+        }
+    }
+    const togleLogout = () => {
+        setisLogout(!isLogout)
+    }
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -134,10 +141,8 @@ try {
                             <Iconss name='log-out' size={26} color='white' />
                         </View>
                         <TouchableOpacity style={styling.detailView} onPress={() => {
-                            auth().signOut()
-                            dispatch(logout({}))
-                            AsyncStorage.removeItem('Login')
-                            AsyncStorage.removeItem('token')
+                            togleLogout()
+
 
                         }}>
                             <Text style={styling.detailHead}>{I18n.t('Signout')}</Text>
@@ -237,10 +242,42 @@ try {
                 Currentvalue={Current}
                 newvalue={newpas}
                 confirmvalue={confirmpass}
-                 onChangeCurent={(val) => { setCurrent(val) }}
-                 onChangenew={(val) => { setNew(val) }}
-                 onChangeConfirm={(val) => { setConfirm(val) }}
+                onChangeCurent={(val) => { setCurrent(val) }}
+                onChangenew={(val) => { setNew(val) }}
+                onChangeConfirm={(val) => { setConfirm(val) }}
             />
+            <Modal
+                isVisible={isLogout}
+                onBackButtonPress={togleLogout}
+                onBackdropPress={togleLogout}
+
+            >
+                <View style={{ width: '90%', backgroundColor: 'white', alignItems: 'center', alignSelf: 'center', paddingVertical: '10%', borderRadius: 12 }}>
+                    <Text style={{ fontFamily: fontFamily.SFUITextBold, fontSize: 16 }}>Are you sure you want to logout?</Text>
+                    <View style={{ flexDirection: 'row', width: '60%', justifyContent: 'space-between', marginVertical: 10 }}>
+                        {/* <LinearGradient style={{ width: '40%', paddingVertical: '5%', borderRadius: 10, alignItems: 'center' }} colors={Colors.gray} > */}
+
+                        <TouchableOpacity style={{ width: '40%', paddingVertical: '5%', borderRadius: 10, alignItems: 'center', backgroundColor: 'red' }} onPress={() => {
+                            auth().signOut()
+                            dispatch(logout({}))
+                            AsyncStorage.removeItem('Login')
+                            AsyncStorage.removeItem('token')
+                            togleLogout()
+                        }}>
+                            <Text style={{ fontFamily: fontFamily.SFUIText, fontSize: 18, color: 'white' }}>Yes</Text>
+                        </TouchableOpacity>
+                        {/* </LinearGradient> */}
+
+                        <TouchableOpacity style={{ backgroundColor: 'grey', paddingHorizontal: '10%', paddingVertical: '5%', borderRadius: 10 }} onPress={() => {
+                            togleLogout()
+                        }}>
+                            <Text style={{
+                                fontFamily: fontFamily.SFUIText, fontSize: 18, color: 'white'
+                            }}>Cancel</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
 
             <SafeAreaView style={{ backgroundColor: 'white' }} />
         </Fragment >

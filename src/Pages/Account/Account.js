@@ -20,7 +20,7 @@ const Account = (props) => {
     const [isVisible, setisVisible] = useState(false)
     const [temp, setTemp] = useState('');
     const [Address, setAddress] = useState([])
-            const [token, setToken] = useState('')
+    const [token, setToken] = useState('')
 
     useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
@@ -37,36 +37,36 @@ const Account = (props) => {
                 console.log(id)
                 await firestore().collection('User').doc(user.uid).collection('address').doc(id).set({
                     address: a,
-                    id:id
+                    id: id
                 })
             }
         })
 
         getPeyment()
     }
-    async function deleteadd(item){
+    async function deleteadd(item) {
         console.log('hello')
         await firestore().collection('User').doc(token).collection('address').doc(item.id).delete()
-                getAddress()
+        getAddress()
         ToastAndroid.show('Address Deleted', ToastAndroid.LONG)
     }
-    async function getAddress(){
-                         let tk = await AsyncStorage.getItem('token')
+    async function getAddress() {
+        let tk = await AsyncStorage.getItem('token')
 
-                    const Snapshot = await firestore().collection('User').doc(tk).collection('address').get()
-                    const ader = [];
-                    Snapshot.forEach((doc) => {
-                        if (doc.exists) {
-                            ader.push(doc.data());
-                        } else {
-                            console.log('No document found!');
-                        }
-                    });
-                    setAddress([...ader]);
-                
+        const Snapshot = await firestore().collection('User').doc(tk).collection('address').get()
+        const ader = [];
+        Snapshot.forEach((doc) => {
+            if (doc.exists) {
+                ader.push(doc.data());
+            } else {
+                console.log('No document found!');
+            }
+        });
+        setAddress([...ader]);
+
     }
     async function getPeyment() {
-                let tk = await AsyncStorage.getItem('token')
+        let tk = await AsyncStorage.getItem('token')
         setToken(tk)
         auth().onAuthStateChanged(async (user) => {
             if (user) {
@@ -84,7 +84,7 @@ const Account = (props) => {
                     }
                 });
                 setPay([...list]);
-               getAddress()
+                getAddress()
             }
         })
     }
@@ -137,7 +137,7 @@ const Account = (props) => {
                                 <Icons name='right' size={16} color='#C8C7CC' />
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styling.accountView}  onPress={() => { props.navigation.navigate('AddSpace') }}>
+                        <TouchableOpacity style={styling.accountView} onPress={() => { props.navigation.navigate('AddSpace') }}>
                             <Text style={styling.accountlTXT}>Add Space</Text>
                             <View style={styling.workOpacity} >
                                 {/* <Text style={styling.workTXT} >{I18n.t('Address')}</Text> */}
@@ -161,9 +161,9 @@ const Account = (props) => {
                                                 inputContainerStyle={{ borderBottomWidth: 0, width: wp(70), height: hp(4), marginBottom: hp(-3) }}
                                                 inputStyle={{ fontSize: 15, fontFamily: fontFamily.SFUIText }}
                                             />
-                                            <Icons name='delete' size={18} color='red' onPress={()=>{
-                                                        deleteadd(item)
-                                                    }} />
+                                            <Icons name='delete' size={18} color='red' onPress={() => {
+                                                deleteadd(item)
+                                            }} />
                                         </View>
 
                                     )
@@ -192,11 +192,11 @@ const Account = (props) => {
                                             </View>
                                         </View>
 
- <Icons name='delete' size={18} color='red' onPress={async()=>{
-                                                        await firestore().collection('User').doc(token).collection('Payment').doc(item.id).delete()
-                getPeyment()
-        ToastAndroid.show('Card Deleted', ToastAndroid.LONG)
-                                                    }} />
+                                        <Icons name='delete' size={18} color='red' onPress={async () => {
+                                            await firestore().collection('User').doc(token).collection('Payment').doc(item.id).delete()
+                                            getPeyment()
+                                            ToastAndroid.show('Card Deleted', ToastAndroid.LONG)
+                                        }} />
                                     </View>
                                 )
                             }}
@@ -204,10 +204,10 @@ const Account = (props) => {
 
 
 
-                        <View style={styling.addAdrsView}>
+                        <TouchableOpacity style={styling.addAdrsView}>
                             <Text style={styling.newAdrsTXT}>{I18n.t('AddnewCard')}</Text>
                             <Icons name='pluscircle' size={24} color='#FF2D55' onPress={() => { props.navigation.navigate('Payment') }} />
-                        </View>
+                        </TouchableOpacity>
                     </ScrollView>
                 </View>
                 <InputModal

@@ -86,10 +86,12 @@ export const styling = StyleSheet.create({
         alignItems: 'center'
     },
     cardContainer: {
-        width: wp('95%'),
+        width: wp('90%'),
         paddingLeft: wp(3),
         flexDirection: 'row',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
 
     },
     mainCardView: {
@@ -138,7 +140,9 @@ export const styling = StyleSheet.create({
 
     },
     nearInnerView: {
-        marginRight: wp(2)
+        marginRight: wp(2),
+        alignSelf: 'center',
+
     },
     nearbyCard: {
         width: wp('80%'),

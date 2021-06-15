@@ -98,7 +98,7 @@ const AddSpace = (props) => {
                     Image: url,
                     credit: credit,
                     spaceid: id,
-                    isLikedBy:[]
+                    isLikedBy: []
                 }).then(() => {
                     firestore().collection('Data').doc(id).set({
                         spaceid: id,
@@ -118,7 +118,7 @@ const AddSpace = (props) => {
                         sunday: sunday,
                         type: SelectedValue,
                         Image: url,
-                                            isLikedBy:[]
+                        isLikedBy: []
 
                     })
 
@@ -151,20 +151,20 @@ const AddSpace = (props) => {
             <SafeAreaView style={{ backgroundColor: 'white' }} />
             <SafeAreaView style={styles.safeContainer} >
                 <View style={styles.mainContainer}>
-                                                <Icons name='left' backgroundColor='white' color='black' size={30} onPress={() => props.navigation.goBack()} />
+                    <Icons name='left' backgroundColor='white' color='black' size={30} onPress={() => props.navigation.goBack()} />
 
                     <ScrollView>
                         <Text style={styles.headText}>
                             Add Space Details
-                    </Text>
+                        </Text>
 
                         <View style={styles.inputView}>
-                            <TouchableOpacity onPress={() => selectImage()} style={{backgroundColor:'lightgrey',width:wp(40), paddingVertical:hp(2), alignItems:'center',elevation:1, alignSelf:'center'}}>
-                                <Text style={{color:'white', fontSize:hp(3)}}>Upload Image</Text>
+                            <TouchableOpacity onPress={() => selectImage()} style={{ backgroundColor: 'lightgrey', width: wp(40), paddingVertical: hp(2), alignItems: 'center', elevation: 1, alignSelf: 'center' }}>
+                                <Text style={{ color: 'white', fontSize: hp(3) }}>Upload Image</Text>
                             </TouchableOpacity>
                             {Images != '' &&
-                                <View style={{ width:wp(80), paddingVertical:hp(3),alignSelf:'center',justifyContent:'center', alignItems:'center'}}>
-                                    <Image source={{ uri: Images.Path }} style={{ height: hp(20), width: wp(70) , alignSelf:'center',}} />
+                                <View style={{ width: wp(80), paddingVertical: hp(3), alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                                    <Image source={{ uri: Images.Path }} style={{ height: hp(20), width: wp(70), alignSelf: 'center', }} />
                                 </View>}
 
                             <Input

@@ -31,6 +31,7 @@ const VerifyCode = ({ route }) => {
 
     }, [])
     async function signInWithPhoneNumber() {
+        
         const confirmation = await auth().signInWithPhoneNumber(phone);
         console.log(confirmation)
         setConfirm(confirmation);
