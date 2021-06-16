@@ -1,7 +1,7 @@
 import React, { useState, useRef, Fragment, useEffect } from 'react';
 import { View, StyleSheet, StatusBar, TouchableOpacity, ScrollView, SafeAreaView, Image, FlatList } from 'react-native';
 import { Text, Input, colors } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+import Iconss from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/AntDesign';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import Geolocation from 'react-native-geolocation-service';
@@ -10,6 +10,7 @@ import { styling } from './styling';
 import { hp, wp } from '../../Global/Styles/Scalling';
 import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 import { ActivityIndicator } from 'react-native-paper';
+import { Icon } from 'react-native-elements';
 
 const MapBrowse = (props) => {
     // const [checks, setcheck] = useState(false)
@@ -108,7 +109,25 @@ const MapBrowse = (props) => {
 
                                     key={index}
                                     title={"Pin"}
-                                    description={"Pin Location"} />
+                                    description={"Pin Location"}
+                                >
+                                    <View style={styling.imageMarkerContainer}>
+                                        <View style={{ bottom: -hp(1.5), alignSelf: 'center', }}>
+                                            <View style={{ position: 'absolute', bottom: -hp(1.5), alignSelf: 'center' }}>
+                                                <Icon
+                                                    name="location"
+                                                    type="ionicon"
+                                                    size={hp(60)}
+                                                    color={'orange'}
+                                                />
+                                            </View>
+                                            <Image
+                                                source={{ uri: elements.Image }}
+                                                style={[{ height: wp(20), width: wp(20), borderRadius: 150 }]}
+                                            />
+                                        </View>
+                                    </View>
+                                </Marker>
                             ))
                             }
 
@@ -136,7 +155,7 @@ const MapBrowse = (props) => {
                                                 {item.Space}
                                             </Text>
                                             <View style={{ flexDirection: 'row' }}>
-                                                <Icon name='map-marker-alt' color='#666666' size={16} />
+                                                <Iconss name='map-marker-alt' color='#666666' size={16} />
                                                 <Text style={styling.cardheadLabel}> {item.distance} mi away </Text>
                                             </View>
                                         </View>

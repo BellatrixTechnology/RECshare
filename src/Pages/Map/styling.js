@@ -87,7 +87,13 @@ export const styling = StyleSheet.create({
         fontSize: fontSize.Map.line,
         fontFamily: fontFamily.SFUIText,
         color: '#666666'
-    }
+    },
+    imageMarkerContainer: {
+
+        borderRadius: 100,
+        // backgroundColor: 'pink',
+        padding: 3
+    },
 })
 // import { StyleSheet } from 'react-native';
 // import { fontFamily, fontSize } from '../../Global/Styles/font';
