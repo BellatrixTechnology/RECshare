@@ -282,15 +282,26 @@ const SpaceDetail = ({ route }) => {
                                     showsUserLocation={true}
                                     showsMyLocationButton={true}
                                     followsUserLocation={true}
+                                    region={
+                                        {
+                                            latitude: obj.marker.latitude, longitude: obj.marker.longitude, latitudeDelta: 0.05,
+                                            longitudeDelta: 0.05
+                                        }
+                                    }
+                                // initialRegion={{
+                                //     latitude: reg.latitude,
+                                //     longitude: reg.longitude,
+                                //     latitudeDelta: 0.05,
+                                //     longitudeDelta: 0.05
+                                // }}
 
-                                    initialRegion={{
-                                        latitude: reg.latitude,
-                                        longitude: reg.longitude,
-                                        latitudeDelta: 0.05,
-                                        longitudeDelta: 0.05
-                                    }}
+                                >
 
-                                ></MapView>
+                                    <Marker
+                                        coordinate={obj.marker}
+
+                                    />
+                                </MapView>
 
                                 {/* <View style={styling.mapView}>
 

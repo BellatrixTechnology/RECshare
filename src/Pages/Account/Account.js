@@ -204,9 +204,9 @@ const Account = (props) => {
 
 
 
-                        <TouchableOpacity style={styling.addAdrsView}>
+                        <TouchableOpacity style={styling.addAdrsView} onPress={() => { props.navigation.navigate('Payment') }} >
                             <Text style={styling.newAdrsTXT}>{I18n.t('AddnewCard')}</Text>
-                            <Icons name='pluscircle' size={24} color='#FF2D55' onPress={() => { props.navigation.navigate('Payment') }} />
+                            <Icons name='pluscircle' size={24} color='#FF2D55' />
                         </TouchableOpacity>
                     </ScrollView>
                 </View>

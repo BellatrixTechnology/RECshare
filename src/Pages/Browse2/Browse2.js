@@ -336,7 +336,7 @@ const Browse2 = (props) => {
                                 </View>
                             </View>
                             <View style={styling.buttonOpacityView}>
-                                <TouchableOpacity style={styling.mapOpacity}>
+                                <TouchableOpacity style={styling.mapOpacity} onPress={() => { props.navigation.navigate('Map') }}>
                                     <Entypo name='map' size={20} />
                                     <Text>  {I18n.t('Map')}</Text>
                                 </TouchableOpacity>

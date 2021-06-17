@@ -86,7 +86,7 @@ const MapBrowse = (props) => {
             <SafeAreaView style={styling.safeContainer} >
                 <View style={styling.container}>
                     {isloaded ?
-                        <ActivityIndicator size='large' color='blue' /> :
+                        <ActivityIndicator size='small' color='red' /> :
 
                         <MapView
                             ref={mapRef}
@@ -105,28 +105,12 @@ const MapBrowse = (props) => {
                         >
 
                             {data.map((elements, index) => (
-                                <Marker coordinate={elements.marker}
+                                <Marker coordinate={elements?.marker}
 
                                     key={index}
-                                    title={"Pin"}
-                                    description={"Pin Location"}
+                                    title={elements?.Space}
+                                    description={'Space Center'}
                                 >
-                                    <View style={styling.imageMarkerContainer}>
-                                        <View style={{ bottom: -hp(1.5), alignSelf: 'center', }}>
-                                            <View style={{ position: 'absolute', bottom: -hp(1.5), alignSelf: 'center' }}>
-                                                <Icon
-                                                    name="location"
-                                                    type="ionicon"
-                                                    size={hp(60)}
-                                                    color={'orange'}
-                                                />
-                                            </View>
-                                            <Image
-                                                source={{ uri: elements.Image }}
-                                                style={[{ height: wp(20), width: wp(20), borderRadius: 150 }]}
-                                            />
-                                        </View>
-                                    </View>
                                 </Marker>
                             ))
                             }
