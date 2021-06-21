@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
@@ -11,14 +11,13 @@ import { I18n, switchLanguage } from '../../../i18n/I18n';
 // import { login } from '../../Redux/Actions/Auth';
 import AsyncStorage from '@react-native-community/async-storage';
 import firestore from '@react-native-firebase/firestore';
-
+import storage from '@react-native-firebase/storage'
 
 const ChooseLanguage = (props) => {
     const logins = props.route.params.login
     const email = props.route.params.email
     const phone = props.route.params.phone
-
-    console.log(logins)
+    const ImagePath = props.route.params.ImagePath
     const [checked, setcheck] = useState('en');
     const [English, setEnglish] = useState(false);
     const [Chinese, setChinese] = useState(false);
@@ -27,9 +26,51 @@ const ChooseLanguage = (props) => {
     const [Hindi, setHindi] = useState(false);
     const [Arabic, setArabic] = useState(false);
     const [Russian, setRussian] = useState(false);
+    const [imageLink, setURl] = useState('')
     const [Bulgarian, setBulgarian] = useState(false);
     const dispatch = useDispatch();
+    console.log(props.route.params)
+    useEffect(() => {
+        if (ImagePath[0]) {
+            uploadImage1()
+        }
+    }, []);
+    async function uploadImage1() {
+        console.log(ImagePath[0])
+        const refID = await firestore().collection('User').doc().id
 
+        let url = await uploadImage(ImagePath[0].uri, 'ProfileImage/' + refID)
+        await setURl(url)
+    }
+    async function uploadImage(uri, path) {
+        try {
+            const response = await fetch(uri);
+            const blob = await response.blob();
+            const ref =
+                storage()
+                    .ref(path);
+            const task = ref.put(blob);
+            return new Promise((resolve, reject) => {
+                task.on(
+                    'state_changed',
+                    taskSnapshot => {
+                        console.log(`${taskSnapshot.bytesTransferred} transferred out of ${taskSnapshot.totalBytes}`)
+                    },
+                    err => {
+                        reject(err);
+                    },
+                    async () => {
+                        const url = await task.snapshot.ref.getDownloadURL();
+                        resolve(url)
+                        return url
+
+                    },
+                );
+            });
+        } catch (err) {
+            console.log('uploadImage error: ' + err);
+        }
+    }
     function selection() {
         AsyncStorage.setItem('Langauge', checked)
         switchLanguage(checked)
@@ -38,7 +79,8 @@ const ChooseLanguage = (props) => {
                 firestore().collection('User').doc(logins).set({
                     Language: en,
                     phone: phone,
-                    email: email
+                    email: email,
+                    imageLink: imageLink
                 })
 
             }
@@ -46,10 +88,11 @@ const ChooseLanguage = (props) => {
                 firestore().collection('User').doc(logins).set({
                     Language: checked,
                     phone: phone,
-                    email: email
+                    email: email,
+                    imageLink: imageLink
                 })
         }
-                            AsyncStorage.setItem('token', logins)
+        AsyncStorage.setItem('token', logins)
 
         dispatch(select({ Types: checked }))
         dispatch(login({ userName: logins }))
@@ -78,7 +121,6 @@ const ChooseLanguage = (props) => {
                     <View style={styling.radioView}>
 
                         <TouchableOpacity style={styling.languageView} onPress={() => {
-
                             setcheck('en')
                             dispatch(select({ Types: 'english' }))
 

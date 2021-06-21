@@ -17,11 +17,9 @@ const VerifyCode = ({ route }) => {
     const email = route.params.Email;
     const Password = route.params.Password
     const Names = route.params.Names
+    const ImagePath = route.params.ImagePath
     const [isloading, setisloading] = useState(false)
-    console.log(route.params.props)
-    const isLogin = useSelector(state => state.Auth.isLogin)
-    const dispatch = useDispatch();
-
+    console.log(route.params.ImagePath, 'asdasd')
     const [confirm, setConfirm] = useState(null);
     const [code, setCode] = useState('');
     const [disabled, setdisabled] = useState(true)
@@ -31,9 +29,8 @@ const VerifyCode = ({ route }) => {
 
     }, [])
     async function signInWithPhoneNumber() {
-        
+
         const confirmation = await auth().signInWithPhoneNumber(phone);
-        console.log(confirmation)
         setConfirm(confirmation);
     }
     async function confirmCode() {
@@ -54,13 +51,12 @@ const VerifyCode = ({ route }) => {
                             displayName: Names,
 
                         })
-                        console.log(userCredentials.user.uid)
                         // let temp = userCredentials.user.uid
                         //    await AsyncStorage.setItem('token', temp)
                         //  await AsyncStorage.setItem('Login', JSON.stringify(obj))
                         //     setisloading(false)
 
-                        props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid, email: email, phone: phone })
+                        props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid, email: email, phone: phone, ImagePath: ImagePath })
                         // AsyncStorage.setItem('token', userCredentials.user.uid)
                         // AsyncStorage.setItem('Login', JSON.stringify(obj))
                         // props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid })

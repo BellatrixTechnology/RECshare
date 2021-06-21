@@ -1,5 +1,5 @@
 import React, { useState, Fragment, useEffect } from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, ScrollView, ToastAndroid } from 'react-native';
+import { View, StyleSheet, StatusBar, TouchableOpacity, SafeAreaView, ScrollView, ToastAndroid, ImageBackground } from 'react-native';
 import { Text, Input, colors } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/FontAwesome';
 import { styling } from './styling';
@@ -9,6 +9,7 @@ import { wp, hp } from '../../Global/Styles/Scalling';
 import InputF from '../../Component/InputField/index';
 import AsyncStorage from '@react-native-community/async-storage';
 import PhoneInput from "react-native-phone-number-input";
+import ImagePicker from 'react-native-image-crop-picker';
 
 import { I18n } from '../../../i18n/I18n';
 import firestore from "@react-native-firebase/firestore"
@@ -23,6 +24,8 @@ const Signup = (props) => {
     const [nameError, seterrName] = useState(false);
     const [phoneError, seterrPhone] = useState(false);
     const [data, setData] = useState([])
+    const [ImagePath, setImage] = useState([]);
+
     let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     useEffect(() => {
@@ -61,7 +64,7 @@ const Signup = (props) => {
         //     ToastAndroid.show('Email or Phone already registered')
         // }
         else {
-            props.navigation.navigate('VerfiyCode', { Phone: phone, props: props, Email: Email, Password: Password, Names: Names })
+            props.navigation.navigate('VerfiyCode', { Phone: phone, props: props, Email: Email, Password: Password, Names: Names, ImagePath: ImagePath })
         }
 
     }
@@ -80,7 +83,18 @@ const Signup = (props) => {
             }
         }
     }
+    const selectImage = () => {
 
+        ImagePicker.openPicker({
+            width: 200,
+            height: 200,
+            cropping: true,
+        }).then(image => {
+            console.log(image)
+            setImage([{ uri: image.path, width: image.width, height: image.height, mime: image.mime }]);
+
+        });
+    }
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" />
@@ -101,8 +115,16 @@ const Signup = (props) => {
                                     <Text style={styling.siguplabel}>{I18n.t('SignupContinure')}</Text>
                                 </View>
                             </View>
-                            <View style={styling.avatarView}>
-                            </View>
+                            <TouchableOpacity onPress={() => { selectImage() }}>
+                                <ImageBackground style={styling.avatarView}
+                                    imageStyle={{
+                                        borderRadius: hp(10)
+                                    }}
+                                    source={ImagePath}
+
+                                >
+                                </ImageBackground>
+                            </TouchableOpacity>
                         </View>
                         <View style={styling.formView}>
                             <InputF

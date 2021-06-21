@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { View, StyleSheet, StatusBar, TouchableOpacity, FlatList, SafeAreaView, ScrollView, ToastAndroid } from 'react-native';
+import { View, Image, StatusBar, TouchableOpacity, FlatList, SafeAreaView, ScrollView, ToastAndroid } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import { styling } from './styling';
 import Icons from 'react-native-vector-icons/AntDesign';
@@ -21,7 +21,7 @@ const Account = (props) => {
     const [temp, setTemp] = useState('');
     const [Address, setAddress] = useState([])
     const [token, setToken] = useState('')
-
+    const [Img, setimg] = useState('')
     useEffect(() => {
         const unsubscribe = props.navigation.addListener('focus', () => {
             getPeyment()
@@ -67,6 +67,8 @@ const Account = (props) => {
     }
     async function getPeyment() {
         let tk = await AsyncStorage.getItem('token')
+        let imag = await AsyncStorage.getItem('ImageLink')
+        setimg(imag)
         setToken(tk)
         auth().onAuthStateChanged(async (user) => {
             if (user) {
@@ -107,12 +109,16 @@ const Account = (props) => {
 
                     </View>
                     <View style={styling.avatarView}>
-                        <Avatar
-                            rounded
-                            size={60}
-                            icon={{
-                                name: 'user', type: IconTypes.AntDesign,
-                            }} />
+                        {Img ?
+                            <Image source={{ uri: Img }}
+                                style={{ height: wp(20), width: wp(20), borderRadius: wp(100) }}
+                            />
+                            : <Avatar
+                                rounded
+                                size={60}
+                                icon={{
+                                    name: 'user', type: IconTypes.AntDesign,
+                                }} />}
                         <View style={styling.nameView}>
                             <Text style={styling.nameTXT}>{Name}</Text>
 

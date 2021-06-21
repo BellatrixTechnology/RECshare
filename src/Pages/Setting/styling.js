@@ -118,7 +118,7 @@ export const styling = StyleSheet.create({
     moreoptionView: {
         alignSelf: 'center',
         width: wp('85%'),
-        marginVertical: hp(1),
+        marginVertical: hp(1.4),
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

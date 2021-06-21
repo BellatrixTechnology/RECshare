@@ -91,7 +91,7 @@ const Browse2 = (props) => {
     }
     async function sortData(parsed1) {
         console.log(parsed1)
-        let a = parsed1.Rating
+        let a = parsed1?.Rating
 
         const list = [];
         if (parsed1?.Rating != '') {

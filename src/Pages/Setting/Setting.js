@@ -86,6 +86,7 @@ const Setting = (props) => {
     }
     const togleLogout = () => {
         setisLogout(!isLogout)
+
     }
     return (
         <Fragment>
@@ -154,7 +155,7 @@ const Setting = (props) => {
                     </View>
                     <View style={styling.innerOptionView}>
                         <ScrollView showsVerticalScrollIndicator={false}>
-                            {/* <View style={styling.moreoptionView}>
+                            <View style={styling.moreoptionView}>
                                 <Text style={styling.detailHead}>{I18n.t('Newsletter')}</Text>
                                 <Switch
                                     trackColor={{ false: "#767577", true: "#FF2D55" }}
@@ -192,7 +193,7 @@ const Setting = (props) => {
                                     <Icons name='right' size={20} color='#C8C7CC' />
                                 </TouchableOpacity>
 
-                            </View> */}
+                            </View>
                             <View style={styling.moreoptionView}>
                                 <Text style={styling.detailHead}>{I18n.t('Languages')}</Text>
                                 {/* <TouchableOpacity style={styling.rightView}> */}
@@ -219,13 +220,13 @@ const Setting = (props) => {
                                 </Picker>
                                 {/* </TouchableOpacity> */}
                             </View>
-                            {/* <View style={styling.moreoptionView}>
+                            <View style={styling.moreoptionView}>
                                 <Text style={styling.detailHead}>Linked Account</Text>
                                 <TouchableOpacity style={styling.rightView}>
                                     <Text style={styling.labelTXT}>Facebook, Google</Text>
                                     <Icons name='right' size={20} color='#C8C7CC' />
-                                </TouchableOpacity> */}
-                            {/* </View> */}
+                                </TouchableOpacity>
+                            </View>
                         </ScrollView>
                     </View>
                 </View>
@@ -262,6 +263,10 @@ const Setting = (props) => {
                             dispatch(logout({}))
                             AsyncStorage.removeItem('Login')
                             AsyncStorage.removeItem('token')
+                            AsyncStorage.removeItem('ImageLink')
+                            AsyncStorage.removeItem('Filter')
+
+
                             togleLogout()
                         }}>
                             <Text style={{ fontFamily: fontFamily.SFUIText, fontSize: 18, color: 'white' }}>Yes</Text>

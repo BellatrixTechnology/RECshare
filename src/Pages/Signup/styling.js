@@ -16,23 +16,28 @@ export const styling = StyleSheet.create({
 
     },
     innerContainer: {
-        flexDirection: 'row',
-
+        flexDirection: 'row', width: wp(100),
+        justifyContent: 'space-between',
     },
     headerView: {
-        width: wp('90%'),
+        // width: wp('90%'),
     },
     welcomeView: {
         marginHorizontal: wp(1)
     },
     signupHeader: {
-        width: wp('90%'),
+        // width: wp('90%'),
         marginHorizontal: wp(1)
     },
     avatarView: {
-        width: wp('40%'),
+        width: wp(25),
+        height: wp(25),
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: 'grey',
+        marginHorizontal: wp(10),
+        marginVertical: hp(2),
+        borderRadius: wp(50)
 
     },
     formView: {

@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import { View, StatusBar } from 'react-native';
+import React, { Component, useEffect, useState } from 'react';
+import { View, StatusBar, Image } from 'react-native';
 import { Text } from 'react-native-elements';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Browse from '../Pages/Browse2/Browse2';
 import Bookings from '../Pages/Booking/Booking';
 import Icon from 'react-native-vector-icons/AntDesign';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import Icons from 'react-native-vector-icons/Feather';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { createStackNavigator } from '@react-navigation/stack';
 import set_location from '../Pages/setLocations/set-location';
 import ChooseLocation from '../Pages/ChooseLocation/ChooseLocation';
@@ -29,72 +31,91 @@ import Filter from '../Pages/Filter/Filter';
 import SpaceDetail from '../Pages/SpaceDetail/SpaceDetail';
 import Payment from '../Pages/Payment/Payment';
 import AddSpace from '../Pages/AddSpace/AddSpace';
+import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
-
-function HomeScreen(props) {
-
-    return (
+let img;
 
 
-        <Tab.Navigator
-            tabBarOptions={{
-                iconStyle: { color: "rgb(17,129,176)" },
-                activeTintColor: '#FF2D55',
-            }}
-            initialRouteName={Browse}
-        >
-            <Tab.Screen name="Browse" component={Browse}
-                options={{
-                    // tabBarColor: '#6bfaf3',
-                    tabBarIcon: ({ color }) => (
-                        <Icon name="search1" color={color} size={22} />
-                    ),
+export default function BottomTabBar() {
+    const [img, setimg] = useState('')
+
+    useEffect(() => {
+        get()
+    }, [])
+    async function get() {
+        let tk = await AsyncStorage.getItem('token')
+        await firestore().collection('User').doc(tk).get().then(async (doc) => {
+            console.log(doc.data().imageLink)
+            setimg(doc.data().imageLink)
+            if (doc.data().imageLink && doc.data().imageLink != '') {
+                await AsyncStorage.setItem('ImageLink', doc.data().imageLink)
+            }
+        })
+    }
+    function HomeScreen(props) {
+
+        return (
+
+
+            <Tab.Navigator
+                tabBarOptions={{
+                    iconStyle: { color: "rgb(17,129,176)" },
+                    activeTintColor: '#FF2D55',
                 }}
-            />
-            <Tab.Screen name="Booking" component={Bookings}
-                options={{
+                initialRouteName={Browse}
+            >
+                <Tab.Screen name="Browse" component={Browse}
+                    options={{
+                        // tabBarColor: '#6bfaf3',
+                        tabBarIcon: ({ color }) => (
+                            <Icon name="search1" color={color} size={22} />
+                        ),
+                    }}
+                />
+                <Tab.Screen name="Booking" component={Bookings}
+                    options={{
+                        // tabBarColor: '#6bfaf3',
+                        tabBarIcon: ({ color }) => (
+                            <MaterialCommunityIcons name="script-text-outline" color={color} size={22} />
+                        ),
+                    }}
+                />
+                <Tab.Screen name="Map" component={MapBrowse}
+                    options={{
+                        // tabBarColor: '#6bfaf3',
+                        tabBarIcon: ({ color }) => (
+                            <Icons name="map-pin" color={color} size={22} />
+                        ),
+                    }}
+                />
+                <Tab.Screen name="Notification" component={Notification}
+                    options={{
+                        // tabBarColor: '#6bfaf3',
+                        tabBarIcon: ({ color }) => (
+                            <FontAwesome name="bell" color={color} size={22} />
+                        ),
+                    }} />
+
+                <Tab.Screen name="Account" component={Account} options={{
                     // tabBarColor: '#6bfaf3',
                     tabBarIcon: ({ color }) => (
-                        <Icons name="bookmark" color={color} size={22} />
-                    ),
-                }}
-            />
-            <Tab.Screen name="Map" component={MapBrowse}
-                options={{
-                    // tabBarColor: '#6bfaf3',
-                    tabBarIcon: ({ color }) => (
-                        <Icons name="map-pin" color={color} size={22} />
-                    ),
-                }}
-            />
-            <Tab.Screen name="Notification" component={Notification}
-                options={{
-                    // tabBarColor: '#6bfaf3',
-                    tabBarIcon: ({ color }) => (
-                        <Icon name="notification" color={color} size={22} />
+                        <Image style={{ width: 25, height: 25, borderRadius: 100 }}
+                            source={img ? { uri: img } : require('./placeholderimg.png')} />
                     ),
                 }} />
 
-            <Tab.Screen name="Account" component={Account} options={{
-                // tabBarColor: '#6bfaf3',
-                tabBarIcon: ({ color }) => (
-                    <Icons name="user" color={color} size={22} />
-                ),
-            }} />
 
-
-        </Tab.Navigator>
-    );
-}
-export default function BottomTabBar() {
+            </Tab.Navigator>
+        );
+    }
     return (
         <NavigationContainer independent={true}>
             <Stack.Navigator initialRouteName={HomeScreen} headerMode={null} >
                 <Stack.Screen name="HomeScreen" component={HomeScreen} />
-                {/* <Stack.Screen name='ChooseLanguage' component={ChooseLanguage} /> */}
                 <Stack.Screen name='Chat' component={Chat} />
                 <Stack.Screen name='Search' component={Search} />
                 <Stack.Screen name='Search2' component={Search2} />
