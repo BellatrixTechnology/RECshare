@@ -57,22 +57,13 @@ const VerifyCode = ({ route }) => {
                         //     setisloading(false)
 
                         props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid, email: email, phone: phone, ImagePath: ImagePath })
-                        // AsyncStorage.setItem('token', userCredentials.user.uid)
-                        // AsyncStorage.setItem('Login', JSON.stringify(obj))
-                        // props.navigation.navigate('ChooseLanguage', { login: userCredentials.user.uid })
+
                     })
-                    // .then(async () => {
-
-                    //     // let userData = await auth().currentUser.linkWithCredential(credentials)
-                    //     console.log(userData.user.uid)
-
-                    // })
                     .catch(error => {
                         if (error.code === 'auth/email-already-in-use') {
                             {
                                 ToastAndroid.show(error.code, ToastAndroid.LONG)
                                 setisloading(false)
-
                             }
                         }
                         else if (error.code === 'auth/invalid-email') {

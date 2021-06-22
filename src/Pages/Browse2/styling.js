@@ -10,7 +10,7 @@ export const styling = StyleSheet.create({
     },
     mainContainer: {
         flex: 1,
-        paddingRight: wp(2),
+        // paddingRight: wp(2),
         // alignSelf: 'center',
         backgroundColor: 'white',
     },
@@ -70,7 +70,7 @@ export const styling = StyleSheet.create({
     innerDetailView: {
         marginVertical: hp(1),
         height: hp(60),
-        width: wp(95),
+        width: wp(100),
         alignSelf: 'center',
     },
     maininnerContainer: {
@@ -86,7 +86,7 @@ export const styling = StyleSheet.create({
         alignItems: 'center'
     },
     cardContainer: {
-        width: wp('90%'),
+        width: wp('100%'),
         paddingLeft: wp(3),
         flexDirection: 'row',
         alignSelf: 'center',

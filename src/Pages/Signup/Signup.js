@@ -24,7 +24,7 @@ const Signup = (props) => {
     const [nameError, seterrName] = useState(false);
     const [phoneError, seterrPhone] = useState(false);
     const [data, setData] = useState([])
-    const [ImagePath, setImage] = useState([]);
+    const [ImagePath, setImage] = useState('');
 
     let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -90,8 +90,8 @@ const Signup = (props) => {
             height: 200,
             cropping: true,
         }).then(image => {
-            console.log(image)
-            setImage([{ uri: image.path, width: image.width, height: image.height, mime: image.mime }]);
+            console.log(image.path, ';llklklklklkl')
+            setImage({ uri: image.path, width: image.width, height: image.height, mime: image.mime });
 
         });
     }
@@ -123,6 +123,7 @@ const Signup = (props) => {
                                     source={ImagePath}
 
                                 >
+                                    <Icons name='camera' size={wp(6)} color='white' />
                                 </ImageBackground>
                             </TouchableOpacity>
                         </View>

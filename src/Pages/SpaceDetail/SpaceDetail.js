@@ -4,6 +4,7 @@ import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/AntDesign';
 import Iconss from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo'
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
@@ -17,7 +18,6 @@ import { wp } from '../../Global/Styles/Scalling';
 const SpaceDetail = ({ route }) => {
     const SpaceStation = route.params.Space
     const props = route.params.props
-    console.log(props)
     const [isVisible, setIsVisble] = useState(true)
     const [usern, setuserName] = useState('');
     const [isEnabled, setIsEnabled] = useState(false);
@@ -126,19 +126,30 @@ const SpaceDetail = ({ route }) => {
                                     <Text style={styling.timeTXT}>${obj.credit}/hr</Text>
                                 </View>
                                 <View style={styling.dataView}>
-                                    <Text>{obj.distance} miles {I18n.t('Away')}</Text>
-                                    <Text>{obj.guest} {I18n.t('guest')}</Text>
-                                    <Text>120 m2</Text>
+                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <Icon name='map-pin' size={10} />
+                                        <Text>{'  '}{obj.distance} miles {I18n.t('Away')}</Text>
+                                    </View>
+                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <Entypo name='user' size={10}
+                                        />
+                                        <Text>{'  '}{obj.guest} {I18n.t('guest')}</Text>
+                                    </View>
+                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <Entypo name='retweet' size={13}
+                                        />
+                                        <Text> 120 m2</Text>
+                                    </View>
                                 </View>
                                 <View style={styling.headerView}>
-                                    <View style={styling.userView}>
-                                        <Icon name='user-circle' size={40} color='#C8C7CC' />
+                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                        <View style={styling.userView}>
+                                        </View>
+                                        <View style={styling.statusView}>
+                                            <Text style={styling.labelTXT}>{I18n.t('Meethost')}</Text>
 
-                                    </View>
-                                    <View style={styling.statusView}>
-                                        <Text style={styling.labelTXT}>{I18n.t('Meethost')}</Text>
-
-                                        <Text style={styling.timeTXT}>{obj.Host}</Text>
+                                            <Text style={styling.timeTXT}>{obj.Host}</Text>
+                                        </View>
                                     </View>
                                     <View style={styling.iconView}>
                                         <Iconss name='chatbubble-sharp' color='white' size={26} onPress={() => props.navigate('Chat', {
@@ -249,19 +260,32 @@ const SpaceDetail = ({ route }) => {
                                 <View style={styling.mainSchdView}>
                                     <View style={styling.SchedueleCiew}>
                                         <Text style={styling.availTXT}>{I18n.t('Schedule')}</Text>
-                                        <View style={styling.seeallView}>
-                                            {/* <Text style={styling.amenTXT}>{I18n.t('See all')}</Text> */}
-                                            {/* <Icons name='right' size={14} /> */}
-                                        </View>
+                                        <TouchableOpacity style={styling.seeallView} onPress={() => {
+                                            props.navigate('Scheduele', {
+                                                props: props,
+                                                type: obj.type,
+                                                Title: obj.Space,
+                                                type: obj.type,
+                                                credit: obj.credit,
+                                                distance: obj.distance,
+                                                address: obj.Location,
+                                                images: obj.Image,
+                                                id: obj.spaceid,
+                                                host: obj.Host
+                                            })
+                                        }}>
+                                            <Text style={styling.amenTXT}>{I18n.t('See all')}</Text>
+                                            <Icons name='right' size={14} />
+                                        </TouchableOpacity>
                                     </View>
 
                                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-evenly' }}>
                                         <View style={styling.timeView}>
-                                            <Text style={styling.timeSchduleTXT}>07:30 AM</Text>
+                                            <Text style={styling.timeSchduleTXT}>10:00 AM</Text>
                                             <Text style={styling.availbleTXT}>Available</Text>
                                         </View>
                                         <View style={styling.timeView}>
-                                            <Text style={styling.timeSchduleTXT}>08:30 AM</Text>
+                                            <Text style={styling.timeSchduleTXT}>11:00 AM</Text>
                                             <Text style={styling.availbleTXT}>Available</Text>
                                         </View>
                                     </View>
@@ -288,13 +312,6 @@ const SpaceDetail = ({ route }) => {
                                             longitudeDelta: 0.05
                                         }
                                     }
-                                // initialRegion={{
-                                //     latitude: reg.latitude,
-                                //     longitude: reg.longitude,
-                                //     latitudeDelta: 0.05,
-                                //     longitudeDelta: 0.05
-                                // }}
-
                                 >
 
                                     <Marker
@@ -311,11 +328,10 @@ const SpaceDetail = ({ route }) => {
                                 </View>
                                 <View style={styling.header2View}>
                                     <View style={styling.userView}>
-                                        <Icon name='user-circle' size={40} color='#C8C7CC' />
-
                                     </View>
                                     <View style={styling.statusView}>
                                         <Text style={styling.revwTXT}>Sri Wedari Soekarno</Text>
+                                        <Text style={styling.ago}>15 minute ago</Text>
                                     </View>
                                 </View>
                                 <Text style={styling.hourTXT}>Mindspace Solution is the latest piece of the sharing economy, eliminating extra office space by giving it to freelancers looking for a more steady place to work.</Text>

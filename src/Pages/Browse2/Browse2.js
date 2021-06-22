@@ -32,33 +32,52 @@ const Browse2 = (props) => {
     const [token, setToken] = useState('')
     const [dataload, setdataload] = useState(true)
     useEffect(() => {
+        let mounted = true
+        setdataload(true)
+
+        StartFunction().then(() => {
+            if (mounted) {
+                setdataload(false)
+            }
+        })
         const unsubscribe = props.navigation.addListener('focus', () => {
             StartFunction()
         });
-        return () => {
-            unsubscribe;
-        };
-    }, []);
+        return function cleanup() {
+            mounted = false,
+                unsubscribe
+        }
+
+    }, [])
     async function StartFunction() {
         setdataload(true)
-        let t = await AsyncStorage.getItem('token')
-        setToken(t)
+
         await get()
-        await list()
         await filters()
     }
-    async function get() {
-        const snapshot = await firestore().collection('Data').get();
-        const list = [];
-        snapshot.forEach((doc) => {
-            list.push(doc.data());
-        });
-        setDAta([...list]);
-        setdataload(false)
 
+    async function get() {
+        let t = await AsyncStorage.getItem('token')
+        setToken(t)
+        const list = [];
+        const snapshot = await firestore().collection('Data').get();
+
+        snapshot.forEach((doc) => {
+            if (doc.exists) {
+                list.push(doc.data());
+            } else {
+                console.log('No document found!');
+            }
+        });
+        setDAta(list);
         if (filter == '') {
             setFilterData([...list])
         }
+        setdataload(false)
+
+        // setdataload(false)
+
+
 
     }
     async function catGet(data) {
@@ -77,12 +96,15 @@ const Browse2 = (props) => {
     }
     async function filters() {
         try {
-            let Filter = await AsyncStorage.getItem('Filter');
-            let parsed1 = JSON.parse(Filter);
-            setfilter(parsed1)
-            if (parsed1 != '') {
-                sortData(parsed1)
-            }
+            await AsyncStorage.getItem('Filter').then((datas) => {
+                if (datas) {
+                    let parsed1 = JSON.parse(datas);
+                    setfilter(parsed1)
+
+                    sortData(parsed1)
+                }
+            })
+
         }
         catch (error) {
             console.log(error)
@@ -132,15 +154,15 @@ const Browse2 = (props) => {
         }
     }
 
-    const list = () => {
-        data.forEach(item => {
-            let list = [...listData]
-            list.push({
-                Type: item.Space
-            })
-            setListData(list)
-        })
-    }
+    // const list = () => {
+    //     data.forEach(item => {
+    //         let list = [...listData]
+    //         list.push({
+    //             Type: item.Space
+    //         })
+    //         setListData(list)
+    //     })
+    // }
     const favourite = async (item, index) => {
         let tk = await AsyncStorage.getItem('token')
         let alreadyLiked = liked(item);

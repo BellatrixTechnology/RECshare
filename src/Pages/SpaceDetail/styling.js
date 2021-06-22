@@ -80,13 +80,13 @@ export const styling = StyleSheet.create({
         borderRadius: 10
     },
     statusView: {
-        width: wp(40),
+        marginHorizontal: wp(4),
     },
     headerView: {
         height: hp(10),
         alignItems: 'center',
         flexDirection: 'row',
-        paddingHorizontal: wp(4),
+        paddingHorizontal: wp(2),
         borderRadius: 10,
         justifyContent: 'space-between',
         backgroundColor: '#F9F9F9',
@@ -113,8 +113,12 @@ export const styling = StyleSheet.create({
         borderRadius: 30
     },
     userView: {
-        width: wp(20),
-        alignItems: 'center'
+        // width: wp(20),
+        alignItems: 'center',
+        width: wp(10),
+        height: wp(10),
+        backgroundColor: 'grey',
+        borderRadius: 100
     },
     availheadView: {
         width: wp(40),
@@ -130,8 +134,8 @@ export const styling = StyleSheet.create({
         flexDirection: 'row',
         height: hp(4),
         width: wp(85),
-        alignItems: 'center',
-        alignSelf: 'center',
+        // alignItems: 'center',
+        // alignSelf: 'center',
         justifyContent: 'space-evenly'
     },
     amenityMoreView: {
@@ -147,7 +151,7 @@ export const styling = StyleSheet.create({
         // height: hp(4),
         width: wp(40),
         backgroundColor: 'white',
-        alignItems: 'center',
+        // alignItems: 'center',
         justifyContent: 'center',
     },
     amenTXT: {
@@ -247,6 +251,11 @@ export const styling = StyleSheet.create({
     revwTXT: {
         fontSize: fontSize.Space.line,
         fontFamily: fontFamily.SFUITextSemiBold
+    },
+    ago: {
+        fontSize: fontSize.Space.status,
+        fontFamily: fontFamily.SFUIText,
+        color: 'grey'
     },
     opacityView: {
         marginVertical: hp(4),

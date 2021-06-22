@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, StatusBar, TouchableOpacity, SafeAreaView, Image } from 'react-native';
 import { Text, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 import Icons from 'react-native-vector-icons/FontAwesome'
@@ -12,6 +12,7 @@ import { I18n, switchLanguage } from '../../../i18n/I18n';
 import AsyncStorage from '@react-native-community/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage'
+import { hp, wp } from '../../Global/Styles/Scalling';
 
 const ChooseLanguage = (props) => {
     const logins = props.route.params.login
@@ -31,15 +32,14 @@ const ChooseLanguage = (props) => {
     const dispatch = useDispatch();
     console.log(props.route.params)
     useEffect(() => {
-        if (ImagePath[0]) {
+        if (ImagePath != '') {
             uploadImage1()
         }
     }, []);
     async function uploadImage1() {
-        console.log(ImagePath[0])
         const refID = await firestore().collection('User').doc().id
 
-        let url = await uploadImage(ImagePath[0].uri, 'ProfileImage/' + refID)
+        let url = await uploadImage(ImagePath.uri, 'ProfileImage/' + refID)
         await setURl(url)
     }
     async function uploadImage(uri, path) {
@@ -104,13 +104,18 @@ const ChooseLanguage = (props) => {
             <View style={styling.mainContainer}>
 
                 <View style={styling.avatarView}>
-                    <Avatar
-                        rounded
-                        size={86}
-                        icon={{
-                            name: 'user', type: IconTypes.AntDesign,
-                        }}
-                    />
+                    {ImagePath ?
+                        <Image
+                            source={{ uri: ImagePath.uri }}
+                            style={{ height: wp(20), width: wp(20), borderRadius: 100 }}
+                        />
+                        : <Avatar
+                            rounded
+                            size={86}
+                            icon={{
+                                name: 'user', type: IconTypes.AntDesign,
+                            }}
+                        />}
                 </View>
                 <View style={styling.innerContainer}>
                     <Text style={styling.greetingTXT}>Hi, Rachael {I18n.t('Welcome')} </Text>
