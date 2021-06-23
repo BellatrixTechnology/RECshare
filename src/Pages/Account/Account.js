@@ -31,21 +31,27 @@ const Account = (props) => {
         };
     }, [])
     async function addAddress(a) {
-        auth().onAuthStateChanged(async (user) => {
-            if (user) {
-                const id = await firestore().collection('User').doc().id
-                console.log(id)
-                await firestore().collection('User').doc(user.uid).collection('address').doc(id).set({
-                    address: a,
-                    id: id
-                })
-            }
-        })
+        if (a != '') {
+            auth().onAuthStateChanged(async (user) => {
+                if (user) {
+                    const id = await firestore().collection('User').doc().id
+                    console.log(id)
+                    await firestore().collection('User').doc(user.uid).collection('address').doc(id).set({
+                        address: a,
+                        id: id
+                    })
+                }
+            })
+            setisVisible(false)
 
-        getPeyment()
+            getPeyment()
+
+        }
+        else {
+            ToastAndroid.show('Empty Field', ToastAndroid.LONG)
+        }
     }
     async function deleteadd(item) {
-        console.log('hello')
         await firestore().collection('User').doc(token).collection('address').doc(item.id).delete()
         getAddress()
         ToastAndroid.show('Address Deleted', ToastAndroid.LONG)
@@ -143,13 +149,13 @@ const Account = (props) => {
                                 <Icons name='right' size={16} color='#C8C7CC' />
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styling.accountView} onPress={() => { props.navigation.navigate('AddSpace') }}>
-                            <Text style={styling.accountlTXT}>Add Space</Text>
-                            <View style={styling.workOpacity} >
-                                {/* <Text style={styling.workTXT} >{I18n.t('Address')}</Text> */}
-                                <Icons name='right' size={16} color='#C8C7CC' />
-                            </View>
-                        </TouchableOpacity>
+                        {/* <TouchableOpacity style={styling.accountView} onPress={() => { props.navigation.navigate('AddSpace') }}> */}
+                        {/* <Text style={styling.accountlTXT}>Add Space</Text> */}
+                        {/* <View style={styling.workOpacity} > */}
+                        {/* <Text style={styling.workTXT} >{I18n.t('Address')}</Text> */}
+                        {/* <Icons name='right' size={16} color='#C8C7CC' /> */}
+                        {/* </View> */}
+                        {/* </TouchableOpacity> */}
                         <View style={styling.addressView}>
                             <Text style={styling.addressTXT}>{I18n.t('Address')}</Text>
                         </View>
@@ -226,7 +232,6 @@ const Account = (props) => {
                         // a.push(temp)
                         // setAddress(a)
                         setTemp('')
-                        setisVisible(false)
                         addAddress(temp)
                     }}
                 />

@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { select, login } from '../../Redux/Actions/Auth';
 import { I18n, switchLanguage } from '../../../i18n/I18n';
+import Toast from 'react-native-simple-toast';
 // import { login } from '../../Redux/Actions/Auth';
 const LoginScreen = (props) => {
     const [Names, setName] = useState('');
@@ -22,32 +23,7 @@ const LoginScreen = (props) => {
     const [data, setData] = useState(false)
 
     const dispatch = useDispatch();
-    // useEffect(() => {
-    //     const unsubscribe = props.navigation.addListener('focus', () => {
-    //         get()
-    //     });
-    //     return () => {
-    //         unsubscribe;
-    //     };
-    // }, [])
-    // function get() {
-    //     switchLanguage(lg)
 
-    // }
-    // async function get() {
-    //     try {
-    //         let Login = await AsyncStorage.getItem('Login');
-    //         let parsed1 = JSON.parse(Login);
-    //         setData(parsed1.auth)
-    //         console.log(parsed1)
-    //         if (parsed1.auth) {
-    //             props.navigation.navigate('HomeScreen')
-    //         }
-    //     }
-    //     catch (error) {
-    //         console.log(error)
-    //     }
-    // }
     const upload = () => {
         auth()
             .signInWithEmailAndPassword(Email, Password).then(async (user) => {
@@ -74,12 +50,18 @@ const LoginScreen = (props) => {
                 setactivity(false)
                 dispatch(login({ userName: Email }))
             })
-            .catch(error => {
-                console.log(error)
-                seterrEmail('Enter Vaild Email')
+            .catch(function (error) {
                 setactivity(false)
-                seterrPass('Enter Valid Password')
-            })
+                Toast.show(error.code + ': ' + error.message, Toast.LONG);
+            });
+        // .catch(error => {
+        //     // console.log(error)
+        //     // console.log(error)
+        //     ToastAndroid.show(error, ToastAndroid.LONG)
+        //     // seterrEmail('Enter Vaild Email')
+        //     setactivity(false)
+        //     // seterrPass('Enter Valid Password')
+        // })
     }
     const checkDetails = () => {
         setactivity(true)
@@ -120,8 +102,7 @@ const LoginScreen = (props) => {
                                 label={I18n.t('Email')}
                                 placeholder={I18n.t('Email')}
                                 onChange={(val) => {
-                                    setEmail(val)
-                                    console.log(val.trim())
+                                    setEmail(val.trim())
                                     {
                                         reg.test(val.trim()) ? seterrEmail(false) : seterrEmail(true)
                                     }

@@ -37,32 +37,20 @@ const Signup = (props) => {
         Snapshot.forEach((doc) => {
             if (doc.exists) {
                 temp.push(doc.data());
-                console.log(doc.data())
-            } else {
-
             }
         });
         setData(temp)
     }
     const Signin = () => {
-        console.log(data)
         // var temp = false;
         let temp = data.filter(item => {
             return (item?.email === Email || item?.phone === phone)
         })
-        // for (let index = 0; index < data.length; index++) {
-        //     if (data[index]?.email === Email || data[index]?.phone == phone) {
-        console.log('hhh', temp)
-        //         temp = true
-        //     }
-        // }
         if (temp.length > 0) {
+            console.log("asdasd")
             ToastAndroid.show('Email or Phone already registered', ToastAndroid.LONG)
 
         }
-        // if (temp) {
-        //     ToastAndroid.show('Email or Phone already registered')
-        // }
         else {
             props.navigation.navigate('VerfiyCode', { Phone: phone, props: props, Email: Email, Password: Password, Names: Names, ImagePath: ImagePath })
         }
@@ -72,7 +60,7 @@ const Signup = (props) => {
         if (Email == '') { seterrEmail('Enter Email') }
         if (Password == '') { seterrPass('Enter Password') }
         if (Names == '') { seterrName('Enter Name') }
-        if (phone == '') { seterrPhone('true') }
+        if (phone == '') { seterrPhone("true") }
         if (Email != '' && Password != '' && Names != '' && phone != '') {
             if (check) {
                 Signin()
@@ -90,7 +78,6 @@ const Signup = (props) => {
             height: 200,
             cropping: true,
         }).then(image => {
-            console.log(image.path, ';llklklklklkl')
             setImage({ uri: image.path, width: image.width, height: image.height, mime: image.mime });
 
         });
@@ -133,7 +120,6 @@ const Signup = (props) => {
                                 placeholder={I18n.t('Name')}
                                 onChange={(val) => {
                                     setName(val)
-                                    console.log(val)
                                     if (val == '') {
                                         seterrName(true)
                                     }
@@ -147,7 +133,7 @@ const Signup = (props) => {
                                 label={I18n.t('Email')}
                                 placeholder='abc@gmail.com'
                                 onChange={(val) => {
-                                    setEmail(val.trim())
+                                    setEmail(val)
                                     {
                                         reg.test(val.trim()) ? seterrEmail(false) : seterrEmail(true)
                                     }
@@ -168,7 +154,6 @@ const Signup = (props) => {
                                     , alignSelf: 'center', backgroundColor: 'white',
                                 }}
                                 textContainerStyle={{ backgroundColor: 'white', color: 'black', padding: '-12%', margin: 0 }}
-                                onChangeCountry={(value) => { console.log(value, 'dsfs') }}
                                 // onChangeText={(val) => }
                                 onChangeFormattedText={(val) => { setPhone(val) }}
                             />
@@ -182,7 +167,6 @@ const Signup = (props) => {
                                 placeholder={I18n.t('Password')}
                                 onChange={(val) => {
                                     setPassword(val)
-                                    console.log(val)
                                     if (val == '') {
                                         seterrPass(true)
                                     }

@@ -110,6 +110,10 @@ const MapBrowse = (props) => {
                                     key={index}
                                     title={elements?.Space}
                                     description={'Space Center'}
+                                    onPress={() => props.navigation.navigate('SpaceDetail', {
+                                        Space: elements.spaceid,
+                                        props: props.navigation
+                                    })}
                                 >
                                 </Marker>
                             ))

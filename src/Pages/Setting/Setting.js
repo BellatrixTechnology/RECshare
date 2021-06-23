@@ -57,21 +57,31 @@ const Setting = (props) => {
     }
     async function changePass() {
         console.log(newpas, confirmpass, Current)
-        try {
-            if (newpas === confirmpass) {
-                reauthenticates(Current).then(() => {
-                    var user = auth().currentUser;
-                    user.updatePassword(newpas).then(() => {
-                        ToastAndroid.show('Password Updated', ToastAndroid.LONG)
-                    }).catch((error) => { console.log(error, 'asdasd'); });
-                }).catch((error) => { ToastAndroid.show('The password is invalid', ToastAndroid.LONG) });
+        if (newpas != '' && confirmpass != '' && Current != '') {
+            try {
+                if (newpas === confirmpass) {
+                    reauthenticates(Current).then(() => {
+                        var user = auth().currentUser;
+                        user.updatePassword(newpas).then(() => {
+                            ToastAndroid.show('Password Updated', ToastAndroid.LONG)
+                            setisVisible(false)
+
+                        }).catch((error) => { ToastAndroid.show(error.code + ': ' + error.message, ToastAndroid.LONG); });
+                    }).catch((error) => {
+                        ToastAndroid.show(error.code + ': ' + error.message, ToastAndroid.LONG);
+                    });
+
+                }
+                else {
+                    ToastAndroid.show('Password not matched', ToastAndroid.LONG)
+
+                }
+            } catch (error) {
+                ToastAndroid.show(error.code + ': ' + error.message, ToastAndroid.LONG);
             }
-            else {
-                ToastAndroid.show('Password not matched', ToastAndroid.LONG)
-            }
-        } catch (error) {
-            ToastAndroid.show('Invalid Password', ToastAndroid.LONG)
-            console.log(error, '0000')
+        }
+        else {
+            ToastAndroid.show('Empty Fields', ToastAndroid.LONG)
         }
     }
     const reauthenticates = (currentPassword) => {
@@ -238,7 +248,6 @@ const Setting = (props) => {
                 onBackdropPress={() => setisVisible(false)}
                 onPressYes={() => {
                     changePass()
-                    setisVisible(false)
                 }}
                 Currentvalue={Current}
                 newvalue={newpas}

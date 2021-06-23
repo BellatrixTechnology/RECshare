@@ -5,6 +5,7 @@ import { styling } from './styling';
 import Icon from 'react-native-vector-icons/AntDesign';
 import CalendarPicker from 'react-native-calendar-picker';
 import { I18n } from '../../../i18n/I18n';
+import { ToastAndroid } from 'react-native';
 
 const Schedule = ({ route }) => {
     console.log(route.params)
@@ -94,6 +95,9 @@ const Schedule = ({ route }) => {
                                         },
                                         props: props
                                     })
+                                }
+                                else {
+                                    ToastAndroid.show('Please Select Date and Time', ToastAndroid.LONG)
                                 }
                             }}
                         >
