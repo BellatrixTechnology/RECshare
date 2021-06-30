@@ -24,6 +24,8 @@ import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {styling} from './styling';
 import {wp} from '../../Global/Styles/Scalling';
+import MapViewDirections from 'react-native-maps-directions';
+
 const SpaceDetail = ({route}) => {
   const SpaceStation = route.params.Space;
   const props = route.params.props;
@@ -354,6 +356,11 @@ const SpaceDetail = ({route}) => {
                   longitudeDelta: 0.05,
                 }}>
                 <Marker coordinate={obj.marker} />
+                <MapViewDirections
+                  origin={obj.marker}
+                  destination={{latitude: 33.6844, longitude: 73.0479}}
+                  apikey={'AIzaSyCGckavZNNNSk--4G5y-RZOvuQ4Ht5srVs'}
+                />
               </MapView>
 
               {/* <View style={styling.mapView}>

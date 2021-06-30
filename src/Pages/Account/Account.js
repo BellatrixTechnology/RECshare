@@ -190,14 +190,13 @@ const Account = (props) => {
         </View>
         <View style={styling.mainContainer}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styling.accountView}>
-              <Text style={styling.accountlTXT}>
-                {I18n.t('AccountCredits')}
-              </Text>
-              <TouchableOpacity style={styling.accountOpacity}>
-                <Text style={styling.creditTXT}>$0.00</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={styling.accountView}>
+              <Text style={styling.accountlTXT}>Edit Profile</Text>
+              <View style={styling.workOpacity}>
+                {/* <Text style={styling.workTXT} >{I18n.t('Address')}</Text> */}
+                <Icons name="right" size={16} color="#C8C7CC" />
+              </View>
+            </TouchableOpacity>
 
             <TouchableOpacity
               style={styling.accountView}
@@ -215,10 +214,10 @@ const Account = (props) => {
             {/* <Icons name='right' size={16} color='#C8C7CC' /> */}
             {/* </View> */}
             {/* </TouchableOpacity> */}
-            <View style={styling.addressView}>
+            {/* <View style={styling.addressView}>
               <Text style={styling.addressTXT}>{I18n.t('Address')}</Text>
-            </View>
-            <View>
+            </View> */}
+            {/* <View>
               <FlatList
                 data={Address}
                 renderItem={({item, index}) => {
@@ -251,13 +250,13 @@ const Account = (props) => {
                   );
                 }}
               />
-            </View>
-            <TouchableOpacity
+            </View> */}
+            {/* <TouchableOpacity
               style={styling.addAdrsView}
               onPress={() => setisVisible(true)}>
               <Text style={styling.newAdrsTXT}>{I18n.t('AddAdres')}</Text>
               <Icons name="pluscircle" size={24} color="#FF2D55" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <View style={styling.addressView}>
               <Text style={styling.addressTXT}>{I18n.t('PaymentCards')}</Text>

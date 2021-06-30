@@ -96,18 +96,10 @@ const MapBrowse = (props) => {
       />
 
       <SafeAreaView style={{backgroundColor: 'white'}} />
-      <View style={styling.headerView}>
-        <AntDesign
-          name="left"
-          backgroundColor="white"
-          color="black"
-          size={30}
-          onPress={() => props.navigation.goBack()}
-        />
-        {/* <Entypo name='dots-three-horizontal' size={30} backgroundColor='white' color='black' /> */}
-      </View>
+
       <SafeAreaView style={styling.safeContainer}>
         <View style={styling.container}>
+          <View style={styling.headerView}></View>
           {isloaded ? (
             <ActivityIndicator size="small" color="red" />
           ) : (
@@ -142,55 +134,70 @@ const MapBrowse = (props) => {
 
           <View
             style={{
-              position: 'absolute',
+              // position: 'absolute',
               width: wp(100),
               paddingVertical: hp(1),
+              justifyContent: 'space-between',
+              // flexDirection: 'column',
+              height: hp(100),
             }}>
-            <FlatList
-              data={data}
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({item}) => {
-                return (
-                  <TouchableOpacity
-                    style={{
-                      backgroundColor: 'white',
-                      width: wp(70),
-                      elevation: 3,
-                      marginHorizontal: wp(3),
-                      paddingVertical: hp(2),
-                      flexDirection: 'row',
-                      borderRadius: 10,
-                      justifyContent: 'space-evenly',
-                    }}
-                    onPress={() =>
-                      props.navigation.navigate('SpaceDetail', {
-                        Space: item.spaceid,
-                        props: props.navigation,
-                      })
-                    }>
-                    <Image
-                      style={styling.floatingInnerView}
-                      source={{uri: item.Image}}
-                    />
-                    <View style={styling.txtView}>
-                      <Text style={styling.cardheadTXT}>{item.Space}</Text>
-                      <View style={{flexDirection: 'row'}}>
-                        <Iconss
-                          name="map-marker-alt"
-                          color="#666666"
-                          size={16}
-                        />
-                        <Text style={styling.cardheadLabel}>
-                          {' '}
-                          {item.distance} mi away{' '}
-                        </Text>
+            <View>
+              <AntDesign
+                name="left"
+                backgroundColor="white"
+                color="black"
+                size={30}
+                onPress={() => props.navigation.goBack()}
+              />
+            </View>
+            <View style={{paddingVertical: hp(10)}}>
+              <FlatList
+                data={data}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({item}) => {
+                  return (
+                    <TouchableOpacity
+                      style={{
+                        backgroundColor: 'white',
+                        width: wp(70),
+                        // height: '20%',
+                        elevation: 3,
+                        marginHorizontal: wp(3),
+                        paddingVertical: hp(2),
+                        flexDirection: 'row',
+                        borderRadius: 10,
+                        justifyContent: 'space-evenly',
+                      }}
+                      onPress={() =>
+                        props.navigation.navigate('SpaceDetail', {
+                          Space: item.spaceid,
+                          props: props.navigation,
+                        })
+                      }>
+                      <Image
+                        style={styling.floatingInnerView}
+                        source={{uri: item.Image}}
+                      />
+                      <View style={styling.txtView}>
+                        <Text style={styling.cardheadTXT}>{item.Space}</Text>
+                        <View style={{flexDirection: 'row'}}>
+                          <Iconss
+                            name="map-marker-alt"
+                            color="#666666"
+                            size={16}
+                          />
+                          <Text style={styling.cardheadLabel}>
+                            {' '}
+                            {item.distance} mi away{' '}
+                          </Text>
+                        </View>
                       </View>
-                    </View>
-                  </TouchableOpacity>
-                );
-              }}
-            />
+                    </TouchableOpacity>
+                  );
+                }}
+              />
+            </View>
           </View>
         </View>
         {/* <View style={styling.headView}>
