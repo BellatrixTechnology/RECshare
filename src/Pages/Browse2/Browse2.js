@@ -310,9 +310,10 @@ const Browse2 = (props) => {
                       showsHorizontalScrollIndicator={false}>
                       <TouchableOpacity
                         style={styling.mainCardView}
-                        onPress={() => {
-                          catGet('Private');
-                        }}>
+                        // onPress={() => {
+                        //   catGet('Private');
+                        //   }}
+                      >
                         <View style={styling.cardView}>
                           <Icons name="building" color="white" size={50} />
                         </View>
@@ -324,9 +325,10 @@ const Browse2 = (props) => {
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={styling.mainCardView}
-                        onPress={() => {
-                          catGet('Meeting');
-                        }}>
+                        // onPress={() => {
+                        //   catGet('Meeting');
+                        //   }}
+                      >
                         <View style={styling.cardView1}>
                           <Icons name="people-carry" color="white" size={50} />
                         </View>
@@ -338,9 +340,10 @@ const Browse2 = (props) => {
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={styling.mainCardView}
-                        onPress={() => {
-                          catGet('Seminar');
-                        }}>
+                        // onPress={() => {
+                        //   catGet('Seminar');
+                        //   }}
+                      >
                         <View style={styling.cardView22}>
                           <Icons
                             name="chalkboard-teacher"
@@ -356,9 +359,10 @@ const Browse2 = (props) => {
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={styling.mainCardView}
-                        onPress={() => {
-                          catGet('Offices');
-                        }}>
+                        // onPress={() => {
+                        //   catGet('Offices');
+                        //   }}
+                      >
                         <View
                           style={[
                             styling.cardView22,

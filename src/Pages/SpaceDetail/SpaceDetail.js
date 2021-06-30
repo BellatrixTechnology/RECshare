@@ -23,7 +23,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {styling} from './styling';
-import {wp} from '../../Global/Styles/Scalling';
+import {hp, wp} from '../../Global/Styles/Scalling';
 import MapViewDirections from 'react-native-maps-directions';
 
 const SpaceDetail = ({route}) => {
@@ -142,8 +142,65 @@ const SpaceDetail = ({route}) => {
           <View style={styling.mainContainer}>
             <ScrollView
               showsVerticalScrollIndicator={false}
-              style={{padding: 5}}>
-              <Image style={styling.imageView} source={{uri: obj.Image}} />
+              style={{padding: 2}}>
+              <View style={styling.imageMAinView}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}>
+                  <View
+                    style={{
+                      width: wp(30),
+                      backgroundColor: '#C8C7CC',
+                      borderRadius: 10,
+                    }}></View>
+                  <Image style={styling.imageView} source={{uri: obj.Image}} />
+                </View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    marginTop: hp(1),
+                  }}>
+                  <View
+                    style={{
+                      width: wp(30),
+                      height: hp(20),
+                      backgroundColor: '#C8C7CC',
+                      borderRadius: 10,
+                    }}></View>
+                  <View
+                    style={{height: hp(20), justifyContent: 'space-between'}}>
+                    <View
+                      style={{
+                        width: wp(25),
+                        height: hp(9),
+                        backgroundColor: '#C8C7CC',
+                        borderRadius: 10,
+                      }}></View>
+                    <View
+                      style={{
+                        width: wp(25),
+                        height: hp(9),
+                        backgroundColor: '#C8C7CC',
+                        borderRadius: 10,
+                      }}></View>
+                  </View>
+                  <View
+                    style={{
+                      width: wp(30),
+                      height: hp(20),
+                      backgroundColor: 'grey',
+                      borderRadius: 10,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text style={{fontSize: wp(5), color: 'white'}}>+4</Text>
+                  </View>
+                </View>
+              </View>
+              {/* <Image style={styling.imageView} source={{uri: obj.Image}} /> */}
               <View style={styling.nameView}>
                 <Text style={styling.labelTXT}>{obj.type}</Text>
                 <Text style={styling.nameTXT}>{obj.Space}</Text>

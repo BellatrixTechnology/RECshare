@@ -24,6 +24,7 @@ export const styling = StyleSheet.create({
     justifyContent: 'space-between',
     backgroundColor: 'white',
   },
+
   headIcon: {
     backgroundColor: 'white',
     color: 'black',
@@ -33,10 +34,12 @@ export const styling = StyleSheet.create({
     fontFamily: fontFamily.SFUITextBold,
   },
   imageView: {
-    height: hp('30'),
-    width: wp(85),
+    height: hp(10),
+    width: wp(55),
+    paddingLeft: wp(2),
+    borderRadius: 10,
     // backgroundColor: '#C8C7CC'
-    alignSelf: 'center',
+    // alignSelf: 'center',
   },
   labelTXT: {
     fontSize: fontSize.Space.line,
@@ -289,5 +292,11 @@ export const styling = StyleSheet.create({
     backgroundColor: '#EFEFF4',
     borderRadius: 10,
     justifyContent: 'space-evenly',
+  },
+  imageMAinView: {
+    width: wp(90),
+    // height: 10,
+    paddingRight: wp(2),
+    // alignItems: 'center',
   },
 });

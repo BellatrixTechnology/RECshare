@@ -299,11 +299,12 @@ const Filter = (props) => {
                 <MultiSlider
                   trackStyle={{backgroundColor: '#FF2D55'}}
                   selectedStyle={{backgroundColor: '#FF2D55'}}
-                  // values={values}
+                  values={startPrice}
                   sliderLength={wp(85)}
                   onValuesChange={(val) => {
                     setStartPrice(val);
                   }}
+                  // enabledTwo={true}
                   min={0}
                   max={1000}
                   markerStyle={{
@@ -311,7 +312,7 @@ const Filter = (props) => {
                     height: wp(4),
                     width: wp(4),
                   }}
-                  step={5}
+                  step={1}
                   allowOverlap={false}
                   snapped={true}
                 />
