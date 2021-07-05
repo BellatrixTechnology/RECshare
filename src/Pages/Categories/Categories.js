@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -8,8 +8,8 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import {Text, Input} from 'react-native-elements';
-import {styling} from './styling';
+import { Text, Input } from 'react-native-elements';
+import { styling } from './styling';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
@@ -17,7 +17,7 @@ import Matriel from 'react-native-vector-icons/MaterialCommunityIcons';
 import MatrielIcon from 'react-native-vector-icons/MaterialIcons';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-import {I18n} from '../../../i18n/I18n';
+import { I18n } from '../../../i18n/I18n';
 
 const Categories = (props) => {
   const [Private, setPrivate] = useState(0);
@@ -70,7 +70,10 @@ const Categories = (props) => {
           </View>
           <View style={styling.mainCardView}>
             <View style={styling.cardContainer}>
-              <View
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate('SpaceList', { type: 'Private' })
+                }}
                 style={[
                   styling.cardView,
                   {
@@ -86,8 +89,11 @@ const Categories = (props) => {
                     {Private} {I18n.t('Workspace')}
                   </Text>
                 </View>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate('SpaceList', { type: 'Meeting' })
+                }}
                 style={[
                   styling.cardView,
                   {
@@ -103,16 +109,20 @@ const Categories = (props) => {
                     {Metting} {I18n.t('Workspace')}
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             </View>
             <View style={styling.cardContainer}>
-              <View
+              <TouchableOpacity
                 style={[
                   styling.cardView,
                   {
                     backgroundColor: '#5AC8FA',
                   },
-                ]}>
+                ]}
+                onPress={() => {
+                  props.navigation.navigate('SpaceList', { type: 'Seminar' })
+                }}
+              >
                 <View style={styling.iconsStyles}>
                   <FontAwesome
                     name="chalkboard-teacher"
@@ -126,8 +136,11 @@ const Categories = (props) => {
                     {Seminer} {I18n.t('Workspace')}
                   </Text>
                 </View>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate('SpaceList', { type: 'Offices' })
+                }}
                 style={[
                   styling.cardView,
                   {
@@ -143,10 +156,14 @@ const Categories = (props) => {
                     {Office} {I18n.t('Workspace')}
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             </View>
             <View style={styling.cardContainer}>
-              <View style={[styling.cardView, {backgroundColor: '#ff6680'}]}>
+              <TouchableOpacity style={[styling.cardView, { backgroundColor: '#ff6680' }]}
+                onPress={() => {
+                  props.navigation.navigate('SpaceList', { type: 'Event' })
+                }}
+              >
                 <View style={styling.iconsStyles}>
                   <MatrielIcon name="event" color="white" size={80} />
                 </View>
@@ -156,8 +173,11 @@ const Categories = (props) => {
                     {Event} {I18n.t('Workspace')}
                   </Text>
                 </View>
-              </View>
-              <View
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  props.navigation.navigate('SpaceList', { type: 'Hot Desk' })
+                }}
                 style={[
                   styling.cardView,
                   {
@@ -173,7 +193,7 @@ const Categories = (props) => {
                     {HotDesk} {I18n.t('Workspace')}
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
         </ScrollView>

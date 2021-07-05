@@ -37,7 +37,7 @@ export const styling = StyleSheet.create({
         fontFamily: fontFamily.SFUITextBold
     },
     availheadView: {
-        width: wp(40),
+        width: wp(60),
         height: hp(5),
         justifyContent: 'flex-end',
     },

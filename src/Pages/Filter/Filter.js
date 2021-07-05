@@ -1,4 +1,4 @@
-import React, {useState, Fragment, call} from 'react';
+import React, { useState, Fragment, call } from 'react';
 import {
   View,
   StyleSheet,
@@ -9,13 +9,13 @@ import {
   Switch,
   ScrollView,
 } from 'react-native';
-import {Text} from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import Icons from 'react-native-vector-icons/AntDesign';
-import {Checkbox} from 'react-native-paper';
+import { Checkbox } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
-import {styling} from './styling';
-import {wp} from '../../Global/Styles/Scalling';
-import {I18n} from '../../../i18n/I18n';
+import { styling } from './styling';
+import { wp } from '../../Global/Styles/Scalling';
+import { I18n } from '../../../i18n/I18n';
 import Slider from '@react-native-community/slider';
 import MultiSlider from '@ptomasroos/react-native-multi-slider';
 
@@ -31,8 +31,8 @@ const Filter = (props) => {
       Checked: checked,
       Rating: rate,
       Amenitie: Amenitie,
-      SPrice: startPrice,
-      EPrice: endPrice,
+      SPrice: '',
+      EPrice: '',
     };
     AsyncStorage.setItem('Filter', JSON.stringify(obj)).then(() => {
       props.navigation.goBack();
@@ -94,7 +94,7 @@ const Filter = (props) => {
                 {I18n.t('AvailaleToday')}
               </Text>
               <Switch
-                trackColor={{false: '#767577', true: '#FF2D55'}}
+                trackColor={{ false: '#767577', true: '#FF2D55' }}
                 thumbColor={isEnabled ? '#E5E5E5' : '#f4f3f4'}
                 ios_backgroundColor="#3e3e3e"
                 onValueChange={() => {
@@ -203,7 +203,7 @@ const Filter = (props) => {
               <TouchableOpacity
                 style={
                   Amenitie == 'Wifi'
-                    ? [styling.amenOpacity, {borderColor: '#FF2D55'}]
+                    ? [styling.amenOpacity, { borderColor: '#FF2D55' }]
                     : styling.amenOpacity
                 }
                 onPress={() => {
@@ -214,7 +214,7 @@ const Filter = (props) => {
               <TouchableOpacity
                 style={
                   Amenitie == 'Projector'
-                    ? [styling.amenOpacity, {borderColor: '#FF2D55'}]
+                    ? [styling.amenOpacity, { borderColor: '#FF2D55' }]
                     : styling.amenOpacity
                 }
                 onPress={() => {
@@ -227,7 +227,7 @@ const Filter = (props) => {
               <TouchableOpacity
                 style={
                   Amenitie == 'White'
-                    ? [styling.amenOpacity, {borderColor: '#FF2D55'}]
+                    ? [styling.amenOpacity, { borderColor: '#FF2D55' }]
                     : styling.amenOpacity
                 }
                 onPress={() => {
@@ -238,7 +238,7 @@ const Filter = (props) => {
               <TouchableOpacity
                 style={
                   Amenitie == 'Printer'
-                    ? [styling.amenOpacity, {borderColor: '#FF2D55'}]
+                    ? [styling.amenOpacity, { borderColor: '#FF2D55' }]
                     : styling.amenOpacity
                 }
                 onPress={() => {
@@ -251,7 +251,7 @@ const Filter = (props) => {
               <TouchableOpacity
                 style={
                   Amenitie == 'Monitor'
-                    ? [styling.amenOpacity, {borderColor: '#FF2D55'}]
+                    ? [styling.amenOpacity, { borderColor: '#FF2D55' }]
                     : styling.amenOpacity
                 }
                 onPress={() => {
@@ -262,7 +262,7 @@ const Filter = (props) => {
               <TouchableOpacity
                 style={
                   Amenitie == 'Kitchen'
-                    ? [styling.amenOpacity, {borderColor: '#FF2D55'}]
+                    ? [styling.amenOpacity, { borderColor: '#FF2D55' }]
                     : styling.amenOpacity
                 }
                 onPress={() => {
@@ -272,17 +272,14 @@ const Filter = (props) => {
               </TouchableOpacity>
             </View>
             <View style={styling.availheadView}>
-              <Text style={styling.availTXT}>{I18n.t('PriceRange')}</Text>
+              <Text style={styling.availTXT}>{I18n.t('PriceRange')}: {startPrice}$ - {endPrice}$ </Text>
             </View>
             <View
               style={{
                 alignSelf: 'center',
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-evenly',
                 width: wp(85),
               }}>
-              <View style={{flex: 8, marginVertical: 10}}>
+              <View style={{ flex: 8, marginVertical: 1 }}>
                 {/* <Slider
                   style={{width: null, height: 10}}
                   minimumValue={10}
@@ -296,26 +293,41 @@ const Filter = (props) => {
                   // onSlidingComplete={onSlidingComplete}
                   // onValuesChangeFinish={onValuesChangeFinish}
                 /> */}
+                {/* <ScrollView> */}
                 <MultiSlider
-                  trackStyle={{backgroundColor: '#FF2D55'}}
-                  selectedStyle={{backgroundColor: '#FF2D55'}}
-                  values={startPrice}
+                  trackStyle={{ backgroundColor: '#FF2D55' }}
+                  selectedStyle={{ backgroundColor: '#FF2D55' }}
+                  isMarkersSeparated={true}
+                  values={[3, 80]}
+                  enabledOne={true}
+                  enabledTwo={true}
+                  // onToggleOne={(val) => {
+                  //   setStartPrice(val);
+                  // }}
+                  // onToggleTwo={(val) => {
+                  //   setStartPrice(val);
+                  // }}
+                  onValuesChangeStart={(va) => { console.log(va) }}
                   sliderLength={wp(85)}
-                  onValuesChange={(val) => {
-                    setStartPrice(val);
-                  }}
-                  // enabledTwo={true}
+
+
                   min={0}
-                  max={1000}
+                  max={100}
                   markerStyle={{
-                    backgroundColor: '#FF2D55',
+                    backgroundColor: 'white',
+                    borderColor: '#FF2D55',
                     height: wp(4),
                     width: wp(4),
+                    borderWidth: 1
                   }}
                   step={1}
                   allowOverlap={false}
                   snapped={true}
+                  onValuesChangeFinish={(a) => { setStartPrice(a[0]), setEndprice(a[1]) }}
                 />
+                {/* </ScrollView> */}
+                {/* <Text style={styling.availTXT}>Price: {startPrice}$</Text> */}
+
               </View>
               {/* <TextInput
                 placeholder="Start"
@@ -344,7 +356,7 @@ const Filter = (props) => {
                 }}
               /> */}
             </View>
-            <Text style={styling.availTXT}>Price: {startPrice}</Text>
+            {/* <Text style={styling.availTXT}>Price: {startPrice}$</Text> */}
 
             <View style={styling.availheadView}>
               <Text style={styling.availTXT}>{I18n.t('StartRating')}</Text>
@@ -354,9 +366,9 @@ const Filter = (props) => {
                 style={
                   rate == 1 || rate == 2 || rate == 3 || rate == 4 || rate == 5
                     ? [
-                        styling.starOpacity1,
-                        {backgroundColor: '#FF2D55', borderColor: '#FF2D55'},
-                      ]
+                      styling.starOpacity1,
+                      { backgroundColor: '#FF2D55', borderColor: '#FF2D55' },
+                    ]
                     : styling.starOpacity1
                 }
                 onPress={() => {
@@ -367,24 +379,24 @@ const Filter = (props) => {
                 <Text
                   style={
                     rate == 1 ||
-                    rate == 2 ||
-                    rate == 3 ||
-                    rate == 4 ||
-                    rate == 5
-                      ? [styling.amenTXT, {color: 'white'}]
+                      rate == 2 ||
+                      rate == 3 ||
+                      rate == 4 ||
+                      rate == 5
+                      ? [styling.amenTXT, { color: 'white' }]
                       : styling.amenTXT
                   }>
                   1
                 </Text>
-                <Text style={[styling.amenTXT, {color: '#FF9500'}]}> ★</Text>
+                <Text style={[styling.amenTXT, { color: '#FF9500' }]}> ★</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={
                   rate == 2 || rate == 3 || rate == 4 || rate == 5
                     ? [
-                        styling.starOpacity,
-                        {backgroundColor: '#FF2D55', borderColor: '#FF2D55'},
-                      ]
+                      styling.starOpacity,
+                      { backgroundColor: '#FF2D55', borderColor: '#FF2D55' },
+                    ]
                     : styling.starOpacity
                 }
                 onPress={() => {
@@ -395,20 +407,20 @@ const Filter = (props) => {
                 <Text
                   style={
                     rate == 2 || rate == 3 || rate == 4 || rate == 5
-                      ? [styling.amenTXT, {color: 'white'}]
+                      ? [styling.amenTXT, { color: 'white' }]
                       : styling.amenTXT
                   }>
                   2
                 </Text>
-                <Text style={[styling.amenTXT, {color: '#FF9500'}]}> ★</Text>
+                <Text style={[styling.amenTXT, { color: '#FF9500' }]}> ★</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={
                   rate == 3 || rate == 4 || rate == 5
                     ? [
-                        styling.starOpacity,
-                        {backgroundColor: '#FF2D55', borderColor: '#FF2D55'},
-                      ]
+                      styling.starOpacity,
+                      { backgroundColor: '#FF2D55', borderColor: '#FF2D55' },
+                    ]
                     : styling.starOpacity
                 }
                 onPress={() => {
@@ -419,20 +431,20 @@ const Filter = (props) => {
                 <Text
                   style={
                     rate == 3 || rate == 4 || rate == 5
-                      ? [styling.amenTXT, {color: 'white'}]
+                      ? [styling.amenTXT, { color: 'white' }]
                       : styling.amenTXT
                   }>
                   3
                 </Text>
-                <Text style={[styling.amenTXT, {color: '#FF9500'}]}> ★</Text>
+                <Text style={[styling.amenTXT, { color: '#FF9500' }]}> ★</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={
                   rate == 4 || rate == 5
                     ? [
-                        styling.starOpacity,
-                        {backgroundColor: '#FF2D55', borderColor: '#FF2D55'},
-                      ]
+                      styling.starOpacity,
+                      { backgroundColor: '#FF2D55', borderColor: '#FF2D55' },
+                    ]
                     : styling.starOpacity
                 }
                 onPress={() => {
@@ -443,20 +455,20 @@ const Filter = (props) => {
                 <Text
                   style={
                     rate == 4 || rate == 5
-                      ? [styling.amenTXT, {color: 'white'}]
+                      ? [styling.amenTXT, { color: 'white' }]
                       : styling.amenTXT
                   }>
                   4
                 </Text>
-                <Text style={[styling.amenTXT, {color: '#FF9500'}]}> ★</Text>
+                <Text style={[styling.amenTXT, { color: '#FF9500' }]}> ★</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={
                   rate == 5
                     ? [
-                        styling.starOpacity2,
-                        {backgroundColor: '#FF2D55', borderColor: '#FF2D55'},
-                      ]
+                      styling.starOpacity2,
+                      { backgroundColor: '#FF2D55', borderColor: '#FF2D55' },
+                    ]
                     : styling.starOpacity2
                 }
                 onPress={() => {
@@ -467,12 +479,12 @@ const Filter = (props) => {
                 <Text
                   style={
                     rate == 5
-                      ? [styling.amenTXT, {color: 'white'}]
+                      ? [styling.amenTXT, { color: 'white' }]
                       : styling.amenTXT
                   }>
                   5
                 </Text>
-                <Text style={[styling.amenTXT, {color: '#FF9500'}]}> ★</Text>
+                <Text style={[styling.amenTXT, { color: '#FF9500' }]}> ★</Text>
               </TouchableOpacity>
             </View>
 
@@ -488,7 +500,7 @@ const Filter = (props) => {
           </ScrollView>
         </View>
       </SafeAreaView>
-      <SafeAreaView style={{backgroundColor: 'white'}} />
+      <SafeAreaView style={{ backgroundColor: 'white' }} />
     </Fragment>
   );
 };

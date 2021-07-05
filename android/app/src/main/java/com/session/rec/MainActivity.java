@@ -1,4 +1,4 @@
-package com.rec;
+package com.session.rec;
 
 import com.facebook.react.ReactActivity;
 

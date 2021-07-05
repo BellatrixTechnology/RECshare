@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import Icons from 'react-native-vector-icons/FontAwesome5';
 import IconsCancel from 'react-native-vector-icons/Entypo';
 import firestore from '@react-native-firebase/firestore'
+import { hp } from '../../Global/Styles/Scalling';
 
 const Search2 = (props) => {
     const [data, setDAta] = useState([]);
@@ -43,8 +44,17 @@ const Search2 = (props) => {
     }
     return (
         <SafeAreaView style={styling.safeContainer} >
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
             <View style={styling.mainContainer}>
+                <View style={{ paddingVertical: hp(1) }}>
+                    <Icon
+                        name="left"
+                        backgroundColor="white"
+                        color="black"
+                        size={30}
+                        onPress={() => props.navigation.goBack()}
+                    />
+                </View>
                 <View style={styling.searchContainer}>
                     <View style={styling.searchBar}>
                         <Icon name='search1' size={18} style={{ color: '#C8C7CC' }} />

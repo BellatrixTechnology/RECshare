@@ -1,15 +1,15 @@
-import React, {Component, useEffect, useState} from 'react';
-import {View, StatusBar, Image} from 'react-native';
-import {Text} from 'react-native-elements';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import React, { Component, useEffect, useState } from 'react';
+import { View, StatusBar, Image } from 'react-native';
+import { Text } from 'react-native-elements';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Browse from '../Pages/Browse2/Browse2';
 import Bookings from '../Pages/Booking/Booking';
 import Icon from 'react-native-vector-icons/AntDesign';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Icons from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {createStackNavigator} from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 import set_location from '../Pages/setLocations/set-location';
 import ChooseLocation from '../Pages/ChooseLocation/ChooseLocation';
 import ChooseLanguage from '../Pages/ChooseLanguage/ChooseLanguage';
@@ -33,6 +33,7 @@ import Payment from '../Pages/Payment/Payment';
 import AddSpace from '../Pages/AddSpace/AddSpace';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-community/async-storage';
+import SpaceList from '../Pages/SpaceList.js/SpaceList';
 
 const Tab = createBottomTabNavigator();
 
@@ -63,7 +64,7 @@ export default function BottomTabBar() {
     return (
       <Tab.Navigator
         tabBarOptions={{
-          iconStyle: {color: 'rgb(17,129,176)'},
+          iconStyle: { color: 'rgb(17,129,176)' },
           activeTintColor: '#FF2D55',
         }}
         initialRouteName={Browse}>
@@ -72,7 +73,7 @@ export default function BottomTabBar() {
           component={Browse}
           options={{
             // tabBarColor: '#6bfaf3',
-            tabBarIcon: ({color}) => (
+            tabBarIcon: ({ color }) => (
               <Icon name="search1" color={color} size={22} />
             ),
           }}
@@ -98,7 +99,7 @@ export default function BottomTabBar() {
           component={Notification}
           options={{
             // tabBarColor: '#6bfaf3',
-            tabBarIcon: ({color}) => (
+            tabBarIcon: ({ color }) => (
               <FontAwesome name="bell" color={color} size={22} />
             ),
           }}
@@ -109,10 +110,10 @@ export default function BottomTabBar() {
           component={Account}
           options={{
             // tabBarColor: '#6bfaf3',
-            tabBarIcon: ({color}) => (
+            tabBarIcon: ({ color }) => (
               <Image
-                style={{width: 25, height: 25, borderRadius: 100}}
-                source={img ? {uri: img} : require('./placeholderimg.png')}
+                style={{ width: 25, height: 25, borderRadius: 100 }}
+                source={img ? { uri: img } : require('./placeholderimg.png')}
               />
             ),
           }}
@@ -143,6 +144,7 @@ export default function BottomTabBar() {
         <Stack.Screen name="Browse" component={Browse} />
         <Stack.Screen name="AddSpace" component={AddSpace} />
         <Stack.Screen name="Payment" component={Payment} />
+        <Stack.Screen name='SpaceList' component={SpaceList} />
       </Stack.Navigator>
     </NavigationContainer>
   );

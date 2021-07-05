@@ -218,7 +218,6 @@ const Setting = (props) => {
                                         changeLanguage(val)
                                     }}
                                 >
-                                    {/* <Picker.Item label={lang} value={lang} /> */}
                                     <Picker.Item label="English" value="en" />
                                     <Picker.Item label="Arabic" value="ara" />
                                     <Picker.Item label="Bulgarian" value="bg" />

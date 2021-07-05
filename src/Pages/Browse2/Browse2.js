@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -9,36 +9,39 @@ import {
   SafeAreaView,
   ImageBackground,
 } from 'react-native';
-import {Text, Input} from 'react-native-elements';
-import {styling} from './styling';
+import { Text, Input } from 'react-native-elements';
+import { styling } from './styling';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Icons from 'react-native-vector-icons/FontAwesome5';
 import Matriel from 'react-native-vector-icons/MaterialCommunityIcons';
-import {ScrollView} from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler';
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {FlatList} from 'react-native';
-import {wp, hp} from '../../Global/Styles/Scalling';
+import { FlatList } from 'react-native';
+import { wp, hp } from '../../Global/Styles/Scalling';
 import IconFont from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-community/async-storage';
-
+import { Picker } from '@react-native-picker/picker'
 import AlertModal from '../../Component/AlertModal/index';
-import {I18n} from '../../../i18n/I18n';
-import {fontFamily} from '../../Global/Styles/font';
+import { I18n } from '../../../i18n/I18n';
+import { fontFamily } from '../../Global/Styles/font';
+import Modal from "react-native-modal"
 
 const Browse2 = (props) => {
   const [status, setStatus] = useState('');
   const [data, setDAta] = useState([]);
+  const [cityVis, setCityVIs] = useState(false)
   const [listData, setListData] = useState([]);
   const [search, setSearch] = useState();
   const [filter, setfilter] = useState('');
   const [filterData, setFilterData] = useState('');
   const [isVisible, setisVisible] = useState(false);
   const [token, setToken] = useState('');
+  const [city, setCity] = useState('')
   const [dataload, setdataload] = useState(true);
   useEffect(() => {
     let mounted = true;
@@ -231,18 +234,20 @@ const Browse2 = (props) => {
       />
       <SafeAreaView style={styling.safeContainer}>
         {dataload ? (
-          <View style={{flex: 1, justifyContent: 'center'}}>
+          <View style={{ flex: 1, justifyContent: 'center' }}>
             <ActivityIndicator color={'red'} size={'large'} />
           </View>
         ) : (
           <ScrollView>
             <View style={styling.mainContainer}>
-              <View style={{marginLeft: wp(3)}}>
+              <View style={{ marginLeft: wp(3) }}>
                 <Text style={styling.labelTXT}>{I18n.t('Willyouplan')}</Text>
-                <View style={styling.cityView}>
-                  <Text style={styling.cityTXT}>San Francisco? </Text>
+                <TouchableOpacity style={styling.cityView}
+                  onPress={() => setCityVIs(true)}
+                >
+                  <Text style={styling.cityTXT}>{city ? city : 'San Francisco'}? </Text>
                   <Icons name="angle-down" size={30} color="#FF2D55" />
-                </View>
+                </TouchableOpacity>
               </View>
               <View style={styling.innerContainer}>
                 <View style={styling.searchBar}>
@@ -262,7 +267,7 @@ const Browse2 = (props) => {
                     <Icon
                       name="search1"
                       size={18}
-                      style={{color: '#bbb'}}
+                      style={{ color: '#bbb' }}
                       onPress={() => {
                         props.navigation.navigate('SpaceDetail', {
                           Space: search,
@@ -310,9 +315,9 @@ const Browse2 = (props) => {
                       showsHorizontalScrollIndicator={false}>
                       <TouchableOpacity
                         style={styling.mainCardView}
-                        // onPress={() => {
-                        //   catGet('Private');
-                        //   }}
+                        onPress={() => {
+                          props.navigation.navigate('SpaceList', { type: 'Private' })
+                        }}
                       >
                         <View style={styling.cardView}>
                           <Icons name="building" color="white" size={50} />
@@ -325,9 +330,9 @@ const Browse2 = (props) => {
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={styling.mainCardView}
-                        // onPress={() => {
-                        //   catGet('Meeting');
-                        //   }}
+                        onPress={() => {
+                          props.navigation.navigate('SpaceList', { type: 'Meeting' })
+                        }}
                       >
                         <View style={styling.cardView1}>
                           <Icons name="people-carry" color="white" size={50} />
@@ -340,9 +345,9 @@ const Browse2 = (props) => {
                       </TouchableOpacity>
                       <TouchableOpacity
                         style={styling.mainCardView}
-                        // onPress={() => {
-                        //   catGet('Seminar');
-                        //   }}
+                        onPress={() => {
+                          props.navigation.navigate('SpaceList', { type: 'Seminar' })
+                        }}
                       >
                         <View style={styling.cardView22}>
                           <Icons
@@ -362,11 +367,15 @@ const Browse2 = (props) => {
                         // onPress={() => {
                         //   catGet('Offices');
                         //   }}
+                        onPress={() => {
+                          props.navigation.navigate('SpaceList', { type: 'Offices' })
+                        }}
+
                       >
                         <View
                           style={[
                             styling.cardView22,
-                            {backgroundColor: '#FF9500'},
+                            { backgroundColor: '#FF9500' },
                           ]}>
                           <Matriel
                             name="office-building"
@@ -405,7 +414,7 @@ const Browse2 = (props) => {
                         data={data}
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
-                        renderItem={({item, index}) => {
+                        renderItem={({ item, index }) => {
                           return (
                             <TouchableOpacity
                               style={styling.nearInnerView}
@@ -417,7 +426,7 @@ const Browse2 = (props) => {
                               }}>
                               <ImageBackground
                                 style={styling.nearbyCard}
-                                source={{uri: item.Image}}
+                                source={{ uri: item.Image }}
                                 imageStyle={styling.nearbyCard}>
                                 <Icon
                                   name="heart"
@@ -433,7 +442,7 @@ const Browse2 = (props) => {
                                   }}
                                 />
                                 <View style={styling.imageViewText}>
-                                  <Text style={{color: 'white'}}>
+                                  <Text style={{ color: 'white' }}>
                                     ${item.credit}/hr
                                   </Text>
                                 </View>
@@ -444,7 +453,7 @@ const Browse2 = (props) => {
                                 </Text>
                               </View>
 
-                              <View style={{flexDirection: 'row'}}>
+                              <View style={{ flexDirection: 'row' }}>
                                 <Icons
                                   name="map-marker-alt"
                                   color="#666666"
@@ -492,7 +501,7 @@ const Browse2 = (props) => {
                     flexDirection: 'row',
                     alignSelf: 'center',
                   }}
-                  renderItem={({item}) => {
+                  renderItem={({ item }) => {
                     return (
                       <TouchableOpacity
                         style={styling.innerCardContainer22}
@@ -503,12 +512,12 @@ const Browse2 = (props) => {
                           });
                         }}>
                         <Image
-                          source={{uri: item.Image}}
+                          source={{ uri: item.Image }}
                           style={styling.cardView2}
                         />
                         <View style={styling.txtView}>
                           <Text style={styling.cardheadTXT}>{item.Space}</Text>
-                          <View style={{flexDirection: 'row'}}>
+                          <View style={{ flexDirection: 'row' }}>
                             <IconFont
                               name="map-marker-alt"
                               color="#666666"
@@ -523,7 +532,7 @@ const Browse2 = (props) => {
                             <Text
                               style={[
                                 styling.cardheadLabel,
-                                {color: '#FF9500'},
+                                { color: '#FF9500' },
                               ]}>
                               ★★★★★
                             </Text>
@@ -532,7 +541,7 @@ const Browse2 = (props) => {
                               <Text
                                 style={[
                                   styling.cardheadLabel,
-                                  {color: '#FF9500'},
+                                  { color: '#FF9500' },
                                 ]}>
                                 ★★★★
                               </Text>
@@ -541,7 +550,7 @@ const Browse2 = (props) => {
                               <Text
                                 style={[
                                   styling.cardheadLabel,
-                                  {color: '#FF9500'},
+                                  { color: '#FF9500' },
                                 ]}>
                                 ★★★
                               </Text>
@@ -550,7 +559,7 @@ const Browse2 = (props) => {
                               <Text
                                 style={[
                                   styling.cardheadLabel,
-                                  {color: '#FF9500'},
+                                  { color: '#FF9500' },
                                 ]}>
                                 ★★
                               </Text>
@@ -559,7 +568,7 @@ const Browse2 = (props) => {
                               <Text
                                 style={[
                                   styling.cardheadLabel,
-                                  {color: '#FF9500'},
+                                  { color: '#FF9500' },
                                 ]}>
                                 ★
                               </Text>
@@ -574,8 +583,49 @@ const Browse2 = (props) => {
           </ScrollView>
         )}
         <AlertModal isVisible={isVisible} />
+        <Modal isVisible={cityVis}
+          backdropOpacity={0.2}
+          onBackButtonPress={() => {
+            setCityVIs(false)
+
+          }}
+          onBackdropPress={() => {
+            setCityVIs(false)
+
+          }}
+        >
+          <View style={{ backgroundColor: 'white', paddingVertical: hp(3), paddingHorizontal: wp(7), borderRadius: 10 }}>
+            <Text style={{ fontSize: hp(3), lineHeight: hp(4), marginBottom: hp(2) }}>Select City</Text>
+            <TouchableOpacity style={{ paddingVertical: hp(2), paddingHorizontal: wp((2)), borderColor: '#FF2D55', borderWidth: 1, marginBottom: hp(1) }}
+              onPress={() => {
+                setCity('Las Vegas')
+                setCityVIs(false)
+
+              }}
+            >
+              <Text>Las Vegas</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ paddingVertical: hp(2), paddingHorizontal: wp((2)), borderColor: '#FF2D55', borderWidth: 1, marginBottom: hp(1) }}
+              onPress={() => {
+                setCity('Los Angeles')
+                setCityVIs(false)
+
+              }}
+            >
+              <Text>Los Angeles</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ paddingVertical: hp(2), paddingHorizontal: wp((2)), borderColor: '#FF2D55', borderWidth: 1 }}
+              onPress={() => {
+                setCity('San Francisco')
+                setCityVIs(false)
+              }}
+            >
+              <Text>San Francisco</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
       </SafeAreaView>
-      <SafeAreaView style={{backgroundColor: 'white'}} />
+      <SafeAreaView style={{ backgroundColor: 'white' }} />
     </Fragment>
   );
 };
