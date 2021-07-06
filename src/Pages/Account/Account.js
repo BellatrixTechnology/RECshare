@@ -1,4 +1,4 @@
-import React, {Fragment, useEffect, useState} from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import {
   View,
   Image,
@@ -9,18 +9,18 @@ import {
   ScrollView,
   ToastAndroid,
 } from 'react-native';
-import {Text, Input} from 'react-native-elements';
-import {styling} from './styling';
+import { Text, Input } from 'react-native-elements';
+import { styling } from './styling';
 import Icons from 'react-native-vector-icons/AntDesign';
 import Iconss from 'react-native-vector-icons/Entypo';
-import {fontFamily, fontSize} from '../../Global/Styles/font';
+import { fontFamily, fontSize } from '../../Global/Styles/font';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {InputModal} from '../../Component/Modal/index';
-import Avatar, {IconTypes, Sizes} from 'rn-avatar';
-import {hp, wp} from '../../Global/Styles/Scalling';
+import { InputModal } from '../../Component/Modal/index';
+import Avatar, { IconTypes, Sizes } from 'rn-avatar';
+import { hp, wp } from '../../Global/Styles/Scalling';
 import AsyncStorage from '@react-native-community/async-storage';
-import {I18n} from '../../../i18n/I18n';
+import { I18n } from '../../../i18n/I18n';
 import Foundation from 'react-native-vector-icons/Foundation';
 const Account = (props) => {
   const [Name, setName] = useState('');
@@ -128,7 +128,7 @@ const Account = (props) => {
         backgroundColor="white"
       />
 
-      <SafeAreaView style={{backgroundColor: 'white'}} />
+      <SafeAreaView style={{ backgroundColor: 'white' }} />
       <SafeAreaView style={styling.safeContainer}>
         <View style={styling.mainHeaderView}>
           <View style={styling.headerView}>
@@ -153,8 +153,8 @@ const Account = (props) => {
             <View>
               {Img ? (
                 <Image
-                  source={{uri: Img}}
-                  style={{height: wp(20), width: wp(20), borderRadius: wp(100)}}
+                  source={{ uri: Img }}
+                  style={{ height: wp(20), width: wp(20), borderRadius: wp(100) }}
                 />
               ) : (
                 <Avatar
@@ -202,6 +202,15 @@ const Account = (props) => {
               style={styling.accountView}
               onPress={() => props.navigation.navigate('Favourites')}>
               <Text style={styling.accountlTXT}>{I18n.t('Favourties')}</Text>
+              <View style={styling.workOpacity}>
+                {/* <Text style={styling.workTXT} >{I18n.t('Address')}</Text> */}
+                <Icons name="right" size={16} color="#C8C7CC" />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styling.accountView}
+              onPress={() => props.navigation.navigate('Notification')}>
+              <Text style={styling.accountlTXT}>Notification</Text>
               <View style={styling.workOpacity}>
                 {/* <Text style={styling.workTXT} >{I18n.t('Address')}</Text> */}
                 <Icons name="right" size={16} color="#C8C7CC" />
@@ -263,7 +272,7 @@ const Account = (props) => {
             </View>
             <FlatList
               data={Pay}
-              renderItem={({item, index}) => {
+              renderItem={({ item, index }) => {
                 return (
                   <View style={styling.paymentView}>
                     <View style={styling.paymentInnerView}>
@@ -319,7 +328,7 @@ const Account = (props) => {
           }}
         />
       </SafeAreaView>
-      <SafeAreaView style={{backgroundColor: 'white'}} />
+      <SafeAreaView style={{ backgroundColor: 'white' }} />
     </Fragment>
   );
 };

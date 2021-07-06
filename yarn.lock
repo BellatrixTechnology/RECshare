@@ -1192,6 +1192,11 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/masked-view/-/masked-view-0.1.10.tgz#5dda643e19e587793bc2034dd9bf7398ad43d401"
   integrity sha512-rk4sWFsmtOw8oyx8SD3KSvawwaK7gRBSEIy2TAwURyGt+3TizssXP1r8nx3zY+R7v2vYYHXZ+k2/GULAT/bcaQ==
 
+"@react-native-community/slider@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-3.0.3.tgz#830167fd757ba70ac638747ba3169b2dbae60330"
+  integrity sha512-8IeHfDwJ9/CTUwFs6x90VlobV3BfuPgNLjTgC6dRZovfCWigaZwVNIFFJnHBakK3pW2xErAPwhdvNR4JeNoYbw==
+
 "@react-native-firebase/app@^10.8.1":
   version "10.8.1"
   resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-10.8.1.tgz#3455f491a5fc3d91677fd69e70b006a68fb7ca5c"
@@ -6075,6 +6080,14 @@ react-native-lightbox@^0.8.1:
   integrity sha512-TFZA6iKEEHpAUIXjMTRb6vx0/9rHgEKy3ZBiRAy295PwldYg5c8opwnbyURLIl522ykeqhVx9uGdXjSMIowLvA==
   dependencies:
     prop-types "^15.7.2"
+
+react-native-maps-directions@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps-directions/-/react-native-maps-directions-1.8.0.tgz#ced452efeb153e54dfb9315480b0ae9539dfbcc7"
+  integrity sha512-7KWfPrvPLU8VP2nEqsnrWlOuylidlRWWDdk3lqT5Nb1q87FeyzNgA7Ib7n6cZlQwH4usTRlJSnzNo/yQ3u4AZw==
+  dependencies:
+    lodash.isequal "^4.5.0"
+    prop-types "^15.6.0"
 
 react-native-maps@^0.28.0:
   version "0.28.0"

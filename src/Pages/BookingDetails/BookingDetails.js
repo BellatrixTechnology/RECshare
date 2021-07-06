@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { View, StatusBar, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, StatusBar, TouchableOpacity, SafeAreaView, Image } from 'react-native';
 import { Text } from 'react-native-elements';
 import { styling } from './styling';
 import Icons from 'react-native-vector-icons/AntDesign';
@@ -22,7 +22,7 @@ const BookingDetails = ({ route }) => {
     const bookID = route.params.bookID
     const name = route.params.name;
     const spaceid = route.params.spaceid
-    const Image = route.params.Image
+    const Images = route.params.Image
     const host = route.params.host
     console.log(route.params)
     console.log(route.params)
@@ -48,11 +48,10 @@ const BookingDetails = ({ route }) => {
                 </View>
                 <View style={styling.mainContainer}>
                     <View style={styling.avatarView}>
-                        <View style={styling.profileView}>
+                        <Image source={{ uri: Images }} style={styling.profileView} />
 
-                        </View>
                         <View style={styling.nameView}>
-                            <Text style={styling.nameTXT}>{name}</Text>
+                            <Text style={styling.nameTXT}>{host}</Text>
                             <TouchableOpacity style={styling.confirmOpacity}>
                                 <Text style={styling.confirmTXT}>{I18n.t('confirmed')}</Text>
                             </TouchableOpacity>
@@ -66,7 +65,7 @@ const BookingDetails = ({ route }) => {
                             <TouchableOpacity style={styling.phoneView} onPress={() => {
                                 props.navigate('Chat',
                                     {
-                                        images: Image,
+                                        images: Images,
                                         id: spaceid,
                                         host: host
                                     }

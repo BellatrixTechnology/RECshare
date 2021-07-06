@@ -1,4 +1,4 @@
-import React, {useState, useEffect, Fragment, useRef} from 'react';
+import React, { useState, useEffect, Fragment, useRef } from 'react';
 import {
   View,
   StyleSheet,
@@ -9,7 +9,7 @@ import {
   ActivityIndicator,
   ScrollView,
 } from 'react-native';
-import {Text} from 'react-native-elements';
+import { Text } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import Icons from 'react-native-vector-icons/AntDesign';
 import Iconss from 'react-native-vector-icons/Ionicons';
@@ -18,15 +18,15 @@ import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import AlertModal from '../../Component/AlertModal/index';
-import {I18n} from '../../../i18n/I18n';
+import { I18n } from '../../../i18n/I18n';
 import AsyncStorage from '@react-native-community/async-storage';
-import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import {styling} from './styling';
-import {hp, wp} from '../../Global/Styles/Scalling';
+import { styling } from './styling';
+import { hp, wp } from '../../Global/Styles/Scalling';
 import MapViewDirections from 'react-native-maps-directions';
 
-const SpaceDetail = ({route}) => {
+const SpaceDetail = ({ route }) => {
   const SpaceStation = route.params.Space;
   const props = route.params.props;
   const [isVisible, setIsVisble] = useState(true);
@@ -37,6 +37,9 @@ const SpaceDetail = ({route}) => {
   const [images, setImages] = useState('');
   const [token, settoken] = useState('');
   const mapRef = useRef(null);
+  const [ameny, setAmeny] = useState(false)
+  const [rew, setRew] = useState(false)
+
   const [reg, setReg] = useState({
     latitude: 32.1738547,
     longitude: 74.223087,
@@ -130,19 +133,19 @@ const SpaceDetail = ({route}) => {
         </View>
 
         {obj == '' ? (
-          <View style={{flex: 1, justifyContent: 'center'}}>
+          <View style={{ flex: 1, justifyContent: 'center' }}>
             <ActivityIndicator color={'red'} size={'large'} />
           </View>
         ) : obj == 'No Record Found' ? (
           <View
-            style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+            style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             <Text>No Record Found</Text>
           </View>
         ) : (
           <View style={styling.mainContainer}>
             <ScrollView
               showsVerticalScrollIndicator={false}
-              style={{padding: 2}}>
+              style={{ padding: 2 }}>
               <View style={styling.imageMAinView}>
                 <View
                   style={{
@@ -155,7 +158,7 @@ const SpaceDetail = ({route}) => {
                       backgroundColor: '#C8C7CC',
                       borderRadius: 10,
                     }}></View>
-                  <Image style={styling.imageView} source={{uri: obj.Image}} />
+                  <Image style={styling.imageView} source={{ uri: obj.Image }} />
                 </View>
                 <View
                   style={{
@@ -171,7 +174,7 @@ const SpaceDetail = ({route}) => {
                       borderRadius: 10,
                     }}></View>
                   <View
-                    style={{height: hp(20), justifyContent: 'space-between'}}>
+                    style={{ height: hp(20), justifyContent: 'space-between' }}>
                     <View
                       style={{
                         width: wp(25),
@@ -196,7 +199,7 @@ const SpaceDetail = ({route}) => {
                       justifyContent: 'center',
                       alignItems: 'center',
                     }}>
-                    <Text style={{fontSize: wp(5), color: 'white'}}>+4</Text>
+                    <Text style={{ fontSize: wp(5), color: 'white' }}>+4</Text>
                   </View>
                 </View>
               </View>
@@ -207,27 +210,27 @@ const SpaceDetail = ({route}) => {
                 <Text style={styling.timeTXT}>${obj.credit}/hr</Text>
               </View>
               <View style={styling.dataView}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Icon name="map-pin" size={10} />
                   <Text>
                     {'  '}
                     {obj.distance} miles {I18n.t('Away')}
                   </Text>
                 </View>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Entypo name="user" size={10} />
                   <Text>
                     {'  '}
                     {obj.guest} {I18n.t('guest')}
                   </Text>
                 </View>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <Entypo name="retweet" size={13} />
                   <Text> 120 m2</Text>
                 </View>
               </View>
               <View style={styling.headerView}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                   <View style={styling.userView}></View>
                   <View style={styling.statusView}>
                     <Text style={styling.labelTXT}>{I18n.t('Meethost')}</Text>
@@ -292,10 +295,32 @@ const SpaceDetail = ({route}) => {
                   <Text style={styling.amenTXT}>{I18n.t('Kitchen')}</Text>
                 </TouchableOpacity>
               </View>
-              <View style={styling.amenityMoreView}>
-                <Icons name="pluscircleo" color="#666666" />
-                <Text style={styling.labelTXT}> 7 More Amenities</Text>
-              </View>
+              {
+                ameny && <>
+                  <View style={styling.amenityView}>
+                    <TouchableOpacity style={styling.amenOpacity}>
+                      <Icons name="laptop" size={20} />
+                      <Text style={styling.amenTXT}>Laptop</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styling.amenOpacity}>
+                      <MaterialIcon name="kitchen" size={15} s />
+                      <Text style={styling.amenTXT}>Kitchen</Text>
+                    </TouchableOpacity>
+                  </View>
+
+                </>
+              }
+              <TouchableOpacity style={styling.amenityMoreView} onPress={() => setAmeny(!ameny)}>
+                {!ameny ? <>
+                  <Icons name="pluscircleo" color="#666666" />
+                  <Text style={styling.labelTXT}> 2 More Amenities</Text>
+                </> :
+                  <>
+                    <Icons name="minuscircleo" color="#666666" />
+                    <Text style={styling.labelTXT}> 2 Less Amenities</Text>
+                  </>
+                }
+              </TouchableOpacity>
               <View style={styling.openMainView}>
                 <View style={styling.availheadView}>
                   <Text style={styling.availTXT}>{I18n.t('openhour')}</Text>
@@ -399,13 +424,14 @@ const SpaceDetail = ({route}) => {
               </View>
 
               <MapView
-                maxZoomLevel={10}
                 ref={mapRef}
                 provider={PROVIDER_GOOGLE}
                 style={styling.mapView}
                 showsUserLocation={true}
                 showsMyLocationButton={true}
                 followsUserLocation={true}
+                scrollEnabled={false}
+                // rotateEnabled={false}
                 region={{
                   latitude: obj.marker.latitude,
                   longitude: obj.marker.longitude,
@@ -415,7 +441,7 @@ const SpaceDetail = ({route}) => {
                 <Marker coordinate={obj.marker} />
                 <MapViewDirections
                   origin={obj.marker}
-                  destination={{latitude: 33.6844, longitude: 73.0479}}
+                  destination={{ latitude: 33.6844, longitude: 73.0479 }}
                   apikey={'AIzaSyCGckavZNNNSk--4G5y-RZOvuQ4Ht5srVs'}
                 />
               </MapView>
@@ -438,10 +464,36 @@ const SpaceDetail = ({route}) => {
                 eliminating extra office space by giving it to freelancers
                 looking for a more steady place to work.
               </Text>
-              <View style={styling.amenityMoreView}>
-                <Icons name="pluscircleo" color="#666666" />
-                <Text style={styling.labelTXT}> 7 More Reviews</Text>
-              </View>
+              {
+                rew &&
+                <>
+                  <View style={styling.header2View}>
+                    <View style={styling.userView}></View>
+                    <View style={styling.statusView}>
+                      <Text style={styling.revwTXT}>Ransome Steve</Text>
+                      <Text style={styling.ago}>15 minute ago</Text>
+                    </View>
+                  </View>
+                  <Text style={styling.hourTXT}>
+                    Mindspace Solution is the latest piece of the sharing economy,
+                    eliminating extra office space by giving it to freelancers
+                    looking for a more steady place to work.
+                  </Text>
+                </>
+              }
+              <TouchableOpacity style={styling.amenityMoreView} onPress={() => { setRew(!rew) }}>
+                {
+                  !rew ?
+                    <>
+                      <Icons name="pluscircleo" color="#666666" />
+                      <Text style={styling.labelTXT}> 1 More Reviews</Text>
+                    </> :
+                    <>
+                      <Icons name="minuscircleo" color="#666666" />
+                      <Text style={styling.labelTXT}> 1 More Reviews</Text>
+                    </>
+                }
+              </TouchableOpacity>
               <View style={styling.opacityView}>
                 <TouchableOpacity
                   style={styling.OpacityLog}
@@ -466,7 +518,7 @@ const SpaceDetail = ({route}) => {
           </View>
         )}
       </SafeAreaView>
-      <SafeAreaView style={{backgroundColor: 'white'}} />
+      <SafeAreaView style={{ backgroundColor: 'white' }} />
     </Fragment>
   );
 };

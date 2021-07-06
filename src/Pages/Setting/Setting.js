@@ -104,67 +104,70 @@ const Setting = (props) => {
             <SafeAreaView style={{ backgroundColor: 'white' }} />
 
             <SafeAreaView style={styling.safeContainer} >
+
                 <View style={styling.headView}>
                     <Icons name="left" color='black' size={30}
                         onPress={() => props.navigation.goBack()}
                     />
                 </View>
-                <View style={styling.headingView}>
-                    <Text style={styling.headTXT}>{I18n.t('Setting')}</Text>
-                </View>
                 <View style={styling.mainContainer}>
-                    <View style={styling.accountView}>
-                        <Text style={styling.accountTXT}>{I18n.t('Account')}</Text>
-                    </View>
-                    <View style={styling.innerView}>
-                        <View style={styling.passwrdView} >
-                            <Icons name='lock1' size={26} color='white' />
-                        </View>
-                        <TouchableOpacity style={styling.detailView} onPress={() => {
-                            setisVisible(true)
-                        }}>
-                            <Text style={styling.detailHead}>{I18n.t('ChangePassword')}</Text>
-                            <Icons name='right' size={20} color='#C8C7CC' />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styling.innerView}>
-                        <View style={styling.notificationView} >
-                            <Icon name='bell' size={26} color='white' />
-                        </View>
-                        <TouchableOpacity style={styling.detailView}>
-                            <Text style={styling.detailHead}>{I18n.t('Notfications')}</Text>
-                            <Icons name='right' size={20} color='#C8C7CC' />
-                        </TouchableOpacity>
-                    </View>
+                    <ScrollView showsVerticalScrollIndicator={false}>
 
-                    <View style={styling.innerView}>
-                        <View style={styling.privacyView} >
-                            <Icon name='hand-stop-o' size={26} color='white' />
+                        <View style={styling.headingView}>
+                            <Text style={styling.headTXT}>{I18n.t('Setting')}</Text>
                         </View>
-                        <TouchableOpacity style={styling.detailView}>
-                            <Text style={styling.detailHead}>{I18n.t('PrivacySetting')}</Text>
-                            <Icons name='right' size={20} color='#C8C7CC' />
-                        </TouchableOpacity>
-                    </View>
-
-                    <View style={styling.innerView}>
-                        <View style={styling.signoutView} >
-                            <Iconss name='log-out' size={26} color='white' />
+                        {/* <View style={styling.mainContainer}> */}
+                        <View style={styling.accountView}>
+                            <Text style={styling.accountTXT}>{I18n.t('Account')}</Text>
                         </View>
-                        <TouchableOpacity style={styling.detailView} onPress={() => {
-                            togleLogout()
+                        <View style={styling.innerView}>
+                            <View style={styling.passwrdView} >
+                                <Icons name='lock1' size={26} color='white' />
+                            </View>
+                            <TouchableOpacity style={styling.detailView} onPress={() => {
+                                setisVisible(true)
+                            }}>
+                                <Text style={styling.detailHead}>{I18n.t('ChangePassword')}</Text>
+                                <Icons name='right' size={20} color='#C8C7CC' />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styling.innerView}>
+                            <View style={styling.notificationView} >
+                                <Icon name='bell' size={26} color='white' />
+                            </View>
+                            <TouchableOpacity style={styling.detailView}>
+                                <Text style={styling.detailHead}>{I18n.t('Notfications')}</Text>
+                                <Icons name='right' size={20} color='#C8C7CC' />
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={styling.innerView}>
+                            <View style={styling.privacyView} >
+                                <Icon name='hand-stop-o' size={26} color='white' />
+                            </View>
+                            <TouchableOpacity style={styling.detailView}>
+                                <Text style={styling.detailHead}>{I18n.t('PrivacySetting')}</Text>
+                                <Icons name='right' size={20} color='#C8C7CC' />
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={styling.innerView}>
+                            <View style={styling.signoutView} >
+                                <Iconss name='log-out' size={26} color='white' />
+                            </View>
+                            <TouchableOpacity style={styling.detailView} onPress={() => {
+                                togleLogout()
 
 
-                        }}>
-                            <Text style={styling.detailHead}>{I18n.t('Signout')}</Text>
-                            <Icons name='right' size={20} color='#C8C7CC' />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={styling.optionView}>
-                        <Text style={styling.accountTXT}>{I18n.t('MoreOptiosn')}</Text>
-                    </View>
-                    <View style={styling.innerOptionView}>
-                        <ScrollView showsVerticalScrollIndicator={false}>
+                            }}>
+                                <Text style={styling.detailHead}>{I18n.t('Signout')}</Text>
+                                <Icons name='right' size={20} color='#C8C7CC' />
+                            </TouchableOpacity>
+                        </View>
+                        <View style={styling.optionView}>
+                            <Text style={styling.accountTXT}>{I18n.t('MoreOptiosn')}</Text>
+                        </View>
+                        <View style={styling.innerOptionView}>
                             <View style={styling.moreoptionView}>
                                 <Text style={styling.detailHead}>{I18n.t('Newsletter')}</Text>
                                 <Switch
@@ -206,9 +209,7 @@ const Setting = (props) => {
                             </View>
                             <View style={styling.moreoptionView}>
                                 <Text style={styling.detailHead}>{I18n.t('Languages')}</Text>
-                                {/* <TouchableOpacity style={styling.rightView}> */}
-                                {/* <Text style={styling.labelTXT}>{lang} </Text> */}
-                                {/* <Icons name='right' size={20} color='#C8C7CC' /> */}
+
 
                                 <Picker
                                     style={{ width: wp(40) }}
@@ -236,8 +237,10 @@ const Setting = (props) => {
                                     <Icons name='right' size={20} color='#C8C7CC' />
                                 </TouchableOpacity>
                             </View>
-                        </ScrollView>
-                    </View>
+                        </View>
+                        {/* </View> */}
+                    </ScrollView>
+
                 </View>
             </SafeAreaView>
             <CurrntPassword

@@ -78,14 +78,14 @@ export default function BottomTabBar() {
             ),
           }}
         />
-        {/* <Tab.Screen name="Booking" component={Bookings}
-                    options={{
-                        // tabBarColor: '#6bfaf3',
-                        tabBarIcon: ({ color }) => (
-                            <MaterialCommunityIcons name="script-text-outline" color={color} size={22} />
-                        ),
-                    }}
-                /> */}
+        <Tab.Screen name="Booking" component={Bookings}
+          options={{
+            // tabBarColor: '#6bfaf3',
+            tabBarIcon: ({ color }) => (
+              <MaterialCommunityIcons name="script-text-outline" color={color} size={22} />
+            ),
+          }}
+        />
         {/* <Tab.Screen name="Map" component={MapBrowse}
                     options={{
                         // tabBarColor: '#6bfaf3',
@@ -94,7 +94,7 @@ export default function BottomTabBar() {
                         ),
                     }}
                 /> */}
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Notification"
           component={Notification}
           options={{
@@ -103,7 +103,7 @@ export default function BottomTabBar() {
               <FontAwesome name="bell" color={color} size={22} />
             ),
           }}
-        />
+        /> */}
 
         <Tab.Screen
           name="Account"
@@ -145,6 +145,9 @@ export default function BottomTabBar() {
         <Stack.Screen name="AddSpace" component={AddSpace} />
         <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen name='SpaceList' component={SpaceList} />
+        <Stack.Screen name='Notification' component={Notification} />
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -255,11 +255,8 @@ const Browse2 = (props) => {
                     style={{
                       height: hp(7),
                       width: wp(90),
-                      elevation: 2,
-                      //   borderWidth: wp(0.1),
                       borderRadius: wp(2),
                       flexDirection: 'row',
-                      //   justifyContent: 'space-between',
                       alignItems: 'center',
                       paddingHorizontal: wp(2),
                     }}

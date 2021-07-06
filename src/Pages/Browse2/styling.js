@@ -1,7 +1,7 @@
-import {StyleSheet} from 'react-native';
-import {colors} from 'react-native-elements';
-import {fontFamily, fontSize} from '../../Global/Styles/font';
-import {hp, wp} from '../../Global/Styles/Scalling';
+import { StyleSheet } from 'react-native';
+import { colors } from 'react-native-elements';
+import { fontFamily, fontSize } from '../../Global/Styles/font';
+import { hp, wp } from '../../Global/Styles/Scalling';
 
 export const styling = StyleSheet.create({
   safeContainer: {
@@ -41,9 +41,11 @@ export const styling = StyleSheet.create({
   searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: wp('90%'),
+    width: wp(90),
     borderRadius: 6,
     marginTop: hp(2),
+    borderWidth: wp(0.1),
+    borderColor: '#bbb',
     justifyContent: 'space-evenly',
   },
   searchableContainer: {

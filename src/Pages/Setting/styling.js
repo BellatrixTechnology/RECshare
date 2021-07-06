@@ -15,8 +15,9 @@ export const styling = StyleSheet.create({
         paddingHorizontal: wp(2)
     },
     mainContainer: {
-        height: hp('100%'),
+        height: hp(95),
         paddingHorizontal: wp(3),
+        paddingVertical: hp(1)
         // paddingBottom: hp(1),
 
     },
@@ -39,14 +40,14 @@ export const styling = StyleSheet.create({
     headTXT: {
         fontSize: fontSize.Setting.heading,
         fontFamily: fontFamily.SFUITextBold,
-        lineHeight: hp(8)
+        // lineHeight: hp(8)
     },
 
 
     accountTXT: {
         fontSize: fontSize.Setting.labels,
         fontFamily: fontFamily.SFUITextHeavy,
-        lineHeight: hp(6),
+        // lineHeight: hp(6),
         marginHorizontal: hp(2)
     },
     passwrdView: {
@@ -61,14 +62,15 @@ export const styling = StyleSheet.create({
         width: wp('90%'),
         flexDirection: 'row',
         alignItems: 'center',
-        marginVertical: hp(1),
+        paddingVertical: hp(1),
         alignSelf: 'center'
 
     },
     detailView: {
         marginLeft: 10,
-        width: wp('75%'),
-        height: hp('7%'),
+        width: wp(77),
+        paddingVertical: hp(2),
+        // height: hp('7%'),
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
@@ -77,7 +79,7 @@ export const styling = StyleSheet.create({
     notificationView: {
 
         width: wp('10%'),
-        height: hp('6%'),
+        paddingVertical: hp(1),
         backgroundColor: '#5AC8FA',
         borderRadius: 10,
         alignItems: 'center',
@@ -85,15 +87,15 @@ export const styling = StyleSheet.create({
     },
     passwrdView: {
         width: wp('10%'),
-        height: hp('6%'),
+        paddingVertical: hp(1),
         backgroundColor: '#4CD964',
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
     },
     privacyView: {
-        width: wp('10%'),
-        height: hp('6%'),
+        width: wp(10),
+        paddingVertical: hp(1),
         backgroundColor: '#FF9500',
         borderRadius: 10,
         alignItems: 'center',
@@ -101,7 +103,7 @@ export const styling = StyleSheet.create({
     },
     signoutView: {
         width: wp('10%'),
-        height: hp('6%'),
+        paddingVertical: hp(1),
         backgroundColor: '#AA4AFF',
         borderRadius: 10,
         alignItems: 'center',
@@ -113,7 +115,7 @@ export const styling = StyleSheet.create({
     },
     innerOptionView: {
         // height: hp('35%'),
-        marginBottom: hp(5)
+        paddingVertical: hp(1)
     },
     moreoptionView: {
         alignSelf: 'center',
