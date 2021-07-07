@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from 'react';
+import React, { Fragment, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -9,15 +9,15 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import {Text, Input} from 'react-native-elements';
-import {styling} from './styling';
+import { Text, Input } from 'react-native-elements';
+import { styling } from './styling';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {wp} from '../../Global/Styles/Scalling';
+import { wp } from '../../Global/Styles/Scalling';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
-import {ToastAndroid} from 'react-native';
-import {useDispatch, useSelector} from 'react-redux';
-import {login, select} from '../../Redux/Actions/Auth';
+import { ToastAndroid } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, select } from '../../Redux/Actions/Auth';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const Payment = (props) => {
@@ -61,9 +61,9 @@ const Payment = (props) => {
             .collection('Payment')
             .doc(id)
             .set({
-              CardNo: CardNo,
+              CardNo: CardNo.slice(0, -1),
               holder: holder,
-              expire: expire,
+              expire: expire.slice(0, -1),
               cvc: cvc,
               id: id,
             })
@@ -73,7 +73,7 @@ const Payment = (props) => {
                 props.navigation.goBack();
               } else {
                 let tok = await AsyncStorage.getItem('token');
-                dispatch(login({userName: tok}));
+                dispatch(login({ userName: tok }));
               }
             });
         }
@@ -109,32 +109,32 @@ const Payment = (props) => {
         </View>
 
         <View style={styling.mainContainer}>
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styling.cardContainer}>
               <View style={styling.cardView}>
                 <View
                   style={[
                     styling.inputView,
-                    {borderBottomWidth: 0, width: wp(80)},
+                    { borderBottomWidth: 0, width: wp(80) },
                   ]}>
-                  <Text style={[styling.cardTXT, {color: 'white'}]}>
+                  <Text style={[styling.cardTXT, { color: 'white' }]}>
                     {' '}
                     Card Number
                   </Text>
-                  <Text style={[styling.valueTXT, {color: 'white'}]}>
+                  <Text style={[styling.valueTXT, { color: 'white' }]}>
                     {' '}
-                    {CardNo}
+                    {CardNo.slice(0, -1)}
                   </Text>
                 </View>
                 <View
                   style={[
                     styling.inputView,
-                    {borderBottomWidth: 0, width: wp(80)},
+                    { borderBottomWidth: 0, width: wp(80) },
                   ]}>
-                  <Text style={[styling.cardTXT, {color: 'white'}]}>
+                  <Text style={[styling.cardTXT, { color: 'white' }]}>
                     Card Holder
                   </Text>
-                  <Text style={[styling.valueTXT, {color: 'white'}]}>
+                  <Text style={[styling.valueTXT, { color: 'white' }]}>
                     {' '}
                     {holder}
                   </Text>
@@ -142,17 +142,17 @@ const Payment = (props) => {
                 <View
                   style={[
                     styling.inputView,
-                    {borderBottomWidth: 0, width: wp(80)},
+                    { borderBottomWidth: 0, width: wp(80) },
                   ]}>
-                  <Text style={[styling.cardTXT, {color: 'white'}]}>
+                  <Text style={[styling.cardTXT, { color: 'white' }]}>
                     Expires
                   </Text>
-                  <Text style={[styling.valueTXT, {color: 'white'}]}>
+                  <Text style={[styling.valueTXT, { color: 'white' }]}>
                     {' '}
-                    {expire}
+                    {expire.slice(0, -1)}
                   </Text>
-                  <Text style={[styling.cardTXT, {color: 'white'}]}>CVC</Text>
-                  <Text style={[styling.valueTXT, {color: 'white'}]}>
+                  <Text style={[styling.cardTXT, { color: 'white' }]}>CVC</Text>
+                  <Text style={[styling.valueTXT, { color: 'white' }]}>
                     {' '}
                     {cvc}
                   </Text>
@@ -163,12 +163,13 @@ const Payment = (props) => {
             <View style={styling.inputView}>
               <Text style={styling.cardTXT}> Card Number</Text>
               <TextInput
-                style={styling.valueTXT}
+                style={styling.cardvalueTXT}
+                textAlign={'center'}
                 placeholder="0909090990956"
-                maxLength={16}
+                maxLength={19}
                 keyboardType="number-pad"
-                onChangeText={(val) => {
-                  setCardNo(val);
+                onChangeText={(value) => {
+                  setCardNo(value.replace(/\W/gi, '').replace(/(.{4})/g, '$1-'));
                 }}
                 value={CardNo}
               />
@@ -187,12 +188,13 @@ const Payment = (props) => {
             <View style={styling.inputView}>
               <Text style={styling.cardTXT}>Expires</Text>
               <TextInput
-                style={[styling.valueTXT, {width: wp(20)}]}
+                style={[styling.valueTXT, { width: wp(20) }]}
                 placeholder="02-22"
                 maxLength={5}
                 keyboardType="number-pad"
-                onChangeText={(val) => {
-                  setExpire(val);
+                onChangeText={(value) => {
+                  setExpire(value.replace(/\W/gi, '').replace(/(.{2})/g, '$1-'));
+                  // setExpire(val);
                 }}
                 value={expire}
               />
@@ -214,8 +216,8 @@ const Payment = (props) => {
                 disabled={isLaoding}
                 onPress={() => {
                   if (
-                    CardNo.length == 16 &&
-                    expire.length == 5 &&
+                    CardNo != '' &&
+                    expire != '' &&
                     holder != '' &&
                     cvc.length == 3
                   ) {
@@ -235,7 +237,7 @@ const Payment = (props) => {
         </View>
       </SafeAreaView>
 
-      <SafeAreaView style={{backgroundColor: 'white'}} />
+      <SafeAreaView style={{ backgroundColor: 'white' }} />
     </Fragment>
   );
 };

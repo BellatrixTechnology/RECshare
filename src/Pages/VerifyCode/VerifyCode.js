@@ -26,7 +26,6 @@ const VerifyCode = ({route}) => {
   const Password = route.params.Password;
   const Names = route.params.Names;
   const ImagePath = route.params.ImagePath;
-  const address = route.params.address;
   const [isloading, setisloading] = useState(false);
   console.log(route.params.ImagePath, 'asdasd');
   const [confirm, setConfirm] = useState(null);
@@ -64,12 +63,11 @@ const VerifyCode = ({route}) => {
               //  await AsyncStorage.setItem('Login', JSON.stringify(obj))
               //     setisloading(false)
 
-              props.navigation.navigate('ChooseLanguage', {
+                            props.navigation.navigate('ChooseLanguage', {
                 login: userCredentials.user.uid,
                 email: email,
                 phone: phone,
                 ImagePath: ImagePath,
-                address: address,
               });
             })
             .catch((error) => {

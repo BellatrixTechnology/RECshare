@@ -5,6 +5,8 @@ import {
   StatusBar,
   TouchableOpacity,
   Image,
+  TextInput,
+  FlatList,
   ActivityIndicator,
   SafeAreaView,
   ImageBackground,
@@ -21,7 +23,6 @@ import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
-import { FlatList } from 'react-native';
 import { wp, hp } from '../../Global/Styles/Scalling';
 import IconFont from 'react-native-vector-icons/FontAwesome5';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -30,7 +31,7 @@ import AlertModal from '../../Component/AlertModal/index';
 import { I18n } from '../../../i18n/I18n';
 import { fontFamily } from '../../Global/Styles/font';
 import Modal from "react-native-modal"
-
+import country from '../../Component/dummy'
 const Browse2 = (props) => {
   const [status, setStatus] = useState('');
   const [data, setDAta] = useState([]);
@@ -43,6 +44,7 @@ const Browse2 = (props) => {
   const [token, setToken] = useState('');
   const [city, setCity] = useState('')
   const [dataload, setdataload] = useState(true);
+  const [listcountry, setListCoutnry] = useState(country)
   useEffect(() => {
     let mounted = true;
     setdataload(true);
@@ -229,6 +231,7 @@ const Browse2 = (props) => {
     <Fragment>
       <StatusBar
         barStyle="dark-content"
+        translucent={false}
         hidden={false}
         backgroundColor="white"
       />
@@ -577,53 +580,72 @@ const Browse2 = (props) => {
                 />
               </View>
             </View>
+
           </ScrollView>
         )}
+
         <AlertModal isVisible={isVisible} />
-        <Modal isVisible={cityVis}
-          backdropOpacity={0.2}
-          onBackButtonPress={() => {
-            setCityVIs(false)
 
-          }}
-          onBackdropPress={() => {
-            setCityVIs(false)
-
-          }}
-        >
-          <View style={{ backgroundColor: 'white', paddingVertical: hp(3), paddingHorizontal: wp(7), borderRadius: 10 }}>
-            <Text style={{ fontSize: hp(3), lineHeight: hp(4), marginBottom: hp(2) }}>Select City</Text>
-            <TouchableOpacity style={{ paddingVertical: hp(2), paddingHorizontal: wp((2)), borderColor: '#FF2D55', borderWidth: 1, marginBottom: hp(1) }}
-              onPress={() => {
-                setCity('Las Vegas')
-                setCityVIs(false)
-
-              }}
-            >
-              <Text>Las Vegas</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{ paddingVertical: hp(2), paddingHorizontal: wp((2)), borderColor: '#FF2D55', borderWidth: 1, marginBottom: hp(1) }}
-              onPress={() => {
-                setCity('Los Angeles')
-                setCityVIs(false)
-
-              }}
-            >
-              <Text>Los Angeles</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{ paddingVertical: hp(2), paddingHorizontal: wp((2)), borderColor: '#FF2D55', borderWidth: 1 }}
-              onPress={() => {
-                setCity('San Francisco')
-                setCityVIs(false)
-              }}
-            >
-              <Text>San Francisco</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
       </SafeAreaView>
+      <Modal isVisible={cityVis}
+        backdropColor='white'
+        backdropOpacity={1}
+        onBackButtonPress={() => {
+          setCityVIs(false)
+
+        }}
+        onBackdropPress={() => {
+          setCityVIs(false)
+
+        }}
+        coverScreen={true}
+        avoidKeyboard={false}
+      >
+        <ScrollView style={{ width: wp(100), height: hp(100) }}>
+          <View style={{ width: wp(90), alignItems: 'flex-end' }}>
+            <Icon
+              name='closecircleo'
+              size={24}
+              color='grey'
+              onPress={() => { setCityVIs(false) }}
+            />
+          </View>
+          <TextInput
+            placeholder='Search Country'
+            placeholderTextColor='white'
+            style={{ width: wp(85), color: 'black', backgroundColor: '#bbb', color: 'white' }}
+            onChangeText={val => {
+              const newData = country.filter(item => {
+                const itemData = `${item.name.toUpperCase()}`;
+
+                const textData = val.toUpperCase();
+
+                return itemData.indexOf(textData) > -1;
+              });
+              setListCoutnry(newData)
+
+              if (val == '') setListCoutnry(country)
+            }}
+          />
+          {listcountry.map((item) => {
+            return (
+              <TouchableOpacity style={{ paddingVertical: hp(2), width: wp(90), borderBottomWidth: wp(0.2), borderBottomColor: '#bbb' }}
+                onPress={() => {
+                  setCity(item.name)
+                  setCityVIs(false)
+                  setListCoutnry(country)
+                }}
+              >
+                <Text>{item.name}</Text>
+              </TouchableOpacity>
+            )
+          }
+          )}
+
+        </ScrollView>
+      </Modal>
       <SafeAreaView style={{ backgroundColor: 'white' }} />
-    </Fragment>
+    </Fragment >
   );
 };
 

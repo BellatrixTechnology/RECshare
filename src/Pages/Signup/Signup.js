@@ -34,8 +34,6 @@ const Signup = (props) => {
   const [phoneError, seterrPhone] = useState(false);
   const [data, setData] = useState([]);
   const [ImagePath, setImage] = useState('');
-  const [address, setAddress] = useState('');
-  const [addressError, setAddressError] = useState(false);
 
   let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -68,7 +66,6 @@ const Signup = (props) => {
         Password: Password,
         Names: Names,
         ImagePath: ImagePath,
-        address: address,
       });
     }
   };
@@ -85,15 +82,12 @@ const Signup = (props) => {
     if (phone == '') {
       seterrPhone('true');
     }
-    if (address == '') {
-      setAddressError('Enter Address');
-    }
+   
     if (
       Email != '' &&
       Password != '' &&
       Names != '' &&
-      phone != '' &&
-      address != ''
+      phone != '' 
     ) {
       if (check) {
         Signin();
@@ -186,19 +180,7 @@ const Signup = (props) => {
                 errorEmail={emailError}
                 keyboardTyp={'email-address'}
               />
-              <InputF
-                label={'Address'}
-                placeholder="abcd"
-                onChange={(val) => {
-                  setAddress(val);
-                  if (val == '') {
-                    setAddressError(true);
-                  } else setAddressError(false);
-                }}
-                value={address}
-                erroraddres={addressError}
-                keyboardTyp={'email-address'}
-              />
+            
               <Text style={styling.inputLabel}>Phone Number</Text>
 
               <PhoneInput

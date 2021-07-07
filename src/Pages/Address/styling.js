@@ -17,9 +17,8 @@ export const styling = StyleSheet.create({
         width: wp('20%'),
     },
     headTXTView: {
-        width: wp('45%'),
+        paddingLeft: wp(2),
         justifyContent: 'flex-start',
-        alignItems: 'center',
         alignContent: 'flex-start',
         marginHorizontal: wp(4),
         marginVertical: hp(1)
@@ -29,62 +28,37 @@ export const styling = StyleSheet.create({
         fontFamily: fontFamily.SFUITextBold,
         lineHeight: hp(8),
     },
-    opacityView: {
-        flexDirection: 'row',
-        height: hp('10%'),
-    },
-    buttonOpacity: {
-        width: wp('50%'),
-        height: hp('8%'),
-        backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderBottomWidth: 0.3,
-        borderRightWidth: 0.3,
-        flexDirection: 'row'
-    },
-    cardContainer: {
-        justifyContent: 'center',
-        flexDirection: 'row',
-        marginVertical: hp(2),
-        alignItems: 'center',
-    },
-    cardView: {
-        backgroundColor: 'black',
-        width: wp('90%'),
-        height: hp('30%'),
-        // paddingHorizontal: wp(5),
-        borderRadius: 10,
-        alignSelf: 'center'
-    },
     inputView: {
-        height: hp(10),
-        width: wp(95),
-        paddingHorizontal: wp(1),
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        borderBottomWidth: 0.5
-
-    },
-
-    cardTXT: {
-        fontFamily: fontFamily.SFUITextSemiBold,
-        fontSize: fontSize.Account.line,
-        paddingHorizontal:wp(2)
-    },
-    valueTXT: {
-        fontFamily: fontFamily.SFUIText,
-        fontSize: fontSize.Account.line,
-        color: '#8A8A8F',
+        marginVertical: hp(2),
         paddingHorizontal: wp(2)
     },
-     cardvalueTXT: {
-         width:wp(50),
-        fontFamily: fontFamily.SFUIText,
-        fontSize: fontSize.Account.line,
-        color: '#8A8A8F',
-        // paddingHorizontal: wp(1),
+    AddresInput: {
+        alignSelf: 'center',
+        width: wp(90),
+        borderColor: '#bbb',
+        borderWidth: wp(0.2),
+        borderRadius: wp(1),
+        marginTop: hp(0.5)
+    },
+    addressLabel: {
+        fontSize: wp(4),
+        fontFamily: fontFamily.SFUITextBold,
+        // lineHeight: hp(18),
+    },
+    row: {
+        marginVertical: hp(2),
+        paddingHorizontal: wp(2),
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    rowInput: {
+        paddingHorizontal: wp(2),
+        alignSelf: 'center',
+        width: wp(40),
+        borderColor: '#bbb',
+        borderWidth: wp(0.2),
+        borderRadius: wp(1),
+        marginTop: hp(0.5)
     },
     signupView: {
         width: wp('90%'),
@@ -110,5 +84,4 @@ export const styling = StyleSheet.create({
         lineHeight: 22,
 
     },
-
 })

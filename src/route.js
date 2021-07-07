@@ -1,18 +1,18 @@
-import React, {Fragment, useState, useEffect} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import React, { Fragment, useState, useEffect } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import LoginScreen from '../src/Pages/Signin/LoginScreen';
 import Signup from '../src/Pages/Signup/Signup';
 import AsyncStorage from '@react-native-community/async-storage';
 import ForgetPassword from '../src/Pages/ForgetPassword/ForgetPassword';
 import VerfiyCode from '../src/Pages/VerifyCode/VerifyCode';
 import Tabs from '../src/Navigator/BottomTab';
-import {useDispatch, useSelector} from 'react-redux';
-import {login, select} from './Redux/Actions/Auth';
-import {ActivityIndicator, View} from 'react-native';
-import {switchLanguage} from '../i18n/I18n';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, select } from './Redux/Actions/Auth';
+import { ActivityIndicator, View } from 'react-native';
+import { switchLanguage } from '../i18n/I18n';
 // import { select, deselect } from '../../Redux/Actions/Auth';
-
+import Address from '../src/Pages/Address'
 import ChooseLanguage from './Pages/ChooseLanguage/ChooseLanguage';
 import Payment from './Pages/Payment/Payment';
 const Stack = createStackNavigator();
@@ -42,11 +42,11 @@ export default function route() {
       let Langauge = await AsyncStorage.getItem('Langauge');
       console.log(Login, '=====');
       if (Login) {
-        dispatch(login({userName: 'Email'}));
+        dispatch(login({ userName: 'Email' }));
         // setLoad(false)
       }
       if (Langauge != '') {
-        dispatch(select({Types: Langauge}));
+        dispatch(select({ Types: Langauge }));
         switchLanguage(Langauge);
         setLoad(false);
       } else setLoad(false);
@@ -63,6 +63,8 @@ export default function route() {
           <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
           <Stack.Screen name="VerfiyCode" component={VerfiyCode} />
           <Stack.Screen name="ChooseLanguage" component={ChooseLanguage} />
+          <Stack.Screen name='Address' component={Address} />
+
           <Stack.Screen name="Payment" component={Payment} />
         </Stack.Navigator>
       ) : (
@@ -73,7 +75,7 @@ export default function route() {
       )}
     </NavigationContainer>
   ) : (
-    <View style={{flex: 1, justifyContent: 'center'}}>
+    <View style={{ flex: 1, justifyContent: 'center' }}>
       <ActivityIndicator color={'red'} size={'large'} />
     </View>
   );

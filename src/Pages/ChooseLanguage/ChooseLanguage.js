@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   StatusBar,
@@ -6,26 +6,25 @@ import {
   SafeAreaView,
   Image,
 } from 'react-native';
-import {Text, Input} from 'react-native-elements';
+import { Text, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Entypo';
 import Icons from 'react-native-vector-icons/FontAwesome';
-import Avatar, {IconTypes, Sizes} from 'rn-avatar';
-import {styling} from './styling';
-import {select, login} from '../../Redux/Actions/Auth';
-import {useDispatch, useSelector} from 'react-redux';
-import {I18n, switchLanguage} from '../../../i18n/I18n';
+import Avatar, { IconTypes, Sizes } from 'rn-avatar';
+import { styling } from './styling';
+import { select, login } from '../../Redux/Actions/Auth';
+import { useDispatch, useSelector } from 'react-redux';
+import { I18n, switchLanguage } from '../../../i18n/I18n';
 // import { login } from '../../Redux/Actions/Auth';
 import AsyncStorage from '@react-native-community/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
-import {hp, wp} from '../../Global/Styles/Scalling';
+import { hp, wp } from '../../Global/Styles/Scalling';
 
 const ChooseLanguage = (props) => {
   const logins = props.route.params.login;
   const email = props.route.params.email;
   const phone = props.route.params.phone;
   const ImagePath = props.route.params.ImagePath;
-  const address = props.route.params.address;
   const [checked, setcheck] = useState('en');
   const [English, setEnglish] = useState(false);
   const [Chinese, setChinese] = useState(false);
@@ -88,7 +87,6 @@ const ChooseLanguage = (props) => {
           phone: phone,
           email: email,
           imageLink: imageLink,
-          address: address,
         });
       } else
         firestore().collection('User').doc(logins).set({
@@ -96,13 +94,12 @@ const ChooseLanguage = (props) => {
           phone: phone,
           email: email,
           imageLink: imageLink,
-          address: address,
         });
     }
     await AsyncStorage.setItem('token', logins);
 
-    dispatch(select({Types: checked}));
-    props.navigation.navigate('Payment');
+    dispatch(select({ Types: checked }));
+    props.navigation.navigate('Address');
     // dispatch(login({userName: logins}));
   }
   return (
@@ -116,8 +113,8 @@ const ChooseLanguage = (props) => {
         <View style={styling.avatarView}>
           {ImagePath ? (
             <Image
-              source={{uri: ImagePath.uri}}
-              style={{height: wp(20), width: wp(20), borderRadius: 100}}
+              source={{ uri: ImagePath.uri }}
+              style={{ height: wp(20), width: wp(20), borderRadius: 100 }}
             />
           ) : (
             <Avatar
@@ -145,7 +142,7 @@ const ChooseLanguage = (props) => {
               style={styling.languageView}
               onPress={() => {
                 setcheck('en');
-                dispatch(select({Types: 'english'}));
+                dispatch(select({ Types: 'english' }));
               }}>
               {checked == 'en' ? (
                 <Icons name="check-circle" size={20} color="green" />
@@ -159,7 +156,7 @@ const ChooseLanguage = (props) => {
               style={styling.languageView}
               onPress={() => {
                 setcheck('chi');
-                dispatch(select({Types: 'chi'}));
+                dispatch(select({ Types: 'chi' }));
               }}>
               {checked == 'chi' ? (
                 <Icons name="check-circle" size={20} color="green" />
@@ -214,7 +211,7 @@ const ChooseLanguage = (props) => {
               style={styling.languageView}
               onPress={() => {
                 setcheck('ara');
-                dispatch(select({Types: 'ara'}));
+                dispatch(select({ Types: 'ara' }));
               }}>
               {checked == 'ara' ? (
                 <Icons name="check-circle" size={20} color="green" />
@@ -229,7 +226,7 @@ const ChooseLanguage = (props) => {
               style={styling.languageView}
               onPress={() => {
                 setcheck('Russian');
-                dispatch(select({Types: 'Russian'}));
+                dispatch(select({ Types: 'Russian' }));
               }}>
               {checked == 'Russian' ? (
                 <Icons name="check-circle" size={20} color="green" />
@@ -242,7 +239,7 @@ const ChooseLanguage = (props) => {
               style={styling.languageView}
               onPress={() => {
                 setcheck('bg');
-                dispatch(select({Types: 'bg'}));
+                dispatch(select({ Types: 'bg' }));
               }}>
               {checked == 'bg' ? (
                 <Icons name="check-circle" size={20} color="green" />
