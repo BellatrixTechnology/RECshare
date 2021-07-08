@@ -21,7 +21,7 @@ const Success = ({ route }) => {
     const spaceid = route.params.spaceid
     const Image = route.params.image
     const host = route.params.host
-
+    const Duration = route.params.Duration
     return (
         <Fragment>
             <StatusBar barStyle="dark-content" hidden={false} backgroundColor='#F2F2F2' translucent={false} />
@@ -83,7 +83,7 @@ const Success = ({ route }) => {
                                 bookID: bookID,
                                 spaceid: spaceid,
                                 Image: Image,
-                                host: host
+                                host: host, Duration: Duration
                             })
                         }}>
                             <Text style={styling.signupText}>{I18n.t('CheckDetail')}</Text>

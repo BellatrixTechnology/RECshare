@@ -598,49 +598,50 @@ const Browse2 = (props) => {
           setCityVIs(false)
 
         }}
-        coverScreen={true}
-        avoidKeyboard={false}
+
       >
-        <ScrollView style={{ width: wp(100), height: hp(100) }}>
-          <View style={{ width: wp(90), alignItems: 'flex-end' }}>
+        <ScrollView style={{ width: wp(100), height: hp(100), paddingTop: hp(-2), marginTop: hp(-2) }}>
+          <View style={{ width: wp(90), alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' }}>
             <Icon
-              name='closecircleo'
+              name='close'
               size={24}
               color='grey'
               onPress={() => { setCityVIs(false) }}
             />
+            <TextInput
+              placeholder='Search Country......'
+              placeholderTextColor='black'
+              style={{ width: wp(80), color: 'black', backgroundColor: 'white', borderWidth: wp(0.2), borderColor: '#bbb', borderRadius: 5 }}
+              onChangeText={val => {
+                const newData = country.filter(item => {
+                  const itemData = `${item.name.toUpperCase()}`;
+
+                  const textData = val.toUpperCase();
+
+                  return itemData.indexOf(textData) > -1;
+                });
+                setListCoutnry(newData)
+
+                if (val == '') setListCoutnry(country)
+              }}
+            />
           </View>
-          <TextInput
-            placeholder='Search Country'
-            placeholderTextColor='white'
-            style={{ width: wp(85), color: 'black', backgroundColor: '#bbb', color: 'white' }}
-            onChangeText={val => {
-              const newData = country.filter(item => {
-                const itemData = `${item.name.toUpperCase()}`;
-
-                const textData = val.toUpperCase();
-
-                return itemData.indexOf(textData) > -1;
-              });
-              setListCoutnry(newData)
-
-              if (val == '') setListCoutnry(country)
-            }}
-          />
-          {listcountry.map((item) => {
-            return (
-              <TouchableOpacity style={{ paddingVertical: hp(2), width: wp(90), borderBottomWidth: wp(0.2), borderBottomColor: '#bbb' }}
-                onPress={() => {
-                  setCity(item.name)
-                  setCityVIs(false)
-                  setListCoutnry(country)
-                }}
-              >
-                <Text>{item.name}</Text>
-              </TouchableOpacity>
-            )
-          }
-          )}
+          <View>
+            {listcountry.map((item) => {
+              return (
+                <TouchableOpacity style={{ paddingVertical: hp(2), width: wp(90), borderBottomWidth: wp(0.2), borderBottomColor: '#bbb' }}
+                  onPress={() => {
+                    setCity(item.name)
+                    setCityVIs(false)
+                    setListCoutnry(country)
+                  }}
+                >
+                  <Text>{item.name}</Text>
+                </TouchableOpacity>
+              )
+            }
+            )}
+          </View>
 
         </ScrollView>
       </Modal>

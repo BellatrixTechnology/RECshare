@@ -20,6 +20,7 @@ const ReviewBooking = ({ route }) => {
     const Image = route.params.data.Image;
     const uid = route.params.data.id
     const host = route.params.data.host
+    const Duration = route.params.data.Duration
     console.log(Image)
     async function SaveData() {
         console.log(auth)
@@ -39,7 +40,8 @@ const ReviewBooking = ({ route }) => {
                     type: type,
                     address: address,
                     Image: Image,
-                    host: host
+                    host: host,
+                    Duration: Duration
                 })
                 firestore().collection('User').doc(userid).collection('Booking').doc(id).set({
                     userid: userid,
@@ -53,7 +55,8 @@ const ReviewBooking = ({ route }) => {
                     address: address,
                     bookingid: id,
                     Image: Image,
-                    host: host
+                    host: host,
+                    Duration: Duration
                 })
                 props.navigate('Success', {
                     name: user.displayName,
@@ -68,7 +71,8 @@ const ReviewBooking = ({ route }) => {
                     bookID: id,
                     spaceid: uid,
                     host: host,
-                    image: Image
+                    image: Image,
+                    Duration: Duration
                 })
             }
             else console.log('null')
@@ -90,11 +94,11 @@ const ReviewBooking = ({ route }) => {
                 </View>
                 <View style={styling.mainContainer}>
                     <ScrollView showsVerticalScrollIndicator={false}>
-                        <View style={styling.cardView}>
+                        <TouchableOpacity style={styling.cardView} onPress={() => props.goBack()}>
                             <View style={styling.detailView}>
                                 <Text style={styling.labelTXT}>{I18n.t('DateT')}</Text>
                                 <Text style={styling.mainTXT}>{Datee}</Text>
-                                <Text style={styling.lineTXT}>{Time}</Text>
+                                <Text style={styling.lineTXT}>{Time} - Duration :{Duration}</Text>
                             </View>
                             <View>
                                 <TouchableOpacity>
@@ -102,7 +106,7 @@ const ReviewBooking = ({ route }) => {
                                 </TouchableOpacity>
                             </View>
 
-                        </View>
+                        </TouchableOpacity>
 
                         <View style={styling.cardView}>
                             <View style={styling.detailView}>

@@ -20,7 +20,8 @@ import { login, select } from '../../Redux/Actions/Auth';
 import AsyncStorage from '@react-native-community/async-storage';
 import { hp, wp } from '../../Global/Styles/Scalling';
 import CountryPicker from 'react-native-country-picker-modal'
-
+import Modal from 'react-native-modal'
+import country from '../../Component/dummy'
 
 const Address = (props) => {
   const [Address, setAddress] = useState('')
@@ -28,8 +29,10 @@ const Address = (props) => {
   const [state, setStates] = useState('')
   const [city, setCity] = useState('')
   const [isVisible, setisVisible] = useState(false)
-  const [country, setCountry] = useState('')
+  const [countrys, setCountrys] = useState('')
   const [isLoading, setloading] = useState(false)
+  const [listcountry, setListCoutnry] = useState(country)
+
   async function adddata() {
     setloading(true);
     auth().onAuthStateChanged(async function (user) {
@@ -43,7 +46,7 @@ const Address = (props) => {
             OptionalAddress: optional,
             state: state,
             city: city,
-            country: country,
+            country: countrys,
           }, { merge: true })
           .then(async () => {
             setloading(false);
@@ -138,10 +141,15 @@ const Address = (props) => {
               </View>
             </View>
             <View style={styling.inputView}>
-              <View
+              <TouchableOpacity
+                onPress={() => setisVisible(true)}
                 style={[styling.AddresInput, { height: hp(6), paddingHorizontal: wp(2), justifyContent: 'center', alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' }]}
               >
+                {/* <TouchableOpacity style={{ backgroundColor: 'red', paddingVertical: hp(2) }} onPress={() => setisVisible(true)}> */}
+                <Text style={styling.addressLabel}>Select Country</Text>
 
+                {/* </TouchableOpacity> */}
+                {/* 
                 <CountryPicker
                   withCountryNameButton={true}
                   filterProps={{ placeholder: 'Enter country/region name' }}
@@ -150,9 +158,9 @@ const Address = (props) => {
                     setCountry(val.name)
                   }}
                   visible={isVisible}
-                />
-                <Text style={styling.addressLabel}>{country}</Text>
-              </View>
+                /> */}
+                <Text style={styling.addressLabel}>{countrys}</Text>
+              </TouchableOpacity>
             </View>
             <View style={styling.signupView}>
               <TouchableOpacity
@@ -172,6 +180,64 @@ const Address = (props) => {
                 )}
               </TouchableOpacity>
             </View>
+            <Modal isVisible={isVisible}
+              backdropColor='white'
+              backdropOpacity={1}
+              onBackButtonPress={() => {
+                setisVisible(false)
+
+              }}
+              onBackdropPress={() => {
+                setisVisible(false)
+
+              }}
+
+            >
+              <ScrollView style={{ width: wp(100), height: hp(100), paddingTop: hp(-2), marginTop: hp(-2) }}>
+                <View style={{ width: wp(90), alignItems: 'center', flexDirection: 'row', justifyContent: 'space-between' }}>
+                  <Icon
+                    name='close'
+                    size={24}
+                    color='grey'
+                    onPress={() => { setCityVIs(false) }}
+                  />
+                  <TextInput
+                    placeholder='Search Country......'
+                    placeholderTextColor='black'
+                    style={{ width: wp(80), color: 'black', backgroundColor: 'white', borderWidth: wp(0.2), borderColor: '#bbb', borderRadius: 5 }}
+                    onChangeText={val => {
+                      const newData = country.filter(item => {
+                        const itemData = `${item.name.toUpperCase()}`;
+
+                        const textData = val.toUpperCase();
+
+                        return itemData.indexOf(textData) > -1;
+                      });
+                      setListCoutnry(newData)
+
+                      if (val == '') setListCoutnry(country)
+                    }}
+                  />
+                </View>
+                <View>
+                  {listcountry.map((item) => {
+                    return (
+                      <TouchableOpacity style={{ paddingVertical: hp(2), width: wp(90), borderBottomWidth: wp(0.2), borderBottomColor: '#bbb' }}
+                        onPress={() => {
+                          setCountrys(item.name)
+                          setisVisible(false)
+                          setListCoutnry(country)
+                        }}
+                      >
+                        <Text>{item.name}</Text>
+                      </TouchableOpacity>
+                    )
+                  }
+                  )}
+                </View>
+
+              </ScrollView>
+            </Modal>
           </ScrollView>
         </View>
       </SafeAreaView>

@@ -9,14 +9,14 @@ export const styling = StyleSheet.create({
 
     },
     mainContainer: {
-        height: hp('100%'),
+        // height: hp('100%'),
         width: wp('100%'),
         paddingHorizontal: wp(3),
         paddingBottom: hp(1),
         backgroundColor: 'white'
     },
     headerView: {
-        height: hp('8%'),
+        // height: hp('8%'),
         width: wp('100%'),
         justifyContent: 'center',
         padding: 10

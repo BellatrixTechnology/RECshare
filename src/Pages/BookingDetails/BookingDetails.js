@@ -24,6 +24,7 @@ const BookingDetails = ({ route }) => {
     const spaceid = route.params.spaceid
     const Images = route.params.Image
     const host = route.params.host
+    const Duration = route.params.Duration
     console.log(route.params)
     console.log(route.params)
     const [isVisible, setisVisible] = useState(false)
@@ -96,7 +97,7 @@ const BookingDetails = ({ route }) => {
                             </View>
                             <View style={styling.dayView}>
                                 <Text style={styling.dayTXT}>{Datee}</Text>
-                                <Text style={styling.timeTXT}>{Time}</Text>
+                                <Text style={styling.timeTXT}>{Duration}</Text>
                             </View>
                         </View>
                     </View>
@@ -109,9 +110,9 @@ const BookingDetails = ({ route }) => {
                                 <Text style={styling.timeTXT}>{distance} mi {I18n.t('Away')}</Text>
                             </View>
 
-                            <View style={styling.mapIconView}>
+                            {/* <View style={styling.mapIconView}>
                                 <Icon name='map-marker' size={30} color='#FF2D55' />
-                            </View>
+                            </View> */}
                         </View>
                     </View>
 
@@ -119,7 +120,7 @@ const BookingDetails = ({ route }) => {
 
                         <Text style={styling.timeTXT}>{I18n.t('Price')}</Text>
                         <Text style={styling.dayTXT}>Total price ${credit}</Text>
-                        <Text style={styling.timeTXT}>for 1 hr </Text>
+                        <Text style={styling.timeTXT}>for {Duration} </Text>
                     </View>
 
                     <View style={styling.cityView}>
