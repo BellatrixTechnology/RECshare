@@ -23,24 +23,27 @@ import CountryPicker from 'react-native-country-picker-modal'
 import Modal from 'react-native-modal'
 import country from '../../Component/dummy'
 
-const Address = (props) => {
-  const [Address, setAddress] = useState('')
-  const [optional, setOption] = useState('')
-  const [state, setStates] = useState('')
-  const [city, setCity] = useState('')
+const EditAddress = (props) => {
+  console.log(props.route.params.data);
+  const [Address, setAddress] = useState(props.route.params.data.Address)
+  const [optional, setOption] = useState(props.route.params.data.OptionalAddress)
+  const [state, setStates] = useState(props.route.params.data.state)
+  const [city, setCity] = useState(props.route.params.data.city)
   const [isVisible, setisVisible] = useState(false)
-  const [countrys, setCountrys] = useState('')
+  const [countrys, setCountrys] = useState(props.route.params.data.country)
   const [isLoading, setloading] = useState(false)
   const [listcountry, setListCoutnry] = useState(country)
 
   async function adddata() {
+    let token = await AsyncStorage.getItem('token')
+
     setloading(true);
     auth().onAuthStateChanged(async function (user) {
       if (user) {
 
         await firestore()
           .collection('User')
-          .doc(user.uid)
+          .doc(token)
           .set({
             Address: Address,
             OptionalAddress: optional,
@@ -50,8 +53,7 @@ const Address = (props) => {
           }, { merge: true })
           .then(async () => {
             setloading(false);
-            props.navigation.navigate('Payment');
-
+            ToastAndroid.show('Address Updated', ToastAndroid.LONG)
           }
           ).catch(e => {
             setloading(false);
@@ -247,4 +249,4 @@ const Address = (props) => {
   );
 };
 
-export default Address;
+export default EditAddress;

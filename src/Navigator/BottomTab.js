@@ -34,13 +34,15 @@ import AddSpace from '../Pages/AddSpace/AddSpace';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-community/async-storage';
 import SpaceList from '../Pages/SpaceList.js/SpaceList';
+import EditProfile from '../Pages/EditProfile';
+import EditAddress from '../Pages/EditAddress';
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
 let img;
 
-export default function BottomTabBar() {
+export default function BottomTabBar(props) {
   const [img, setimg] = useState('');
 
   useEffect(() => {
@@ -124,6 +126,7 @@ export default function BottomTabBar() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName={HomeScreen} headerMode={null}>
+
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="Chat" component={Chat} />
         <Stack.Screen name="Search" component={Search} />
@@ -146,8 +149,8 @@ export default function BottomTabBar() {
         <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen name='SpaceList' component={SpaceList} />
         <Stack.Screen name='Notification' component={Notification} />
-
-
+        <Stack.Screen name='EditProfile' component={EditProfile} />
+        <Stack.Screen name='EditAddress' component={EditAddress} />
       </Stack.Navigator>
     </NavigationContainer>
   );

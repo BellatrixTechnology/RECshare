@@ -36,6 +36,7 @@
     "react-native-i18n": "^2.0.15",
     "react-native-icon-checkbox": "^1.2.0",
     "react-native-image-crop-picker": "^0.34.1",
+    "react-native-image-slider-box": "^1.0.12",
     "react-native-keyboard-aware-scrollview": "^2.1.0",
     "react-native-maps": "^0.28.0",
     "react-native-maps-directions": "^1.8.0",

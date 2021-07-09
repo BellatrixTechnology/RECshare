@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import {
   View,
   StyleSheet,
@@ -8,18 +8,18 @@ import {
   ToastAndroid,
   ActivityIndicator,
 } from 'react-native';
-import {Text, Input} from 'react-native-elements';
-import {styling} from './styling';
+import { Text, Input } from 'react-native-elements';
+import { styling } from './styling';
 import auth from '@react-native-firebase/auth';
 import InputF from '../../Component/InputField/index';
 import AsyncStorage from '@react-native-community/async-storage';
 import CountDown from 'react-native-countdown-component';
-import {useDispatch, useSelector} from 'react-redux';
-import {login} from '../../Redux/Actions/Auth';
-import {I18n} from '../../../i18n/I18n';
+import { useDispatch, useSelector } from 'react-redux';
+import { login } from '../../Redux/Actions/Auth';
+import { I18n } from '../../../i18n/I18n';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
-const VerifyCode = ({route}) => {
+const VerifyCode = ({ route }) => {
   const phone = route.params.Phone;
   const props = route.params.props;
   const email = route.params.Email;
@@ -63,11 +63,12 @@ const VerifyCode = ({route}) => {
               //  await AsyncStorage.setItem('Login', JSON.stringify(obj))
               //     setisloading(false)
 
-                            props.navigation.navigate('ChooseLanguage', {
+              props.navigation.navigate('ChooseLanguage', {
                 login: userCredentials.user.uid,
                 email: email,
                 phone: phone,
                 ImagePath: ImagePath,
+                Names: Names
               });
             })
             .catch((error) => {
@@ -172,7 +173,7 @@ const VerifyCode = ({route}) => {
                 onFinish={() => setdisabled(false)}
                 size={20}
                 timeToShow={['M', 'S']}
-                timeLabels={{m: null, s: null}}
+                timeLabels={{ m: null, s: null }}
                 digitStyle={{
                   backgroundColor: '#FFF',
                   borderWidth: 2,
@@ -183,7 +184,7 @@ const VerifyCode = ({route}) => {
           </View>
         </View>
       </SafeAreaView>
-      <SafeAreaView style={{backgroundColor: 'white'}} />
+      <SafeAreaView style={{ backgroundColor: 'white' }} />
     </Fragment>
   );
 };

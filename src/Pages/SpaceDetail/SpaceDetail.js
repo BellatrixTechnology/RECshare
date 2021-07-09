@@ -17,7 +17,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
-import AlertModal from '../../Component/AlertModal/index';
+import { SliderBox } from "react-native-image-slider-box";
 import { I18n } from '../../../i18n/I18n';
 import AsyncStorage from '@react-native-community/async-storage';
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps';
@@ -25,7 +25,7 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { styling } from './styling';
 import { hp, wp } from '../../Global/Styles/Scalling';
 import MapViewDirections from 'react-native-maps-directions';
-
+import Modal from 'react-native-modal'
 const SpaceDetail = ({ route }) => {
   const SpaceStation = route.params.Space;
   const props = route.params.props;
@@ -39,7 +39,7 @@ const SpaceDetail = ({ route }) => {
   const mapRef = useRef(null);
   const [ameny, setAmeny] = useState(false)
   const [rew, setRew] = useState(false)
-
+  const [imageStatus, setImageStatus] = useState(false)
   const [reg, setReg] = useState({
     latitude: 32.1738547,
     longitude: 74.223087,
@@ -152,13 +152,19 @@ const SpaceDetail = ({ route }) => {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                   }}>
-                  <View
+                  <TouchableOpacity
+                    onPress={() => { setImageStatus(true) }}
                     style={{
                       width: wp(30),
                       backgroundColor: '#C8C7CC',
                       borderRadius: 10,
-                    }}></View>
-                  <Image style={styling.imageView} source={{ uri: obj.Image }} />
+                    }}>
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => { setImageStatus(true) }}
+                  >
+                    <Image style={styling.imageView} source={{ uri: obj.Image }} />
+
+                  </TouchableOpacity>
                 </View>
                 <View
                   style={{
@@ -166,31 +172,35 @@ const SpaceDetail = ({ route }) => {
                     justifyContent: 'space-between',
                     marginTop: hp(1),
                   }}>
-                  <View
+                  <TouchableOpacity
+                    onPress={() => { setImageStatus(true) }}
                     style={{
                       width: wp(30),
                       height: hp(20),
                       backgroundColor: '#C8C7CC',
                       borderRadius: 10,
-                    }}></View>
+                    }}></TouchableOpacity>
                   <View
                     style={{ height: hp(20), justifyContent: 'space-between' }}>
-                    <View
+                    <TouchableOpacity
+                      onPress={() => { setImageStatus(true) }}
                       style={{
                         width: wp(25),
                         height: hp(9),
                         backgroundColor: '#C8C7CC',
                         borderRadius: 10,
-                      }}></View>
-                    <View
+                      }}></TouchableOpacity>
+                    <TouchableOpacity
+                      onPress={() => { setImageStatus(true) }}
                       style={{
                         width: wp(25),
                         height: hp(9),
                         backgroundColor: '#C8C7CC',
                         borderRadius: 10,
-                      }}></View>
+                      }}></TouchableOpacity>
                   </View>
-                  <View
+                  <TouchableOpacity
+                    onPress={() => { setImageStatus(true) }}
                     style={{
                       width: wp(30),
                       height: hp(20),
@@ -200,7 +210,7 @@ const SpaceDetail = ({ route }) => {
                       alignItems: 'center',
                     }}>
                     <Text style={{ fontSize: wp(5), color: 'white' }}>+4</Text>
-                  </View>
+                  </TouchableOpacity>
                 </View>
               </View>
               {/* <Image style={styling.imageView} source={{uri: obj.Image}} /> */}
@@ -517,6 +527,32 @@ const SpaceDetail = ({ route }) => {
             </ScrollView>
           </View>
         )}
+        <Modal isVisible={imageStatus} backdropColor='black' backdropOpacity={0.9}>
+          <View style={{ backgroundColor: 'black', height: hp(90), paddingHorizontal: wp(4), borderRadius: 5, paddingBottom: hp(2) }}>
+            <View style={{ paddingVertical: hp(2) }}>
+              <Icons
+                name='close'
+                size={24}
+                color='grey'
+                onPress={() => { setImageStatus(false) }} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <SliderBox
+                images={[
+                  obj.Image,
+                  "https://source.unsplash.com/1024x768/?nature",
+                  "https://source.unsplash.com/1024x768/?water",
+                  "https://source.unsplash.com/1024x768/?girl",
+                  "https://source.unsplash.com/1024x768/?tree",
+                ]
+                }
+                resizeMode='contain'
+                sliderBoxHeight={hp(80)}
+                parentWidth={wp(80)}
+              />
+            </View>
+          </View>
+        </Modal>
       </SafeAreaView>
       <SafeAreaView style={{ backgroundColor: 'white' }} />
     </Fragment>

@@ -190,7 +190,7 @@ const Account = (props) => {
         </View>
         <View style={styling.mainContainer}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            <TouchableOpacity style={styling.accountView}>
+            <TouchableOpacity style={styling.accountView} onPress={() => props.navigation.navigate('EditProfile')}>
               <Text style={styling.accountlTXT}>Edit Profile</Text>
               <View style={styling.workOpacity}>
                 {/* <Text style={styling.workTXT} >{I18n.t('Address')}</Text> */}

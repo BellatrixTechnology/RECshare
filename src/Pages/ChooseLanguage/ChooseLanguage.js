@@ -87,6 +87,7 @@ const ChooseLanguage = (props) => {
           phone: phone,
           email: email,
           imageLink: imageLink,
+          displayName: props.route.params.Names
         });
       } else
         firestore().collection('User').doc(logins).set({
@@ -94,6 +95,8 @@ const ChooseLanguage = (props) => {
           phone: phone,
           email: email,
           imageLink: imageLink,
+          displayName: props.route.params.Names
+
         });
     }
     await AsyncStorage.setItem('token', logins);
