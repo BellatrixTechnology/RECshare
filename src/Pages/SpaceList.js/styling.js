@@ -14,13 +14,13 @@ export const styling = StyleSheet.create({
         backgroundColor: 'white'
     },
     headerView: {
-        height: hp('7%'),
+        // height: hp('7%'),
         width: wp('100%'),
         justifyContent: 'flex-end',
         padding: 5,
     },
     headTXTView: {
-        height: hp('7%'),
+        // height: hp('7%'),
         width: wp('40%'),
         justifyContent: 'flex-start',
         alignItems: 'center',

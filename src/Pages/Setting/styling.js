@@ -77,25 +77,24 @@ export const styling = StyleSheet.create({
         borderBottomWidth: 0.2
     },
     notificationView: {
-
-        width: wp('10%'),
-        paddingVertical: hp(1),
+        paddingHorizontal: wp(3),
+        paddingVertical: hp(1.5),
         backgroundColor: '#5AC8FA',
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
     },
     passwrdView: {
-        width: wp('10%'),
-        paddingVertical: hp(1),
+        paddingHorizontal: wp(3),
+        paddingVertical: hp(1.5),
         backgroundColor: '#4CD964',
         borderRadius: 10,
         alignItems: 'center',
         justifyContent: 'center',
     },
     privacyView: {
-        width: wp(10),
-        paddingVertical: hp(1),
+        paddingHorizontal: wp(3),
+        paddingVertical: hp(1.5),
         backgroundColor: '#FF9500',
         borderRadius: 10,
         alignItems: 'center',

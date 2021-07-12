@@ -17,7 +17,8 @@ import { I18n, switchLanguage } from '../../../i18n/I18n';
 import firestore from '@react-native-firebase/firestore';
 import Modal from "react-native-modal"
 import { fontFamily } from '../../Global/Styles/font';
-
+import Fontisto from 'react-native-vector-icons/Fontisto'
+import Ionicons from 'react-native-vector-icons/Ionicons'
 const Setting = (props) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const user = useSelector((state) => state.Auth.user);
@@ -116,13 +117,12 @@ const Setting = (props) => {
                         <View style={styling.headingView}>
                             <Text style={styling.headTXT}>{I18n.t('Setting')}</Text>
                         </View>
-                        {/* <View style={styling.mainContainer}> */}
                         <View style={styling.accountView}>
                             <Text style={styling.accountTXT}>{I18n.t('Account')}</Text>
                         </View>
                         <View style={styling.innerView}>
                             <View style={styling.passwrdView} >
-                                <Icons name='lock1' size={26} color='white' />
+                                <Fontisto name='locked' size={20} color='white' />
                             </View>
                             <TouchableOpacity style={styling.detailView} onPress={() => {
                                 setisVisible(true)
@@ -133,7 +133,7 @@ const Setting = (props) => {
                         </View>
                         <View style={styling.innerView}>
                             <View style={styling.notificationView} >
-                                <Icon name='bell' size={26} color='white' />
+                                <Icon name='bell' size={20} color='white' />
                             </View>
                             <TouchableOpacity style={styling.detailView}>
                                 <Text style={styling.detailHead}>{I18n.t('Notfications')}</Text>
@@ -143,7 +143,7 @@ const Setting = (props) => {
 
                         <View style={styling.innerView}>
                             <View style={styling.privacyView} >
-                                <Icon name='hand-stop-o' size={26} color='white' />
+                                <Ionicons name='md-hand-left-sharp' size={20} color='white' />
                             </View>
                             <TouchableOpacity style={styling.detailView}>
                                 <Text style={styling.detailHead}>{I18n.t('PrivacySetting')}</Text>

@@ -41,16 +41,20 @@ export const styling = StyleSheet.create({
   searchBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    width: wp(90),
-    borderRadius: 6,
+    width: wp(87.7),
+    borderRadius: 7,
     marginTop: hp(2),
-    borderWidth: wp(0.1),
-    borderColor: '#bbb',
+    paddingTop: hp(0.1),
+    paddingBottom: hp(0.7),
+    // borderWidth: wp(0.1),
+    // borderColor: '#bbb',
+    backgroundColor: '#EFEFF4',
     justifyContent: 'space-evenly',
+    zIndex: 1,
   },
   searchableContainer: {
-    // padding: wp(3),
     width: wp(80),
+    zIndex: 2
   },
   searchItemStyle: {
     padding: wp(1),

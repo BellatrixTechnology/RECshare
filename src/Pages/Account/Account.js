@@ -21,7 +21,7 @@ import Avatar, { IconTypes, Sizes } from 'rn-avatar';
 import { hp, wp } from '../../Global/Styles/Scalling';
 import AsyncStorage from '@react-native-community/async-storage';
 import { I18n } from '../../../i18n/I18n';
-import Foundation from 'react-native-vector-icons/Foundation';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 const Account = (props) => {
   const [Name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -132,8 +132,8 @@ const Account = (props) => {
       <SafeAreaView style={styling.safeContainer}>
         <View style={styling.mainHeaderView}>
           <View style={styling.headerView}>
-            <Icons
-              name="setting"
+            <FontAwesome
+              name="gear"
               backgroundColor="#F9F9F9"
               color="black"
               size={25}
@@ -157,13 +157,9 @@ const Account = (props) => {
                   style={{ height: wp(20), width: wp(20), borderRadius: wp(100) }}
                 />
               ) : (
-                <Avatar
-                  rounded
-                  size={60}
-                  icon={{
-                    name: 'user',
-                    type: IconTypes.AntDesign,
-                  }}
+                <View
+                  style={{ height: wp(20), width: wp(20), borderRadius: wp(100), backgroundColor: 'grey' }}
+
                 />
               )}
               {/* <View

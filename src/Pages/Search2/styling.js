@@ -12,14 +12,16 @@ export const styling = StyleSheet.create({
     mainContainer: {
         height: hp('100%'),
         width: wp('100%'),
-        padding: 10,
+        paddingHorizontal: 10,
         backgroundColor: 'white',
-        padding: 20
+        // padding: 20
     },
     searchContainer: {
         width: wp('90%'),
+        alignSelf: 'center',
         height: hp('7%'),
         flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center'
     },
     searchBar: {
@@ -31,7 +33,7 @@ export const styling = StyleSheet.create({
         height: hp('7%'),
         borderRadius: 6,
         paddingLeft: 10,
-        backgroundColor: '#EFEFF4'
+        backgroundColor: '#EFEFF4',
     },
     cancelView: {
         // height: hp('8%'),

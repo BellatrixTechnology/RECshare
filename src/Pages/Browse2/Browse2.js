@@ -257,10 +257,14 @@ const Browse2 = (props) => {
                   <TouchableOpacity
                     style={{
                       height: hp(7),
-                      width: wp(90),
+                      width: wp(87),
                       borderRadius: wp(2),
                       flexDirection: 'row',
                       alignItems: 'center',
+                      // borderWidth: wp(0.1),
+                      // borderColor: '#bbb',
+                      backgroundColor: 'white',
+                      zIndex: 1,
                       paddingHorizontal: wp(2),
                     }}
                     onPress={() => props.navigation.navigate('Search2')}>

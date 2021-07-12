@@ -44,14 +44,14 @@ const Search2 = (props) => {
     }
     return (
         <SafeAreaView style={styling.safeContainer} >
-            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={true} />
+            <StatusBar barStyle="dark-content" hidden={false} backgroundColor="white" translucent={false} />
             <View style={styling.mainContainer}>
                 <View style={{ paddingVertical: hp(1) }}>
                     <Icon
                         name="left"
                         backgroundColor="white"
                         color="black"
-                        size={30}
+                        size={26}
                         onPress={() => props.navigation.goBack()}
                     />
                 </View>
